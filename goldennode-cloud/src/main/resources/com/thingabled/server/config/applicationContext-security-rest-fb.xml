@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:http="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+  	<security:http use-expressions="true" pattern="/rest/**"
+		create-session="never" entry-point-ref="forbiddenEntryPoint">
+		<!-- Anyone can access these urls -->
+		<security:intercept-url pattern="/auth/**"
+			access="permitAll" />
+		<!-- The rest of our application is protected. -->
+		<security:intercept-url pattern="/**"
+			access="hasRole('ROLE_USER')" />
+		<security:http-basic />
+		<!-- Adds social authentication filter to the Spring Security filter chain. -->
+		<security:custom-filter ref="facebookOauthTokenAuthenticationFilter"
+			after="BASIC_AUTH_FILTER"/>
+		
+	</security:http>
+
+
+	<bean id="facebookOauthTokenAuthenticationFilter"
+		class="com.thingabled.server.security.oauth.FacebookOauthTokenAuthenticationFilter">
+		<constructor-arg index="0" ref="authenticationManager" />
+		<constructor-arg index="1" ref="userIdSource" />
+		<constructor-arg index="2" ref="usersConnectionRepository" />
+		<constructor-arg index="3" ref="connectionFactoryLocator" />
+	</bean>
+
+
+</beans>

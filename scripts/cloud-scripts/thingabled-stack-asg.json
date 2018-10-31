@@ -1,0 +1,561 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Thingabled Stack ASG",
+	"Parameters": {
+		"ami": {
+			"Description": "ami",
+			"Type": "String"
+		},
+		"continent": {
+			"Description": "continent",
+			"Type": "String"
+		},
+		"topicEmailAddress": {
+			"Description": "topicEmailAddress",
+			"Type": "String"
+		},
+		"instanceType": {
+			"Description": "instanceType",
+			"Type": "String"
+		},
+		"publicSubnet1": {
+			"Description": "publicSubnet1",
+			"Type": "String"
+		},
+		"publicSubnet2": {
+			"Description": "publicSubnet2",
+			"Type": "String"
+		},
+		"privateSubnet1": {
+			"Description": "privateSubnet1",
+			"Type": "String"
+		},
+		"privateSubnet2": {
+			"Description": "privateSubnet2",
+			"Type": "String"
+		},
+		"securityGroupPublic": {
+			"Description": "securityGroupPublic",
+			"Type": "String"
+		},
+		"securityGroupPrivate": {
+			"Description": "securityGroupPrivate",
+			"Type": "String"
+		},
+		"rdsUser": {
+			"Description": "rdsUser",
+			"Type": "String"
+		},
+		"rdsPassword": {
+			"Description": "rdsPassword",
+			"Type": "String"
+		},
+		"rdsAddress": {
+			"Description": "rdsAddress",
+			"Type": "String"
+		},
+		"tomcatVersion": {
+			"Description": "tomcatVersion",
+			"Type": "String"
+		},
+		"artifactVersion": {
+			"Description": "artifactVersion",
+			"Type": "String"
+		},
+		"openJDKVersion": {
+			"Description": "openJDKVersion",
+			"Type": "String"
+		},
+		"s3Bucket": {
+			"Description": "s3 bucket name for other resources",
+			"Type": "String"
+		}
+	},
+	"Resources": {
+		"topicAutoScaling": {
+			"Type": "AWS::SNS::Topic",
+			"Properties": {
+				"DisplayName": "Auto-Scaling",
+				"Subscription": [
+					{
+						"Endpoint": {
+							"Ref": "topicEmailAddress"
+						},
+						"Protocol": "email"
+					}
+				]
+			}
+		},
+		"sslCertificate": {
+			"Type": "AWS::CertificateManager::Certificate",
+			"Properties": {
+				"DomainName": "thingabled.com",
+				"DomainValidationOptions": [
+					{
+						"DomainName": "thingabled.com",
+						"ValidationDomain": "thingabled.com"
+					}
+				]
+			}
+		},
+		"loadBalancer": {
+			"Type": "AWS::ElasticLoadBalancing::LoadBalancer",
+			"Properties": {
+				"Policies": [
+					{
+						"PolicyName": "PolicyForELB",
+						"PolicyType": "SSLNegotiationPolicyType",
+						"Attributes": [
+							{
+								"Name": "Reference-Security-Policy",
+								"Value": "ELBSecurityPolicy-2016-08"
+							}
+						]
+					}
+				],
+				"Subnets": [
+					{
+						"Ref": "publicSubnet1"
+					},
+					{
+						"Ref": "publicSubnet2"
+					}
+				],
+				"HealthCheck": {
+					"HealthyThreshold": "10",
+					"Interval": "5",
+					"Target": "HTTP:8080/server/login",
+					"Timeout": "4",
+					"UnhealthyThreshold": "3"
+				},
+				"ConnectionDrainingPolicy": {
+					"Enabled": "true",
+					"Timeout": "60"
+				},
+				"ConnectionSettings": {
+					"IdleTimeout": "60"
+				},
+				"CrossZone": "true",
+				"SecurityGroups": [
+					{
+						"Ref": "securityGroupPublic"
+					}
+				],
+				"Listeners": [
+					{
+						"InstancePort": "8080",
+						"LoadBalancerPort": "443",
+						"Protocol": "HTTPS",
+						"InstanceProtocol": "HTTP",
+						"SSLCertificateId": {
+							"Ref": "sslCertificate"
+						},
+						"PolicyNames": [
+							"PolicyForELB"
+						]
+					}
+				]
+			}
+		},
+		"rootRole": {
+			"Type": "AWS::IAM::Role",
+			"Properties": {
+				"AssumeRolePolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"Service": [
+									"ec2.amazonaws.com"
+								]
+							},
+							"Action": [
+								"sts:AssumeRole"
+							]
+						}
+					]
+				},
+				"Path": "/",
+				"Policies": [
+					{
+						"PolicyName": "root",
+						"PolicyDocument": {
+							"Version": "2012-10-17",
+							"Statement": [
+								{
+									"Effect": "Allow",
+									"Action": "*",
+									"Resource": "*"
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		"instanceProfile": {
+			"Type": "AWS::IAM::InstanceProfile",
+			"Properties": {
+				"Path": "/",
+				"Roles": [
+					{
+						"Ref": "rootRole"
+					}
+				]
+			}
+		},
+		"launchConfiguration": {
+			"Type": "AWS::AutoScaling::LaunchConfiguration",
+			"Properties": {
+				"ImageId": {
+					"Ref": "ami"
+				},
+				"InstanceType": {
+					"Ref": "instanceType"
+				},
+				"KeyName": "aws",
+				"IamInstanceProfile": {
+					"Ref": "instanceProfile"
+				},
+				"SecurityGroups": [
+					{
+						"Ref": "securityGroupPrivate"
+					}
+				],
+				"UserData": {
+					"Fn::Base64": {
+						"Fn::Join": [
+							"",
+							[
+								"#!/bin/bash -ex\n",
+								"cd /root \n",
+								"aws s3 cp  s3://",
+								{
+									"Ref": "s3Bucket"
+								},
+								"/apache-tomcat-",
+								{
+									"Ref": "tomcatVersion"
+								},
+								".tar.gz . --region ",
+								{
+									"Ref": "AWS::Region"
+								},
+								" \n",
+								"aws s3 cp  s3://",
+								{
+									"Ref": "s3Bucket"
+								},
+								"/server-",
+								{
+									"Ref": "artifactVersion"
+								},
+								".war . --region ",
+								{
+									"Ref": "AWS::Region"
+								},
+								" \n",
+								"aws s3 cp  s3://",
+								{
+									"Ref": "s3Bucket"
+								},
+								"/authserver-",
+								{
+									"Ref": "artifactVersion"
+								},
+								".war . --region ",
+								{
+									"Ref": "AWS::Region"
+								},
+								" \n",
+								"aws s3 cp  s3://",
+								{
+									"Ref": "s3Bucket"
+								},
+								"/thingabled.sql . --region ",
+								{
+									"Ref": "AWS::Region"
+								},
+								" \n",
+								"tar -xzf apache-tomcat-",
+								{
+									"Ref": "tomcatVersion"
+								},
+								".tar.gz \n",
+								"cp server-",
+								{
+									"Ref": "artifactVersion"
+								},
+								".war apache-tomcat-",
+								{
+									"Ref": "tomcatVersion"
+								},
+								"/webapps/server.war \n",
+								"cp authserver-",
+								{
+									"Ref": "artifactVersion"
+								},
+								".war apache-tomcat-",
+								{
+									"Ref": "tomcatVersion"
+								},
+								"/webapps/authserver.war \n",
+								"cat > apache-tomcat-",
+								{
+									"Ref": "tomcatVersion"
+								},
+								"/conf/context.xml<<'EOF'\n",
+								"<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n",
+								"<Context> \n",
+								"    <WatchedResource>WEB-INF/web.xml</WatchedResource> \n",
+								"    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource> \n",
+								"    <Resource name=\"jdbc/thingabled\" auth=\"Container\" type=\"javax.sql.DataSource\" \n",
+								"               maxActive=\"100\" maxIdle=\"30\" maxWait=\"10000\" \n",
+								"               username=\"",
+								{
+									"Ref": "rdsUser"
+								},
+								"\" password=\"",
+								{
+									"Ref": "rdsPassword"
+								},
+								"\" driverClassName=\"com.mysql.jdbc.Driver\" \n",
+								"               url=\"jdbc:mysql://",
+								{
+									"Ref": "rdsAddress"
+								},
+								"/thingabled\"/> \n",
+								"<Parameter name=\"iftttKey\" value=\"lSyudIoEYr_JNIaKS2ATwgw9yAUUEcVPKppRGSJP1ZJP1nWf-rWASEGU_9wh5uPE\"/> \n",
+								"</Context> \n",
+								"EOF\n",
+								"yum install java-",
+								{
+									"Ref": "openJDKVersion"
+								},
+								"-openjdk-devel -y \n",
+								"update-alternatives --set java /usr/lib/jvm/jre-",
+								{
+									"Ref": "openJDKVersion"
+								},
+								"-openjdk.x86_64/bin/java \n",
+								"update-alternatives --set javac /usr/lib/jvm/java-",
+								{
+									"Ref": "openJDKVersion"
+								},
+								"-openjdk.x86_64/bin/javac \n",
+								"yum install mysql -y \n",
+								"mysql --host ",
+								{
+									"Ref": "rdsAddress"
+								},
+								" -u",
+								{
+									"Ref": "rdsUser"
+								},
+								" -p",
+								{
+									"Ref": "rdsPassword"
+								},
+								" -f < thingabled.sql \n",
+								"apache-tomcat-",
+								{
+									"Ref": "tomcatVersion"
+								},
+								"/bin/startup.sh & \n"
+							]
+						]
+					}
+				}
+			}
+		},
+		"autoScalingGroup": {
+			"Type": "AWS::AutoScaling::AutoScalingGroup",
+			"Properties": {
+				"VPCZoneIdentifier": [
+					{
+						"Ref": "privateSubnet1"
+					},
+					{
+						"Ref": "privateSubnet2"
+					}
+				],
+				"Cooldown": "300",
+				"DesiredCapacity": "1",
+				"HealthCheckGracePeriod": "100",
+				"HealthCheckType": "ELB",
+				"MaxSize": "3",
+				"MinSize": "1",
+				"NotificationConfigurations": [
+					{
+						"TopicARN": {
+							"Ref": "topicAutoScaling"
+						},
+						"NotificationTypes": [
+							"autoscaling:EC2_INSTANCE_LAUNCH",
+							"autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
+							"autoscaling:EC2_INSTANCE_TERMINATE",
+							"autoscaling:EC2_INSTANCE_TERMINATE_ERROR"
+						]
+					}
+				],
+				"LaunchConfigurationName": {
+					"Ref": "launchConfiguration"
+				},
+				"LoadBalancerNames": [
+					{
+						"Ref": "loadBalancer"
+					}
+				],
+				"TerminationPolicies": [
+					"Default"
+				]
+			}
+		},
+		"scalingDecreaseGroupSize": {
+			"Type": "AWS::AutoScaling::ScalingPolicy",
+			"Properties": {
+				"AdjustmentType": "ChangeInCapacity",
+				"PolicyType": "StepScaling",
+				"StepAdjustments": [
+					{
+						"ScalingAdjustment": 0,
+						"MetricIntervalUpperBound": 0.0
+					}
+				],
+				"AutoScalingGroupName": {
+					"Ref": "autoScalingGroup"
+				}
+			}
+		},
+		"scalingIncreaseGroupSize": {
+			"Type": "AWS::AutoScaling::ScalingPolicy",
+			"Properties": {
+				"AdjustmentType": "ChangeInCapacity",
+				"PolicyType": "StepScaling",
+				"StepAdjustments": [
+					{
+						"ScalingAdjustment": 0,
+						"MetricIntervalLowerBound": 0.0
+					}
+				],
+				"AutoScalingGroupName": {
+					"Ref": "autoScalingGroup"
+				}
+			}
+		},
+		"scaleDownAlarm": {
+			"Type": "AWS::CloudWatch::Alarm",
+			"Properties": {
+				"ActionsEnabled": "true",
+				"ComparisonOperator": "LessThanThreshold",
+				"EvaluationPeriods": "1",
+				"MetricName": "CPUUtilization",
+				"Namespace": "AWS/EC2",
+				"Period": "900",
+				"Statistic": "Average",
+				"Threshold": "10.0",
+				"AlarmActions": [
+					{
+						"Ref": "topicAutoScaling"
+					},
+					{
+						"Ref": "scalingDecreaseGroupSize"
+					}
+				],
+				"Dimensions": [
+					{
+						"Name": "AutoScalingGroupName",
+						"Value": "Auto Scaling Group"
+					}
+				]
+			}
+		},
+		"scaleUpAlarm": {
+			"Type": "AWS::CloudWatch::Alarm",
+			"Properties": {
+				"ActionsEnabled": "true",
+				"ComparisonOperator": "GreaterThanOrEqualToThreshold",
+				"EvaluationPeriods": "1",
+				"MetricName": "CPUUtilization",
+				"Namespace": "AWS/EC2",
+				"Period": "300",
+				"Statistic": "Average",
+				"Threshold": "30.0",
+				"AlarmActions": [
+					{
+						"Ref": "scalingIncreaseGroupSize"
+					},
+					{
+						"Ref": "topicAutoScaling"
+					}
+				],
+				"Dimensions": [
+					{
+						"Name": "AutoScalingGroupName",
+						"Value": "Auto Scaling Group"
+					}
+				]
+			}
+		},
+		"dnsthingabledcomEuropeanDNSQueries": {
+			"Type": "AWS::Route53::RecordSetGroup",
+			"Properties": {
+				"HostedZoneName": "thingabled.com.",
+				"RecordSets": [
+					{
+						"Name": "thingabled.com.",
+						"Type": "A",
+						"AliasTarget": {
+							"HostedZoneId": {
+								"Fn::GetAtt": [
+									"loadBalancer",
+									"CanonicalHostedZoneNameID"
+								]
+							},
+							"DNSName": {
+								"Fn::GetAtt": [
+									"loadBalancer",
+									"CanonicalHostedZoneName"
+								]
+							}
+						}
+					}
+				]
+			}
+		}
+	},
+	"Outputs": {
+		"loadBalancer": {
+			"Value": {
+				"Ref": "loadBalancer"
+			}
+		},
+		"loadBalancerURL": {
+			"Description": "Loadbalancer URL",
+			"Value": {
+				"Fn::Join": [
+					"",
+					[
+						"http://",
+						{
+							"Fn::GetAtt": [
+								"loadBalancer",
+								"DNSName"
+							]
+						},
+						"/"
+					]
+				]
+			}
+		},
+		"loadBalancerDNSName": {
+			"Value": {
+				"Fn::GetAtt": [
+					"loadBalancer",
+					"DNSName"
+				]
+			}
+		}
+	}
+}

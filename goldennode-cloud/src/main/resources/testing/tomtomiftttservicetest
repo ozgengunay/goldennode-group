@@ -1,0 +1,20 @@
+{  
+   "data":{  
+      "accessToken":"1c22d82e-d20e-4354-ae6d-3d0a36e94c57",
+      "samples":{  
+         "triggers":{  
+         },
+         "actions":{  
+            "navigate_destination":{  
+               "address":"XYZ"
+            },
+            "update_my_weight":{  
+               "weight":"86"
+            },
+            "update_my_height":{  
+               "height":"170"
+            }
+         }
+      }
+   }
+}
