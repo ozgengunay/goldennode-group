@@ -3,13 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.goldennode</groupId>
-		<artifactId>commons</artifactId>
+		<artifactId>goldennode-group</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>commons</artifactId>
+	<artifactId>goldennode-commons</artifactId>
 	<packaging>jar</packaging>
-	<name>commons</name>
-	<url>http://www.thingabled.com</url>
+	<name>goldennode-commons</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -47,7 +46,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>commons</finalName>
+		<finalName>goldennode-commons</finalName>
 	</build>
 
 

@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.thingabled</groupId>
-	<artifactId>thingabled</artifactId>
+	<groupId>com.goldennode</groupId>
+	<artifactId>goldennode-group</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>thingabled</name>
-	<url>http://www.thingabled.com</url>
+	<name>goldennode-group</name>
+	<url>http://www.goldennode.com</url>
 
 	<properties>
 		<!-- CONFIG -->
@@ -67,21 +67,75 @@
 		
 		<commons.io.version>2.5</commons.io.version>
 
+
+
+
+		<java.version>1.8</java.version>
+		<pmd.version>3.8</pmd.version>
+		<maven-jxr.version>2.3</maven-jxr.version>
+		<cobertura.version>2.7</cobertura.version>
+		<javadoc.version>3.0.0</javadoc.version>
+		<slf4j.version>1.7.10</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
+		<junit.version>4.12</junit.version>
+		<findbugs.version>3.0.1</findbugs.version>
+		<surefire.version>2.20.1</surefire.version>
+		<mockito.version>1.9.5</mockito.version>
+		<jackson.version>2.9.7</jackson.version>
+		<spring.version>5.1.1.RELEASE</spring.version>
 	</properties>
 
 	<modules>
-		<module>commons</module>
-		<module>server</module>
-		<module>authserver</module>
+		<module>goldennode-commons</module>
+		<module>goldennode-cloud</module>
+		<module>goldennode-api</module>
+		<module>goldennode-client</module>
 	</modules>
 
 	<dependencyManagement>
 
+
+
+
 		<dependencies>
+		
+		<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+		
+		
+		
+		
+		
 			<!-- Modules Start -->
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>commons</artifactId>
+				<artifactId>goldennode-commons</artifactId>
 				<version>${project.version}</version>
 				<type>jar</type>
 			</dependency>
@@ -460,6 +514,15 @@
 					<artifactId>replacer</artifactId>
 					<version>${maven.replacer.plugin.version}</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${surefire.version}</version>
+					<configuration>
+						<forkMode>once</forkMode>
+						<argLine>-Xms256m -Xmx6000m -Djava.net.preferIPv4Stack=true</argLine>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -566,14 +629,14 @@
 	<!-- </scm> -->
 
 	<organization>
-		<name>thingabled</name>
-		<url>http://www.thingabled.com</url>
+		<name>goldennode</name>
+		<url>http://www.goldennode.com</url>
 	</organization>
 
 	<developers>
 		<developer>
 			<name>Ozgen Gunay</name>
-			<email>ozgengunay@thingabled.com</email>
+			<email>ozgengunay@goldennode.com</email>
 			<roles>
 				<role>Senior Developer</role>
 			</roles>
@@ -581,6 +644,29 @@
 		</developer>
 	</developers>
 
+
+	<scm>
+		<developerConnection>scm:git:https://github.com/ozgengunay/goldennode</developerConnection>
+	</scm>
+
+
+	<issueManagement>
+		<system>Jira</system>
+		<url>http://jira.thingabled.com:8080</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>http://jenkins.thingabled.com:8080</url>
+		<notifiers>
+			<notifier>
+				<sendOnError>true</sendOnError>
+				<sendOnFailure>true</sendOnFailure>
+				<sendOnSuccess>true</sendOnSuccess>
+				<sendOnWarning>true</sendOnWarning>
+			</notifier>
+		</notifiers>
+	</ciManagement>
 	<!-- <issueManagement> -->
 	<!-- <system>Jira</system> -->
 	<!-- <url>http://thingabled.com:8083/jira</url> -->
@@ -617,6 +703,9 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+
+
 
 
 </project>

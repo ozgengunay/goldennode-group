@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.goldennode</groupId>
-		<artifactId>cloud</artifactId>
+		<artifactId>goldennode-group</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>server</artifactId>
+	<artifactId>goldennode-cloud</artifactId>
 	<packaging>war</packaging>
-	<name>cloud</name>
+	<name>goldennode-cloud</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
@@ -19,7 +19,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>commons</artifactId>
+			<artifactId>goldennode-commons</artifactId>
 		</dependency>
 		<!-- Spring Framework -->
 		<dependency>
