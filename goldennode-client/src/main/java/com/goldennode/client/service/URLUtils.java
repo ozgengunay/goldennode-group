@@ -7,7 +7,7 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 public class URLUtils {
-    private static final String BASE_URL = "https://thingabled.com";
+    private static final String BASE_URL = "https://goldennode.com";
 
     public <K> ResponseEntity<K> post(String url, Object request, Class<K> responseClass) throws IOException {
         SimpleClientHttpRequestFactory fac=new SimpleClientHttpRequestFactory();

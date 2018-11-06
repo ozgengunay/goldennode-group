@@ -613,19 +613,19 @@
 	</pluginRepositories>
 	<!-- <distributionManagement> -->
 	<!-- <repository> -->
-	<!-- <id>thingableddeployment</id> -->
+	<!-- <id>goldennodedeployment</id> -->
 	<!-- <name>Internal Releases</name> -->
-	<!-- <url>http://thingabled.com:8081/nexus/content/repositories/releases/</url> -->
+	<!-- <url>http://goldennode.com:8081/nexus/content/repositories/releases/</url> -->
 	<!-- </repository> -->
 	<!-- <snapshotRepository> -->
-	<!-- <id>thingableddeployment</id> -->
+	<!-- <id>goldennodedeployment</id> -->
 	<!-- <name>Internal Releases</name> -->
-	<!-- <url>http://thingabled.com:8081/nexus/content/repositories/snapshots/</url> -->
+	<!-- <url>http://goldennode.com:8081/nexus/content/repositories/snapshots/</url> -->
 	<!-- </snapshotRepository> -->
 	<!-- </distributionManagement> -->
 
 	<!-- <scm> -->
-	<!-- <developerConnection>scm:svn:http://thingabled.com:8080/svn/thingabled_rep/thingabled/trunk/thingabled</developerConnection> -->
+	<!-- <developerConnection>scm:svn:http://goldennode.com:8080/svn/goldennode_rep/goldennode/trunk/goldennode</developerConnection> -->
 	<!-- </scm> -->
 
 	<organization>
@@ -652,12 +652,12 @@
 
 	<issueManagement>
 		<system>Jira</system>
-		<url>http://jira.thingabled.com:8080</url>
+		<url>http://jira.goldennode.com:8080</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>http://jenkins.thingabled.com:8080</url>
+		<url>http://jenkins.goldennode.com:8080</url>
 		<notifiers>
 			<notifier>
 				<sendOnError>true</sendOnError>
@@ -669,12 +669,12 @@
 	</ciManagement>
 	<!-- <issueManagement> -->
 	<!-- <system>Jira</system> -->
-	<!-- <url>http://thingabled.com:8083/jira</url> -->
+	<!-- <url>http://goldennode.com:8083/jira</url> -->
 	<!-- </issueManagement> -->
 
 	<!-- <ciManagement> -->
 	<!-- <system>hudson</system> -->
-	<!-- <url>http://thingabled.com:8082</url> -->
+	<!-- <url>http://goldennode.com:8082</url> -->
 	<!-- <notifiers> -->
 	<!-- <notifier> -->
 	<!-- <sendOnError>true</sendOnError> -->

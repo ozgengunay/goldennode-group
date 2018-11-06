@@ -28,12 +28,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
-
-import com.thingabled.commons.entity.Authorities;
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.entity.Users.SocialMediaService;
-import com.thingabled.commons.repository.AuthorityRepository;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.commons.entity.Authorities;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.entity.Users.SocialMediaService;
+import com.goldennode.commons.repository.AuthorityRepository;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 import com.goldennode.server.security.social.RegistrationForm;
 import com.goldennode.server.security.social.service.DuplicateEmailException;
 import com.goldennode.server.security.social.service.UserService;
@@ -191,7 +190,7 @@ public class RegistrationController {
 			rols.add(new SimpleGrantedAuthority(authority.getAuthority()));
 		}
  
-        ThingabledUserDetails userDetails = new ThingabledUserDetails(user.getEmail(),user.getPassword_(),rols);
+        GoldenNodeUserDetails userDetails = new GoldenNodeUserDetails(user.getEmail(),user.getPassword_(),rols);
         userDetails.setFirstName(user.getFirstName());
         userDetails.setId(user.getId());
         userDetails.setLastName(user.getLastName());

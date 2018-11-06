@@ -14,16 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thingabled.commons.entity.BaseEntity.Status;
-import com.thingabled.commons.entity.Thing;
-import com.thingabled.commons.entity.ThingData;
-import com.thingabled.commons.entity.ThingPoint;
-import com.thingabled.commons.repository.ThingPointRepository;
-import com.thingabled.commons.repository.ThingRepository;
-import com.thingabled.commons.util.DateTimeUtils;
+import com.goldennode.commons.entity.Thing;
+import com.goldennode.commons.entity.ThingData;
+import com.goldennode.commons.entity.ThingPoint;
+import com.goldennode.commons.entity.BaseEntity.Status;
+import com.goldennode.commons.repository.ThingPointRepository;
+import com.goldennode.commons.repository.ThingRepository;
+import com.goldennode.commons.util.DateTimeUtils;
 import com.goldennode.server.controllers.rest.ErrorCode;
-import com.goldennode.server.controllers.rest.ThingabledRestException;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
 
 @RestController
 @RequestMapping(value = { "/restnoauth/thingdata" })
@@ -43,16 +42,16 @@ public class ThingDataControllerNoAuth {
 	@RequestMapping(method = { RequestMethod.POST })
 	public void add(Principal principal, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("publickey") String publickey, @RequestParam("thingPointId") String thingPointId,
-			@RequestParam("value") String value) throws ThingabledRestException {
+			@RequestParam("value") String value) throws GoldenNodeRestException {
 
 		ThingPoint thingPointEntity = thingPointRepository.findByIdAndStatus(thingPointId, Status.ENABLED);
 		if (thingPointEntity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_POINT_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_POINT_NOT_FOUND);
 		}
 
 		Thing entity = thingRepository.findByPublickeyAndStatus(publickey, Status.ENABLED);
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_FOUND);
 		}
 
 		ThingData newEntity = new ThingData();

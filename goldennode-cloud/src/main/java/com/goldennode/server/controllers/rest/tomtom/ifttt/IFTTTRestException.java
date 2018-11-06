@@ -1,8 +1,8 @@
 package com.goldennode.server.controllers.rest.tomtom.ifttt;
 
-import com.thingabled.commons.util.ThingabledException;
+import com.goldennode.commons.util.GoldenNodeException;
 
-public class IFTTTRestException extends ThingabledException {
+public class IFTTTRestException extends GoldenNodeException {
 
 	private String error;
 

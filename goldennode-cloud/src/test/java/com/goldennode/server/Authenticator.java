@@ -16,8 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.RequestEntity;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.util.MultiValueMap;
-
-import com.thingabled.commons.util.UUID;
+import com.goldennode.commons.util.UUID;
 
 public class Authenticator {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Authenticator.class);

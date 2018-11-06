@@ -17,22 +17,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thingabled.commons.entity.BaseEntity.Status;
-import com.thingabled.commons.entity.Thing;
-import com.thingabled.commons.entity.ThingContext;
-import com.thingabled.commons.entity.ThingContext.Type;
-import com.thingabled.commons.entity.ThingOwnership;
-import com.thingabled.commons.entity.ThingPoint;
-import com.thingabled.commons.entity.ThingPoint.Permission;
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.repository.ThingContextRepository;
-import com.thingabled.commons.repository.ThingOwnershipRepository;
-import com.thingabled.commons.repository.ThingRepository;
-import com.thingabled.commons.util.UUID;
+import com.goldennode.commons.entity.Thing;
+import com.goldennode.commons.entity.ThingContext;
+import com.goldennode.commons.entity.ThingOwnership;
+import com.goldennode.commons.entity.ThingPoint;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.entity.BaseEntity.Status;
+import com.goldennode.commons.entity.ThingContext.Type;
+import com.goldennode.commons.entity.ThingPoint.Permission;
+import com.goldennode.commons.repository.ThingContextRepository;
+import com.goldennode.commons.repository.ThingOwnershipRepository;
+import com.goldennode.commons.repository.ThingRepository;
+import com.goldennode.commons.util.UUID;
 import com.goldennode.server.controllers.rest.ErrorCode;
-import com.goldennode.server.controllers.rest.ThingabledRestException;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 
 @RestController
 @RequestMapping(value = { "/rest/things" })
@@ -49,8 +48,8 @@ public class ThingController {
 	
 	@RequestMapping(value = { "/{id}" }, method = { RequestMethod.GET })
 	public Thing get(@PathVariable("id") String id, @RequestParam("idType") String idType)
-			throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		Thing entity = null;
@@ -66,19 +65,19 @@ public class ThingController {
 		}
 
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_FOUND);
 		}
 		// get owner
 		ThingOwnership ownership = thingOwnershipRepository.findByThingIdAndUserIdAndStatus(id, userDetails.getId(),
 				Status.ENABLED);
 		if (ownership == null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_OWNED);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_OWNED);
 		}
 
 		return entity;
 	}
 
-	private Thing findByThingContextId(ThingabledUserDetails userDetails, String id) throws ThingabledRestException {
+	private Thing findByThingContextId(GoldenNodeUserDetails userDetails, String id) throws GoldenNodeRestException {
 		List<ThingOwnership> ownerships = thingOwnershipRepository.findByUserIdAndStatus(userDetails.getId(),
 				Status.ENABLED);
 		for (ThingOwnership ownership : ownerships) {
@@ -87,14 +86,14 @@ public class ThingController {
 				return thing;
 			}
 		}
-		throw new ThingabledRestException(ErrorCode.THING_NOT_FOUND);
+		throw new GoldenNodeRestException(ErrorCode.THING_NOT_FOUND);
 
 	}
 
 	
 	@RequestMapping(method = { RequestMethod.GET })
-	public List<Thing> get(Principal principal) throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+	public List<Thing> get(Principal principal) throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		// get owner
@@ -110,18 +109,18 @@ public class ThingController {
 
 	@RequestMapping(method = { RequestMethod.POST })
 	public Thing register(HttpServletRequest request, HttpServletResponse response, @RequestBody Thing data)
-			throws ThingabledRestException {
+			throws GoldenNodeRestException {
 
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		ThingContext context = thingContextRepository.findByIdAndStatus(data.getThingContextId(), Status.ENABLED);
 		if (context == null) {
-			throw new ThingabledRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
 		}
 
 		if (context.getType() != Type.PHYSICAL && context.getType() != Type.VIRTUAL) {
-			throw new ThingabledRestException(ErrorCode.CAN_REGISTER_ONLY_PHYSICAL_OR_VIRTUAL_THINGS);
+			throw new GoldenNodeRestException(ErrorCode.CAN_REGISTER_ONLY_PHYSICAL_OR_VIRTUAL_THINGS);
 		}
 
 		if (context.getType() == Type.VIRTUAL) {
@@ -131,13 +130,13 @@ public class ThingController {
 			for (ThingOwnership ownership : ownerships) {
 				Thing thing = thingRepository.findByIdAndStatus(ownership.getThingId(), Status.ENABLED);
 				if (thing.getThingContextId().equals(data.getThingContextId())) {
-					throw new ThingabledRestException(ErrorCode.SAME_THING_ALREADY_REGISTERED);
+					throw new GoldenNodeRestException(ErrorCode.SAME_THING_ALREADY_REGISTERED);
 				}
 			}
 		}
 
 		if (context.getType()==Type.PHYSICAL && !userDetails.getRoles().contains(new SimpleGrantedAuthority(Users.Role.ROLE_DEVELOPER.toString())))
-			throw new ThingabledRestException(ErrorCode.REGISTERATIONNOTALLOWEDFORNONDEVELOPERS);
+			throw new GoldenNodeRestException(ErrorCode.REGISTERATIONNOTALLOWEDFORNONDEVELOPERS);
 		
 		Thing newEntity = Thing.newEntity();
 		newEntity.setPublickey(UUID.getUUID());
@@ -163,7 +162,7 @@ public class ThingController {
 		if (context.getType() == Type.VIRTUAL) {
 			try {
 				own(newEntity);
-			} catch (ThingabledRestException e) {
+			} catch (GoldenNodeRestException e) {
 				// will not throw
 			}
 		}
@@ -176,7 +175,7 @@ public class ThingController {
 	@RequestMapping(value = { "/{id}" }, method = { RequestMethod.DELETE })
 	public void delete(HttpServletResponse response, @PathVariable("id") String id,
 			@RequestParam("idType") String idType, @RequestParam("operation") String operation)
-					throws ThingabledRestException {
+					throws GoldenNodeRestException {
 
 		if (operation.equals("deregister")) {
 			deregister(response, id, idType, operation);
@@ -187,9 +186,9 @@ public class ThingController {
 	}
 
 	private void deregister(HttpServletResponse response, String id, String idType, String operation)
-			throws ThingabledRestException {
+			throws GoldenNodeRestException {
 
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		Thing entity = null;
@@ -202,22 +201,22 @@ public class ThingController {
 		}
 
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_FOUND);
 		}
 
 		ThingContext context = thingContextRepository.findByIdAndStatus(entity.getThingContextId(), Status.ENABLED);
 		if (context == null) {
-			throw new ThingabledRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
 		}
 
 		if (context.getType() == Type.PHYSICAL) {
-			throw new ThingabledRestException(ErrorCode.CANT_DEREGISTER_PHYSICAL_THINGS);
+			throw new GoldenNodeRestException(ErrorCode.CANT_DEREGISTER_PHYSICAL_THINGS);
 		}
 
 		ThingOwnership ownership = thingOwnershipRepository.findByThingIdAndUserIdAndStatus(id, userDetails.getId(),
 				Status.ENABLED);
 		if (ownership == null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_OWNED);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_OWNED);
 		}
 		ownership.disable();
 		thingOwnershipRepository.save(ownership);
@@ -235,7 +234,7 @@ public class ThingController {
 	
 	@RequestMapping(value = { "/{id}" }, method = { RequestMethod.PUT })
 	public void update(@PathVariable("id") String id, @RequestParam("operation") String operation,
-			@RequestParam("idType") String idType, @RequestBody Thing data) throws ThingabledRestException {
+			@RequestParam("idType") String idType, @RequestBody Thing data) throws GoldenNodeRestException {
 
 		Thing entity = null;
 		if (idType.equals("thingId")) {
@@ -247,7 +246,7 @@ public class ThingController {
 		}
 
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_FOUND);
 		}
 
 		if (operation.equals("own")) {
@@ -255,13 +254,13 @@ public class ThingController {
 		}
 	}
 
-	private void own(Thing entity) throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+	private void own(Thing entity) throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		// get owner
 		ThingOwnership ownership_ = thingOwnershipRepository.findByThingIdAndStatus(entity.getId(), Status.ENABLED);
 		if (ownership_ != null) {
-			throw new ThingabledRestException(ErrorCode.THING_ALREADY_OWNED);
+			throw new GoldenNodeRestException(ErrorCode.THING_ALREADY_OWNED);
 		}
 		ThingOwnership ownership = ThingOwnership.newEntity();
 		ownership.setThingId(entity.getId());
@@ -271,7 +270,7 @@ public class ThingController {
 	}
 	
 	private void disown(HttpServletResponse response, String id, String idType, String operation)
-			throws ThingabledRestException {
+			throws GoldenNodeRestException {
 
 		Thing entity = null;
 		if (idType.equals("thingId")) {
@@ -282,23 +281,23 @@ public class ThingController {
 			entity = thingRepository.findByPublickeyAndStatus(id, Status.ENABLED);
 		}
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_FOUND);
 		}
 
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		ThingContext context = thingContextRepository.findByIdAndStatus(entity.getThingContextId(), Status.ENABLED);
 		if (context == null) {
-			throw new ThingabledRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
 		}
 		if (context.getType() == Type.VIRTUAL) {
-			throw new ThingabledRestException(ErrorCode.CAN_NOT_DISOWN_VIRTUAL_THINGS);
+			throw new GoldenNodeRestException(ErrorCode.CAN_NOT_DISOWN_VIRTUAL_THINGS);
 		}
 		ThingOwnership ownership = thingOwnershipRepository.findByThingIdAndUserIdAndStatus(
 				entity.getId(), userDetails.getId(),  Status.ENABLED);
 		if (ownership==null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_OWNED);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_OWNED);
 		}
 		
 		ownership.disable();
@@ -314,7 +313,7 @@ public class ThingController {
 	 * @PathVariable("thingPointId") String thingPointId, @RequestBody
 	 * ThingPermission data) throws ThingException {
 	 * 
-	 * ThingabledUserDetails userDetails = (ThingabledUserDetails)
+	 * GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails)
 	 * SecurityContextHolder.getContext() .getAuthentication().getPrincipal();
 	 * 
 	 * Thing entity = repository.findByIdAndStatus(thingId, Status.ENABLED); if

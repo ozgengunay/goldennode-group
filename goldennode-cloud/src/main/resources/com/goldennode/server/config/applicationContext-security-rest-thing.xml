@@ -19,7 +19,7 @@
 	</sec:http>
 
 	<bean id="thingAuthenticationFilter"
-		class="com.thingabled.server.security.hmac.filter.ThingAuthenticationFilter">
+		class="com.goldennode.server.security.hmac.filter.ThingAuthenticationFilter">
 		<constructor-arg name="defaultFilterProcessesUrl"
 			value="/" />
 		<property name="authenticationManager" ref="authenticationManager" />
@@ -32,7 +32,7 @@
 				class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
 				<property name="redirectStrategy">
 					<bean
-						class="com.thingabled.server.security.hmac.filter.NoRedirectStrategy" />
+						class="com.goldennode.server.security.hmac.filter.NoRedirectStrategy" />
 				</property>
 			</bean>
 		</property>
@@ -40,7 +40,7 @@
 
 
 	<bean id="thingAuthenticationProvider"
-		class="com.thingabled.server.security.hmac.provider.ThingAuthenticationProvider">
+		class="com.goldennode.server.security.hmac.provider.ThingAuthenticationProvider">
 
 	</bean>
 

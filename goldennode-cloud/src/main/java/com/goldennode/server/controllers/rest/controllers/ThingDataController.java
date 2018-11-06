@@ -38,20 +38,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import com.thingabled.commons.entity.BaseEntity.Status;
-import com.thingabled.commons.entity.ThingData;
-import com.thingabled.commons.entity.ThingOwnership;
-import com.thingabled.commons.entity.ThingPoint;
-import com.thingabled.commons.repository.ThingOwnershipRepository;
-import com.thingabled.commons.repository.ThingPointRepository;
-import com.thingabled.commons.util.DateTimeUtils;
-import com.thingabled.commons.util.DateTimeUtils.Period;
-import com.thingabled.commons.util.Interval;
-import com.thingabled.commons.util.URLUtils;
+import com.goldennode.commons.entity.ThingData;
+import com.goldennode.commons.entity.ThingOwnership;
+import com.goldennode.commons.entity.ThingPoint;
+import com.goldennode.commons.entity.BaseEntity.Status;
+import com.goldennode.commons.repository.ThingOwnershipRepository;
+import com.goldennode.commons.repository.ThingPointRepository;
+import com.goldennode.commons.util.DateTimeUtils;
+import com.goldennode.commons.util.Interval;
+import com.goldennode.commons.util.URLUtils;
+import com.goldennode.commons.util.DateTimeUtils.Period;
 import com.goldennode.server.controllers.rest.ErrorCode;
-import com.goldennode.server.controllers.rest.ThingabledRestException;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 
 @RestController
 @RequestMapping(value = { "/rest/thingdata","/rest/pt/thingdata" })
@@ -70,19 +69,19 @@ public class ThingDataController {
 
 	@RequestMapping(method = { RequestMethod.POST })
 	public void add(Principal principal, HttpServletRequest request, HttpServletResponse response,
-			@RequestBody ThingData data) throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			@RequestBody ThingData data) throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		ThingPoint thingPointEntity = thingPointRepository.findByIdAndStatus(data.getThingPointId(), Status.ENABLED);
 		if (thingPointEntity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_POINT_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_POINT_NOT_FOUND);
 		}
 
 		ThingOwnership ownership = thingOwnershipRepository
 				.findByThingIdAndUserIdAndStatus(thingPointEntity.getThingId(), userDetails.getId(), Status.ENABLED);
 		if (ownership == null) {
-			throw new ThingabledRestException(ErrorCode.THING_NOT_OWNED);
+			throw new GoldenNodeRestException(ErrorCode.THING_NOT_OWNED);
 		}
 
 		ThingData newEntity = new ThingData();
@@ -137,25 +136,25 @@ public class ThingDataController {
 
 	@RequestMapping(value = { "/{thingPointId}" }, method = { RequestMethod.GET })
 	public Set<Interval> get(Principal principal, @PathVariable("thingPointId") String thingPointId,
-			@RequestParam("period") String period, @RequestParam("type") String type) throws ThingabledRestException {
+			@RequestParam("period") String period, @RequestParam("type") String type) throws GoldenNodeRestException {
 		try {
-			ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 					.getAuthentication().getPrincipal();
 
 			ThingPoint thingPoint = thingPointRepository.findByIdAndStatus(thingPointId, Status.ENABLED);
 			if (thingPoint == null) {
-				throw new ThingabledRestException(ErrorCode.THING_POINT_NOT_FOUND);
+				throw new GoldenNodeRestException(ErrorCode.THING_POINT_NOT_FOUND);
 			}
 			// get owner
 			ThingOwnership ownership = thingOwnershipRepository.findByThingIdAndUserIdAndStatus(thingPoint.getThingId(),
 					userDetails.getId(), Status.ENABLED);
 			if (ownership == null) {
-				throw new ThingabledRestException(ErrorCode.THING_NOT_OWNED);
+				throw new GoldenNodeRestException(ErrorCode.THING_NOT_OWNED);
 			}
 
 			TimeZone appTimeZone = TimeZone.getTimeZone("GMT");
 			TreeSet<Interval> intervals = DateTimeUtils.getIntervals(Period.valueOf(period),
-					com.thingabled.commons.util.DateTimeUtils.Type.valueOf(type), appTimeZone);
+					com.goldennode.commons.util.DateTimeUtils.Type.valueOf(type), appTimeZone);
 
 			Interval intervalFromPeriod = DateTimeUtils.getIntervalFromPeriod(Period.valueOf(period), appTimeZone);
 
@@ -192,7 +191,7 @@ public class ThingDataController {
 			return intervals;
 		} catch (ParseException | IOException e) {
 			LOGGER.error("error",e);
-			throw new ThingabledRestException(ErrorCode.GENERAL_ERROR);
+			throw new GoldenNodeRestException(ErrorCode.GENERAL_ERROR);
 		}
 
 	}

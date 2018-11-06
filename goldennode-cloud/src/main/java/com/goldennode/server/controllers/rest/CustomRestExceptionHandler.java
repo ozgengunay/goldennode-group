@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-@ControllerAdvice(basePackages="com.thingabled.server.controllers.rest.controllers")
+@ControllerAdvice(basePackages="com.goldennode.server.controllers.rest.controllers")
 public class CustomRestExceptionHandler {
 
-	@ExceptionHandler({ ThingabledRestException.class })
-	public ResponseEntity<Object> handleAll(ThingabledRestException ex, WebRequest request) {
+	@ExceptionHandler({ GoldenNodeRestException.class })
+	public ResponseEntity<Object> handleAll(GoldenNodeRestException ex, WebRequest request) {
 		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex,ex.getCode());
 		return new ResponseEntity<Object>(apiError, apiError.getStatus());
 	}

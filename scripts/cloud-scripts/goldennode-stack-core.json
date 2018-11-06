@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Thingabled Stack Core",
+	"Description": "Goldennode Stack Core",
 	"Parameters": {
 		"ami": {
 			"Description": "ami",

@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Thingabled Stack ASG",
+	"Description": "Goldennode Stack ASG",
 	"Parameters": {
 		"ami": {
 			"Description": "ami",
@@ -89,11 +89,11 @@
 		"sslCertificate": {
 			"Type": "AWS::CertificateManager::Certificate",
 			"Properties": {
-				"DomainName": "thingabled.com",
+				"DomainName": "goldennode.com",
 				"DomainValidationOptions": [
 					{
-						"DomainName": "thingabled.com",
-						"ValidationDomain": "thingabled.com"
+						"DomainName": "goldennode.com",
+						"ValidationDomain": "goldennode.com"
 					}
 				]
 			}
@@ -273,7 +273,7 @@
 								{
 									"Ref": "s3Bucket"
 								},
-								"/thingabled.sql . --region ",
+								"/goldennode.sql . --region ",
 								{
 									"Ref": "AWS::Region"
 								},
@@ -310,7 +310,7 @@
 								"<Context> \n",
 								"    <WatchedResource>WEB-INF/web.xml</WatchedResource> \n",
 								"    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource> \n",
-								"    <Resource name=\"jdbc/thingabled\" auth=\"Container\" type=\"javax.sql.DataSource\" \n",
+								"    <Resource name=\"jdbc/goldennode\" auth=\"Container\" type=\"javax.sql.DataSource\" \n",
 								"               maxActive=\"100\" maxIdle=\"30\" maxWait=\"10000\" \n",
 								"               username=\"",
 								{
@@ -325,7 +325,7 @@
 								{
 									"Ref": "rdsAddress"
 								},
-								"/thingabled\"/> \n",
+								"/goldennode\"/> \n",
 								"<Parameter name=\"iftttKey\" value=\"lSyudIoEYr_JNIaKS2ATwgw9yAUUEcVPKppRGSJP1ZJP1nWf-rWASEGU_9wh5uPE\"/> \n",
 								"</Context> \n",
 								"EOF\n",
@@ -357,7 +357,7 @@
 								{
 									"Ref": "rdsPassword"
 								},
-								" -f < thingabled.sql \n",
+								" -f < goldennode.sql \n",
 								"apache-tomcat-",
 								{
 									"Ref": "tomcatVersion"
@@ -498,13 +498,13 @@
 				]
 			}
 		},
-		"dnsthingabledcomEuropeanDNSQueries": {
+		"dnsgoldennodecomEuropeanDNSQueries": {
 			"Type": "AWS::Route53::RecordSetGroup",
 			"Properties": {
-				"HostedZoneName": "thingabled.com.",
+				"HostedZoneName": "goldennode.com.",
 				"RecordSets": [
 					{
-						"Name": "thingabled.com.",
+						"Name": "goldennode.com.",
 						"Type": "A",
 						"AliasTarget": {
 							"HostedZoneId": {

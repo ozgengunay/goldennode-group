@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.goldennode.server.controllers.rest.ThingabledRestException;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
 
 @RestController
 @RequestMapping(value = { "/tomtom/ifttt/v1/status" })
@@ -18,7 +18,7 @@ public class ChannelStatus {
 	
 	@RequestMapping(method =  RequestMethod.GET, headers={"Accept=application/json"})
 	public ResponseEntity<Object> getStatus(HttpServletRequest request)
-			throws ThingabledRestException {
+			throws GoldenNodeRestException {
 		if (request.getHeader("IFTTT-Channel-Key")==null ||!request.getHeader("IFTTT-Channel-Key").equals(request.getServletContext().getInitParameter("iftttKey"))){
 			return new ResponseEntity<Object>(HttpStatus.UNAUTHORIZED);
 		} 

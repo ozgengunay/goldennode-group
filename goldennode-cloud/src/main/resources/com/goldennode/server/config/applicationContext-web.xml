@@ -42,7 +42,7 @@
         <websocket:sockjs/>
     </websocket:handlers>
 
-    <bean id="wshandler" class="com.thingabled.server.controllers.rest.tomtom.ifttt.WebSocketHandler"/>
+    <bean id="wshandler" class="com.goldennode.server.controllers.rest.tomtom.ifttt.WebSocketHandler"/>
 	
     
      <websocket:message-broker application-destination-prefix="/app">

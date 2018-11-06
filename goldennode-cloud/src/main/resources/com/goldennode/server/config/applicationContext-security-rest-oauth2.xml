@@ -30,9 +30,9 @@
 		class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler" />
 
 	<bean id="iftttAuthenticationEntryPoint"
-		class="com.thingabled.server.controllers.rest.tomtom.ifttt.IftttEntryPoint" />
+		class="com.goldennode.server.controllers.rest.tomtom.ifttt.IftttEntryPoint" />
 	<bean id="iftttAccessDeniedHandler"
-		class="com.thingabled.server.controllers.rest.tomtom.ifttt.IftttAccessDeniedHandler" />
+		class="com.goldennode.server.controllers.rest.tomtom.ifttt.IftttAccessDeniedHandler" />
 	
 	<bean id="oauthAuthenticationEntryPoint"
 		class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint" />

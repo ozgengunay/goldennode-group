@@ -2,10 +2,10 @@
 
 case "$1" in
   disable)
-	sed -i '/127.0.0.1 thingabled.com/d' /etc/hosts 
+	sed -i '/127.0.0.1 goldennode.com/d' /etc/hosts 
     ;;
   enable)
- 	echo "127.0.0.1 thingabled.com" >> /etc/hosts
+ 	echo "127.0.0.1 goldennode.com" >> /etc/hosts
     ;;
   status)
     cat /etc/hosts

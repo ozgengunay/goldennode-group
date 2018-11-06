@@ -20,14 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thingabled.commons.entity.Friendship;
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.repository.FriendshipRepository;
-import com.thingabled.commons.repository.UserRepository;
+import com.goldennode.commons.entity.Friendship;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.repository.FriendshipRepository;
+import com.goldennode.commons.repository.UserRepository;
 import com.goldennode.server.controllers.rest.ErrorCode;
-import com.goldennode.server.controllers.rest.ThingabledRestException;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 
 @RestController
 @RequestMapping(value = { "/rest/friendships" })
@@ -44,12 +43,12 @@ public class FriendshipController {
 
 	@RequestMapping(value = { "/{friendshipId}" }, method = { RequestMethod.GET })
 	public Friendship get(Principal principal, @PathVariable("friendshipId") String friendshipId)
-			throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		Friendship entity = repository.findByIdAndUserId(friendshipId, userDetails.getId());
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.ENTITY_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.ENTITY_NOT_FOUND);
 		}
 		return entity;
 	}
@@ -57,7 +56,7 @@ public class FriendshipController {
 
 	@RequestMapping(method = { RequestMethod.GET })
 	public List<Friendship> getAll(Principal principal, HttpServletRequest request) {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		

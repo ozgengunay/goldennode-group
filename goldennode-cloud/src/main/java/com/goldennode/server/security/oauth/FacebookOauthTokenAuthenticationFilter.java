@@ -48,8 +48,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.entity.Users.SocialMediaService;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.entity.Users.SocialMediaService;
 import com.goldennode.server.security.hmac.filter.NoRedirectStrategy;
 import com.goldennode.server.security.social.RegistrationForm;
 import com.goldennode.server.security.social.service.DuplicateEmailException;

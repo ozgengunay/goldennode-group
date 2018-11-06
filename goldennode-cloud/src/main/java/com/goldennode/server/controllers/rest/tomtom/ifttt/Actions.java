@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thingabled.commons.entity.IftttAction;
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.repository.IftttActionRepository;
-import com.thingabled.commons.repository.UserRepository;
+import com.goldennode.commons.entity.IftttAction;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.repository.IftttActionRepository;
+import com.goldennode.commons.repository.UserRepository;
 
 @RestController
 @CrossOrigin(origins = "*")

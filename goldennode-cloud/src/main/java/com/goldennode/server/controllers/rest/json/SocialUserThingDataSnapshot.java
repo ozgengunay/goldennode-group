@@ -1,6 +1,6 @@
 package com.goldennode.server.controllers.rest.json;
 
-import com.thingabled.commons.entity.ThingData;
+import com.goldennode.commons.entity.ThingData;
 
 public class SocialUserThingDataSnapshot{
 	

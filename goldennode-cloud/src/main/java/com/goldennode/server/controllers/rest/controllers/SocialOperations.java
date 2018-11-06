@@ -25,28 +25,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thingabled.commons.entity.BaseEntity.Status;
-import com.thingabled.commons.entity.Friendship;
-import com.thingabled.commons.entity.Thing;
-import com.thingabled.commons.entity.ThingContext;
-import com.thingabled.commons.entity.ThingContext.Type;
-import com.thingabled.commons.entity.ThingData;
-import com.thingabled.commons.entity.ThingOwnership;
-import com.thingabled.commons.entity.ThingPoint;
-import com.thingabled.commons.entity.ThingPoint.Permission;
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.repository.FriendshipRepository;
-import com.thingabled.commons.repository.ThingContextRepository;
-import com.thingabled.commons.repository.ThingOwnershipRepository;
-import com.thingabled.commons.repository.ThingPointRepository;
-import com.thingabled.commons.repository.ThingRepository;
-import com.thingabled.commons.repository.UserRepository;
-import com.thingabled.commons.util.DateTimeUtils;
+import com.goldennode.commons.entity.Friendship;
+import com.goldennode.commons.entity.Thing;
+import com.goldennode.commons.entity.ThingContext;
+import com.goldennode.commons.entity.ThingData;
+import com.goldennode.commons.entity.ThingOwnership;
+import com.goldennode.commons.entity.ThingPoint;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.entity.BaseEntity.Status;
+import com.goldennode.commons.entity.ThingContext.Type;
+import com.goldennode.commons.entity.ThingPoint.Permission;
+import com.goldennode.commons.repository.FriendshipRepository;
+import com.goldennode.commons.repository.ThingContextRepository;
+import com.goldennode.commons.repository.ThingOwnershipRepository;
+import com.goldennode.commons.repository.ThingPointRepository;
+import com.goldennode.commons.repository.ThingRepository;
+import com.goldennode.commons.repository.UserRepository;
+import com.goldennode.commons.util.DateTimeUtils;
 import com.goldennode.server.controllers.rest.ErrorCode;
-import com.goldennode.server.controllers.rest.ThingabledRestException;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
 import com.goldennode.server.controllers.rest.json.SocialUserThingDataSnapshot;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 
 @RestController
 @RequestMapping(value = { "/rest/socialoperations" })
@@ -79,9 +78,9 @@ public class SocialOperations {
 	@RequestMapping(value = { "/getFriendList/{friendList}" }, method = {
 			RequestMethod.GET },produces = "application/json")
 	public String getFriendList( @PathVariable("friendList") String friendList)
-					throws ThingabledRestException{
+					throws GoldenNodeRestException{
 		try {
-			ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 					.getAuthentication().getPrincipal();
 
 			List<SocialUserThingDataSnapshot> snapshots = new ArrayList<SocialUserThingDataSnapshot>();
@@ -107,7 +106,7 @@ public class SocialOperations {
 			return joFinal.toString();
 		} catch (Exception e) {
 			LOGGER.error("error in getFriendsThingDataSnapshot", e);
-			throw new ThingabledRestException(ErrorCode.GENERAL_ERROR);
+			throw new GoldenNodeRestException(ErrorCode.GENERAL_ERROR);
 		}
 
 	}
@@ -121,18 +120,18 @@ public class SocialOperations {
 			RequestMethod.GET })
 	public List<SocialUserThingDataSnapshot> getFriendsThingDataSnapshot(Principal principal,
 			@PathVariable("thingContextId") String thingContextId, @PathVariable("internalId") String internalId)
-					throws ThingabledRestException{
+					throws GoldenNodeRestException{
 		try {
-			ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 					.getAuthentication().getPrincipal();
 
 			ThingContext thingContext = thingContextRepository.findByIdAndStatus(thingContextId, Status.ENABLED);
 			if (thingContext == null) {
-				throw new ThingabledRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
+				throw new GoldenNodeRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
 			}
 
 			if (thingContext.getType() != Type.VIRTUAL) {
-				throw new ThingabledRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
+				throw new GoldenNodeRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
 			}
 
 			List<SocialUserThingDataSnapshot> snapshots = new ArrayList<SocialUserThingDataSnapshot>();
@@ -192,7 +191,7 @@ public class SocialOperations {
 			return snapshots;
 		} catch (Exception e) {
 			LOGGER.error("error in getFriendsThingDataSnapshot", e);
-			throw new ThingabledRestException(ErrorCode.GENERAL_ERROR);
+			throw new GoldenNodeRestException(ErrorCode.GENERAL_ERROR);
 		}
 
 	}

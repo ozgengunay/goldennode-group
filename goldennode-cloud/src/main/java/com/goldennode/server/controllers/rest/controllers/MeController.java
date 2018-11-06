@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.repository.UserRepository;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.repository.UserRepository;
 import com.goldennode.server.controllers.rest.ErrorCode;
-import com.goldennode.server.controllers.rest.ThingabledRestException;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 
 @RestController
 @RequestMapping(value = { "/rest/me" })
@@ -30,12 +29,12 @@ public class MeController {
 	private UserRepository userRepository;
 
 	@RequestMapping(method = { RequestMethod.PUT })
-	public void setOAuthPassword(Principal principal, @RequestBody Users data) throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+	public void setOAuthPassword(Principal principal, @RequestBody Users data) throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		Users entity = userRepository.findById(userDetails.getId());
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.ENTITY_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.ENTITY_NOT_FOUND);
 		}
 		if (data.getPassword() == null) {
 			entity.setPassword(null);
@@ -47,12 +46,12 @@ public class MeController {
 	}
 
 	@RequestMapping(method = { RequestMethod.GET })
-	public Users getMe(Principal principal) throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+	public Users getMe(Principal principal) throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		Users entity = userRepository.findById(userDetails.getId());
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.ENTITY_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.ENTITY_NOT_FOUND);
 		}
 
 		if (entity.getPassword() != null)

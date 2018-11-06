@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<beans>
-		<jee:jndi-lookup jndi-name="jdbc/thingabled" id="dataSource"
+		<jee:jndi-lookup jndi-name="jdbc/goldennode" id="dataSource"
 			expected-type="javax.sql.DataSource">
 		</jee:jndi-lookup>
 
@@ -30,7 +30,7 @@
 			<property name="dataSource" ref="dataSource" />
 			<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 			<property name="packagesToScan"
-				value="com.thingabled.commons.entity" />
+				value="com.goldennode.commons.entity" />
 			<property name="jpaProperties">
 				<props>
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
@@ -43,7 +43,7 @@
 		</bean>
 
 		<jpa:repositories
-			base-package="com.thingabled.commons.repository" />
+			base-package="com.goldennode.commons.repository" />
 
 	</beans>
 

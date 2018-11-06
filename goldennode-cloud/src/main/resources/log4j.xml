@@ -6,7 +6,7 @@
 
 	<appender name="file" class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="10MB" />
-		<param name="file" value="${catalina.home}/logs/thingabled.log" />
+		<param name="file" value="${catalina.home}/logs/goldennode.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
 		</layout>
@@ -17,7 +17,7 @@
 	    </layout>
 	</appender>
 
-	<logger name="com.thingabled" additivity="false">
+	<logger name="com.goldennode" additivity="false">
 		<level value="DEBUG" />
 		<appender-ref ref="file" />
 		<appender-ref ref="console" />

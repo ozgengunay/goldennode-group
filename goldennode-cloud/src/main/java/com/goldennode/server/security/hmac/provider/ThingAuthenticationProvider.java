@@ -19,7 +19,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.codec.Base64;
 
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 import com.goldennode.server.security.hmac.filter.HMACCredentials;
 import com.goldennode.server.security.hmac.service.ThingUserDetailsService;
 
@@ -54,7 +54,7 @@ public class ThingAuthenticationProvider extends AbstractUserDetailsAuthenticati
 			HMACCredentials restCredentials = (HMACCredentials) authentication.getCredentials();
 
 			if (!restCredentials.getSignature().equals(
-					generateSignature(restCredentials.getRequestData(), ((ThingabledUserDetails) userDetails).getThing().getSecretkey()))) {
+					generateSignature(restCredentials.getRequestData(), ((GoldenNodeUserDetails) userDetails).getThing().getSecretkey()))) {
 
 				LOGGER.debug("Authentication failed: password does not match stored value");
 

@@ -1,13 +1,13 @@
-CREATE database IF NOT EXISTS `thingabled`;
+CREATE database IF NOT EXISTS `goldennode`;
 
--- Database: `thingabled`
+-- Database: `goldennode`
 --
-use thingabled;
+use goldennode;
 
--- CREATE USER 'thingabled'@'localhost' IDENTIFIED BY 'thingabled';
--- CREATE USER 'thingabled'@'%' IDENTIFIED BY 'thingabled';
--- GRANT ALL PRIVILEGES ON *.* TO 'thingabled'@'localhost' WITH GRANT OPTION;
--- GRANT ALL PRIVILEGES ON *.* TO 'thingabled'@'%' WITH GRANT OPTION;
+-- CREATE USER 'goldennode'@'localhost' IDENTIFIED BY 'goldennode';
+-- CREATE USER 'goldennode'@'%' IDENTIFIED BY 'goldennode';
+-- GRANT ALL PRIVILEGES ON *.* TO 'goldennode'@'localhost' WITH GRANT OPTION;
+-- GRANT ALL PRIVILEGES ON *.* TO 'goldennode'@'%' WITH GRANT OPTION;
 -- --------------------------------------------------------
 
 --

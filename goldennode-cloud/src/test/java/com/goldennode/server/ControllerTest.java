@@ -10,8 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
-import com.thingabled.commons.entity.ThingData;
+import com.goldennode.commons.entity.ThingData;
 
 public class ControllerTest {
 

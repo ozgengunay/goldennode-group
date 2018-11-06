@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-@ControllerAdvice(basePackages = "com.thingabled.server.controllers.rest.tomtom.ifttt")
+@ControllerAdvice(basePackages = "com.goldennode.server.controllers.rest.tomtom.ifttt")
 public class IFTTTRestExceptionHandler {
 
 	@ExceptionHandler({ IFTTTRestException.class })

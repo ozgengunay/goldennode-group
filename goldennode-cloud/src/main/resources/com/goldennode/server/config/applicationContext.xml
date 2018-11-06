@@ -5,9 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
    
-    <context:component-scan base-package="com.thingabled.server"/>
+    <context:component-scan base-package="com.goldennode.server"/>
     <context:annotation-config></context:annotation-config>
-	<context:property-placeholder location="classpath:com/thingabled/server/config/application.properties"/>
+	<context:property-placeholder location="classpath:com/goldennode/server/config/application.properties"/>
     <import resource="applicationContext-web.xml"/>
     <import resource="applicationContext-persistence.xml"/>
     <import resource="applicationContext-security-nosec.xml"/>
@@ -18,7 +18,7 @@
     <import resource="applicationContext-social.xml"/>
     
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="com.thingabled.server.config.messages"/>
+        <property name="basename" value="com.goldennode.server.config.messages"/>
         <property name="useCodeAsDefaultMessage" value="true"/>
     </bean>
     

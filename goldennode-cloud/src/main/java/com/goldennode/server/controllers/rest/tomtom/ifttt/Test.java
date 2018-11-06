@@ -39,7 +39,7 @@ public class Test {
 			AmazonS3 s3Client = new AmazonS3Client();
 			Region euWest2 = com.amazonaws.regions.Region.getRegion(Regions.EU_WEST_2);
 			s3Client.setRegion(euWest2);
-			GetObjectRequest rangeObjectRequest = new GetObjectRequest("thingabled-scripts", "tomtomiftttservicetest");
+			GetObjectRequest rangeObjectRequest = new GetObjectRequest("goldennode-scripts", "tomtomiftttservicetest");
 			// rangeObjectRequest.setRange(0, 10); // retrieve 1st 11 bytes.
 			S3Object objectPortion = s3Client.getObject(rangeObjectRequest);
 			objectData = objectPortion.getObjectContent();

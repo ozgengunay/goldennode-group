@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thingabled.commons.entity.BaseEntity.Status;
-import com.thingabled.commons.entity.SocialGroup;
-import com.thingabled.commons.entity.SocialGroupMember;
-import com.thingabled.commons.repository.SocialGroupMemberRepository;
-import com.thingabled.commons.repository.SocialGroupRepository;
+import com.goldennode.commons.entity.SocialGroup;
+import com.goldennode.commons.entity.SocialGroupMember;
+import com.goldennode.commons.entity.BaseEntity.Status;
+import com.goldennode.commons.repository.SocialGroupMemberRepository;
+import com.goldennode.commons.repository.SocialGroupRepository;
 import com.goldennode.server.controllers.rest.ErrorCode;
-import com.goldennode.server.controllers.rest.ThingabledRestException;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 
 @RestController
 @RequestMapping(value = { "/rest/socialgroupmembers" })
@@ -34,20 +33,20 @@ public class SocialGroupMemberController {
 
 	@RequestMapping(value = { "/{socialGroupMemberId}" }, method = { RequestMethod.GET })
 	public SocialGroupMember get(Principal principal, @PathVariable("socialGroupMemberId") String socialGroupMemberId)
-			throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		SocialGroupMember groupMember = repository.findByIdAndStatus(socialGroupMemberId, Status.ENABLED);
 		if (groupMember == null) {
-			throw new ThingabledRestException(ErrorCode.ENTITY_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.ENTITY_NOT_FOUND);
 		}
 
 		// For checking that group is user's
 		SocialGroup group = groupRepository.findByIdAndUserIdAndStatus(groupMember.getSocialGroupId(),
 				userDetails.getId(), Status.ENABLED);
 		if (group == null) {
-			throw new ThingabledRestException(ErrorCode.ENTITY_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.ENTITY_NOT_FOUND);
 		}
 
 		return groupMember;
@@ -55,14 +54,14 @@ public class SocialGroupMemberController {
 
 	@RequestMapping(method = { RequestMethod.POST })
 	public void add(Principal principal, HttpServletRequest request, HttpServletResponse response,
-			@RequestBody SocialGroupMember data) throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			@RequestBody SocialGroupMember data) throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		// For checking that group is user's
 		SocialGroup group = groupRepository.findByIdAndUserIdAndStatus(data.getSocialGroupId(), userDetails.getId(),
 				Status.ENABLED);
 		if (group == null) {
-			throw new ThingabledRestException(ErrorCode.ENTITY_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.ENTITY_NOT_FOUND);
 		}
 		SocialGroupMember newEntity = SocialGroupMember.newEntity();
 		newEntity.setSocialGroupId(group.getId());
@@ -73,19 +72,19 @@ public class SocialGroupMemberController {
 
 	@RequestMapping(value = { "/{socialGroupMemberId}" }, method = { RequestMethod.DELETE })
 	public void delete(Principal principal, @PathVariable("socialGroupMemberId") String socialGroupMemberId)
-			throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
 		SocialGroupMember entity = repository.findByIdAndStatus(socialGroupMemberId, Status.ENABLED);
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.ENTITY_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.ENTITY_NOT_FOUND);
 		}
 		// For checking that group is user's
 		SocialGroup group = groupRepository.findByIdAndUserIdAndStatus(entity.getSocialGroupId(), userDetails.getId(),
 				Status.ENABLED);
 		if (group == null) {
-			throw new ThingabledRestException(ErrorCode.ENTITY_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.ENTITY_NOT_FOUND);
 		}
 
 		entity.disable();

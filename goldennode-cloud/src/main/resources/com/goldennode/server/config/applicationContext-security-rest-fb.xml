@@ -24,7 +24,7 @@
 
 
 	<bean id="facebookOauthTokenAuthenticationFilter"
-		class="com.thingabled.server.security.oauth.FacebookOauthTokenAuthenticationFilter">
+		class="com.goldennode.server.security.oauth.FacebookOauthTokenAuthenticationFilter">
 		<constructor-arg index="0" ref="authenticationManager" />
 		<constructor-arg index="1" ref="userIdSource" />
 		<constructor-arg index="2" ref="usersConnectionRepository" />

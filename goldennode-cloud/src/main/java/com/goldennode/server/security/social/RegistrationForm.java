@@ -4,8 +4,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.thingabled.commons.entity.Users.SocialMediaService;
+import com.goldennode.commons.entity.Users.SocialMediaService;
 import com.goldennode.server.security.social.validation.PasswordsNotEmpty;
 import com.goldennode.server.security.social.validation.PasswordsNotEqual;
 

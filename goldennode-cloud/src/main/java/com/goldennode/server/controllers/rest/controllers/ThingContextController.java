@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.thingabled.commons.entity.BaseEntity.Status;
-import com.thingabled.commons.entity.ThingContext;
-import com.thingabled.commons.repository.ThingContextRepository;
+import com.goldennode.commons.entity.ThingContext;
+import com.goldennode.commons.entity.BaseEntity.Status;
+import com.goldennode.commons.repository.ThingContextRepository;
 import com.goldennode.server.controllers.rest.ErrorCode;
-import com.goldennode.server.controllers.rest.ThingabledRestException;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.server.controllers.rest.GoldenNodeRestException;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 
 @RestController
 @RequestMapping(value = { "/rest/thingcontext" })
@@ -42,7 +41,7 @@ public class ThingContextController {
 	@RequestMapping(method = { RequestMethod.POST })
 	public void add(Principal principal, HttpServletRequest request, HttpServletResponse response,
 			@RequestBody ThingContext data) {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		ThingContext newEntity = ThingContext.newEntity();
 		newEntity.setName(data.getName());
@@ -56,12 +55,12 @@ public class ThingContextController {
 	
 	@RequestMapping(value = { "/{thingContextId}" }, method = { RequestMethod.PUT })
 	public ThingContext update(Principal principal, @PathVariable("thingContextId") String thingContextId,
-			@RequestBody ThingContext data) throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			@RequestBody ThingContext data) throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		ThingContext entity = repository.findByIdAndUserIdAndStatus(thingContextId,userDetails.getId(),Status.ENABLED);
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
 		}
 	
 		entity.setName(data.getName());
@@ -73,12 +72,12 @@ public class ThingContextController {
 
 	@RequestMapping(value = { "/{thingContextId}" }, method = { RequestMethod.DELETE })
 	public void delete(Principal principal, @PathVariable("thingContextId") String thingContextId)
-			throws ThingabledRestException {
-		ThingabledUserDetails userDetails = (ThingabledUserDetails) SecurityContextHolder.getContext()
+			throws GoldenNodeRestException {
+		GoldenNodeUserDetails userDetails = (GoldenNodeUserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		ThingContext entity = repository.findByIdAndUserIdAndStatus(thingContextId,userDetails.getId(),Status.ENABLED);
 		if (entity == null) {
-			throw new ThingabledRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
+			throw new GoldenNodeRestException(ErrorCode.THING_CONTEXT_NOT_FOUND);
 		}
 		entity.disable();
 		repository.save(entity);

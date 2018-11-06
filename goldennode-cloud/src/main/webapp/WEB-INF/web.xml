@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
-	<display-name>thingabled</display-name>
+	<display-name>goldennode</display-name>
 	<listener>
 		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
 	</listener>
@@ -13,7 +13,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:com/thingabled/server/config/applicationContext.xml
+			classpath:com/goldennode/server/config/applicationContext.xml
 		</param-value>
 	</context-param>
 	<context-param>
@@ -24,19 +24,19 @@
 	</context-param>
 	<servlet>
 		<description></description>
-		<display-name>thingabled</display-name>
-		<servlet-name>thingabled</servlet-name>
+		<display-name>goldennode</display-name>
+		<servlet-name>goldennode</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>thingabled</servlet-name>
+		<servlet-name>goldennode</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<description>Spring Database</description>
 	<resource-ref>
 		<description>DB Connection</description>
-		<res-ref-name>jdbc/thingabled</res-ref-name>
+		<res-ref-name>jdbc/goldennode</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>

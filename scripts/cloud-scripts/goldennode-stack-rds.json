@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Thingabled Stack RDS",
+	"Description": "Goldennode Stack RDS",
 	"Parameters": {
 		"privateSubnet1": {
 			"Description": "privateSubnet1",
@@ -32,9 +32,9 @@
 				"Port": "3306",
 				"StorageType": "gp2",
 				"BackupRetentionPeriod": "7",
-				"MasterUsername": "thingabled",
-				"MasterUserPassword": "thingabled",
-				"DBName": "thingabled",
+				"MasterUsername": "goldennode",
+				"MasterUserPassword": "goldennode",
+				"DBName": "goldennode",
 				"Engine": "mysql",
 				"EngineVersion": "5.7.17",
 				"LicenseModel": "general-public-license",

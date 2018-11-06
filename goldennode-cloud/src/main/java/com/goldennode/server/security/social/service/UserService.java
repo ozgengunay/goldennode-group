@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.thingabled.commons.entity.Authorities;
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.repository.AuthorityRepository;
-import com.thingabled.commons.repository.UserRepository;
+import com.goldennode.commons.entity.Authorities;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.repository.AuthorityRepository;
+import com.goldennode.commons.repository.UserRepository;
 import com.goldennode.server.security.social.RegistrationForm;
 
 @Service

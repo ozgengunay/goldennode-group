@@ -12,13 +12,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.thingabled.commons.entity.Authorities;
-import com.thingabled.commons.entity.Users;
-import com.thingabled.commons.entity.BaseEntity.Status;
-import com.thingabled.commons.repository.AuthorityRepository;
-import com.thingabled.commons.repository.UserRepository;
-import com.goldennode.server.security.ThingabledUserDetails;
+import com.goldennode.commons.entity.Authorities;
+import com.goldennode.commons.entity.Users;
+import com.goldennode.commons.entity.BaseEntity.Status;
+import com.goldennode.commons.repository.AuthorityRepository;
+import com.goldennode.commons.repository.UserRepository;
+import com.goldennode.server.security.GoldenNodeUserDetails;
 
 @Service
 public class AccountUserDetailsService implements UserDetailsService {
@@ -47,7 +46,7 @@ public class AccountUserDetailsService implements UserDetailsService {
 			rols.add(new SimpleGrantedAuthority(authority.getAuthority()));
 		}
        
-        ThingabledUserDetails principal = new ThingabledUserDetails(user.getEmail(),user.getPassword_(),rols);
+        GoldenNodeUserDetails principal = new GoldenNodeUserDetails(user.getEmail(),user.getPassword_(),rols);
         principal.setFirstName(user.getFirstName());
         principal.setId(user.getId());
         principal.setLastName(user.getLastName());

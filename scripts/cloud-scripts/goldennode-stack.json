@@ -1,11 +1,11 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Thingabled Stack",
+	"Description": "Goldennode Stack",
 	"Parameters": {
 		"topicEmailAddress": {
 			"Description": "topicEmailAddress",
 			"Type": "String",
-			"Default": "admin@thingabled.com"
+			"Default": "admin@goldennode.com"
 		},
 		"dbInstanceClass": {
 			"Description": "dbInstanceClass",
@@ -25,22 +25,22 @@
 		"s3Base": {
 			"Description": "s3 base for cf",
 			"Type": "String",
-			"Default": "https://s3.eu-west-2.amazonaws.com/thingabled-cf"
+			"Default": "https://s3.eu-west-2.amazonaws.com/goldennode-cf"
 		},
 		"s3Bucket": {
 			"Description": "s3 bucket name for other resources",
 			"Type": "String",
-			"Default": "thingabled-scripts"
+			"Default": "goldennode-scripts"
 		},
 		"rdsUser": {
 			"Description": "RDS username",
 			"Type": "String",
-			"Default": "thingabled"
+			"Default": "goldennode"
 		},
 		"rdsPassword": {
 			"Description": "RDS password",
 			"Type": "String",
-			"Default": "thingabled"
+			"Default": "goldennode"
 		},
 		"tomcatVersion": {
 			"Description": "tomcatVersion",
@@ -133,7 +133,7 @@
 		}
 	},
 	"Resources": {
-		"stackThingabledCore": {
+		"stackGoldennodeCore": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
@@ -143,7 +143,7 @@
 							{
 								"Ref": "s3Base"
 							},
-							"thingabled-stack-core.json"
+							"goldennode-stack-core.json"
 						]
 					]
 				},
@@ -164,7 +164,7 @@
 				}
 			}
 		},
-		"stackThingabledRDS": {
+		"stackGoldennodeRDS": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
@@ -174,7 +174,7 @@
 							{
 								"Ref": "s3Base"
 							},
-							"thingabled-stack-rds.json"
+							"goldennode-stack-rds.json"
 						]
 					]
 				},
@@ -182,19 +182,19 @@
 				"Parameters": {
 					"privateSubnet1": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.privateSubnet1"
 						]
 					},
 					"privateSubnet2": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.privateSubnet2"
 						]
 					},
 					"securityGroupRDS": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.securityGroupRDS"
 						]
 					},
@@ -204,10 +204,10 @@
 				}
 			},
 			"DependsOn": [
-				"stackThingabledCore"
+				"stackGoldennodeCore"
 			]
 		},
-		"stackThingabledAsg": {
+		"stackGoldennodeAsg": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
@@ -217,7 +217,7 @@
 							{
 								"Ref": "s3Base"
 							},
-							"thingabled-stack-asg.json"
+							"goldennode-stack-asg.json"
 						]
 					]
 				},
@@ -249,37 +249,37 @@
 					},
 					"publicSubnet1": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.publicSubnet1"
 						]
 					},
 					"publicSubnet2": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.publicSubnet2"
 						]
 					},
 					"privateSubnet1": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.privateSubnet1"
 						]
 					},
 					"privateSubnet2": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.privateSubnet2"
 						]
 					},
 					"securityGroupPublic": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.securityGroupPublic"
 						]
 					},
 					"securityGroupPrivate": {
 						"Fn::GetAtt": [
-							"stackThingabledCore",
+							"stackGoldennodeCore",
 							"Outputs.securityGroupPrivate"
 						]
 					},
@@ -291,7 +291,7 @@
 					},
 					"rdsAddress": {
 						"Fn::GetAtt": [
-							"stackThingabledRDS",
+							"stackGoldennodeRDS",
 							"Outputs.rdsAddress"
 						]
 					},
@@ -310,7 +310,7 @@
 				}
 			},
 			"DependsOn": [
-				"stackThingabledRDS"
+				"stackGoldennodeRDS"
 			]
 		}
 	},
@@ -319,7 +319,7 @@
 			"Description": "Loadbalancer URL",
 			"Value": {
 				"Fn::GetAtt": [
-					"stackThingabledAsg",
+					"stackGoldennodeAsg",
 					"Outputs.loadBalancerURL"
 				]
 			}
@@ -327,7 +327,7 @@
 		"loadBalancerDNSName": {
 			"Value": {
 				"Fn::GetAtt": [
-					"stackThingabledAsg",
+					"stackGoldennodeAsg",
 					"Outputs.loadBalancerDNSName"
 				]
 			}
@@ -335,7 +335,7 @@
 		"bastionIP": {
 			"Value": {
 				"Fn::GetAtt": [
-					"stackThingabledCore",
+					"stackGoldennodeCore",
 					"Outputs.bastionIP"
 				]
 			}
@@ -343,7 +343,7 @@
 		"vpcId": {
 			"Value": {
 				"Fn::GetAtt": [
-					"stackThingabledCore",
+					"stackGoldennodeCore",
 					"Outputs.vpcId"
 				]
 			}
@@ -357,7 +357,7 @@
 		"rdsAddress": {
 			"Value": {
 				"Fn::GetAtt": [
-					"stackThingabledRDS",
+					"stackGoldennodeRDS",
 					"Outputs.rdsAddress"
 				]
 			}
