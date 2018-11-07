@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.hazelcast.core.Hazelcast;
 
 
 @WebListener
@@ -19,7 +20,8 @@ public class ContextListener implements ServletContextListener {
 		LOGGER.debug("Context Destroyed... / "
 				+ contextEvent.getServletContext().getRealPath("/") + " / "
 				+ contextEvent.getServletContext().getServletContextName());
-		
+		//Hazelcast.shutdownAll();
+		//contextEvent.getServletContext().removeAttribute("hazelcast");
 	}
 
 
@@ -29,6 +31,7 @@ public class ContextListener implements ServletContextListener {
 			
 			//WebApplicationContext ctx =WebApplicationContextUtils.getWebApplicationContext(contextEvent.getServletContext());
 			
+			//contextEvent.getServletContext().setAttribute("hazelcast", Hazelcast.newHazelcastInstance());
 			LOGGER.debug("Context initialized... / "
 					+ contextEvent.getServletContext().getRealPath("/") + " / "
 					+ contextEvent.getServletContext().getServletContextName());
