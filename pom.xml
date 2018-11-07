@@ -110,6 +110,11 @@
 				<version>${hazelcast.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.hazelcast</groupId>
+				<artifactId>hazelcast-aws</artifactId>
+				<version>${hazelcast.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${slf4j.version}</version>

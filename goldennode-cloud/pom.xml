@@ -21,6 +21,10 @@
 			<artifactId>hazelcast-spring</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.hazelcast</groupId>
+			<artifactId>hazelcast-aws</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
 			<version>1.11.147</version>
