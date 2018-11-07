@@ -247,7 +247,7 @@
 								{
 									"Ref": "s3Bucket"
 								},
-								"/server-",
+								"/goldennode-cloud-",
 								{
 									"Ref": "artifactVersion"
 								},
@@ -260,7 +260,7 @@
 								{
 									"Ref": "s3Bucket"
 								},
-								"/authserver-",
+								"/goldennode-authserver-",
 								{
 									"Ref": "artifactVersion"
 								},
