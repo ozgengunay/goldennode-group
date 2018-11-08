@@ -68,8 +68,7 @@
 		<commons.io.version>2.5</commons.io.version>
 
 		<hazelcast.version>3.11</hazelcast.version>
-
-
+		<hazelcast-aws.version>2.3</hazelcast-aws.version>
 		<java.version>1.8</java.version>
 		<pmd.version>3.8</pmd.version>
 		<maven-jxr.version>2.3</maven-jxr.version>
@@ -113,7 +112,7 @@
 			<dependency>
 				<groupId>com.hazelcast</groupId>
 				<artifactId>hazelcast-aws</artifactId>
-				<version>${hazelcast.version}</version>
+				<version>${hazelcast-aws.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>

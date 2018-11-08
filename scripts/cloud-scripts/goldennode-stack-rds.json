@@ -1,77 +1,77 @@
 {
-	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Goldennode Stack RDS",
-	"Parameters": {
-		"privateSubnet1": {
-			"Description": "privateSubnet1",
-			"Type": "String"
-		},
-		"privateSubnet2": {
-			"Description": "privateSubnet2",
-			"Type": "String"
-		},
-		"securityGroupRDS": {
-			"Description": "securityGroupRDS",
-			"Type": "String"
-		},
-		"dbInstanceClass": {
-			"Description": "dbInstanceClass",
-			"Type": "String"
-		}
-	},
-	"Resources": {
-		"dbInstance": {
-			"Type": "AWS::RDS::DBInstance",
-			"Properties": {
-				"AllocatedStorage": "5",
-				"AllowMajorVersionUpgrade": "false",
-				"AutoMinorVersionUpgrade": "true",
-				"DBInstanceClass": {
-					"Ref": "dbInstanceClass"
-				},
-				"Port": "3306",
-				"StorageType": "gp2",
-				"BackupRetentionPeriod": "7",
-				"MasterUsername": "goldennode",
-				"MasterUserPassword": "goldennode",
-				"DBName": "goldennode",
-				"Engine": "mysql",
-				"EngineVersion": "5.7.17",
-				"LicenseModel": "general-public-license",
-				"DBSubnetGroupName": {
-					"Ref": "dbSubnetGroup"
-				},
-				"VPCSecurityGroups": [
-					{
-						"Ref": "securityGroupRDS"
-					}
-				]
-			}
-		},
-		"dbSubnetGroup": {
-			"Type": "AWS::RDS::DBSubnetGroup",
-			"Properties": {
-				"DBSubnetGroupDescription": "dbSubnetGroup",
-				"SubnetIds": [
-					{
-						"Ref": "privateSubnet1"
-					},
-					{
-						"Ref": "privateSubnet2"
-					}
-				]
-			}
-		}
-	},
-	"Outputs": {
-		"rdsAddress": {
-			"Value": {
-				"Fn::GetAtt": [
-					"dbInstance",
-					"Endpoint.Address"
-				]
-			}
-		}
-	}
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Goldennode Stack RDS",
+  "Parameters": {
+    "privateSubnet1": {
+      "Description": "privateSubnet1",
+      "Type": "String"
+    },
+    "privateSubnet2": {
+      "Description": "privateSubnet2",
+      "Type": "String"
+    },
+    "securityGroupRDS": {
+      "Description": "securityGroupRDS",
+      "Type": "String"
+    },
+    "dbInstanceClass": {
+      "Description": "dbInstanceClass",
+      "Type": "String"
+    },
+    "rdsUser": {
+      "Ref": "rdsUser"
+    },
+    "rdsPassword": {
+      "Ref": "rdsPassword"
+    },
+    "rdsDBName": {
+      "Ref": "rdsDBName"
+    }
+  },
+  "Resources": {
+    "dbInstance": {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "AllocatedStorage": "5",
+        "AllowMajorVersionUpgrade": "false",
+        "AutoMinorVersionUpgrade": "true",
+        "DBInstanceClass": {
+          "Ref": "dbInstanceClass"
+        },
+        "Port": "3306",
+        "StorageType": "gp2",
+        "BackupRetentionPeriod": {
+          "Ref": "rdsPassword"
+        },
+        "DBName": {
+          "Ref": "rdsDBName"
+        }
+      }
+    },
+    "dbSubnetGroup": {
+      "Type": "AWS::RDS::DBSubnetGroup",
+      "Properties": {
+        "DBSubnetGroupDescription": "dbSubnetGroup",
+        "SubnetIds": [
+          {
+            "Ref": "privateSubnet1"
+          },
+          {
+            "Ref": "privateSubnet2"
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "rdsAddress": {
+      "Value": {
+        "Fn::GetAtt": [
+          "dbInstance",
+          "Endpoint.Address"
+        ]
+      }
+    }
+  }
 }
 
