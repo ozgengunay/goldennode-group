@@ -1,84 +1,76 @@
 package com.goldennode.server.controllers.rest.controllers;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.hazelcast.core.HazelcastInstance;
 
 @Service
-public class MapService implements Map<Object, Object>, DistributedObject {
-    Map<Object, Object> map=new HashMap<>();
+public class MapService {
     @Autowired
     private HazelcastInstance hzInstance;
 
     public MapService() {
     }
 
-    @Override
-    public int size() {
-        return map.size();
+    public int size(String userId, String mapId) {
+        return init(userId, mapId).size();
     }
 
-    @Override
-    public boolean isEmpty() {
-        return map.isEmpty();
+    public boolean isEmpty(String userId, String mapId) {
+        return init(userId, mapId).isEmpty();
     }
 
-    @Override
-    public boolean containsKey(Object key) {
-        return map.containsKey(key);
+    public boolean containsKey(String userId, String mapId, Object key) {
+        return init(userId, mapId).containsKey(key);
     }
 
-    @Override
-    public boolean containsValue(Object value) {
-        return map.containsValue(value);
+    public boolean containsValue(String userId, String mapId, Object value) {
+        return init(userId, mapId).containsValue(value);
     }
 
-    @Override
-    public Object get(Object key) {
-        return map.get(key);
+    public Object get(String userId, String mapId, Object key) {
+        return init(userId, mapId).get(key);
     }
 
-    @Override
-    public Object put(Object key, Object value) {
-        return map.put(key, value);
+    public Object put(String userId, String mapId, Object key, Object value) {
+        return init(userId, mapId).put(key, value);
     }
 
-    @Override
-    public Object remove(Object key) {
-        return map.remove(key);
+    public Object remove(String userId, String mapId, Object key) {
+        return init(userId, mapId).remove(key);
     }
 
-    @Override
-    public void putAll(Map<? extends Object, ? extends Object> m) {
-        map.putAll(m);
+    public void clear(String userId, String mapId) {
+        init(userId, mapId).clear();
     }
 
-    @Override
-    public void clear() {
-        map.clear();
+    public Set<Object> keySet(String userId, String mapId) {
+        return init(userId, mapId).keySet();
     }
 
-    @Override
-    public Set<Object> keySet() {
-        return map.keySet();
+    public Collection<Object> values(String userId, String mapId) {
+        return init(userId, mapId).values();
     }
 
-    @Override
-    public Collection<Object> values() {
-        return map.values();
+    
+    public void putAll(String userId, String mapId, Map<?,?> m) {
+        
+        init(userId,mapId).putAll(m);
     }
 
-    @Override
-    public Set<Entry<Object, Object>> entrySet() {
-        return map.entrySet();
+    public Set<Entry<Object,Object>> entrySet(String userId, String mapId) {
+      
+        return init(userId,mapId).entrySet();
+    }
+    
+    private Map init(String userId, String mapId) {
+        return hzInstance.getMap(userId + "_" + mapId);
     }
 
-    @Override
-    public void init(String userId, String mapId) {
-        map = hzInstance.getMap(userId + "_" + mapId);
-    }
 }
