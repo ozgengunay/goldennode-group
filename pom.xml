@@ -13,7 +13,7 @@
 
 	<properties>
 		<!-- CONFIG -->
-		<tomcat.version>9.0.0.M21</tomcat.version>
+		<tomcat.version>9.0.8</tomcat.version>
 		<required.maven.version>3.3</required.maven.version>
 		<tomcat.parentdir>${HOME}</tomcat.parentdir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,6 +82,7 @@
 		<mockito.version>1.9.5</mockito.version>
 		<jackson.version>2.9.7</jackson.version>
 		<spring.version>5.1.1.RELEASE</spring.version>
+		<mysql-connector.version>5.1.47</mysql-connector.version>
 	</properties>
 
 	<modules>
@@ -98,7 +99,11 @@
 
 
 		<dependencies>
-			<!-- https://mvnrepository.com/artifact/com.hazelcast/hazelcast -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.hazelcast</groupId>
 				<artifactId>hazelcast</artifactId>
@@ -491,7 +496,7 @@
 						<packagingExcludes>
 							WEB-INF/deploy/**
 						</packagingExcludes>
-						<outputDirectory>${tomcat.parentdir}/apache-tomcat-${tomcat.version}/webapps/</outputDirectory>
+						<!--<outputDirectory>${tomcat.parentdir}/apache-tomcat-${tomcat.version}/webapps/</outputDirectory>-->
 					</configuration>
 				</plugin>
 				<plugin>

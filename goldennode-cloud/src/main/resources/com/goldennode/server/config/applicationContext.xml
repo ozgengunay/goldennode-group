@@ -16,6 +16,7 @@
     <import resource="applicationContext-security-rest-thing.xml"/>
     <import resource="applicationContext-security-web.xml"/> 
     <import resource="applicationContext-social.xml"/>
+    <import resource="applicationContext-distribution.xml"/>
     
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="com.goldennode.server.config.messages"/>
