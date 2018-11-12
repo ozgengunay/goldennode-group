@@ -13,12 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
 
 @RestController
 @RequestMapping(value = { "/tomtom/ifttt/v1/test" })
@@ -36,7 +30,7 @@ public class Test {
 		InputStream objectData = null;
 		try {
 
-			AmazonS3 s3Client = new AmazonS3Client();
+			/*AmazonS3 s3Client = new AmazonS3Client();
 			Region euWest2 = com.amazonaws.regions.Region.getRegion(Regions.EU_WEST_2);
 			s3Client.setRegion(euWest2);
 			GetObjectRequest rangeObjectRequest = new GetObjectRequest("goldennode-scripts", "tomtomiftttservicetest");
@@ -44,9 +38,10 @@ public class Test {
 			S3Object objectPortion = s3Client.getObject(rangeObjectRequest);
 			objectData = objectPortion.getObjectContent();
 			String content = IOUtils.toString(objectData);
-			return new ResponseEntity<String>(content, HttpStatus.OK);
+			return new ResponseEntity<String>(content, HttpStatus.OK);*/
 			// Process the objectData stream.
 
+		    return null;
 		} catch (Exception e) {
 			throw new IFTTTRestException("Test file not found > " + e.toString());
 		} finally {

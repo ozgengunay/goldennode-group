@@ -1,83 +1,88 @@
 package com.goldennode.server.controllers.rest.controllers;
 
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.goldennode.commons.entity.Thing;
-
 @RestController
-@RequestMapping(value = { "/rest/map" })
+@RequestMapping(value = { "/goldennode/map/id/{mapId}" })
 @CrossOrigin(origins = "*")
 public class MapController {
     @Autowired
     private MapService mapService;
 
-    
-    
-    @RequestMapping(value = { "/{id}" }, method = { RequestMethod.GET })
-    public Thing get(@PathVariable("id") String id, @RequestParam("idType") String idType)
-    
-    
-    
-    public void init(String userId, String key) {
-        mapService.init(userId, key);
+    @RequestMapping(value = { "/init" }, method = { RequestMethod.POST })
+    public void init(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId) {
+        mapService.init(userId, mapId);
     }
 
-    public int size() {
+    @RequestMapping(value = { "/size" }, method = { RequestMethod.GET })
+    public int size(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId) {
         return mapService.size();
     }
 
-    public boolean isEmpty() {
+    @RequestMapping(value = { "/isEmpty" }, method = { RequestMethod.GET })
+    public boolean isEmpty(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId) {
         return mapService.isEmpty();
     }
 
-    public boolean containsKey(Object key) {
+    @RequestMapping(value = { "/containsKey/key/{key}" }, method = { RequestMethod.GET })
+    public boolean containsKey(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId, @PathVariable("key") Object key) {
         return mapService.containsKey(key);
     }
 
-    public boolean containsValue(Object value) {
+    @RequestMapping(value = { "/containsValue" }, method = { RequestMethod.GET })
+    public boolean containsValue(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId, @RequestBody InputStream value) {
         return mapService.containsValue(value);
     }
 
-    public Object get(Object key) {
+    @RequestMapping(value = { "/get/key/{key}" }, method = { RequestMethod.GET })
+    public Object get(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId, @PathVariable("key") Object key) {
         return mapService.get(key);
     }
 
-    public Object put(Object key, Object value) {
+    @RequestMapping(value = { "/put/key/{key}" }, method = { RequestMethod.POST })
+    public Object put(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId, @PathVariable("key") Object key, @RequestBody InputStream value) {
         return mapService.put(key, value);
     }
 
-    public Object remove(Object key) {
+    @RequestMapping(value = { "/remove/key/{key}" }, method = { RequestMethod.DELETE })
+    public Object remove(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId, @PathVariable("key") Object key) {
         return mapService.remove(key);
     }
 
-    public void putAll(Map<? extends Object, ? extends Object> m) {
+    @RequestMapping(value = { "/putAll" }, method = { RequestMethod.POST })
+    public void putAll(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId, Map<? extends Object, ? extends Object> m) {
         mapService.putAll(m);
     }
 
-    public void clear() {
+    @RequestMapping(value = { "/clear" }, method = { RequestMethod.DELETE })
+    public void clear(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId) {
         mapService.clear();
     }
 
-    public Set<Object> keySet() {
+    @RequestMapping(value = { "/keySet" }, method = { RequestMethod.GET })
+    public Set<Object> keySet(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId) {
         return mapService.keySet();
     }
 
-    public Collection<Object> values() {
+    @RequestMapping(value = { "/values" }, method = { RequestMethod.GET })
+    public Collection<Object> values(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId) {
         return mapService.values();
     }
 
-    public Set<Entry<Object, Object>> entrySet() {
+    @RequestMapping(value = { "/entrySet" }, method = { RequestMethod.GET })
+    public Set<Entry<Object, Object>> entrySet(@RequestParam("userId") String userId, @PathVariable("mapId") String mapId) {
         return mapService.entrySet();
     }
 }

@@ -12,6 +12,7 @@
 	<security:http pattern="/static/**" security="none" />
 	<security:http pattern="/restnoauth/**" security="none" />
 	<security:http pattern="/websocket/**" security="none" />
+	<security:http pattern="/goldennode/**" security="none" />
 
 
 </beans>

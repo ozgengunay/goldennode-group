@@ -1,17 +1,16 @@
 package com.goldennode.server.controllers.rest.controllers;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hazelcast.core.HazelcastInstance;
 
 @Service
 public class MapService implements Map<Object, Object>, DistributedObject {
-    Map<Object, Object> map;
+    Map<Object, Object> map=new HashMap<>();
     @Autowired
     private HazelcastInstance hzInstance;
 
@@ -79,7 +78,7 @@ public class MapService implements Map<Object, Object>, DistributedObject {
     }
 
     @Override
-    public void init(String userId, String key) {
-        map = hzInstance.getMap(userId + "_" + key);
+    public void init(String userId, String mapId) {
+        map = hzInstance.getMap(userId + "_" + mapId);
     }
 }
