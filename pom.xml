@@ -2,15 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.goldennode</groupId>
 	<artifactId>goldennode-group</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<name>goldennode-group</name>
 	<url>http://www.goldennode.com</url>
-
+	<organization>
+		<name>goldennode</name>
+		<url>http://www.goldennode.com</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Ozgen Gunay</name>
+			<email>ozgengunay@goldennode.com</email>
+			<roles>
+				<role>Senior Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
 	<properties>
 		<!-- CONFIG -->
 		<tomcat.version>9.0.8</tomcat.version>
@@ -30,7 +41,8 @@
 		<gwt.version>2.5.0</gwt.version>
 		<gwt.visualization.version>1.0.2</gwt.visualization.version>
 		<!-- SPRING -->
-		<spring.version>4.3.8.RELEASE</spring.version>
+		<spring.version>5.1.1.RELEASE</spring.version>
+		<!-- <spring.version>4.3.8.RELEASE</spring.version> -->
 		<spring.data.jpa.version>1.11.3.RELEASE</spring.data.jpa.version>
 		<spring.security.version>3.2.10.RELEASE</spring.security.version>
 		<spring.social.version>1.1.0.RELEASE</spring.social.version>
@@ -42,14 +54,18 @@
 		<hibernate.validator.version>5.4.1.Final</hibernate.validator.version>
 		<!-- DROOLS -->
 		<drools.version>5.5.0.Final</drools.version>
-		<!-- JACKSON -->
+		<!-- JACKSON/JSON -->
 		<jackson.core.version>2.9.7</jackson.core.version>
+		<jackson.version>2.9.7</jackson.version>
+		<json.version>20151123</json.version>
 		<!-- LOGGING -->
+		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<sl4j.version>1.7.25</sl4j.version>
 		<!-- TEST -->
 		<junit.version>4.12</junit.version>
+		<mockito.version>1.9.5</mockito.version>
 		<!-- COMMONS -->
+		<commons.io.version>2.5</commons.io.version>
 		<commons.dbcp.version>2.1.1</commons.dbcp.version>
 		<commons.validator.version>1.6</commons.validator.version>
 		<commons.email.version>1.4</commons.email.version>
@@ -58,32 +74,20 @@
 		<!-- PLUGINS -->
 		<pmd.version>3.8</pmd.version>
 		<cobertura.version>2.7</cobertura.version>
-		<javadoc.version>2.10.4</javadoc.version>
 		<maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
 		<rpm.maven.plugin.version>2.1.5</rpm.maven.plugin.version>
 		<isc.maven.plugin.version>1.2.0</isc.maven.plugin.version>
 		<maven.replacer.plugin.version>1.5.3</maven.replacer.plugin.version>
-
-		<commons.io.version>2.5</commons.io.version>
-
-		<hazelcast.version>3.11</hazelcast.version>
-		<hazelcast-aws.version>2.3</hazelcast-aws.version>
-		<java.version>1.8</java.version>
-		<pmd.version>3.8</pmd.version>
-		<maven-jxr.version>2.3</maven-jxr.version>
-		<cobertura.version>2.7</cobertura.version>
-		<javadoc.version>3.0.0</javadoc.version>
-		<slf4j.version>1.7.10</slf4j.version>
-		<log4j.version>1.2.17</log4j.version>
-		<junit.version>4.12</junit.version>
 		<findbugs.version>3.0.1</findbugs.version>
 		<surefire.version>2.20.1</surefire.version>
-		<mockito.version>1.9.5</mockito.version>
-		<jackson.version>2.9.7</jackson.version>
-		<spring.version>5.1.1.RELEASE</spring.version>
+		<!-- HAZELCAST -->
+		<hazelcast.version>3.11</hazelcast.version>
+		<hazelcast-aws.version>2.3</hazelcast-aws.version>
+		<!-- MYSQL -->
 		<mysql-connector.version>5.1.47</mysql-connector.version>
+		<!-- AWS -->
+		<aws.version>1.11.147</aws.version>
 	</properties>
-
 	<modules>
 		<module>goldennode-commons</module>
 		<module>goldennode-cloud</module>
@@ -91,18 +95,21 @@
 		<module>goldennode-client</module>
 		<module>goldennode-authserver</module>
 	</modules>
-
 	<dependencyManagement>
-
-
-
-
 		<dependencies>
+			<dependency>
+				<groupId>com.amazonaws</groupId>
+				<artifactId>aws-java-sdk</artifactId>
+				<version>${aws.version}</version>
+			</dependency>
+			<!-- MYSQL Start -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql-connector.version}</version>
 			</dependency>
+			<!-- MYSQL End -->
+			<!-- HAZELCAST Start -->
 			<dependency>
 				<groupId>com.hazelcast</groupId>
 				<artifactId>hazelcast</artifactId>
@@ -118,33 +125,7 @@
 				<artifactId>hazelcast-aws</artifactId>
 				<version>${hazelcast-aws.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.mockito</groupId>
-				<artifactId>mockito-all</artifactId>
-				<version>${mockito.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
+			<!-- HAZELCAST End -->
 			<!-- Modules Start -->
 			<dependency>
 				<groupId>${project.groupId}</groupId>
@@ -152,32 +133,8 @@
 				<version>${project.version}</version>
 				<type>jar</type>
 			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>gwtcommons</artifactId>
-				<version>${project.version}</version>
-				<type>jar</type>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>managementui</artifactId>
-				<version>${project.version}</version>
-				<type>jar</type>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>server</artifactId>
-				<version>${project.version}</version>
-				<type>war</type>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>website</artifactId>
-				<version>${project.version}</version>
-				<type>war</type>
-			</dependency>
 			<!-- Modules End -->
-			<!-- JAVA -->
+			<!-- JAVA Start -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
@@ -210,8 +167,8 @@
 				<artifactId>javax.persistence</artifactId>
 				<version>${persistence.api.version}</version>
 			</dependency>
-
-			<!-- GWT -->
+			<!-- JAVA End -->
+			<!-- GWT Start -->
 			<dependency>
 				<groupId>com.google.gwt.google-apis</groupId>
 				<artifactId>gwt-visualization</artifactId>
@@ -240,7 +197,8 @@
 				<version>${gwt.version}</version>
 				<scope>runtime</scope>
 			</dependency>
-			<!-- SPRING -->
+			<!-- GWT End -->
+			<!-- SPRING Start -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
@@ -296,13 +254,11 @@
 				<artifactId>spring-websocket</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-messaging</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-core</artifactId>
@@ -363,6 +319,7 @@
 				<artifactId>spring-security-oauth2</artifactId>
 				<version>${spring.security.oauth.version}</version>
 			</dependency>
+			<!-- SPRING End -->
 			<!-- HIBERNATE -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -401,22 +358,21 @@
 				<artifactId>jackson-annotations</artifactId>
 				<version>${jackson.core.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>${json.version}</version>
+			</dependency>
 			<!-- LOGGING -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-nop</artifactId>
-				<version>${sl4j.version}</version>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>${sl4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-jcl</artifactId>
-				<version>${sl4j.version}</version>
+				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>log4j</groupId>
@@ -428,6 +384,12 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<!-- COMMONS -->
@@ -486,15 +448,10 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
 					<configuration>
-						<packagingExcludes>
-							WEB-INF/deploy/**
+						<packagingExcludes> WEB-INF/deploy/** 
 						</packagingExcludes>
 						<outputDirectory>${tomcat.parentdir}/apache-tomcat-${tomcat.version}/webapps/</outputDirectory>
 					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -510,11 +467,6 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>cobertura-maven-plugin</artifactId>
 					<version>${cobertura.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>${javadoc.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -536,141 +488,80 @@
 						<argLine>-Xms256m -Xmx6000m -Djava.net.preferIPv4Stack=true</argLine>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${maven.enforcer.plugin.version}</version>
+					<executions>
+						<execution>
+							<id>enforce-maven</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireMavenVersion>
+										<version>${required.maven.version}</version>
+									</requireMavenVersion>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
 			<plugin>
-				<groupId>com.isomorphic</groupId>
-				<artifactId>isc-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>${maven.enforcer.plugin.version}</version>
-				<executions>
-					<execution>
-						<id>enforce-maven</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireMavenVersion>
-									<version>${required.maven.version}</version>
-								</requireMavenVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<!-- <executions> <execution> <goals> <goal>check</goal> <goal>cpd-check</goal> 
+					</goals> </execution> </executions> -->
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-pmd-plugin</artifactId> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <goals> -->
-			<!-- <goal>check</goal> -->
-			<!-- <goal>cpd-check</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
-			<!-- <plugin> -->
-			<!-- <groupId>org.codehaus.mojo</groupId> -->
-			<!-- <artifactId>cobertura-maven-plugin</artifactId> -->
-			<!-- <configuration> -->
-			<!-- <check> -->
-			<!-- <branchRate>85</branchRate> -->
-			<!-- <lineRate>85</lineRate> -->
-			<!-- <haltOnFailure>true</haltOnFailure> -->
-			<!-- <totalBranchRate>85</totalBranchRate> -->
-			<!-- <totalLineRate>85</totalLineRate> -->
-			<!-- <packageLineRate>85</packageLineRate> -->
-			<!-- <packageBranchRate>85</packageBranchRate> -->
-			<!-- </check> -->
-			<!-- </configuration> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <goals> -->
-			<!-- <goal>clean</goal> -->
-			<!-- <goal>check</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<configuration>
+					<check>
+						<branchRate>85</branchRate>
+						<lineRate>85</lineRate>
+						<haltOnFailure>true</haltOnFailure>
+						<totalBranchRate>85</totalBranchRate>
+						<totalLineRate>85</totalLineRate>
+						<packageLineRate>85</packageLineRate>
+						<packageBranchRate>85</packageBranchRate>
+					</check>
+				</configuration>
+				<!-- <executions> <execution> <goals> <goal>clean</goal> <goal>check</goal> 
+					</goals> </execution> </executions> -->
+			</plugin>
 		</plugins>
 	</build>
-	<repositories>
+	<distributionManagement>
 		<repository>
-			<id>personal</id>
-			<url>https://repo.maven.apache.org/maven2</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<id>goldennodedeployment</id>
+			<name>Internal Releases</name>
+			<url>http://nexus.goldennode.com/nexus/content/repositories/releases/</url>
 		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>personal</id>
-			<url>https://repo.maven.apache.org/maven2</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	<!-- <distributionManagement> -->
-	<!-- <repository> -->
-	<!-- <id>goldennodedeployment</id> -->
-	<!-- <name>Internal Releases</name> -->
-	<!-- <url>http://goldennode.com:8081/nexus/content/repositories/releases/</url> -->
-	<!-- </repository> -->
-	<!-- <snapshotRepository> -->
-	<!-- <id>goldennodedeployment</id> -->
-	<!-- <name>Internal Releases</name> -->
-	<!-- <url>http://goldennode.com:8081/nexus/content/repositories/snapshots/</url> -->
-	<!-- </snapshotRepository> -->
-	<!-- </distributionManagement> -->
-
-	<!-- <scm> -->
-	<!-- <developerConnection>scm:svn:http://goldennode.com:8080/svn/goldennode_rep/goldennode/trunk/goldennode</developerConnection> -->
-	<!-- </scm> -->
-
-	<organization>
-		<name>goldennode</name>
-		<url>http://www.goldennode.com</url>
-	</organization>
-
-	<developers>
-		<developer>
-			<name>Ozgen Gunay</name>
-			<email>ozgengunay@goldennode.com</email>
-			<roles>
-				<role>Senior Developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-	</developers>
-
-
+		<snapshotRepository>
+			<id>goldennodedeployment</id>
+			<name>Internal Releases</name>
+			<url>http://nexus.goldennode.com/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<scm>
-		<developerConnection>scm:git:https://github.com/ozgengunay/goldennode</developerConnection>
+		<developerConnection>scm:git:https://github.com/ozgengunay/goldennode-group</developerConnection>
 	</scm>
-
-
 	<issueManagement>
 		<system>Jira</system>
-		<url>http://jira.goldennode.com:8080</url>
+		<url>http://jira.goldennode.com</url>
 	</issueManagement>
-
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>http://jenkins.goldennode.com:8080</url>
+		<url>http://jenkins.goldennode.com</url>
 		<notifiers>
 			<notifier>
 				<sendOnError>true</sendOnError>
@@ -680,45 +571,20 @@
 			</notifier>
 		</notifiers>
 	</ciManagement>
-	<!-- <issueManagement> -->
-	<!-- <system>Jira</system> -->
-	<!-- <url>http://goldennode.com:8083/jira</url> -->
-	<!-- </issueManagement> -->
-
-	<!-- <ciManagement> -->
-	<!-- <system>hudson</system> -->
-	<!-- <url>http://goldennode.com:8082</url> -->
-	<!-- <notifiers> -->
-	<!-- <notifier> -->
-	<!-- <sendOnError>true</sendOnError> -->
-	<!-- <sendOnFailure>true</sendOnFailure> -->
-	<!-- <sendOnSuccess>true</sendOnSuccess> -->
-	<!-- <sendOnWarning>true</sendOnWarning> -->
-	<!-- </notifier> -->
-	<!-- </notifiers> -->
-	<!-- </ciManagement> -->
 	<reporting>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>${pmd.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${javadoc.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>
-
-
-
-
-
 </project>
