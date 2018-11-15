@@ -21,7 +21,7 @@
 		access-decision-manager-ref="accessDecisionManager" use-expressions="true">
 		<security:anonymous enabled="false" />
 		<security:intercept-url pattern="/**"
-			access="hasAnyRole('ROLE_USER','SCOPE_IFTTT')" />
+			access="hasAnyRole('ROLE_USER')" />
 		<security:custom-filter ref="resourceServerFilter"
 			before="PRE_AUTH_FILTER" />
 		<security:access-denied-handler ref="iftttAccessDeniedHandler" />

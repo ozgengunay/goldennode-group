@@ -1,13 +1,11 @@
-package com.goldennode.server.security.hmac.provider;
+package com.goldennode.server.security.hmac;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +16,13 @@ import org.springframework.security.authentication.dao.AbstractUserDetailsAuthen
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.codec.Base64;
+import com.goldennode.server.security.GoldenNodeUser;
 
-import com.goldennode.server.security.GoldenNodeUserDetails;
-import com.goldennode.server.security.hmac.filter.HMACCredentials;
-import com.goldennode.server.security.hmac.service.ThingUserDetailsService;
+public class HMACAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-public class ThingAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ThingAuthenticationProvider.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(HMACAuthenticationProvider.class);
 	@Autowired
-	private ThingUserDetailsService thingUserDetailsService;
+	private HmacUserDetailsService thingUserDetailsService;
 	private String algorithm = "HmacSHA256";
 
 	/**
@@ -54,7 +49,7 @@ public class ThingAuthenticationProvider extends AbstractUserDetailsAuthenticati
 			HMACCredentials restCredentials = (HMACCredentials) authentication.getCredentials();
 
 			if (!restCredentials.getSignature().equals(
-					generateSignature(restCredentials.getRequestData(), ((GoldenNodeUserDetails) userDetails).getThing().getSecretkey()))) {
+					generateSignature(restCredentials.getRequestData(), ((GoldenNodeUser) userDetails).getPassword()))) {
 
 				LOGGER.debug("Authentication failed: password does not match stored value");
 
@@ -94,9 +89,7 @@ public class ThingAuthenticationProvider extends AbstractUserDetailsAuthenticati
 	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
 		LOGGER.debug("Loading user by apikey>" + username);
-
 		UserDetails loadedUser = thingUserDetailsService.loadUserByUsername(username);
-
 		LOGGER.debug("Loaded user>" + loadedUser);
 		return loadedUser;
 

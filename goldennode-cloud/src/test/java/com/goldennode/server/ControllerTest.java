@@ -10,7 +10,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import com.goldennode.commons.entity.ThingData;
 
 public class ControllerTest {
 
@@ -52,9 +51,7 @@ public class ControllerTest {
 
 	//@Test
 	public void getAll() throws URISyntaxException {
-		ThingData d=new ThingData();
-		d.setValue("12");
-		d.setThingPointId("1122");
+		String d="TEST";
 		RequestEntity entity = new RequestEntity(d,HttpMethod.POST, new URI(Config.SERVER_URL+"/"+Config.CONTEXT_PATH+URI));
 		entity = Authenticator.signRequest(entity);
 		LOGGER.debug("Request=" + entity);

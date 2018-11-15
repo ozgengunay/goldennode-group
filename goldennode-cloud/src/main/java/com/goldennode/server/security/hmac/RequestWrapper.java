@@ -1,4 +1,4 @@
-package com.goldennode.server.security.hmac.filter;
+package com.goldennode.server.security.hmac;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

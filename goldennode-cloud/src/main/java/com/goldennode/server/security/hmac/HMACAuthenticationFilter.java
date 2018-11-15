@@ -1,4 +1,4 @@
-package com.goldennode.server.security.hmac.filter;
+package com.goldennode.server.security.hmac;
 
 import java.io.IOException;
 
@@ -15,9 +15,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
-public class ThingAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public class HMACAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-	protected ThingAuthenticationFilter(String defaultFilterProcessesUrl) {
+	protected HMACAuthenticationFilter(String defaultFilterProcessesUrl) {
 		super(defaultFilterProcessesUrl);
 	}
 

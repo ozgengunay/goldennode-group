@@ -3,10 +3,8 @@ package com.goldennode.server.listeners;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.hazelcast.core.Hazelcast;
 
 
 @WebListener
