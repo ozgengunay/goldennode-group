@@ -22,7 +22,7 @@ public class HMACAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(HMACAuthenticationProvider.class);
 	@Autowired
-	private HmacUserDetailsService thingUserDetailsService;
+	private HmacUserDetailsService hmacUerDetailsService;
 	private String algorithm = "HmacSHA256";
 
 	/**
@@ -89,7 +89,7 @@ public class HMACAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
 		LOGGER.debug("Loading user by apikey>" + username);
-		UserDetails loadedUser = thingUserDetailsService.loadUserByUsername(username);
+		UserDetails loadedUser = hmacUerDetailsService.loadUserByUsername(username);
 		LOGGER.debug("Loaded user>" + loadedUser);
 		return loadedUser;
 

@@ -86,7 +86,7 @@ public class Users {
     }
 
     public enum Role {
-        ROLE_PT, ROLE_DEVELOPER, ROLE_USER, ROLE_CLIENT
+        ROLE_USER, ROLE_CLIENT
     }
 
     public String getId() {

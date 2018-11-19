@@ -4,16 +4,10 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
-       >
-
-<!-- xmlns:websocket="http://www.springframework.org/schema/websocket -->
-<!-- http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd -->
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/static/**" location="/static/" />
 	<mvc:default-servlet-handler />
-	
-		
 	<bean id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
@@ -29,27 +23,10 @@
 			</props>
 		</property>
 	</bean>
-
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="suffix" value=".jsp" />
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
 	</bean>
-	
-	<!--  <websocket:handlers allowed-origins="http://localhost:8100">
-        <websocket:mapping path="/websocket/questions" handler="wshandler"/>
-        <websocket:sockjs/>
-    </websocket:handlers>
-
-    <bean id="wshandler" class="com.goldennode.server.controllers.rest.tomtom.ifttt.WebSocketHandler"/>
-	
-    
-     <websocket:message-broker application-destination-prefix="/app">
-        <websocket:stomp-endpoint path="/questions">
-            <websocket:sockjs/>
-        </websocket:stomp-endpoint>
-        <websocket:simple-broker prefix="/topic, /queue"/>
-    </websocket:message-broker> -->
-    
 </beans>

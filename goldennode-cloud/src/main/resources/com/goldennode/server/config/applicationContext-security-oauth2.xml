@@ -16,6 +16,8 @@
 
 	<security:http pattern="/tomtom/ifttt/v1/status" security="none" />
 	<security:http pattern="/tomtom/ifttt/v1/test/**" security="none" />
+	
+	
 	<security:http pattern="/tomtom/ifttt/**" create-session="never"
 		entry-point-ref="iftttAuthenticationEntryPoint"
 		access-decision-manager-ref="accessDecisionManager" use-expressions="true">
@@ -26,6 +28,7 @@
 			before="PRE_AUTH_FILTER" />
 		<security:access-denied-handler ref="iftttAccessDeniedHandler" />
 	</security:http>
+	
 	<bean id="oauthAccessDeniedHandler"
 		class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler" />
 

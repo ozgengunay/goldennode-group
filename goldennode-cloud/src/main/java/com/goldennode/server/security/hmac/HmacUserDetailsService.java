@@ -23,7 +23,7 @@ public class HmacUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String publicKey) throws UsernameNotFoundException {
         Users user = userRepository.findByUsername(publicKey);
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(Users.Role.ROLE_PT.toString()));
+        authorities.add(new SimpleGrantedAuthority(Users.Role.ROLE_CLIENT.toString()));
         GoldenNodeUser principal = new GoldenNodeUser(user.getUsername(), user.getPassword(), authorities);
         principal.setFirstName(user.getFirstName());
         principal.setId(user.getId());

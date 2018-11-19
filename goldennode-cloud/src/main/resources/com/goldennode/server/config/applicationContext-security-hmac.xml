@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
      	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<sec:http pattern="/rest/pt/**" disable-url-rewriting="true"
+	<sec:http pattern="/rest/**" disable-url-rewriting="true"
 		entry-point-ref="forbiddenEntryPoint" use-expressions="true"
 		create-session="never">
 		<sec:anonymous enabled="false" />
@@ -43,8 +43,6 @@
 		class="com.goldennode.server.security.hmac.provider.ThingAuthenticationProvider">
 
 	</bean>
-
-
 
 	<bean id="forbiddenEntryPoint"
 		class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />

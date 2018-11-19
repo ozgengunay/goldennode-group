@@ -9,8 +9,7 @@
 
 
 	<!-- Static resources such as CSS and JS files are ignored by Spring Security -->
-	<security:http pattern="/static/**" security="none" />
 	<security:http pattern="/restnoauth/**" security="none" />
-	<security:http pattern="/websocket/**" security="none" />
+
 
 </beans>
