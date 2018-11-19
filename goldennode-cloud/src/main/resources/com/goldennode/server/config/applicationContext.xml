@@ -7,7 +7,7 @@
    
     <context:component-scan base-package="com.goldennode.server"/>
     <context:annotation-config/>
-    <import resource="applicationContext-web.xml"/>
+    <!-- <import resource="applicationContext-web.xml"/> -->
     <import resource="applicationContext-persistence.xml"/>
     <import resource="applicationContext-security-nosec.xml"/>
     <import resource="applicationContext-security-rest-oauth2.xml"/>

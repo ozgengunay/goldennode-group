@@ -13,24 +13,24 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<security:http pattern="/tomtom/ifttt/**" create-session="never"
-		entry-point-ref="iftttAuthenticationEntryPoint"
+	<security:http pattern="/rest/**" create-session="never"
+		entry-point-ref="goldenNodeAuthenticationEntryPoint"
 		access-decision-manager-ref="accessDecisionManager" use-expressions="true">
 		<security:anonymous enabled="false" />
 		<security:intercept-url pattern="/**"
 			access="hasAnyRole('ROLE_USER')" />
 		<security:custom-filter ref="resourceServerFilter"
 			before="PRE_AUTH_FILTER" />
-		<security:access-denied-handler ref="iftttAccessDeniedHandler" />
+		<security:access-denied-handler ref="goldenNodeAccessDeniedHandler" />
 	</security:http>
 	
 	<bean id="oauthAccessDeniedHandler"
 		class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler" />
 
-	<bean id="iftttAuthenticationEntryPoint"
-		class="com.goldennode.server.controllers.rest.tomtom.ifttt.IftttEntryPoint" />
-	<bean id="iftttAccessDeniedHandler"
-		class="com.goldennode.server.controllers.rest.tomtom.ifttt.IftttAccessDeniedHandler" />
+	<bean id="goldenNodeAuthenticationEntryPoint"
+		class="com.goldennode.server.security.GoldenNodeEntryPoint" />
+	<bean id="goldenNodeAccessDeniedHandler"
+		class="com.goldennode.server.security.GoldenNodeAccessDeniedHandler" />
 
 	<bean id="oauthAuthenticationEntryPoint"
 		class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint" />
@@ -58,6 +58,6 @@
 		<property name="supportRefreshToken" value="true" />
 	</bean>
 	<oauth2:resource-server id="resourceServerFilter"
-		token-services-ref="tokenServices" entry-point-ref="iftttAuthenticationEntryPoint" />
+		token-services-ref="tokenServices" entry-point-ref="goldenNodeAuthenticationEntryPoint" />
 
 </beans>

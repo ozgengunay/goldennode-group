@@ -92,8 +92,4 @@ public class Users {
     public String getId() {
         return id;
     }
-
-    public enum SocialMediaService {
-        FACEBOOK, TWITTER, LINKEDIN
-    }
 }
