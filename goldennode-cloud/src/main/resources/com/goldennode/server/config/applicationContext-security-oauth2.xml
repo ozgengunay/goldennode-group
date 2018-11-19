@@ -13,11 +13,6 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-
-	<security:http pattern="/tomtom/ifttt/v1/status" security="none" />
-	<security:http pattern="/tomtom/ifttt/v1/test/**" security="none" />
-	
-	
 	<security:http pattern="/tomtom/ifttt/**" create-session="never"
 		entry-point-ref="iftttAuthenticationEntryPoint"
 		access-decision-manager-ref="accessDecisionManager" use-expressions="true">
@@ -36,7 +31,7 @@
 		class="com.goldennode.server.controllers.rest.tomtom.ifttt.IftttEntryPoint" />
 	<bean id="iftttAccessDeniedHandler"
 		class="com.goldennode.server.controllers.rest.tomtom.ifttt.IftttAccessDeniedHandler" />
-	
+
 	<bean id="oauthAuthenticationEntryPoint"
 		class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint" />
 	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased"
@@ -46,7 +41,8 @@
 				<bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter" />
 				<bean class="org.springframework.security.access.vote.RoleVoter" />
 				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
-				<bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
+				<bean
+					class="org.springframework.security.web.access.expression.WebExpressionVoter" />
 			</list>
 		</constructor-arg>
 	</bean>
