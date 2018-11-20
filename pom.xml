@@ -36,18 +36,10 @@
 		<jstl.version>1.2</jstl.version>
 		<jsp.api.version>2.3.3</jsp.api.version>
 		<validation.api.version>2.0.1.Final</validation.api.version>
-		<!-- GWT -->
-		<smartgwt.version>5.0-p20151203</smartgwt.version>
-		<gwt.version>2.5.0</gwt.version>
-		<gwt.visualization.version>1.0.2</gwt.visualization.version>
 		<!-- SPRING -->
 		<spring.version>5.1.1.RELEASE</spring.version>
-		<!-- <spring.version>4.3.8.RELEASE</spring.version> -->
 		<spring.data.jpa.version>2.1.2.RELEASE</spring.data.jpa.version>
 		<spring.security.version>5.1.1.RELEASE</spring.security.version>
-		<spring.social.version>1.1.6.RELEASE</spring.social.version>
-		<spring.social.facebook.version>2.0.3.RELEASE</spring.social.facebook.version>
-		<spring.social.twitter.version>1.1.2.RELEASE</spring.social.twitter.version>
 		<spring.security.oauth.version>2.3.4.RELEASE</spring.security.oauth.version>
 		<!-- HIBERNATE -->
 		<hibernate.version>5.3.7.Final</hibernate.version>
@@ -62,10 +54,10 @@
 		<junit.version>4.12</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<!-- COMMONS -->
-		<commons.io.version>2.5</commons.io.version>
-		<commons.dbcp.version>2.1.1</commons.dbcp.version>
+		<commons.io.version>2.6</commons.io.version>
+		<commons.dbcp.version>2.5.0</commons.dbcp.version>
 		<commons.validator.version>1.6</commons.validator.version>
-		<commons.email.version>1.4</commons.email.version>
+		<commons.email.version>1.5</commons.email.version>
 		<!-- MIX -->
 		<javassist.version>3.12.1.GA</javassist.version>
 		<!-- PLUGINS -->
@@ -83,7 +75,7 @@
 		<!-- MYSQL -->
 		<mysql-connector.version>5.1.47</mysql-connector.version>
 		<!-- AWS -->
-		<aws.version>1.11.147</aws.version>
+		<aws.version>1.11.452</aws.version>
 	</properties>
 	<modules>
 		<module>goldennode-commons</module>
@@ -165,36 +157,6 @@
 				<version>${persistence.api.version}</version>
 			</dependency>
 			<!-- JAVA End -->
-			<!-- GWT Start -->
-			<dependency>
-				<groupId>com.google.gwt.google-apis</groupId>
-				<artifactId>gwt-visualization</artifactId>
-				<version>${gwt.visualization.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.isomorphic.smartgwt.lgpl</groupId>
-				<artifactId>smartgwt-lgpl</artifactId>
-				<version>${smartgwt.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.isomorphic.smartgwt.lgpl</groupId>
-				<artifactId>smartgwt-skins</artifactId>
-				<version>${smartgwt.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.gwt</groupId>
-				<artifactId>gwt-user</artifactId>
-				<version>${gwt.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.google.gwt</groupId>
-				<artifactId>gwt-servlet</artifactId>
-				<version>${gwt.version}</version>
-				<scope>runtime</scope>
-			</dependency>
-			<!-- GWT End -->
 			<!-- SPRING Start -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -522,17 +484,23 @@
 				<artifactId>cobertura-maven-plugin</artifactId>
 				<configuration>
 					<check>
-						<branchRate>85</branchRate>
-						<lineRate>85</lineRate>
+						<branchRate>0</branchRate>
+						<lineRate>0</lineRate>
 						<haltOnFailure>true</haltOnFailure>
-						<totalBranchRate>85</totalBranchRate>
-						<totalLineRate>85</totalLineRate>
-						<packageLineRate>85</packageLineRate>
-						<packageBranchRate>85</packageBranchRate>
+						<totalBranchRate>0</totalBranchRate>
+						<totalLineRate>0</totalLineRate>
+						<packageLineRate>0</packageLineRate>
+						<packageBranchRate>0</packageBranchRate>
 					</check>
 				</configuration>
-				<!-- <executions> <execution> <goals> <goal>clean</goal> <goal>check</goal> 
-					</goals> </execution> </executions> -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>clean</goal>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
