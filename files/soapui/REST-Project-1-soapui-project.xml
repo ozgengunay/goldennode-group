@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="0d2981a6-cbdf-4f1f-aa28-690d8457e65f" activeEnvironment="Default" name="REST Project 1" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project id="0d2981a6-cbdf-4f1f-aa28-690d8457e65f" activeEnvironment="Default" name="REST Project 1" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config">
   <con:settings/>
   <con:interface xsi:type="con:RestService" id="d8b275dd-304d-47cc-8180-cf417d9ea2e9" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8080" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <con:settings/>
@@ -7,16 +7,10 @@
     <con:endpoints>
       <con:endpoint>http://localhost:8080</con:endpoint>
     </con:endpoints>
-    <con:resource name="map-get" path="/goldennode/map/id/1/get/key/1" id="f2888b0b-1e4d-4a37-a874-41849caeabba">
+    <con:resource name="map-get" path="/rest/goldennode/map/id/1/get/key/1" id="f2888b0b-1e4d-4a37-a874-41849caeabba">
       <con:settings/>
       <con:parameters>
-        <con:parameter>
-          <con:name>Cookie</con:name>
-          <con:value/>
-          <con:style>HEADER</con:style>
-          <con:default/>
-          <con:description xsi:nil="true"/>
-        </con:parameter>
+        
       </con:parameters>
       <con:method name="" id="0f1aeb12-71d5-45d0-a25f-aee6c1cf034c" method="GET">
         <con:settings/>
@@ -35,7 +29,7 @@
         </con:representation>
         <con:representation type="FAULT">
           <con:mediaType>text/html;charset=utf-8</con:mediaType>
-          <con:status>401</con:status>
+          <con:status>401 404</con:status>
           <con:params/>
           <con:element>html</con:element>
         </con:representation>
@@ -147,7 +141,7 @@
           <con:params/>
           <con:element>data</con:element>
         </con:representation>
-        <con:request name="Request 1" id="0de4d815-ed8c-4b00-be9b-3184bd5f0e7f" mediaType="application/json">
+        <con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>500 401</con:status><con:params/><con:element xmlns:log="http://localhost/goldennode-cloud-0.0.1-SNAPSHOT/login;jsessionid=B3A19F39740AA18963546C334BFB1699">log:Fault</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html;charset=ISO-8859-1</con:mediaType><con:status>404</con:status><con:params/><con:element>html</con:element></con:representation><con:request name="Request 1" id="0de4d815-ed8c-4b00-be9b-3184bd5f0e7f" mediaType="application/json">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -157,19 +151,15 @@
           <con:credentials>
             <con:username>ogunay1978@gmail.com</con:username>
             <con:password>496341Og</con:password>
-            <con:selectedAuthProfile>Profile 1</con:selectedAuthProfile>
+            <con:selectedAuthProfile>Profile 2</con:selectedAuthProfile>
             <con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes>
             <con:preemptive>true</con:preemptive>
             <con:authType>OAuth 2.0</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
-          <con:parameters>
-            <entry key="Cookie" value="7A0A09A7C3225CDDB55A6E739EEC0FFD" xmlns="http://eviware.com/soapui/config"/>
-          </con:parameters>
-          <con:parameterOrder>
-            <con:entry>Cookie</con:entry>
-          </con:parameterOrder>
+          <con:parameters/>
+          <con:parameterOrder/>
         </con:request>
       </con:method>
     </con:resource>
@@ -281,6 +271,6 @@
       <con:oAuth2Flow>CLIENT_CREDENTIALS_GRANT</con:oAuth2Flow>
       <con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod>
     </con:oAuth2Profile>
-  </con:oAuth2ProfileContainer>
+  <con:oAuth2Profile><con:name>Profile 2</con:name><con:clientID>ifttt</con:clientID><con:clientSecret>secret</con:clientSecret><con:authorizationURI>http://localhost:8080/goldennode-authserver-0.0.1-SNAPSHOT/oauth/authorize</con:authorizationURI><con:accessTokenURI>http://localhost:8080/goldennode-authserver-0.0.1-SNAPSHOT/oauth/token</con:accessTokenURI><con:redirectURI>http://localhost</con:redirectURI><con:accessTokenPosition>HEADER</con:accessTokenPosition><con:oAuth2Flow>AUTHORIZATION_CODE_GRANT</con:oAuth2Flow><con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod><con:scope>ifttt</con:scope><con:accessTokenStatus>WAITING_FOR_AUTHORIZATION</con:accessTokenStatus></con:oAuth2Profile></con:oAuth2ProfileContainer>
   <con:oAuth1ProfileContainer/>
-</con:soapui-project>
+<con:sensitiveInformation/></con:soapui-project>

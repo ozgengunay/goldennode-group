@@ -30,7 +30,7 @@
 			action="<c:url value="/login.do"/>" method="post">
 			<p>
 				<label>Username: <input type='text' name='j_username'
-					value="user_01"></label>
+					value="ogunay1978@gmail.com"></label>
 			</p>
 			<p>
 				<label>Password: <input type="password" name='j_password'

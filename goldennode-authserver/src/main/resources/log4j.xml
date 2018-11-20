@@ -17,7 +17,7 @@
 		<appender-ref ref="file" />
 	</logger>
 	<root>
-		<priority value="INFO" />
+		<priority value="DEBUG" />
 		<appender-ref ref="file" />
 	</root>
 
