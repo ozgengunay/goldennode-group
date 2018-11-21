@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.goldennode.server.security.GoldenNodeUser;
 
 @RestController
-@RequestMapping(value = { "/rest/goldennode/map/id/{mapId}" })
+@RequestMapping(value = { "/goldennode/map/id/{mapId}" })
 @CrossOrigin(origins = "*")
 public class MapController {
     @Autowired

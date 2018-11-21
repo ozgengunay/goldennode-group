@@ -2,52 +2,60 @@ package com.goldennode.server;
 
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.codec.Base64;
+import org.springframework.web.client.RestTemplate;
+import com.goldennode.commons.util.UUID;
 
 public class ClientAuthenticationSample {
 
-	public static void main(String[] args) {
-		//try {
+	private static String base_url="http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT";
+
+    public static void main(String[] args) {
+		try {
 			
 			
-			String auth="Authorization: Basic " + new String (Base64.encode("wakccrevor_1497268267@tfbnw.net:12345678".getBytes()));
-			System.out.println(auth);
-			//sampleRequest();
-		/*} catch (GeneralSecurityException e) {
+			//String auth="Authorization: Basic " + new String (Base64.encode("wakccrevor_1497268267@tfbnw.net:12345678".getBytes()));
+			//System.out.println(auth);
+			sampleRequest();
+		} catch (GeneralSecurityException e) {
 			e.printStackTrace();
-		}*/
+		}
 
 	}
 
 	private static void sampleRequest() throws GeneralSecurityException {
 
-	/*	String uri = "/server/getLocation/locationId/1";
+		String uri = "/goldennode/map/id/1/get/key/1";
 				
-		String body="{\"id\":\"1234\",\"unit\":\"C\",\"value\":\"33\"}";
-		LOGGER.debug("body > " + body);
-		String publicKey = "public1";
-		String secretKey = "secret1";
+		//String body="{\"id\":\"1234\",\"unit\":\"C\",\"value\":\"33\"}";
+		String body="{}";
+		System.out.println("body > " + body);
+		String publicKey = "ogunay1978@gmail.com";
+		String secretKey = "12345678";
 		String auth = "key=" + publicKey + ",timestamp=" + System.currentTimeMillis() / 1000L + ",nonce="
 				+ UUID.getUUID();
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("Signature", generateHmacSHA256Signature(auth + uri + body, secretKey));
-		LOGGER.debug("Signature to be generated : "+generateHmacSHA256Signature(auth + uri + body, secretKey));
+		System.out.println("Signature to be generated : "+generateHmacSHA256Signature(auth + uri + body, secretKey));
 		headers.add("Authorization", auth);
 		//headers.add("Content-Type", "application/json");
 
-		LOGGER.debug("Signature=" + headers.get("Signature"));
-		LOGGER.debug("Authorization=" + headers.get("Authorization"));
+		System.out.println("Signature=" + headers.get("Signature"));
+		System.out.println("Authorization=" + headers.get("Authorization"));
 		HttpEntity<String> entity = new HttpEntity<String>(body, headers);
-		LOGGER.debug("Request=" + entity.toString());
+		System.out.println("Request=" + entity.toString());
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> result = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-		LOGGER.debug(result);*/
+		ResponseEntity<String> result = restTemplate.exchange(base_url+uri, HttpMethod.GET, entity, String.class);
+		System.out.println(result);
 
 	}
 

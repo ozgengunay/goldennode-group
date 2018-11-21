@@ -36,9 +36,8 @@ public class HMACAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-		// Get Credentials out of the Token...
-		UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
-		if (token != null) {
+
+		if (authentication != null) {
 			if (authentication.getCredentials() == null) {
 				LOGGER.debug("Authentication failed: no credentials provided");
 

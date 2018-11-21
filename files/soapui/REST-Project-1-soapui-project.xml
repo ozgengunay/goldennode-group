@@ -7,11 +7,9 @@
     <con:endpoints>
       <con:endpoint>http://localhost:8080</con:endpoint>
     </con:endpoints>
-    <con:resource name="map-get" path="/rest/goldennode/map/id/1/get/key/1" id="f2888b0b-1e4d-4a37-a874-41849caeabba">
+    <con:resource name="map-get" path="/goldennode/map/id/1/get/key/1" id="f2888b0b-1e4d-4a37-a874-41849caeabba">
       <con:settings/>
-      <con:parameters>
-        
-      </con:parameters>
+      <con:parameters></con:parameters>
       <con:method name="" id="0f1aeb12-71d5-45d0-a25f-aee6c1cf034c" method="GET">
         <con:settings/>
         <con:parameters/>
@@ -141,7 +139,19 @@
           <con:params/>
           <con:element>data</con:element>
         </con:representation>
-        <con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>500 401</con:status><con:params/><con:element xmlns:log="http://localhost/goldennode-cloud-0.0.1-SNAPSHOT/login;jsessionid=B3A19F39740AA18963546C334BFB1699">log:Fault</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html;charset=ISO-8859-1</con:mediaType><con:status>404</con:status><con:params/><con:element>html</con:element></con:representation><con:request name="Request 1" id="0de4d815-ed8c-4b00-be9b-3184bd5f0e7f" mediaType="application/json">
+        <con:representation type="FAULT">
+          <con:mediaType>application/json;charset=UTF-8</con:mediaType>
+          <con:status>500 401</con:status>
+          <con:params/>
+          <con:element xmlns:log="http://localhost/goldennode-cloud-0.0.1-SNAPSHOT/login;jsessionid=B3A19F39740AA18963546C334BFB1699">log:Fault</con:element>
+        </con:representation>
+        <con:representation type="FAULT">
+          <con:mediaType>text/html;charset=ISO-8859-1</con:mediaType>
+          <con:status>404</con:status>
+          <con:params/>
+          <con:element>html</con:element>
+        </con:representation>
+        <con:request name="Request 1" id="0de4d815-ed8c-4b00-be9b-3184bd5f0e7f" mediaType="application/json">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -151,10 +161,10 @@
           <con:credentials>
             <con:username>ogunay1978@gmail.com</con:username>
             <con:password>496341Og</con:password>
-            <con:selectedAuthProfile>Profile 2</con:selectedAuthProfile>
+            <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
             <con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes>
             <con:preemptive>true</con:preemptive>
-            <con:authType>OAuth 2.0</con:authType>
+            <con:authType>No Authorization</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -183,7 +193,7 @@
         </con:representation>
         <con:representation type="FAULT">
           <con:mediaType>text/html;charset=utf-8</con:mediaType>
-          <con:status>401</con:status>
+          <con:status>401 403</con:status>
           <con:params/>
           <con:element>html</con:element>
         </con:representation>
@@ -249,10 +259,10 @@
           <con:credentials>
             <con:username>ogunay1978@gmail.com</con:username>
             <con:password>496341Og</con:password>
-            <con:selectedAuthProfile>Basic</con:selectedAuthProfile>
+            <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
             <con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes>
             <con:preemptive>true</con:preemptive>
-            <con:authType>Preemptive</con:authType>
+            <con:authType>No Authorization</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -271,6 +281,27 @@
       <con:oAuth2Flow>CLIENT_CREDENTIALS_GRANT</con:oAuth2Flow>
       <con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod>
     </con:oAuth2Profile>
-  <con:oAuth2Profile><con:name>Profile 2</con:name><con:clientID>ifttt</con:clientID><con:clientSecret>secret</con:clientSecret><con:authorizationURI>http://localhost:8080/goldennode-authserver-0.0.1-SNAPSHOT/oauth/authorize</con:authorizationURI><con:accessTokenURI>http://localhost:8080/goldennode-authserver-0.0.1-SNAPSHOT/oauth/token</con:accessTokenURI><con:redirectURI>http://localhost</con:redirectURI><con:accessTokenPosition>HEADER</con:accessTokenPosition><con:oAuth2Flow>AUTHORIZATION_CODE_GRANT</con:oAuth2Flow><con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod><con:scope>ifttt</con:scope><con:accessTokenStatus>WAITING_FOR_AUTHORIZATION</con:accessTokenStatus></con:oAuth2Profile></con:oAuth2ProfileContainer>
+    <con:oAuth2Profile>
+      <con:name>Profile 2</con:name>
+      <con:clientID>ifttt</con:clientID>
+      <con:clientSecret>secret</con:clientSecret>
+      <con:authorizationURI>http://localhost:8080/goldennode-authserver-0.0.1-SNAPSHOT/oauth/authorize</con:authorizationURI>
+      <con:accessTokenURI>http://localhost:8080/goldennode-authserver-0.0.1-SNAPSHOT/oauth/token</con:accessTokenURI>
+      <con:redirectURI>http://localhost</con:redirectURI>
+      <con:accessToken>9cdeb0fe-3b6b-4823-8e5a-36a807cc07f7</con:accessToken>
+      <con:accessTokenPosition>HEADER</con:accessTokenPosition>
+      <con:oAuth2Flow>CLIENT_CREDENTIALS_GRANT</con:oAuth2Flow>
+      <con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod>
+      <con:refreshToken xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+      <con:scope>ifttt</con:scope>
+      <con:accessTokenStatus>RETRIEVED_FROM_SERVER</con:accessTokenStatus>
+      <con:accessTokenStartingStatus>RETRIEVED_FROM_SERVER</con:accessTokenStartingStatus>
+      <con:accessTokenExpirationTime>82445</con:accessTokenExpirationTime>
+      <con:accessTokenIssuedTime>1542809995</con:accessTokenIssuedTime>
+      <con:resourceOwnerName>ogunay1978@gmail.com</con:resourceOwnerName>
+      <con:resourceOwnerPassword>12345678</con:resourceOwnerPassword>
+    </con:oAuth2Profile>
+  </con:oAuth2ProfileContainer>
   <con:oAuth1ProfileContainer/>
-<con:sensitiveInformation/></con:soapui-project>
+  <con:sensitiveInformation/>
+</con:soapui-project>
