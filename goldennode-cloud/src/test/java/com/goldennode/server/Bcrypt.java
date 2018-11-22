@@ -17,7 +17,7 @@ public class Bcrypt {
 			LOGGER.debug(encoded);
 			
 		}*/
-		String salt=BCrypt.gensalt();
+		String salt=BCrypt.gensalt(10);
 		LOGGER.debug(salt);
 		String encoded =BCrypt.hashpw("ozgen", salt);
 		LOGGER.debug(encoded);

@@ -40,7 +40,7 @@ public class HMACAuthenticationFilter extends AbstractAuthenticationProcessingFi
 			throw new InsufficientAuthenticationException("Invalid Authorization Header");
 		publicKey = values[0].split("=")[1];
 		AbstractAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(publicKey, new HMACCredentials(
-				authorizationHeader + request.getRequestURI() + requestWrapper.getPayload(), signatureHeader));
+				authorizationHeader + request.getRequestURI() + requestWrapper.getPayload()+ request.getMethod(), signatureHeader));
 
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
