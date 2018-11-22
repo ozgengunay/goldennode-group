@@ -22,7 +22,7 @@ public class HMACAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(HMACAuthenticationProvider.class);
 	@Autowired
-	private HmacUserDetailsService hmacUerDetailsService;
+	private HMACUserDetailsService hmacUerDetailsService;
 	private String algorithm = "HmacSHA256";
 
 	/**

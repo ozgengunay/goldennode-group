@@ -44,7 +44,7 @@ public class HMACAuthenticationFilter extends AbstractAuthenticationProcessingFi
 
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
-
+		request.setAttribute("requestWrapper", requestWrapper);
 		return this.getAuthenticationManager().authenticate(authRequest);
 	}
 
@@ -52,7 +52,7 @@ public class HMACAuthenticationFilter extends AbstractAuthenticationProcessingFi
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		super.successfulAuthentication(request, response, chain, authResult);
-		chain.doFilter(request, response);
+		chain.doFilter((RequestWrapper)request.getAttribute("requestWrapper"), response);
 	}
 
 	private String getHeaderValue(HttpServletRequest request, String headerParameterName) {

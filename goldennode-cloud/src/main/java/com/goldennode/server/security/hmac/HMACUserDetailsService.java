@@ -14,7 +14,7 @@ import com.goldennode.commons.repository.UserRepository;
 import com.goldennode.server.security.GoldenNodeUser;
 
 @Service
-public class HmacUserDetailsService implements UserDetailsService {
+public class HMACUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 

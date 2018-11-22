@@ -40,7 +40,7 @@
 		<spring.version>5.1.1.RELEASE</spring.version>
 		<spring.data.jpa.version>2.1.2.RELEASE</spring.data.jpa.version>
 		<spring.security.version>5.1.1.RELEASE</spring.security.version>
-		 <spring.security.oauth.version>2.1.0.RELEASE</spring.security.oauth.version>
+		<spring.security.oauth.version>2.1.0.RELEASE</spring.security.oauth.version>
 		<!-- HIBERNATE -->
 		<hibernate.version>5.3.7.Final</hibernate.version>
 		<hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
@@ -335,6 +335,11 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-core</artifactId>
 				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
 			</dependency>
 			<!-- TEST -->
 			<dependency>

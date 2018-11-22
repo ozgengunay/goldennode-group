@@ -2,6 +2,7 @@ package com.goldennode.server;
 
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -13,15 +14,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
+
 import com.goldennode.commons.util.UUID;
 
-public class ClientAuthenticationSample {
+public class ClientAuthenticationSampleGet {
     private static String base_url = "http://localhost:8080";
 
     @Test
     public void sampleRequest() throws GeneralSecurityException {
-        String uri = "/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/put/key/1";
-        String body = "{\"id\":\"1234\",\"unit\":\"C\",\"value\":\"33\"}";
+        String uri = "/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/get/key/1";
+        String body = "";
         System.out.println("body > " + body);
         String publicKey = "ogunay1978@gmail.com";
         String secretKey = "12345678";
@@ -37,7 +39,7 @@ public class ClientAuthenticationSample {
         HttpEntity<String> entity = new HttpEntity<String>(body, headers);
         System.out.println("Request=" + entity.toString());
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> result = restTemplate.exchange(base_url + uri, HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> result = restTemplate.exchange(base_url + uri, HttpMethod.GET, entity, String.class);
         System.out.println(result);
     }
 
