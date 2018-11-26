@@ -13,75 +13,111 @@ import org.springframework.http.ResponseEntity;
 import com.goldennode.commons.util.GoldenNodeException;
 import com.goldennode.commons.util.RestClient;
 
-public class MapServiceImpl<K extends Serializable, V extends Serializable>  implements MapService<K,V>{
-
+public class MapServiceImpl<K extends Serializable, V extends Serializable> implements MapService<K, V> {
     public int size(String id) throws GoldenNodeException {
         ResponseEntity<String> response= RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
         if( response.getStatusCodeValue()==HttpStatus.OK.value())
             return Integer.parseInt(response.getBody());
         else {
-            throw new GoldenNodeException("Error occured" +response.getStatusCode());
+            throw new GoldenNodeException("Error occured" +response.getStatusCode()+" - "+ response.getBody());a
         }
     }
 
-    public boolean isEmpty(String id) {
-        ResponseEntity<String> response= RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
-        if( response.getStatusCodeValue()==HttpStatus.OK.value())
-            return Integer.parseInt(response.getBody());
+    public boolean isEmpty(String id) throws GoldenNodeException {
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
         else {
-            throw new GoldenNodeException("Error occured" +response.getStatusCode());
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
         }
     }
 
-    public boolean containsKey(String id, Object key) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean containsKey(String id, Object key)  throws GoldenNodeException{
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
 
-    public boolean containsValue(String id, Object value) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean containsValue(String id, Object value)  throws GoldenNodeException{
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
 
     public V get(String id, Object key) {
-        // TODO Auto-generated method stub
-        return null;
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
     }
 
     public V put(String id, K key, V value) {
-        // TODO Auto-generated method stub
-        return null;
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
 
     public V remove(String id, Object key) {
-        // TODO Auto-generated method stub
-        return null;
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
 
     public void putAll(String id, Map<? extends K, ? extends V> m) {
-        // TODO Auto-generated method stub
-        
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
 
     public void clear(String id) {
-        // TODO Auto-generated method stub
-        
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
 
     public Set<K> keySet(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
 
     public Collection<V> values(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
 
     public Set<Entry<K, V>> entrySet(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        ResponseEntity<String> response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if (response.getStatusCodeValue() == HttpStatus.OK.value())
+            return Boolean.parseBoolean(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+        }
     }
-
-   
 }
