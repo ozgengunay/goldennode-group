@@ -1,6 +1,6 @@
 package com.goldennode.api.core;
 
-import com.goldennode.api.helper.SystemUtils;
+import com.goldennode.commons.util.SystemUtils;
 
 public class RequestOptions {
     private static final int REQUEST_TIMEOUT = Integer

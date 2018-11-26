@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import com.goldennode.api.core.RequestOptions;
 import com.goldennode.api.grid.Grid;
-import com.goldennode.api.helper.StringUtils;
+import com.goldennode.commons.util.StringUtils;
 
 public class LeaderSelector {
     static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(LeaderSelector.class);

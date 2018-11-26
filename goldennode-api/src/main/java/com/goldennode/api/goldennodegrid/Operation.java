@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.goldennode.api.helper.StringUtils;
+import com.goldennode.commons.util.StringUtils;
 
 public class Operation implements Serializable {
     private static final long serialVersionUID = 1L;

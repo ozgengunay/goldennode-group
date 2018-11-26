@@ -1,4 +1,4 @@
-package com.goldennode.api.helper;
+package com.goldennode.commons.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

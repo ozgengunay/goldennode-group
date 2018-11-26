@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.goldennode.api.helper.StringUtils;
+import com.goldennode.commons.util.StringUtils;
 
 public class Request implements Serializable {
     private static final long serialVersionUID = 1L;

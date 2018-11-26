@@ -4,7 +4,7 @@ import java.util.TimerTask;
 
 import org.slf4j.LoggerFactory;
 
-import com.goldennode.api.helper.LockHelper;
+import com.goldennode.commons.util.LockHelper;
 
 public class ThreadUtils {
     private static final int THREAD_CHECK_RETRY_INTERVAL = 10;

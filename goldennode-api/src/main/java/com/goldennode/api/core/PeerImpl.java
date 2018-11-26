@@ -25,10 +25,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.LoggerFactory;
 
-import com.goldennode.api.helper.LockHelper;
-import com.goldennode.api.helper.ReflectionUtils;
-import com.goldennode.api.helper.StringUtils;
-import com.goldennode.api.helper.SystemUtils;
+import com.goldennode.commons.util.LockHelper;
+import com.goldennode.commons.util.ReflectionUtils;
+import com.goldennode.commons.util.StringUtils;
+import com.goldennode.commons.util.SystemUtils;
 
 public class PeerImpl extends Peer {
     static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PeerImpl.class);

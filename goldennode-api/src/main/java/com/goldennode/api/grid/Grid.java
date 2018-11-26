@@ -11,8 +11,8 @@ import com.goldennode.api.goldennodegrid.DistributedObject;
 import com.goldennode.api.goldennodegrid.HeartbeatTimer;
 import com.goldennode.api.goldennodegrid.MultiResponse;
 import com.goldennode.api.goldennodegrid.Operation;
+import com.goldennode.commons.util.LockHelper;
 import com.goldennode.api.core.Peer;
-import com.goldennode.api.helper.LockHelper;
 
 public abstract class Grid {
     public abstract Peer getOwner();

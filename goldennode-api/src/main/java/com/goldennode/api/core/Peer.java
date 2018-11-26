@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.goldennode.api.helper.StringUtils;
+import com.goldennode.commons.util.StringUtils;
 
 public abstract class Peer implements Serializable, Comparable<Peer> {
     private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package com.goldennode.testutils;
+package com.goldennode.api.snippets;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +9,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
+
+import com.goldennode.testutils.GoldenNodeJunitRunner;
+import com.goldennode.testutils.RepeatTest;
 
 public class Clone extends GoldenNodeJunitRunner {
     static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Clone.class);

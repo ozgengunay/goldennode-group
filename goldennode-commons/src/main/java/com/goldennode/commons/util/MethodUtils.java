@@ -1,4 +1,4 @@
-package com.goldennode.api.helper;
+package com.goldennode.commons.util;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Member;

@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.goldennode.commons.util.GoldenNodeException;
+
 public interface MapService<K extends Serializable, V extends Serializable>  extends Service {
     
-    String initializeMap();
-
-    int size(String id);
+    int size(String id) throws GoldenNodeException;
 
     boolean isEmpty(String id);
 

@@ -9,7 +9,7 @@ import com.goldennode.api.goldennodegrid.GoldenNodeGrid;
 import com.goldennode.api.grid.Grid;
 import com.goldennode.api.grid.GridException;
 import com.goldennode.api.grid.GridFactory;
-import com.goldennode.api.helper.ExceptionUtils;
+import com.goldennode.commons.util.ExceptionUtils;
 import com.goldennode.testutils.GoldenNodeJunitRunner;
 import com.goldennode.testutils.PortUtils;
 import com.goldennode.testutils.RepeatTest;

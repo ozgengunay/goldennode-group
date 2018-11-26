@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.slf4j.LoggerFactory;
 
-import com.goldennode.api.helper.ExceptionUtils;
+import com.goldennode.commons.util.ExceptionUtils;
 import com.goldennode.testutils.GoldenNodeJunitRunner;
 import com.goldennode.testutils.RepeatTest;
 import com.goldennode.testutils.ThreadUtils;

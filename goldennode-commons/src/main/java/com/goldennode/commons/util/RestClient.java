@@ -1,30 +1,37 @@
-package com.goldennode.server;
+package com.goldennode.commons.util;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.util.MultiValueMap;
-import com.goldennode.commons.util.UUID;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
-public class Authenticator {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Authenticator.class);
+public class RestClient {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestClient.class);
     private static String publicKey;
     private static String secretKey;
-
-   static {
-        publicKey = System.getenv("com.goldennode.client.publicKey");
-        secretKey = System.getenv("com.goldennode.client.secretKey");
+    private static String SERVER_URL = "http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT";
+    
+    static {
+        publicKey = System.getenv("GN_PK");
+        secretKey = System.getenv("GN_SK");
         if (publicKey == null) {
             publicKey = System.getProperty("com.goldennode.client.publicKey");
         }
@@ -36,6 +43,29 @@ public class Authenticator {
         }
         if (secretKey == null) {
             throw new RuntimeException("can't load secretKey");
+        }
+    }
+
+    public static  ResponseEntity<String> call(String uri, HttpMethod method) throws GoldenNodeException {
+        return call(uri, method, null);
+    }
+
+    public static ResponseEntity<String> call(String uri, HttpMethod method, String body) throws GoldenNodeException {
+        RequestEntity<String> entity;
+        try {
+            entity = new RequestEntity<>(body, method, new URI(SERVER_URL + uri));
+            entity = RestClient.signEntity(entity);
+            LOGGER.debug("Request=" + entity);
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> result = restTemplate.exchange(entity, String.class);
+            LOGGER.debug("Response=" + result);
+            return result;
+        } catch (URISyntaxException e) {
+            LOGGER.error("Error occured", e);
+            throw new GoldenNodeException(e);
+        } catch (RestClientException e) {
+            LOGGER.error("Error occured", e);
+            throw new GoldenNodeException(e);
         }
     }
 
@@ -54,7 +84,6 @@ public class Authenticator {
                 headers.add(entry.getKey(), singleValue);
             }
         }
-        headers.add(HttpHeaders.ACCEPT, MediaType.APPLICATION_XML_VALUE);
         headers.add("Signature", generateHmacSHA256Signature(auth + entity.getUrl().getPath() + (entity.getBody() == null ? "" : entity.getBody()) + entity.getMethod(), secretKey));
         LOGGER.debug("Signature to be created from : " + auth + entity.getUrl().getPath() + (entity.getBody() == null ? "" : entity.getBody()) + entity.getMethod());
         headers.add("Authorization", auth);

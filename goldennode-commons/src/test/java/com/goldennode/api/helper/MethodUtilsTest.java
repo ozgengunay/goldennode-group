@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
+import com.goldennode.commons.util.ReflectionUtils;
 import com.goldennode.testutils.GoldenNodeJunitRunner;
 import com.goldennode.testutils.RepeatTest;
 

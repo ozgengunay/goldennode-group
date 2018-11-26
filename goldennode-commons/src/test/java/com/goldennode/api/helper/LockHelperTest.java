@@ -2,6 +2,7 @@ package com.goldennode.api.helper;
 
 import org.junit.Test;
 
+import com.goldennode.commons.util.LockHelper;
 import com.goldennode.testutils.GoldenNodeJunitRunner;
 import com.goldennode.testutils.RepeatTest;
 import com.goldennode.testutils.ThreadUtils;

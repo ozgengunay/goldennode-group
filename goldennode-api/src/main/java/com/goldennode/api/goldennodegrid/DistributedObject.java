@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.goldennode.api.grid.Grid;
 import com.goldennode.api.grid.GridException;
-import com.goldennode.api.helper.ReflectionUtils;
+import com.goldennode.commons.util.ReflectionUtils;
 
 public abstract class DistributedObject implements Serializable {
     private static final long serialVersionUID = 1L;

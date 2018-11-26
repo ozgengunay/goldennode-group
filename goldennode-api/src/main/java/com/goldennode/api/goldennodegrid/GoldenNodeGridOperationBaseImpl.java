@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.goldennode.api.core.Peer;
 import com.goldennode.api.grid.GridException;
-import com.goldennode.api.helper.ReflectionUtils;
+import com.goldennode.commons.util.ReflectionUtils;
 
 public class GoldenNodeGridOperationBaseImpl extends GridOperationBase {
     static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(GoldenNodeGridOperationBaseImpl.class);

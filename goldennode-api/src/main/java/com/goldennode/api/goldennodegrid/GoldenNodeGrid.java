@@ -23,8 +23,8 @@ import com.goldennode.api.core.RequestOptions;
 import com.goldennode.api.core.Response;
 import com.goldennode.api.grid.Grid;
 import com.goldennode.api.grid.GridException;
-import com.goldennode.api.helper.ExceptionUtils;
-import com.goldennode.api.helper.SystemUtils;
+import com.goldennode.commons.util.ExceptionUtils;
+import com.goldennode.commons.util.SystemUtils;
 
 public class GoldenNodeGrid extends Grid {
     static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(GoldenNodeGrid.class);

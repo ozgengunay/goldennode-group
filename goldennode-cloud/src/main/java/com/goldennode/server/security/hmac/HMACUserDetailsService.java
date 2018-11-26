@@ -9,8 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.goldennode.commons.entity.Users;
-import com.goldennode.commons.repository.UserRepository;
+
+import com.goldennode.server.entity.Users;
+import com.goldennode.server.repository.UserRepository;
 import com.goldennode.server.security.GoldenNodeUser;
 
 @Service

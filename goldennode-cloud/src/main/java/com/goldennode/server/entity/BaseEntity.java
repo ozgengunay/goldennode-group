@@ -1,4 +1,4 @@
-package com.goldennode.commons.entity;
+package com.goldennode.server.entity;
 
 import java.util.Date;
 

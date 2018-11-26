@@ -30,7 +30,7 @@
 			<property name="dataSource" ref="dataSource" />
 			<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 			<property name="packagesToScan"
-				value="com.goldennode.commons.entity" />
+				value="com.goldennode.server.entiy" />
 			<property name="jpaProperties">
 				<props>
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
@@ -43,7 +43,7 @@
 		</bean>
 
 		<jpa:repositories
-			base-package="com.goldennode.commons.repository" />
+			base-package="com.goldennode.server.repository" />
 
 	</beans>
 

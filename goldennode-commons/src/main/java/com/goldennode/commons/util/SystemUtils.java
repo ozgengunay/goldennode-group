@@ -1,4 +1,4 @@
-package com.goldennode.api.helper;
+package com.goldennode.commons.util;
 
 public class SystemUtils {
     public static String getSystemProperty(String defaultValue, String systemProperty) {

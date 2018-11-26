@@ -4,6 +4,7 @@ import java.net.SocketException;
 
 import org.junit.Test;
 
+import com.goldennode.commons.util.ExceptionUtils;
 import com.goldennode.testutils.GoldenNodeJunitRunner;
 import com.goldennode.testutils.RepeatTest;
 

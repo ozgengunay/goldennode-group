@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Lock;
 
 import org.slf4j.LoggerFactory;
 
-import com.goldennode.api.helper.StringUtils;
+import com.goldennode.commons.util.StringUtils;
 
 public class LockServiceImpl implements LockService {
     static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(LockServiceImpl.class);

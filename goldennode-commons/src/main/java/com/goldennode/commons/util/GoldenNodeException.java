@@ -12,4 +12,8 @@ public class GoldenNodeException extends Exception implements Serializable {
 		super(message);
 	}
 
+    public GoldenNodeException(Throwable e) {
+        super(e);
+    }
+
 }

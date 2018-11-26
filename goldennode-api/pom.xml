@@ -10,10 +10,11 @@
 	<artifactId>goldennode-api</artifactId>
 	<packaging>jar</packaging>
 	<name>goldennode-api</name>
-
-
-
 	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>goldennode-commons</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast</artifactId>
@@ -32,31 +33,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 </project>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

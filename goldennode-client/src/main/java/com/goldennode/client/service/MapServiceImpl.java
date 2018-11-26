@@ -6,22 +6,31 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.goldennode.commons.util.GoldenNodeException;
+import com.goldennode.commons.util.RestClient;
+
 public class MapServiceImpl<K extends Serializable, V extends Serializable>  implements MapService<K,V>{
 
-    public String initializeMap() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public int size(String id) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int size(String id) throws GoldenNodeException {
+        ResponseEntity<String> response= RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if( response.getStatusCodeValue()==HttpStatus.OK.value())
+            return Integer.parseInt(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" +response.getStatusCode());
+        }
     }
 
     public boolean isEmpty(String id) {
-        
-        // TODO Auto-generated method stub
-        return false;
+        ResponseEntity<String> response= RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), HttpMethod.GET);
+        if( response.getStatusCodeValue()==HttpStatus.OK.value())
+            return Integer.parseInt(response.getBody());
+        else {
+            throw new GoldenNodeException("Error occured" +response.getStatusCode());
+        }
     }
 
     public boolean containsKey(String id, Object key) {

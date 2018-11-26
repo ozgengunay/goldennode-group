@@ -1,4 +1,4 @@
-package com.goldennode.api.helper;
+package com.goldennode.commons.util;
 
 public class LockHelper {
     public static void sleep(long timeout) {

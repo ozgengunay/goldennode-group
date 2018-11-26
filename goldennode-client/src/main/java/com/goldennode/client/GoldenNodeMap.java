@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import com.goldennode.client.service.MapService;
+import com.goldennode.commons.util.GoldenNodeException;
 
 /**
  * Hello world!
@@ -17,11 +18,15 @@ public class GoldenNodeMap<K extends Serializable, V extends Serializable> imple
     private String id;
 
     public GoldenNodeMap() {
-        id = service.initializeMap();
+        
     }
 
     public int size() {
-        return service.size(id);
+        try {
+            return service.size(id);
+        } catch (GoldenNodeException e) {
+            throw new GoldenNodeRuntimeException(e);
+        }
     }
 
     public boolean isEmpty() {
