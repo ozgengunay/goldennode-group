@@ -5,10 +5,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import com.goldennode.commons.util.GoldenNodeException;
+import com.goldennode.client.GoldenNodeException;
 
 public interface MapService<K extends Serializable, V extends Serializable> extends Service {
+    
     int size(String id) throws GoldenNodeException;
 
     boolean isEmpty(String id) throws GoldenNodeException;

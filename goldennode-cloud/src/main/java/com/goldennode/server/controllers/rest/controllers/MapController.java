@@ -45,7 +45,7 @@ public class MapController {
         return mapService.containsKey(userDetails.getUsername(), mapId, key);
     }
 
-    @RequestMapping(value = { "/containsValue" }, method = { RequestMethod.GET })
+    @RequestMapping(value = { "/containsValue" }, method = { RequestMethod.POST })
     public boolean containsValue(@PathVariable("mapId") String mapId, @RequestBody String value) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return mapService.containsValue(userDetails.getUsername(), mapId, value);
