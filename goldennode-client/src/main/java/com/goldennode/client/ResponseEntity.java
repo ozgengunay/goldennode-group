@@ -8,4 +8,12 @@ public class ResponseEntity {
         this.responseCode = responseCode;
         this.body = body;
     }
+
+    public int getStatusCode() {
+        return responseCode;
+    }
+
+    public String getBody() {
+        return body;
+    }
 }
