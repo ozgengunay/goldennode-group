@@ -1,4 +1,4 @@
-package com.goldennode.server.controllers.rest.controllers;
+package com.goldennode.server.controllers;
 
 import java.io.IOException;
 import java.util.Collection;

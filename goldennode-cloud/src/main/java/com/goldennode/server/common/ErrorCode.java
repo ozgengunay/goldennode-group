@@ -1,4 +1,4 @@
-package com.goldennode.server.controllers.rest;
+package com.goldennode.server.common;
 
 public enum ErrorCode{
 	CAN_REGISTER_ONLY_PHYSICAL_OR_VIRTUAL_THINGS("canregisteronlyphysicalorvirtualthings") ,

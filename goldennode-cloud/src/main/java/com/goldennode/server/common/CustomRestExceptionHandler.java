@@ -1,4 +1,4 @@
-package com.goldennode.server.controllers.rest;
+package com.goldennode.server.common;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

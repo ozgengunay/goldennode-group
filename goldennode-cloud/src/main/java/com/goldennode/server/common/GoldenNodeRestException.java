@@ -1,4 +1,4 @@
-package com.goldennode.server.controllers.rest;
+package com.goldennode.server.common;
 
 import com.goldennode.commons.util.GoldenNodeException;
 

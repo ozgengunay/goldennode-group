@@ -24,7 +24,7 @@
 	</developers>
 	<properties>
 		<!-- CONFIG -->
-		<tomcat.version>9.0.8</tomcat.version>
+		<tomcat.version>8.5.28</tomcat.version>
 		<required.maven.version>3.3</required.maven.version>
 		<tomcat.parentdir>${HOME}</tomcat.parentdir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
