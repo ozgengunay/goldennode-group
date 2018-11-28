@@ -28,3 +28,511 @@
 2018-11-27T16:29:16,956 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
 2018-11-27T16:29:16,957 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [a53c28b4-b16e-4d4c-b6c3-5dd7c6ab24ea] with org.springframework.http.converter.StringHttpMessageConverter
 2018-11-27T16:29:27,272 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T15:40:50,416 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416050,nonce=831df54d-7be7-422e-b20d-e6bde2da067f/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/put/key/1bb04ddd9-3c72-481b-9cfc-8dab99e4cd15POST
+2018-11-28T15:40:50,433 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<POST http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/put/key/1,bb04ddd9-3c72-481b-9cfc-8dab99e4cd15,{Signature=[FEJWw8/bhP1raHAPWnOxf4FUiAmJ+bO55283ajD3QGI=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416050,nonce=831df54d-7be7-422e-b20d-e6bde2da067f]}>
+2018-11-28T15:40:50,735 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/put/key/1
+2018-11-28T15:40:50,750 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:40:50,751 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [bb04ddd9-3c72-481b-9cfc-8dab99e4cd15] with org.springframework.http.converter.StringHttpMessageConverter
+2018-11-28T15:40:51,390 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 404 NOT_FOUND
+2018-11-28T15:40:51,397 ERROR (main) [com.goldennode.commons.util.RestClient(call:67)] Error occured
+org.springframework.web.client.HttpClientErrorException$NotFound: 404 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:85) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:60) [classes/:?]
+	at com.goldennode.server.ControllerTest._01_put(ControllerTest.java:19) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:40:51,417 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416051,nonce=d35f6bce-3e17-41d6-a6d1-7dcdb7084541/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/put/key/2fb2da9c8-9652-4a6d-a9c6-896af8a17629POST
+2018-11-28T15:40:51,418 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<POST http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/put/key/2,fb2da9c8-9652-4a6d-a9c6-896af8a17629,{Signature=[WsoKOWIdOEhrhVZDPx7AZiLRapBZN3pYP4+UiAml1bE=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416051,nonce=d35f6bce-3e17-41d6-a6d1-7dcdb7084541]}>
+2018-11-28T15:40:51,430 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/put/key/2
+2018-11-28T15:40:51,430 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:40:51,430 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [fb2da9c8-9652-4a6d-a9c6-896af8a17629] with org.springframework.http.converter.StringHttpMessageConverter
+2018-11-28T15:40:51,464 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 404 NOT_FOUND
+2018-11-28T15:40:51,465 ERROR (main) [com.goldennode.commons.util.RestClient(call:67)] Error occured
+org.springframework.web.client.HttpClientErrorException$NotFound: 404 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:85) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:60) [classes/:?]
+	at com.goldennode.server.ControllerTest._02_put(ControllerTest.java:24) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:40:51,469 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416051,nonce=4a153d1b-c7d0-49fc-8dac-1c25ef32f810/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/get/key/1GET
+2018-11-28T15:40:51,469 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<GET http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/get/key/1,{Signature=[FmQaixJNkpcpZz29IMmyEdmGokTLTIPXNevWwNpdXcU=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416051,nonce=4a153d1b-c7d0-49fc-8dac-1c25ef32f810]}>
+2018-11-28T15:40:51,478 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP GET http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/get/key/1
+2018-11-28T15:40:51,478 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:40:51,502 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 404 NOT_FOUND
+2018-11-28T15:40:51,503 ERROR (main) [com.goldennode.commons.util.RestClient(call:67)] Error occured
+org.springframework.web.client.HttpClientErrorException$NotFound: 404 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:85) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:60) [classes/:?]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:50) [classes/:?]
+	at com.goldennode.server.ControllerTest._03_get(ControllerTest.java:29) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:40:51,506 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416051,nonce=ab295da7-12af-49a7-a948-ce260f9b9f95/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/keySetGET
+2018-11-28T15:40:51,507 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<GET http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/keySet,{Signature=[fB1QgmJN1s3ksjySs5rvoUHuC/dgdhamZRUEMFDUU2s=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416051,nonce=ab295da7-12af-49a7-a948-ce260f9b9f95]}>
+2018-11-28T15:40:51,516 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP GET http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT/goldennode/map/id/1/keySet
+2018-11-28T15:40:51,517 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:40:51,536 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 404 NOT_FOUND
+2018-11-28T15:40:51,537 ERROR (main) [com.goldennode.commons.util.RestClient(call:67)] Error occured
+org.springframework.web.client.HttpClientErrorException$NotFound: 404 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:85) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:60) [classes/:?]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:50) [classes/:?]
+	at com.goldennode.server.ControllerTest._04_get(ControllerTest.java:34) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:41:16,544 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416076,nonce=96fba4d8-4a73-42e5-b5a1-f23852fccafc/goldennode/map/id/1/put/key/1f6864bd7-4faa-4eea-9b38-0c7473ed7964POST
+2018-11-28T15:41:16,553 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,f6864bd7-4faa-4eea-9b38-0c7473ed7964,{Signature=[QeOCXmsi4zDHyzQn6PypJUGz50PD/4ITEQpBEFgHVco=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416076,nonce=96fba4d8-4a73-42e5-b5a1-f23852fccafc]}>
+2018-11-28T15:41:16,925 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T15:41:16,980 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:41:16,982 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [f6864bd7-4faa-4eea-9b38-0c7473ed7964] with org.springframework.http.converter.StringHttpMessageConverter
+2018-11-28T15:41:17,219 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 415 UNSUPPORTED_MEDIA_TYPE
+2018-11-28T15:41:17,315 ERROR (main) [com.goldennode.commons.util.RestClient(call:67)] Error occured
+org.springframework.web.client.HttpClientErrorException$UnsupportedMediaType: 415 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:95) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:60) [classes/:?]
+	at com.goldennode.server.ControllerTest._01_put(ControllerTest.java:19) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:41:17,337 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416077,nonce=418d3002-dd8d-4aa6-abd7-c446dc87c3b1/goldennode/map/id/1/put/key/27e7b17fa-2545-42b9-bd9e-2993cd4fc8bePOST
+2018-11-28T15:41:17,339 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/2,7e7b17fa-2545-42b9-bd9e-2993cd4fc8be,{Signature=[r/VYb5SxcEXUrhq0ypBvnNDxVDElUf8nFeCfGjiY4EI=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416077,nonce=418d3002-dd8d-4aa6-abd7-c446dc87c3b1]}>
+2018-11-28T15:41:17,350 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/2
+2018-11-28T15:41:17,351 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:41:17,352 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [7e7b17fa-2545-42b9-bd9e-2993cd4fc8be] with org.springframework.http.converter.StringHttpMessageConverter
+2018-11-28T15:41:17,376 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 415 UNSUPPORTED_MEDIA_TYPE
+2018-11-28T15:41:17,376 ERROR (main) [com.goldennode.commons.util.RestClient(call:67)] Error occured
+org.springframework.web.client.HttpClientErrorException$UnsupportedMediaType: 415 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:95) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:60) [classes/:?]
+	at com.goldennode.server.ControllerTest._02_put(ControllerTest.java:24) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:41:17,381 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416077,nonce=eb414a77-f72d-4b7f-bf50-69985ebb375b/goldennode/map/id/1/get/key/1GET
+2018-11-28T15:41:17,382 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<GET http://localhost:8080/goldennode/map/id/1/get/key/1,{Signature=[wmCOG6AxCHN0jMAjrPTkkezCyLWjmeEVGqpCrzdMXjw=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416077,nonce=eb414a77-f72d-4b7f-bf50-69985ebb375b]}>
+2018-11-28T15:41:17,392 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP GET http://localhost:8080/goldennode/map/id/1/get/key/1
+2018-11-28T15:41:17,393 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:41:17,565 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T15:41:17,569 DEBUG (main) [com.goldennode.commons.util.RestClient(call:61)] Response=<200,{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Length=[0], Date=[Wed, 28 Nov 2018 14:41:17 GMT]}>
+2018-11-28T15:41:17,570 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416077,nonce=de6077be-e6cd-47f2-9192-c2488f86a46b/goldennode/map/id/1/keySetGET
+2018-11-28T15:41:17,571 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<GET http://localhost:8080/goldennode/map/id/1/keySet,{Signature=[Oa1McJ8CEpwKI1UN70JCNCrLpJAoDZfGHI4BXYDN34A=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416077,nonce=de6077be-e6cd-47f2-9192-c2488f86a46b]}>
+2018-11-28T15:41:17,583 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP GET http://localhost:8080/goldennode/map/id/1/keySet
+2018-11-28T15:41:17,584 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:41:17,699 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T15:41:17,699 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Reading to [java.lang.String] as "application/json;charset=UTF-8"
+2018-11-28T15:41:17,700 DEBUG (main) [com.goldennode.commons.util.RestClient(call:61)] Response=<200,[],{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Type=[application/json;charset=UTF-8], Transfer-Encoding=[chunked], Date=[Wed, 28 Nov 2018 14:41:17 GMT]}>
+2018-11-28T15:43:08,885 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416188,nonce=edf21a77-4a1e-4fc5-b69e-0c31bf09f31e/goldennode/map/id/1/put/key/1fd281ca5-4969-4d6b-b609-e8dfde812051POST
+2018-11-28T15:43:08,927 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,fd281ca5-4969-4d6b-b609-e8dfde812051,{Signature=[xqrNr8sjadp6kxHgsh5Y+DURd2N9p5HFdikP77NDH2U=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416188,nonce=edf21a77-4a1e-4fc5-b69e-0c31bf09f31e]}>
+2018-11-28T15:43:09,413 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T15:43:09,435 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:43:09,436 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [fd281ca5-4969-4d6b-b609-e8dfde812051] with org.springframework.http.converter.StringHttpMessageConverter
+2018-11-28T15:43:09,617 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 415 UNSUPPORTED_MEDIA_TYPE
+2018-11-28T15:43:09,633 ERROR (main) [com.goldennode.commons.util.RestClient(call:67)] Error occured
+org.springframework.web.client.HttpClientErrorException$UnsupportedMediaType: 415 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:95) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:60) [classes/:?]
+	at com.goldennode.server.ControllerTest._01_put(ControllerTest.java:19) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:47:26,100 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:92)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416445,nonce=bd93fa23-cbd4-4789-9810-5a7112abd150/goldennode/map/id/1/put/key/1abea3d12-536c-4b6a-b13c-943ede6daee7POST
+2018-11-28T15:47:26,112 DEBUG (main) [com.goldennode.commons.util.RestClient(call:62)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,abea3d12-536c-4b6a-b13c-943ede6daee7,{Content-Type=[application/json], Signature=[BY9i6RoHd5HEsWmvMFUb6k9+YFfZC+X0CxJM1jnxMEw=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416445,nonce=bd93fa23-cbd4-4789-9810-5a7112abd150]}>
+2018-11-28T15:47:26,527 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T15:47:26,549 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:47:26,551 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [abea3d12-536c-4b6a-b13c-943ede6daee7] as "application/json"
+2018-11-28T15:47:26,759 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 400 BAD_REQUEST
+2018-11-28T15:47:26,767 ERROR (main) [com.goldennode.commons.util.RestClient(call:71)] Error occured
+org.springframework.web.client.HttpClientErrorException$BadRequest: 400 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:64) [classes/:?]
+	at com.goldennode.server.ControllerTest._01_put(ControllerTest.java:19) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:48:11,092 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:92)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416490,nonce=2a30bc48-c7ae-4632-abaa-dcda09d65181/goldennode/map/id/1/put/key/1{}POST
+2018-11-28T15:48:11,112 DEBUG (main) [com.goldennode.commons.util.RestClient(call:62)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,{},{Content-Type=[application/json], Signature=[zAQj0V3U+0BC/x7c1nZ2QCyI+9BjymMf6fA//BpSHPU=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416490,nonce=2a30bc48-c7ae-4632-abaa-dcda09d65181]}>
+2018-11-28T15:48:11,421 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T15:48:11,439 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:48:11,440 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [{}] as "application/json"
+2018-11-28T15:48:11,585 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 404 NOT_FOUND
+2018-11-28T15:48:11,594 ERROR (main) [com.goldennode.commons.util.RestClient(call:71)] Error occured
+org.springframework.web.client.HttpClientErrorException$NotFound: 404 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:85) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:64) [classes/:?]
+	at com.goldennode.server.ControllerTest._01_put(ControllerTest.java:19) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:51:53,461 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:92)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416713,nonce=559e0a19-39de-484d-9945-b145eb446bec/goldennode/map/id/1/put/key/1{}POST
+2018-11-28T15:51:53,496 DEBUG (main) [com.goldennode.commons.util.RestClient(call:62)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,{},{Content-Type=[application/json], Signature=[A3PR6DCqLO7SiAo66e05BufYSLYGPwGQJpX5XZQPIPc=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416713,nonce=559e0a19-39de-484d-9945-b145eb446bec]}>
+2018-11-28T15:51:53,752 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T15:51:53,772 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:51:53,773 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [{}] as "application/json"
+2018-11-28T15:52:09,469 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 404 NOT_FOUND
+2018-11-28T15:52:09,478 ERROR (main) [com.goldennode.commons.util.RestClient(call:71)] Error occured
+org.springframework.web.client.HttpClientErrorException$NotFound: 404 null
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:85) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:97) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:79) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:777) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:735) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:636) ~[spring-web-5.1.1.RELEASE.jar:5.1.1.RELEASE]
+	at com.goldennode.commons.util.RestClient.call(RestClient.java:64) [classes/:?]
+	at com.goldennode.server.ControllerTest._01_put(ControllerTest.java:19) [test-classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:48) [junit-4.12.jar:4.12]
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78) [junit-4.12.jar:4.12]
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:?]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:?]
+2018-11-28T15:53:53,353 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:92)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543416833,nonce=f973ddb2-16e9-45e9-a40a-7f3f277f7b08/goldennode/map/id/1/get/key/1GET
+2018-11-28T15:53:53,378 DEBUG (main) [com.goldennode.commons.util.RestClient(call:62)] Request=<GET http://localhost:8080/goldennode/map/id/1/get/key/1,{Content-Type=[application/json], Signature=[fFe+GwyHGhQsxNKO3Z1F83qvZ3CAbKGLeLkyejD0IYU=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543416833,nonce=f973ddb2-16e9-45e9-a40a-7f3f277f7b08]}>
+2018-11-28T15:53:53,604 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP GET http://localhost:8080/goldennode/map/id/1/get/key/1
+2018-11-28T15:53:53,616 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T15:53:53,894 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T15:53:53,899 DEBUG (main) [com.goldennode.commons.util.RestClient(call:65)] Response=<200,{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Length=[0], Date=[Wed, 28 Nov 2018 14:53:53 GMT]}>
+2018-11-28T16:00:56,966 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:92)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417256,nonce=25efedf0-1b04-424a-9c11-c7b7fec8018d/goldennode/map/id/1/put/key/1{}POST
+2018-11-28T16:00:56,987 DEBUG (main) [com.goldennode.commons.util.RestClient(call:62)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,{},{Content-Type=[application/json], Signature=[sTr18QmVKAndY6ObLMNuuekBJkERf+98U+KmcM57VBI=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543417256,nonce=25efedf0-1b04-424a-9c11-c7b7fec8018d]}>
+2018-11-28T16:00:57,248 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T16:00:57,265 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T16:00:57,266 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [{}] as "application/json"
+2018-11-28T16:00:59,005 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T16:00:59,008 DEBUG (main) [com.goldennode.commons.util.RestClient(call:65)] Response=<200,{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Length=[0], Date=[Wed, 28 Nov 2018 15:00:58 GMT]}>
+2018-11-28T16:01:10,795 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:92)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417270,nonce=baf1a67c-0fc2-47e0-b6dd-d13dc68af775/goldennode/map/id/1/put/key/19f66525c-22df-4393-a271-e14aca40daadPOST
+2018-11-28T16:01:10,806 DEBUG (main) [com.goldennode.commons.util.RestClient(call:62)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,9f66525c-22df-4393-a271-e14aca40daad,{Content-Type=[application/json], Signature=[dypKaU1W3iP2JcInAkzicUUJIQM8j7F6U+CGNp1tEHI=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543417270,nonce=baf1a67c-0fc2-47e0-b6dd-d13dc68af775]}>
+2018-11-28T16:01:11,066 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T16:01:11,079 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T16:01:11,083 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [9f66525c-22df-4393-a271-e14aca40daad] as "application/json"
+2018-11-28T16:01:11,476 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T16:01:11,483 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Reading to [java.lang.String] as "text/plain;charset=ISO-8859-1"
+2018-11-28T16:01:11,506 DEBUG (main) [com.goldennode.commons.util.RestClient(call:65)] Response=<200,{},{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Type=[text/plain;charset=ISO-8859-1], Content-Length=[2], Date=[Wed, 28 Nov 2018 15:01:11 GMT]}>
+2018-11-28T16:01:20,016 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:92)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417279,nonce=89e88558-9357-4b91-8d81-5c2456c74239/goldennode/map/id/1/put/key/10afd42e2-d748-4dbb-8ee8-bdd41b29168fPOST
+2018-11-28T16:01:20,033 DEBUG (main) [com.goldennode.commons.util.RestClient(call:62)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,0afd42e2-d748-4dbb-8ee8-bdd41b29168f,{Content-Type=[application/json], Signature=[be8229VYEhmXnQLoCkplSgnpvBYOHLrtfE6bpLl4Ko0=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543417279,nonce=89e88558-9357-4b91-8d81-5c2456c74239]}>
+2018-11-28T16:01:20,251 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T16:01:20,263 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T16:01:20,264 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [0afd42e2-d748-4dbb-8ee8-bdd41b29168f] as "application/json"
+2018-11-28T16:01:20,604 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T16:01:20,605 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Reading to [java.lang.String] as "text/plain;charset=ISO-8859-1"
+2018-11-28T16:01:20,610 DEBUG (main) [com.goldennode.commons.util.RestClient(call:65)] Response=<200,9f66525c-22df-4393-a271-e14aca40daad,{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Type=[text/plain;charset=ISO-8859-1], Content-Length=[36], Date=[Wed, 28 Nov 2018 15:01:20 GMT]}>
+2018-11-28T16:01:20,612 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:92)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417280,nonce=ee6a043c-e0c8-4d59-a41b-4c7666980175/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:01:20,612 DEBUG (main) [com.goldennode.commons.util.RestClient(call:62)] Request=<GET http://localhost:8080/goldennode/map/id/1/get/key/1,{Content-Type=[application/json], Signature=[0CjTJeTOEXi1AuktCUEVMheCDi+uezacyHSDqpPt+OI=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543417280,nonce=ee6a043c-e0c8-4d59-a41b-4c7666980175]}>
+2018-11-28T16:01:20,620 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP GET http://localhost:8080/goldennode/map/id/1/get/key/1
+2018-11-28T16:01:20,621 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T16:01:20,640 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T16:01:20,641 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Reading to [java.lang.String] as "text/plain;charset=ISO-8859-1"
+2018-11-28T16:01:20,642 DEBUG (main) [com.goldennode.commons.util.RestClient(call:65)] Response=<200,0afd42e2-d748-4dbb-8ee8-bdd41b29168f,{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Type=[text/plain;charset=ISO-8859-1], Content-Length=[36], Date=[Wed, 28 Nov 2018 15:01:20 GMT]}>
+2018-11-28T16:05:24,698 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417524,nonce=b3b7b54d-55aa-4edf-9ff4-b5d62d128117/goldennode/map/id/1/put/key/19991c1a7-a993-4fed-a22d-76cc2f98cdcfPOST
+2018-11-28T16:05:24,711 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<POST http://localhost:8080/goldennode/map/id/1/put/key/1,9991c1a7-a993-4fed-a22d-76cc2f98cdcf,{Content-Type=[application/json], Signature=[oeeEB/a7UGmnf6gsn9GTOP3rIMof+cLS7ajLI3NvKoQ=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543417524,nonce=b3b7b54d-55aa-4edf-9ff4-b5d62d128117]}>
+2018-11-28T16:05:24,995 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP POST http://localhost:8080/goldennode/map/id/1/put/key/1
+2018-11-28T16:05:25,009 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T16:05:25,010 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Writing [9991c1a7-a993-4fed-a22d-76cc2f98cdcf] as "application/json"
+2018-11-28T16:05:25,089 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T16:05:25,090 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Reading to [java.lang.String] as "text/plain;charset=ISO-8859-1"
+2018-11-28T16:05:25,107 DEBUG (main) [com.goldennode.commons.util.RestClient(call:61)] Response=<200,0afd42e2-d748-4dbb-8ee8-bdd41b29168f,{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Type=[text/plain;charset=ISO-8859-1], Content-Length=[36], Date=[Wed, 28 Nov 2018 15:05:25 GMT]}>
+2018-11-28T16:05:25,109 DEBUG (main) [com.goldennode.commons.util.RestClient(signEntity:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417525,nonce=33f7582b-390b-49ed-945f-f1bfc258dc98/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:05:25,109 DEBUG (main) [com.goldennode.commons.util.RestClient(call:58)] Request=<GET http://localhost:8080/goldennode/map/id/1/get/key/1,{Content-Type=[application/json], Signature=[6ZnFTiPCq1cfhhZ2oXVEb3x5+0zCOW6DOOGCAkNhhhg=], Authorization=[key=ogunay1978@gmail.com,timestamp=1543417525,nonce=33f7582b-390b-49ed-945f-f1bfc258dc98]}>
+2018-11-28T16:05:25,118 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] HTTP GET http://localhost:8080/goldennode/map/id/1/get/key/1
+2018-11-28T16:05:25,119 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Accept=[text/plain, application/json, application/cbor, application/*+json, */*]
+2018-11-28T16:05:25,386 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Response 200 OK
+2018-11-28T16:05:25,386 DEBUG (main) [org.springframework.web.client.RestTemplate(debug:142)] Reading to [java.lang.String] as "text/plain;charset=ISO-8859-1"
+2018-11-28T16:05:25,387 DEBUG (main) [com.goldennode.commons.util.RestClient(call:61)] Response=<200,9991c1a7-a993-4fed-a22d-76cc2f98cdcf,{Cache-Control=[no-cache, no-store, max-age=0, must-revalidate], Pragma=[no-cache], Expires=[0], X-XSS-Protection=[1; mode=block], X-Frame-Options=[DENY], X-Content-Type-Options=[nosniff], Content-Type=[text/plain;charset=ISO-8859-1], Content-Length=[36], Date=[Wed, 28 Nov 2018 15:05:25 GMT]}>
+2018-11-28T16:06:33,230 DEBUG (main) [com.goldennode.client.RestClient(signRequest:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417593,nonce=49abc268-7b11-42e1-9b6e-2fdd5e2130fe/goldennode/map/id/1/put/key/174a42e0c-5cd1-4b54-901c-2023302b6422POST
+2018-11-28T16:06:44,002 DEBUG (main) [com.goldennode.client.RestClient(signRequest:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417603,nonce=cfe28469-f1b7-47fc-95e9-b51f01d7909d/goldennode/map/id/1/put/key/1aae97869-8a65-4478-b0c4-35817bd4b102POST
+2018-11-28T16:07:08,783 DEBUG (main) [com.goldennode.client.RestClient(signRequest:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417628,nonce=b4fdd2a6-f550-4360-83e5-c9d868270b6f/goldennode/map/id/1/put/key/14b0816c5-26f2-4935-973d-aadb158a6e29POST
+2018-11-28T16:07:36,874 DEBUG (main) [com.goldennode.client.RestClient(signRequest:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417656,nonce=76341747-a200-48ef-bfba-beb99c27148c/goldennode/map/id/1/put/key/17e6908f1-9aae-47bd-808e-afaf2cb3a13cPOST
+2018-11-28T16:08:46,340 DEBUG (main) [com.goldennode.client.RestClient(signRequest:88)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417726,nonce=490df22d-7126-400c-81de-eee06d876b1b/goldennode/map/id/1/put/key/1e37f2dc0-e4e9-49a8-92f4-a6b69c958866POST
+2018-11-28T16:10:24,277 DEBUG (main) [com.goldennode.client.RestClient(signRequest:89)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543417824,nonce=de5a7c58-4421-4e16-b8c2-b1999c507c93/goldennode/map/id/1/put/key/19bb6d513-c92d-47e5-8058-143ba0751c8bPOST
+2018-11-28T16:13:36,634 DEBUG (main) [com.goldennode.client.RestClient(signRequest:89)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418016,nonce=2ce3b372-ed5c-4ce4-924f-214075483812/goldennode/map/id/1/put/key/167dd29f2-5b4c-4117-bfbb-68343a7cdb52POST
+2018-11-28T16:13:42,577 DEBUG (main) [com.goldennode.client.RestClient(signRequest:89)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418022,nonce=b330e8b5-1fb7-45ee-b52d-830dd4908a61/goldennode/map/id/1/put/key/1af958904-161f-43a0-8f72-c94c4fb473a2POST
+2018-11-28T16:19:19,164 DEBUG (main) [com.goldennode.client.RestClient(signRequest:91)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418358,nonce=d8859272-92ed-4f7c-a63a-e0e0452772b0/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:19:36,912 DEBUG (main) [com.goldennode.client.RestClient(signRequest:91)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418376,nonce=472b6e62-ed1e-4afe-bfa6-72e048a216ed/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:19:54,721 DEBUG (main) [com.goldennode.client.RestClient(signRequest:91)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418394,nonce=64769dad-dc0f-4459-a730-120cb0417637/goldennode/map/id/1/put/key/15ebdc0c2-bd5a-4f45-b79e-19e0f09f600ePOST
+2018-11-28T16:19:54,754 DEBUG (main) [com.goldennode.client.RestClient(signRequest:91)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418394,nonce=9b72beae-abe0-4d58-a730-aaf45863f316/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:20:20,728 DEBUG (main) [com.goldennode.client.RestClient(signRequest:91)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418420,nonce=3ec51700-089e-4af7-baa1-fffb9d9216ab/goldennode/map/id/1/put/key/1da0b1950-eded-4502-b053-0c94483d022dPOST
+2018-11-28T16:20:20,759 DEBUG (main) [com.goldennode.client.RestClient(signRequest:91)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418420,nonce=c067c91d-4820-40a9-aa68-48673941db55/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:20:55,442 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418455,nonce=33d41513-abc4-42b3-9a17-674e8f2a5787/goldennode/map/id/1/put/key/171f3833f-e466-4635-8009-33d813e8a75dPOST
+2018-11-28T16:20:55,480 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418455,nonce=acca125c-65a0-42fc-8837-26bb97cd2c4d/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:22:13,410 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418533,nonce=0d6e932a-d0c9-4420-9078-482f1b320f48/goldennode/map/id/1/put/key/1af84bf89-19bf-4741-98a5-a5a760787a43POST
+2018-11-28T16:22:13,453 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418533,nonce=933a6bda-ce64-44b7-96c1-e07074585229/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:22:22,264 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418542,nonce=0c310a0d-5e4b-4a3c-8d50-3412520e655b/goldennode/map/id/1/put/key/1f34b6683-e81f-4286-80d1-d1206824a6ccPOST
+2018-11-28T16:22:22,304 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418542,nonce=66c650f2-e3c5-4a6d-8014-f74be068d546/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:23:25,589 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418605,nonce=1922e154-7e42-44b2-a86a-e9b7dce06084/goldennode/map/id/1/put/key/123268589-1dd7-4b9a-9b95-e0fb7213a161POST
+2018-11-28T16:23:25,620 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418605,nonce=947619fb-bc66-44e9-8243-1b86c1457b2b/goldennode/map/id/1/put/key/261f71496-5e86-4a73-af72-e6e4e71a2c23POST
+2018-11-28T16:23:25,638 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418605,nonce=7254ca91-8b2a-42a6-9860-0e5434d07b79/goldennode/map/id/1/get/key/1GET
+2018-11-28T16:23:25,654 DEBUG (main) [com.goldennode.client.RestClient(signRequest:86)] Signature to be created from : key=ogunay1978@gmail.com,timestamp=1543418605,nonce=013ab748-d5bb-4aa5-887c-77218482d681/goldennode/map/id/1/keySetGET

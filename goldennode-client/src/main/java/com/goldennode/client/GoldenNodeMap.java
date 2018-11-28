@@ -5,12 +5,15 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import com.goldennode.client.service.MapService;
+import com.goldennode.client.service.MapServiceImpl;
 
 public class GoldenNodeMap<K extends Serializable, V extends Serializable> implements Map<K, V> {
     MapService<K, V> service;
     private String id;
 
-    public GoldenNodeMap() {
+    public GoldenNodeMap(String id) {
+        this.id = id;
+        service = new MapServiceImpl<>();
     }
 
     public int size() {

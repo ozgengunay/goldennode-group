@@ -14,10 +14,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.UUID;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,15 +51,15 @@ public class RestClient {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod(method);
             con.setRequestProperty("Accept", "application/json");
-            
+            con.setRequestProperty("Accept-Charset", "UTF-8");
             signRequest(con, body);
             if (body != null) {
-                //con.setRequestProperty("Content-length", "" + body.length());
+                con.setRequestProperty("Content-Type", "application/json");
                 con.setDoOutput(true);
                 OutputStream os = con.getOutputStream();
                 os.write(body.getBytes());
-               // os.flush();
-                //os.close();
+                os.flush();
+                os.close();
             }
             int responseCode = con.getResponseCode();
             InputStream is = con.getErrorStream() == null ? con.getInputStream() : con.getErrorStream();

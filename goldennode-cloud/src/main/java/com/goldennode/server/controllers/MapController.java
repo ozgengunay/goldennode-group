@@ -59,9 +59,9 @@ public class MapController {
     }
 
     @RequestMapping(value = { "/put/key/{key}" }, method = { RequestMethod.POST })
-    public String put(@PathVariable("mapId") String mapId, @PathVariable("key") String key, @RequestBody RequestWrapper data) {
+    public String put(@PathVariable("mapId") String mapId, @PathVariable("key") String key, @RequestBody String data) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return mapService.put(userDetails.getUsername(), mapId, key, data.getPayload());
+        return mapService.put(userDetails.getUsername(), mapId, key, data);
     }
 
     @RequestMapping(value = { "/remove/key/{key}" }, method = { RequestMethod.DELETE })

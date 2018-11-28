@@ -17,6 +17,7 @@ import com.goldennode.client.GoldenNodeException;
 import com.goldennode.client.ResponseEntity;
 import com.goldennode.client.RestClient;
 
+
 public class MapServiceImpl<K extends Serializable, V extends Serializable> implements MapService<K, V> {
     public int size(String id) throws GoldenNodeException {
         ResponseEntity response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), "GET");
@@ -139,7 +140,7 @@ public class MapServiceImpl<K extends Serializable, V extends Serializable> impl
     }
 
     public void clear(String id) throws GoldenNodeException {
-        ResponseEntity response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), "GET");
+        ResponseEntity response = RestClient.call("/goldennode/map/id/{mapId}/clear".replace("{mapId}", id), "DELETE");
         if (response.getStatusCode() == 200)
             return;
         else {
