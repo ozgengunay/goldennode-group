@@ -1,7 +1,9 @@
 package com.goldennode.client;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,7 +11,7 @@ import org.junit.Test;
 public class TestGoldenNodeMap {
     @Test
     public void test1() {
-        Map<String, String> m = new GoldenNodeMap<>("map1");
+        Map<String, String> m = new HashMap<String, String>(); //new GoldenNodeMap<>("map1");
         Object response;
         m.clear();
         response = m.isEmpty();
@@ -34,9 +36,13 @@ public class TestGoldenNodeMap {
         Assert.assertEquals(false, response);
         response = m.keySet();
         Assert.assertEquals(3, ((Set) response).size());
+        Assert.assertEquals("key1", ((Set) response).iterator().next());
         response = m.values();
         Assert.assertEquals(3, ((Collection) response).size());
+        Assert.assertEquals("val1", ((Collection) response).iterator().next());
         response = m.entrySet();
+        Assert.assertEquals("key1", ((Set<Entry<String, String>>) response).iterator().next().getKey());
+        Assert.assertEquals("val1", ((Set<Entry<String, String>>) response).iterator().next().getValue());
         Assert.assertEquals(3, ((Set) response).size());
         response = m.containsValue("val1");
         Assert.assertEquals(true, response);
