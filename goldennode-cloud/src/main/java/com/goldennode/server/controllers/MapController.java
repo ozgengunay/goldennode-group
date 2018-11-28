@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.goldennode.server.security.GoldenNodeUser;
+import com.goldennode.server.security.hmac.RequestWrapper;
 
 @RestController
 @RequestMapping(value = { "/goldennode/map/id/{mapId}" })
@@ -58,9 +59,9 @@ public class MapController {
     }
 
     @RequestMapping(value = { "/put/key/{key}" }, method = { RequestMethod.POST })
-    public String put(@PathVariable("mapId") String mapId, @PathVariable("key") String key, @RequestBody String data) {
+    public String put(@PathVariable("mapId") String mapId, @PathVariable("key") String key, @RequestBody RequestWrapper data) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return mapService.put(userDetails.getUsername(), mapId, key, data);
+        return mapService.put(userDetails.getUsername(), mapId, key, data.getPayload());
     }
 
     @RequestMapping(value = { "/remove/key/{key}" }, method = { RequestMethod.DELETE })

@@ -17,6 +17,11 @@
 			<artifactId>goldennode-commons</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>goldennode-client</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast</artifactId>
 		</dependency>

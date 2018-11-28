@@ -25,7 +25,7 @@ public class RestClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestClient.class);
     private static String publicKey;
     private static String secretKey;
-    private static String SERVER_URL = "http://localhost:8080/goldennode-cloud-0.0.1-SNAPSHOT";
+    private static String SERVER_URL = "http://localhost:8080";
     static {
         publicKey = System.getenv("GN_PK");
         secretKey = System.getenv("GN_SK");
@@ -51,16 +51,17 @@ public class RestClient {
         try {
             URL url = new URL(SERVER_URL + uri);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
+            con.setRequestMethod(method);
             con.setRequestProperty("Accept", "application/json");
-            con.setDoOutput(true);
+            
             signRequest(con, body);
             if (body != null) {
-                OutputStream theControl = con.getOutputStream();
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(theControl));
-                out.write(body);
-                out.flush();
-                out.close();
+                //con.setRequestProperty("Content-length", "" + body.length());
+                con.setDoOutput(true);
+                OutputStream os = con.getOutputStream();
+                os.write(body.getBytes());
+               // os.flush();
+                //os.close();
             }
             int responseCode = con.getResponseCode();
             InputStream is = con.getErrorStream() == null ? con.getInputStream() : con.getErrorStream();

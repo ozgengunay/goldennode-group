@@ -30,7 +30,7 @@
 			<property name="dataSource" ref="dataSource" />
 			<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 			<property name="packagesToScan"
-				value="com.goldennode.server.entiy" />
+				value="com.goldennode.server.entity" />
 			<property name="jpaProperties">
 				<props>
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>

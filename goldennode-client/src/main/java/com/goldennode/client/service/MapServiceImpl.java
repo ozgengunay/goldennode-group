@@ -97,7 +97,7 @@ public class MapServiceImpl<K extends Serializable, V extends Serializable> impl
         } catch (JsonProcessingException e) {
             throw new GoldenNodeException(e);
         }
-        ResponseEntity response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", jsonKey), "GET", jsonValue);
+        ResponseEntity response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", jsonKey), "POST", jsonValue);
         if (response.getStatusCode() == 200)
             return (V) response.getBody();
         else {
