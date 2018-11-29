@@ -1,13 +1,12 @@
 package com.goldennode.client;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import com.goldennode.client.service.MapService;
 import com.goldennode.client.service.MapServiceImpl;
 
-public class GoldenNodeMap<K extends Serializable, V extends Serializable> implements Map<K, V> {
+public class GoldenNodeMap<K, V> implements Map<K, V> {
     MapService<K, V> service;
     private String id;
 

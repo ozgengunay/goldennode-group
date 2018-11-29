@@ -41,11 +41,11 @@ public class RestClient {
         }
     }
 
-    public static ResponseEntity call(String uri, String method) throws GoldenNodeException {
+    public static Response call(String uri, String method) throws GoldenNodeException {
         return call(uri, method, null);
     }
 
-    public static ResponseEntity call(String uri, String method, String body) throws GoldenNodeException {
+    public static Response call(String uri, String method, String body) throws GoldenNodeException {
         try {
             URL url = new URL(SERVER_URL + uri);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -70,7 +70,7 @@ public class RestClient {
                 response.append(inputLine);
             }
             in.close();
-            return new ResponseEntity(responseCode, response.toString());
+            return new Response(response.toString(), responseCode);
         } catch (IOException e) {
             throw new GoldenNodeException(e);
         }
