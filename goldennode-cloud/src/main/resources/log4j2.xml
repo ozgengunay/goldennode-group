@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
   <Appenders>
-    <File name="file" fileName="${catalina.home}/logs/goldennode-cloud.log" append="true">
+    <File name="file" fileName="${sys:catalina.home}/logs/goldennode-cloud.log" append="true">
       <PatternLayout pattern="%d{ISO8601} %-5p (%t) [%c(%M:%L)] %m%n"/>
     </File>
     <Console name="STDOUT" target="SYSTEM_OUT">

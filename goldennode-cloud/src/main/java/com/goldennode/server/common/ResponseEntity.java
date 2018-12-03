@@ -6,20 +6,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseEntity {
     @JsonProperty
-    Object response;
+    Object entity;
     @JsonProperty
-    String responseCode;
+    String code;
 
-    public ResponseEntity(Object response, StatusCode responseCode) {
-        this.response = response;
-        this.responseCode = responseCode.toString();
+    public ResponseEntity(Object entity, StatusCode code) {
+        this.entity = entity;
+        this.code = code.toString();
     }
 
-    public String getResponseCode() {
-        return responseCode;
+    public String getCode() {
+        return code;
     }
 
-    public Object getResponse() {
-        return response;
+    public Object getEntity() {
+        return entity;
     }
 }

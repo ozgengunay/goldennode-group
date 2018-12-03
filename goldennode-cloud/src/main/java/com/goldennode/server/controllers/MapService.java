@@ -5,16 +5,23 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
 @Service
 public class MapService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MapService.class);
     @Autowired
     private HazelcastInstance hzInstance;
 
-    public MapService() {
+    public MapService(HazelcastInstance hzInstance) {
+        this.hzInstance = hzInstance;
     }
 
     public int size(String userId, String mapId) {
@@ -38,7 +45,11 @@ public class MapService {
     }
 
     public String put(String userId, String mapId, String key, String value) {
-        return (String) init(userId, mapId).put(key, value);
+        {
+            LOGGER.debug("SAVING key: " + key + ", value: " + value);
+            String val = (String) init(userId, mapId).put(key, value);
+            return val;
+        }
     }
 
     public String remove(String userId, String mapId, String key) {
@@ -68,6 +79,4 @@ public class MapService {
     private Map init(String userId, String mapId) {
         return hzInstance.getMap(userId + "_" + mapId);
     }
-
- 
 }

@@ -1,39 +1,53 @@
 package com.goldennode.client;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Response {
-    String response;
-    int responseCode;
-    String value;
+    String body;
+    int statusCode;
+    String entityValue;
+    Iterator<JsonNode> entityIterator;
 
-    public Response(String response, int responseCode) {
-        this.response = response;
-        this.responseCode = responseCode;
+    public Response(String body, int statusCode) {
+        this.body = body;
+        this.statusCode = statusCode;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            JsonNode json = mapper.readTree(response);
-            if (json.has("response")) {
-                value = json.get("response").asText();
-            } else {
-                value = null;
+            if (!body.isEmpty()) {
+                JsonNode json = mapper.readTree(body);
+                if (json.has("entity")) {
+                    if (json.get("entity").isArray()) {
+                        entityIterator = json.get("entity").iterator();
+                    } else {
+                        entityValue = json.get("entity").asText();
+                    }
+                } else {
+                    entityValue = null;
+                }
             }
         } catch (IOException e) {
-            //invalid json
+            // invalid json
         }
     }
 
-    public int getResponseCode() {
-        return responseCode;
+    public int getStatusCode() {
+        return statusCode;
     }
 
-    public String getResponse() {
-        return response;
+    public String getBody() {
+        return body;
     }
 
-    public String getValue() {
-        return value;
+    public String getEntityValue() {
+        return entityValue;
+    }
+
+    public Iterator<JsonNode> getEntityIterator() {
+        return entityIterator;
     }
 }
