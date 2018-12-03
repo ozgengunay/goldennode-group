@@ -84,16 +84,16 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public Object extractObject(String value) throws IOException, ClassNotFoundException {
         JsonNode node = om.readTree(value);
-        String className = node.get("className").asText();
-        JsonNode objectNode = node.get("object");
+        String className = node.get("c").asText();//.replaceAll("_", ".");
+        JsonNode objectNode = node.get("o");
         Class<?> c = Class.forName(className);
         return om.treeToValue(objectNode, c);
     }
 
     public String encapObject(Object value) throws JsonProcessingException {
         JsonNode newNode = om.createObjectNode();
-        ((ObjectNode) newNode).put("className", value.getClass().getName());
-        ((ObjectNode) newNode).set("object", om.valueToTree(value));
+        ((ObjectNode) newNode).put("c", value.getClass().getName());
+        ((ObjectNode) newNode).set("o", om.valueToTree(value));
         return om.writeValueAsString(newNode);
     }
 
