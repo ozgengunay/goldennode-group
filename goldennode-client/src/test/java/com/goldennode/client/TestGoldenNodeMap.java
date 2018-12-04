@@ -8,10 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,12 +35,62 @@ public class TestGoldenNodeMap {
 
     @Test
     public void test1() {
-        Map<String, TestBean> m0 = new GoldenNodeMap<>("map0");
-        m0.put("1", new TestBean("String1", 1));
-        TestBean tb = m0.get("1");
-        System.out.println(tb.toString());
-        Map<String, String> m = new GoldenNodeMap<>("map1");// new HashMap<String, String>();
         Object response;
+        
+        Map<String, TestBean> m0 = new GoldenNodeMap<>("map0");
+        m0.clear();
+        response = m0.isEmpty();
+        Assert.assertEquals(true, response);
+        TestBean tb1 = new TestBean("String1", 1);
+        TestBean tb2 = new TestBean("String2", 2);
+        response = m0.put("key1", tb1);
+        Assert.assertEquals(null, response);
+        response = m0.put("key2", tb2);
+        Assert.assertEquals(null, response);
+        response = m0.get("key1");
+        Assert.assertEquals(tb1, response);
+        response = m0.get("key2");
+        Assert.assertEquals(tb2, response);
+        response = m0.size();
+        Assert.assertEquals(2, response);
+        response = m0.containsKey("key1");
+        Assert.assertEquals(true, response);
+        response = m0.containsKey("key4");
+        Assert.assertEquals(false, response);
+        response = m0.keySet();
+        Collection<String> expectedKey = new HashSet<>();
+        expectedKey.add("key1");
+        expectedKey.add("key2");
+        Assert.assertTrue(contentsSame(expectedKey, (Set) response));
+        response = m0.values();
+        Assert.assertEquals(2, ((Collection) response).size());
+        Collection<TestBean> expectedValue = new HashSet<>();
+        expectedValue = new ArrayList<>();
+        expectedValue.add(tb1);
+        expectedValue.add(tb2);
+        Assert.assertTrue(contentsSame(expectedValue, (List) response));
+        response = m0.entrySet();
+        Assert.assertEquals("key1", ((Set<Entry<String, String>>) response).iterator().next().getKey());
+        Assert.assertEquals(tb1, ((Set<Entry<String, String>>) response).iterator().next().getValue());
+        Assert.assertEquals(2, ((Set) response).size());
+        response = m0.containsValue(tb1);
+        Assert.assertEquals(true, response);
+        response = m0.containsValue(new TestBean("N/A", -1));
+        Assert.assertEquals(false, response);
+        response = m0.isEmpty();
+        Assert.assertEquals(false, response);
+        response = m0.remove("key1");
+        Assert.assertEquals(tb1, response);
+        response = m0.remove("key2");
+        Assert.assertEquals(tb2, response);
+        response = m0.isEmpty();
+        Assert.assertEquals(true, response);
+        
+        
+        
+        
+        
+        Map<String, String> m = new GoldenNodeMap<>("map1");// new HashMap<String, String>();
         m.clear();
         response = m.isEmpty();
         Assert.assertEquals(true, response);
@@ -97,10 +145,10 @@ public class TestGoldenNodeMap {
         Assert.assertEquals(true, response);
     }
 
-    private boolean contentsSame(Collection<String> expected, Collection<String> actual) {
+    private boolean contentsSame(Collection expected, Collection actual) {
         if (expected.size() != actual.size())
             return false;
-        for (String exp : expected) {
+        for (Object exp : expected) {
             if (!actual.contains(exp))
                 return false;
         }

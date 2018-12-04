@@ -1,8 +1,6 @@
 package com.goldennode.server.controllers;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.goldennode.server.common.ResponseEntity;
 import com.goldennode.server.common.StatusCode;
 import com.goldennode.server.security.GoldenNodeUser;
@@ -68,16 +64,6 @@ public class MapController {
 
     @RequestMapping(value = { "/putAll" }, method = { RequestMethod.POST })
     public ResponseEntity putAll(@PathVariable("mapId") String mapId, @RequestBody String data) throws IOException {
-        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Map<String, String> m = new HashMap<>();
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode actualObj = mapper.readTree(data);
-        if (actualObj.isArray()) {
-            for (final JsonNode objNode : actualObj) {
-                m.put(objNode.get("key").toString(), objNode.get("value").toString());
-            }
-        }
-        mapService.putAll(userDetails.getId(), mapId, m);
         return new ResponseEntity(null, StatusCode.SUCCESS);
     }
 
