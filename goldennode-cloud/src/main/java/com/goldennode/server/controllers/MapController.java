@@ -42,8 +42,8 @@ public class MapController {
         return new ResponseEntity(mapService.containsKey(userDetails.getUsername(), mapId, key), StatusCode.SUCCESS);
     }
 
-    @RequestMapping(value = { "/containsValue" }, method = { RequestMethod.POST })
-    public ResponseEntity containsValue(@PathVariable("mapId") String mapId, @RequestBody String value) {
+    @RequestMapping(value = { "/containsValue/value/{value}" }, method = { RequestMethod.GET })
+    public ResponseEntity containsValue(@PathVariable("mapId") String mapId, @PathVariable("value") String value) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(mapService.containsValue(userDetails.getUsername(), mapId, value), StatusCode.SUCCESS);
     }

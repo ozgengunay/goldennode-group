@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +13,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -56,7 +56,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public boolean containsValue(String id, Object value) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsValue".replace("{mapId}", id), "GET", encapObject(value));
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsValue/value/{value}".replace("{mapId}", id).replace("{value}", URLEncoder.encode(encapObject(value))), "GET", encapObject(value));
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean((String) response.getEntityValue());
             else {
@@ -84,7 +84,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public Object extractObject(String value) throws IOException, ClassNotFoundException {
         JsonNode node = om.readTree(value);
-        String className = node.get("c").asText();//.replaceAll("_", ".");
+        String className = node.get("c").asText();
         JsonNode objectNode = node.get("o");
         Class<?> c = Class.forName(className);
         return om.treeToValue(objectNode, c);
@@ -150,21 +150,14 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public Set<K> keySet(String id) throws GoldenNodeException {
         try {
-            ObjectMapper om = new ObjectMapper();
             Response response = RestClient.call("/goldennode/map/id/{mapId}/keySet".replace("{mapId}", id), "GET");
-            Set<K> list = new HashSet<>();
             if (response.getStatusCode() == 200) {
-                ObjectMapper mapper = new ObjectMapper();
+                Set<K> set = new HashSet<>();
                 Iterator<JsonNode> iter = response.getEntityIterator();
                 while (iter.hasNext()) {
-                    JsonNode node = iter.next();
-                    JsonNode element = om.readTree(node.asText());
-                    String className = element.get("c>>lassName").asText();
-                    JsonNode objectNode = element.get("object");
-                    Class c = Class.forName(className);
-                    list.add((K) om.treeToValue(objectNode, c));
+                    set.add((K) extractObject(iter.next().asText()));
                 }
-                return list;
+                return set;
             } else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -177,19 +170,12 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public Collection<V> values(String id) throws GoldenNodeException {
         try {
-            ObjectMapper om = new ObjectMapper();
             Response response = RestClient.call("/goldennode/map/id/{mapId}/values".replace("{mapId}", id), "GET");
-            List<V> list = new ArrayList<>();
             if (response.getStatusCode() == 200) {
-                ObjectMapper mapper = new ObjectMapper();
+                List<V> list = new ArrayList<>();
                 Iterator<JsonNode> iter = response.getEntityIterator();
                 while (iter.hasNext()) {
-                    JsonNode node = iter.next();
-                    JsonNode element = om.readTree(node.asText());
-                    String className = element.get("className").asText();
-                    JsonNode objectNode = element.get("object");
-                    Class c = Class.forName(className);
-                    list.add((V) om.treeToValue(objectNode, c));
+                    list.add((V) extractObject(iter.next().asText()));
                 }
                 return list;
             } else {
@@ -203,19 +189,25 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
     }
 
     public Set<Entry<K, V>> entrySet(String id) throws GoldenNodeException {
-        Response response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), "GET");
-        if (response.getStatusCode() == 200) {
-            ObjectMapper om = new ObjectMapper();
-            TypeReference<Entry<K, V>> typeRef = new TypeReference<Entry<K, V>>() {
-            };
-            try {
-                HashSet<Entry<K, V>> set = om.readValue((String) response.getEntityValue(), typeRef);
-                return set;
-            } catch (IOException e) {
-                throw new GoldenNodeException(e);
+        try {
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/entrySet".replace("{mapId}", id), "GET");
+            if (response.getStatusCode() == 200) {
+                Map<K, V> map = new HashMap<>();
+                Iterator<JsonNode> iter = response.getEntityIterator();
+                while (iter.hasNext()) {
+                    JsonNode node = iter.next();
+                    K key = (K) extractObject(node.fieldNames().next());
+                    V value = (V) extractObject(node.fields().next().getValue().asText());
+                    map.put(key, value);
+                }
+                return map.entrySet();
+            } else {
+                throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
-        } else {
-            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
+        } catch (ClassNotFoundException e) {
+            throw new GoldenNodeException(e);
+        } catch (IOException e) {
+            throw new GoldenNodeException(e);
         }
     }
 }
