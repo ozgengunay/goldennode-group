@@ -1,7 +1,9 @@
-package com.goldennode.server.security.hmac;
+package com.goldennode.server.security.web;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,18 +18,22 @@ import com.goldennode.server.repository.UserRepository;
 import com.goldennode.server.security.GoldenNodeUser;
 
 @Service
-public class HMACUserDetailsService implements UserDetailsService {
+public class AccountUserDetailsService implements UserDetailsService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountUserDetailsService.class);
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
     @Autowired
     private AuthorityRepository authorityRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String publicKey) throws UsernameNotFoundException {
-        Users user = userRepository.findByUsername(publicKey);
-        //Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-       // authorities.add(new SimpleGrantedAuthority(Users.Role.ROLE_USER.toString()));
-        Set<Authorities> authorities = authorityRepository.findByPublicKey(user.getEmail());
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        LOGGER.debug("Loading user by username: {}", username);
+        Users user = repository.findByEmail(username);
+        LOGGER.debug("Found user: {}", user);
+        if (user == null) {
+            throw new UsernameNotFoundException("No user found with username: " + username);
+        }
+        Set<Authorities> authorities = authorityRepository.findByUsername(user.getEmail());
         Set<GrantedAuthority> rols = new HashSet<GrantedAuthority>();
         for (Authorities authority : authorities) {
             rols.add(new SimpleGrantedAuthority(authority.getAuthority()));
@@ -36,6 +42,7 @@ public class HMACUserDetailsService implements UserDetailsService {
         principal.setFirstName(user.getFirstName());
         principal.setId(user.getId());
         principal.setLastName(user.getLastName());
+        LOGGER.debug("Returning user details: {}", principal);
         return principal;
     }
 }
