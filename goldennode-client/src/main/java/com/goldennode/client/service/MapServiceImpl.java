@@ -1,6 +1,7 @@
 package com.goldennode.client.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,9 +41,20 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    public static void main(String arg[]) {
+        System.out.println(escape("~!@#$%^&*()_+{}:|<>?>[];',./\""));
+    }
+    private static String escape(String str) {
+        try {
+            return URLEncoder.encode(str.replace("/", "&sol;").replace("\"", "&quot;").replace("\\", "&bsol;"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {  
+            return null;
+        }
+    }
+
     public boolean containsKey(String id, Object key) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsKey/key/{key}".replace("{mapId}", id).replace("{key}", URLEncoder.encode(encapObject(key))), "GET");
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsKey/key/{key}".replace("{mapId}", id).replace("{key}", escape(encapObject(key))), "GET");
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean((String) response.getEntityValue());
             else {
@@ -55,7 +67,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public boolean containsValue(String id, Object value) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsValue/value/{value}".replace("{mapId}", id).replace("{value}", URLEncoder.encode(encapObject(value))), "GET");
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsValue/value/{value}".replace("{mapId}", id).replace("{value}", escape(encapObject(value))), "GET");
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean((String) response.getEntityValue());
             else {
@@ -68,7 +80,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public V get(String id, Object key) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/get/key/{key}".replace("{mapId}", id).replace("{key}", URLEncoder.encode(encapObject(key))), "GET");
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/get/key/{key}".replace("{mapId}", id).replace("{key}", escape(encapObject(key))), "GET");
             if (response.getStatusCode() == 200) {
                 return (V) extractObject(response.getEntityValue());
             } else {
@@ -98,7 +110,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public V put(String id, K key, V value) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", URLEncoder.encode(encapObject(key))), "POST", encapObject(value));
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", escape(encapObject(key))), "POST", encapObject(value));
             if (response.getStatusCode() == 200)
                 return (V) response.getEntityValue();
             else {
@@ -111,7 +123,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public V remove(String id, Object key) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/remove/key/{key}".replace("{mapId}", id).replace("{key}", URLEncoder.encode(encapObject(key))), "DELETE");
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/remove/key/{key}".replace("{mapId}", id).replace("{key}", escape(encapObject(key))), "DELETE");
             if (response.getStatusCode() == 200)
                 return (V) extractObject(response.getEntityValue());
             else {

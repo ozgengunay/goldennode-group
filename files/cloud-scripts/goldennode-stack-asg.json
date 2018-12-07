@@ -298,19 +298,6 @@
 								{
 									"Ref": "s3BucketArtifacts"
 								},
-								"/goldennode-authserver-",
-								{
-									"Ref": "artifactVersion"
-								},
-								".war . --region ",
-								{
-									"Ref": "AWS::Region"
-								},
-								" \n",
-								"aws s3 cp  s3://",
-								{
-									"Ref": "s3BucketArtifacts"
-								},
 								"/goldennode.sql . --region ",
 								{
 									"Ref": "AWS::Region"
@@ -321,6 +308,11 @@
 									"Ref": "tomcatVersion"
 								},
 								".tar.gz \n",
+								"rm -rf apache-tomcat-",
+								{
+									"Ref": "tomcatVersion"
+								},
+								"/webapps/* \n",
 								"cp goldennode-cloud-",
 								{
 									"Ref": "artifactVersion"
@@ -329,16 +321,7 @@
 								{
 									"Ref": "tomcatVersion"
 								},
-								"/webapps/goldennode-cloud.war \n",
-								"cp goldennode-authserver-",
-								{
-									"Ref": "artifactVersion"
-								},
-								".war apache-tomcat-",
-								{
-									"Ref": "tomcatVersion"
-								},
-								"/webapps/goldennode-authserver.war \n",
+								"/webapps/ROOT.war \n",
 								"cat > apache-tomcat-",
 								{
 									"Ref": "tomcatVersion"
@@ -372,7 +355,6 @@
 									"Ref": "rdsDBName"
 								},
 								"\"/> \n",
-								"<Parameter name=\"iftttKey\" value=\"lSyudIoEYr_JNIaKS2ATwgw9yAUUEcVPKppRGSJP1ZJP1nWf-rWASEGU_9wh5uPE\"/> \n",
 								"</Context> \n",
 								"EOF\n",
 								"yum install java-",

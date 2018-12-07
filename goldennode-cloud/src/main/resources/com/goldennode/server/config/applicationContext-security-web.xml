@@ -8,16 +8,14 @@
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-
-
-
 	<!-- Configures the authentication manager bean which processes authentication 
 		requests. -->
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
 			ref="hmacAuthenticationProvider" />
 	</security:authentication-manager>
-
-
-
+	<bean id="myHttpFirewall"
+		class="org.springframework.security.web.firewall.DefaultHttpFirewall">
+	</bean>
+	<security:http-firewall ref="myHttpFirewall" />
 </beans>

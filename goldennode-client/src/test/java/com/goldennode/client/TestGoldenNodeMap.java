@@ -36,23 +36,27 @@ public class TestGoldenNodeMap {
     @Test
     public void test1() {
         Object response;
-        
         Map<String, TestBean> m0 = new GoldenNodeMap<>("map0");
         m0.clear();
         response = m0.isEmpty();
         Assert.assertEquals(true, response);
         TestBean tb1 = new TestBean("String1", 1);
         TestBean tb2 = new TestBean("String2", 2);
+        TestBean tb3 = new TestBean("~!@#$%^&*()_+{}:\"|<>?>[];'\\,./", 3);
         response = m0.put("key1", tb1);
         Assert.assertEquals(null, response);
         response = m0.put("key2", tb2);
+        Assert.assertEquals(null, response);
+        response = m0.put("key3", tb3);
         Assert.assertEquals(null, response);
         response = m0.get("key1");
         Assert.assertEquals(tb1, response);
         response = m0.get("key2");
         Assert.assertEquals(tb2, response);
+        response = m0.get("key3");
+        Assert.assertEquals(tb3, response);
         response = m0.size();
-        Assert.assertEquals(2, response);
+        Assert.assertEquals(3, response);
         response = m0.containsKey("key1");
         Assert.assertEquals(true, response);
         response = m0.containsKey("key4");
@@ -61,36 +65,39 @@ public class TestGoldenNodeMap {
         Collection<String> expectedKey = new HashSet<>();
         expectedKey.add("key1");
         expectedKey.add("key2");
+        expectedKey.add("key3");
         Assert.assertTrue(contentsSame(expectedKey, (Set) response));
         response = m0.values();
-        Assert.assertEquals(2, ((Collection) response).size());
+        Assert.assertEquals(3, ((Collection) response).size());
         Collection<TestBean> expectedValue = new HashSet<>();
         expectedValue = new ArrayList<>();
         expectedValue.add(tb1);
         expectedValue.add(tb2);
+        expectedValue.add(tb3);
         Assert.assertTrue(contentsSame(expectedValue, (List) response));
         response = m0.entrySet();
         Assert.assertEquals("key1", ((Set<Entry<String, String>>) response).iterator().next().getKey());
         Assert.assertEquals(tb1, ((Set<Entry<String, String>>) response).iterator().next().getValue());
-        Assert.assertEquals(2, ((Set) response).size());
+        Assert.assertEquals(3, ((Set) response).size());
         response = m0.containsValue(tb1);
+        Assert.assertEquals(true, response);
+        response = m0.containsValue(tb2);
         Assert.assertEquals(true, response);
         response = m0.containsValue(new TestBean("N/A", -1));
         Assert.assertEquals(false, response);
+        response = m0.containsValue(new TestBean("~!@#$%^&*()_+{}:\"|<>?>[];'\\,./", 3));
+        Assert.assertEquals(true, response);
         response = m0.isEmpty();
         Assert.assertEquals(false, response);
         response = m0.remove("key1");
         Assert.assertEquals(tb1, response);
         response = m0.remove("key2");
         Assert.assertEquals(tb2, response);
+        response = m0.remove("key3");
+        Assert.assertEquals(tb3, response);
         response = m0.isEmpty();
         Assert.assertEquals(true, response);
-        
-        
-        
-        
-        
-        Map<String, String> m = new GoldenNodeMap<>("map1");// new HashMap<String, String>();
+        Map<String, String> m = new GoldenNodeMap<>("map1");
         m.clear();
         response = m.isEmpty();
         Assert.assertEquals(true, response);
