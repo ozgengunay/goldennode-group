@@ -21,19 +21,19 @@ import com.goldennode.server.security.GoldenNodeUser;
 public class AccountUserDetailsService implements UserDetailsService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountUserDetailsService.class);
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
     @Autowired
     private AuthorityRepository authorityRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LOGGER.debug("Loading user by username: {}", username);
-        Users user = repository.findByEmail(username);
+        Users user = userRepository.findByEmail(username);
         LOGGER.debug("Found user: {}", user);
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + username);
         }
-        Set<Authorities> authorities = authorityRepository.findByUsername(user.getEmail());
+        Set<Authorities> authorities = authorityRepository.findByUserId(user.getId());
         Set<GrantedAuthority> rols = new HashSet<GrantedAuthority>();
         for (Authorities authority : authorities) {
             rols.add(new SimpleGrantedAuthority(authority.getAuthority()));

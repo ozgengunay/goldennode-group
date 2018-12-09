@@ -17,18 +17,21 @@ use goldennode;
 CREATE TABLE IF NOT EXISTS `authorities` (
   `id` varchar(50) NOT NULL,
   `authority` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL
+  `userid` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `enabled` int(11) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `username` varchar(255) NOT NULL
+  `username` varchar(255) DEFAULT NULL,
+  `publickey` varchar(255) DEFAULT NULL,
+  `privatekey` varchar(255) DEFAULT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -37,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 ALTER TABLE `authorities`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UK2uf74smucdwf9qal2n67m2343` (`username`,`authority`);
+  ADD UNIQUE KEY `UK_userid_authority` (`userid`,`authority`);
 
 -- --------------------------------------------------------
 --
@@ -45,7 +48,8 @@ ALTER TABLE `authorities`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`),
-  ADD UNIQUE KEY `UK_r43af9ap4edm43mmtq01oddj6` (`username`);
--- --------------------------------------------------------
+  ADD UNIQUE KEY `UK_email` (`email`),
+  ADD UNIQUE KEY `UK_username` (`username`),
+  ADD UNIQUE KEY `UK_publickey` (`publickey`);
+  -- --------------------------------------------------------
 

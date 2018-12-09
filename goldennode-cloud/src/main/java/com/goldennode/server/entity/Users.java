@@ -10,20 +10,24 @@ import com.goldennode.commons.util.UUID;
 @Table(name = "users")
 public class Users {
     @Id
-    @Column(name = "id", length = 50)
+    @Column(name = "id", length = 50, nullable = false, unique = true)
     private String id;
-    @Column(name = "email", length = 50, nullable = false, unique = true)
+    @Column(name = "email", length = 50, nullable = true, unique = true)
     private String email;
-    @Column(name = "first_name", length = 255, nullable = false)
+    @Column(name = "firstname", length = 255, nullable = true)
     private String firstName;
-    @Column(name = "last_name", length = 255, nullable = false)
+    @Column(name = "lastname", length = 255, nullable = true)
     private String lastName;
-    @Column(name = "username", length = 255, nullable = false, unique = true)
+    @Column(name = "username", length = 255, nullable = true, unique = true)
     private String username;
     @Column(name = "password", length = 255, nullable = true)
     private String password;
     @Column(name = "enabled", nullable = false)
     private int enabled;
+    @Column(name = "publickey", length = 255, nullable = true, unique = true)
+    private String publicKey;
+    @Column(name = "privatekey", length = 255, nullable = true)
+    private String privateKey;
 
     public Users() {
         super();
@@ -86,10 +90,26 @@ public class Users {
     }
 
     public enum Role {
-        ROLE_USER, ROLE_CLIENT
+        ROLE_PREMIUM_USER, ROLE_FREEMIUM_USER, ROLE_TEMP_USER
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
     }
 }
