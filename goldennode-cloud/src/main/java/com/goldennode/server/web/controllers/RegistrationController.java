@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.goldennode.server.entity.Authorities;
@@ -41,6 +42,7 @@ import com.goldennode.server.security.web.validation.DuplicateEmailException;
 @CrossOrigin(origins = "*")
 public class RegistrationController {
     @RequestMapping(value = { "/temp" }, method = { RequestMethod.POST })
+    @ResponseBody
     public ResponseEntity<Users> registerTemp(@PathVariable("mapId") String mapId, @RequestBody String data) throws IOException {
         Users registered = service.registerTempUser();
         return new ResponseEntity<Users>(registered, HttpStatus.OK);

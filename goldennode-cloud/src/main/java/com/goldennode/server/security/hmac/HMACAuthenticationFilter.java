@@ -28,7 +28,7 @@ public class HMACAuthenticationFilter extends AbstractAuthenticationProcessingFi
 
 		String authorizationHeader = getHeaderValue(request, "Authorization");
 		String signatureHeader = getHeaderValue(request, "Signature");
-		String publicKey;
+		String apiKey;
 		if (authorizationHeader.equals("")) {
 			throw new InsufficientAuthenticationException("Invalid Authorization Header");
 		}
@@ -38,8 +38,8 @@ public class HMACAuthenticationFilter extends AbstractAuthenticationProcessingFi
 		String[] values = authorizationHeader.split(",");
 		if (values.length < 2)
 			throw new InsufficientAuthenticationException("Invalid Authorization Header");
-		publicKey = values[0].split("=")[1];
-		AbstractAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(publicKey, new HMACCredentials(
+		apiKey = values[0].split("=")[1];
+		AbstractAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(apiKey, new HMACCredentials(
 				authorizationHeader + request.getRequestURI() + requestWrapper.getPayload()+ request.getMethod(), signatureHeader));
 
 		// Allow subclasses to set the "details" property

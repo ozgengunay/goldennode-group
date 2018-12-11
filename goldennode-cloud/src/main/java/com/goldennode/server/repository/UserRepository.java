@@ -10,7 +10,7 @@ public interface UserRepository extends JpaRepository<Users, String> {
     
     public Users findByUsername(String username);
 
-    public Users findByPublicKey(String publicKey);
+    public Users findByApiKey(String apiKey);
     
 
 }

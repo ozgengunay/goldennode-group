@@ -13,7 +13,7 @@
       <AppenderRef ref="file"/>
       <AppenderRef ref="STDOUT"/>
     </Logger>
-    <Root level="info">
+    <Root level="debug">
       <AppenderRef ref="file"/>
       <AppenderRef ref="STDOUT"/>
     </Root>

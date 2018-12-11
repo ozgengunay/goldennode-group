@@ -28,19 +28,19 @@ public class HMACUserDetailsService implements UserDetailsService {
     private AuthorityRepository authorityRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String publicKey) throws UsernameNotFoundException {
-        LOGGER.debug("Loading user by publicKey: {}", publicKey);
-        Users user = userRepository.findByPublicKey(publicKey);
+    public UserDetails loadUserByUsername(String apiKey) throws UsernameNotFoundException {
+        LOGGER.debug("Loading user by apiKey: {}", apiKey);
+        Users user = userRepository.findByApiKey(apiKey);
         LOGGER.debug("Found user: {}", user);
         if (user == null) {
-            throw new UsernameNotFoundException("No user found with publicKey: " + publicKey);
+            throw new UsernameNotFoundException("No user found with apiKey: " + apiKey);
         }
         Set<Authorities> authorities = authorityRepository.findByUserId(user.getId());
         Set<GrantedAuthority> rols = new HashSet<GrantedAuthority>();
         for (Authorities authority : authorities) {
             rols.add(new SimpleGrantedAuthority(authority.getAuthority()));
         }
-        GoldenNodeUser principal = new GoldenNodeUser(user.getPublicKey(), user.getPrivateKey(), rols);
+        GoldenNodeUser principal = new GoldenNodeUser(user.getApiKey(), user.getSecretKey(), rols);
         principal.setFirstName(user.getFirstName());
         principal.setId(user.getId());
         principal.setLastName(user.getLastName());

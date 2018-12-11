@@ -24,20 +24,20 @@ import org.springframework.web.client.RestTemplate;
 
 public class RestClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestClient.class);
-    private static String publicKey;
+    private static String apiKey;
     private static String secretKey;
     private static String SERVER_URL = "http://localhost:8080";
     static {
-        publicKey = System.getenv("GN_PK");
+        apiKey = System.getenv("GN_PK");
         secretKey = System.getenv("GN_SK");
-        if (publicKey == null) {
-            publicKey = System.getProperty("com.goldennode.client.publicKey");
+        if (apiKey == null) {
+            apiKey = System.getProperty("com.goldennode.client.apiKey");
         }
         if (secretKey == null) {
             secretKey = System.getProperty("com.goldennode.client.secretKey");
         }
-        if (publicKey == null) {
-            throw new RuntimeException("can't load publicKey");
+        if (apiKey == null) {
+            throw new RuntimeException("can't load apiKey");
         }
         if (secretKey == null) {
             throw new RuntimeException("can't load secretKey");
@@ -71,7 +71,7 @@ public class RestClient {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static RequestEntity signEntity(RequestEntity entity) {
-        String auth = "key=" + publicKey + ",timestamp=" + System.currentTimeMillis() / 1000L + ",nonce=" + UUID.getUUID();
+        String auth = "key=" + apiKey + ",timestamp=" + System.currentTimeMillis() / 1000L + ",nonce=" + UUID.getUUID();
         HttpHeaders headers = new HttpHeaders();
         MultiValueMap<String, String> map = entity.getHeaders();
         Iterator<Entry<String, List<String>>> iter = map.entrySet().iterator();

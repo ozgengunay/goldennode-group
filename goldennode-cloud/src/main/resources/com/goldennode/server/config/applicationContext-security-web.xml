@@ -8,37 +8,21 @@
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-	<bean id="myHttpFirewall"
-		class="org.springframework.security.web.firewall.DefaultHttpFirewall">
-	</bean>
-	<security:http-firewall ref="myHttpFirewall" />
-	<security:http auto-config="true" pattern="/**">
-		<!-- Enables Spring Security CSRF protection -->
-		<!-- <security:csrf /> -->
-		<!-- Configures the form login -->
-		<security:form-login login-page="/login"
-			login-processing-url="/login/authenticate"
-			authentication-failure-url="/login?error=bad_credentials"
-			username-parameter="username" password-parameter="password" />
-		<!-- Configures the logout function -->
-		<security:logout logout-url="/logout"
-			logout-success-url="/login" delete-cookies="JESSIONID" />
-		<!-- Anyone can access these urls -->
-		<!-- <security:intercept-url pattern="/auth/**"
-			access="permitAll" /> -->
-		<security:intercept-url pattern="/login"
-			access="permitAll" />
-		<security:intercept-url pattern="/register/**"
-			access="permitAll" />
-		<!-- The rest of our application is protected. -->
+	<security:http use-expressions="true">
+	<!-- <security:csrf disabled="true" /> -->
+		<security:intercept-url pattern="/login*"
+			access="isAnonymous()" />
 		<security:intercept-url pattern="/**"
-			access="hasAnyRole('ROLE_PREMIUM_USER','ROLE_FREEMIUM_USER')" />
+			access="isAuthenticated()" />
+		<security:form-login login-page='/login'
+			default-target-url="/index" authentication-failure-url="/login?error=bad_credentials" />
+		<security:logout logout-success-url="/login" />
 	</security:http>
 	<!-- Configures the authentication manager bean which processes authentication 
 		requests. -->
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider
-			ref="hmacAuthenticationProvider" />
+		<!-- <security:authentication-provider
+			ref="hmacAuthenticationProvider" /> -->
 		<security:authentication-provider
 			user-service-ref="accountUserDetailsService">
 			<security:password-encoder ref="passwordEncoder" />
@@ -49,9 +33,8 @@
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 		<constructor-arg index="0" value="10" />
 	</bean>
-	<!--This bean encrypts the authorization details of the connection. In 
-		our example, the authorization details are stored as plain text. DO NOT USE 
-		THIS IN PRODUCTION. 
-	<bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
+	<!--This bean encrypts the authorization details of the connection. In our 
+		example, the authorization details are stored as plain text. DO NOT USE THIS 
+		IN PRODUCTION. <bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" 
 		factory-method="noOpText" /> -->
 </beans>

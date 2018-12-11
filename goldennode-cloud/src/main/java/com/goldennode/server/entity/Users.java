@@ -18,16 +18,16 @@ public class Users {
     private String firstName;
     @Column(name = "lastname", length = 255, nullable = true)
     private String lastName;
-    @Column(name = "username", length = 255, nullable = true, unique = true)
+    @Column(name = "username", length = 50, nullable = true, unique = true)
     private String username;
     @Column(name = "password", length = 255, nullable = true)
     private String password;
     @Column(name = "enabled", nullable = false)
     private int enabled;
-    @Column(name = "publickey", length = 255, nullable = true, unique = true)
-    private String publicKey;
-    @Column(name = "privatekey", length = 255, nullable = true)
-    private String privateKey;
+    @Column(name = "apikey", length = 50, nullable = true, unique = true)
+    private String apiKey;
+    @Column(name = "secretkey", length = 50, nullable = true)
+    private String secretKey;
 
     public Users() {
         super();
@@ -97,19 +97,21 @@ public class Users {
         return id;
     }
 
-    public String getPublicKey() {
-        return publicKey;
+    public String getApiKey() {
+        return apiKey;
     }
 
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
-    public String getPrivateKey() {
-        return privateKey;
+    public String getSecretKey() {
+        return secretKey;
     }
 
-    public void setPrivateKey(String privateKey) {
-        this.privateKey = privateKey;
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
+
+   
 }

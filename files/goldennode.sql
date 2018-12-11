@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `publickey` varchar(255) DEFAULT NULL,
-  `privatekey` varchar(255) DEFAULT NULL
+  `username` varchar(50) DEFAULT NULL,
+  `apikey` varchar(50) DEFAULT NULL,
+  `secretkey` varchar(50) DEFAULT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -50,6 +50,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UK_email` (`email`),
   ADD UNIQUE KEY `UK_username` (`username`),
-  ADD UNIQUE KEY `UK_publickey` (`publickey`);
+  ADD UNIQUE KEY `UK_apikey` (`apikey`);
   -- --------------------------------------------------------
 

@@ -15,29 +15,42 @@ import java.util.UUID;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RestClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestClient.class);
-    private static String publicKey;
+    private static String apiKey;
     private static String secretKey;
-    private static String SERVER_URL = "http://localhost:8080";
+    private static String host;
+    private static String SERVER_URL = "https://goldennode.com";
     static {
-        publicKey = System.getenv("GN_PK");
+        apiKey = System.getenv("GN_PK");
         secretKey = System.getenv("GN_SK");
-        if (publicKey == null) {
-            publicKey = System.getProperty("com.goldennode.client.publicKey");
+        host = System.getenv("GN_HOST");
+        if (apiKey == null) {
+            apiKey = System.getProperty("com.goldennode.client.apiKey");
         }
         if (secretKey == null) {
             secretKey = System.getProperty("com.goldennode.client.secretKey");
         }
-        if (publicKey == null) {
-            throw new RuntimeException("can't load publicKey");
+        if (host == null) {
+            host = System.getProperty("com.goldennode.client.host");
+        }
+        if (apiKey == null) {
+            throw new RuntimeException("can't load apiKey");
         }
         if (secretKey == null) {
             throw new RuntimeException("can't load secretKey");
+        }
+        if (host == null) {
+            host = SERVER_URL;
         }
     }
 
@@ -46,12 +59,16 @@ public class RestClient {
     }
 
     public static Response call(String uri, String method, String body) throws GoldenNodeException {
+        System.setProperty("javax.net.ssl.trustStore", "/home/gunayo/.keystore");
+        System.setProperty("javax.net.ssl.trustStorePassword", "12345678");
         try {
-            URL url = new URL(SERVER_URL + uri);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            URL url = new URL(host + uri);
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             con.setRequestMethod(method);
             con.setRequestProperty("Accept", "application/json");
             con.setRequestProperty("Accept-Charset", "UTF-8");
+            SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            (con).setSSLSocketFactory(socketFactory);
             signRequest(con, body);
             if (body != null) {
                 con.setRequestProperty("Content-Type", "application/json");
@@ -80,7 +97,7 @@ public class RestClient {
     }
 
     public static void signRequest(HttpURLConnection con, String body) {
-        String auth = "key=" + publicKey + ",timestamp=" + System.currentTimeMillis() / 1000L + ",nonce=" + UUID.randomUUID().toString();
+        String auth = "key=" + apiKey + ",timestamp=" + System.currentTimeMillis() / 1000L + ",nonce=" + UUID.randomUUID().toString();
         String sigBase = auth + con.getURL().getPath() + (body == null ? "" : body) + con.getRequestMethod();
         con.addRequestProperty("Signature", generateHmacSHA256Signature(sigBase, secretKey));
         LOGGER.debug("Signature to be created from : " + sigBase);

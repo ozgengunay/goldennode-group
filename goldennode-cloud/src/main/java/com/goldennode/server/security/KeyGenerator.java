@@ -1,24 +1,27 @@
 package com.goldennode.server.security;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 public class KeyGenerator {
-    public static KeyPair generateKeyPair() {
-        try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            KeyPair keypair = keyPairGenerator.genKeyPair();
-            return keypair;
-        } catch (NoSuchAlgorithmException e) {
-            return null;
-        }
+    public static String generateApiKey() {
+        return createRandomString(16);
     }
-    
-    
-    public static void main(String arg[]) {
-        System.out.println("--"+KeyGenerator.generateKeyPair().getPublic().getEncoded()+"--");
-        System.out.println("--"+KeyGenerator.generateKeyPair().getPrivate().getEncoded()+"--");
+
+    public static String generateSecretKey() {
+        return createRandomString(32);
+    }
+
+    public static String createRandomString(int length) {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() < length) {
+            sb.append(Integer.toHexString(random.nextInt()));
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(generateApiKey());
+        System.out.println(generateSecretKey());
     }
 }

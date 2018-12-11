@@ -13,6 +13,7 @@ import com.goldennode.server.entity.Authorities;
 import com.goldennode.server.entity.Users;
 import com.goldennode.server.repository.AuthorityRepository;
 import com.goldennode.server.repository.UserRepository;
+import com.goldennode.server.security.KeyGenerator;
 import com.goldennode.server.security.web.RegistrationForm;
 import com.goldennode.server.security.web.validation.DuplicateEmailException;
 
@@ -41,9 +42,8 @@ public class UserService {
         registered.setLastName(userAccountData.getLastName());
         registered.setPassword(encodedPassword);
         registered.setUsername(userAccountData.getEmail());
-        KeyPair keypair = com.goldennode.server.security.KeyGenerator.generateKeyPair();
-        registered.setPublicKey(keypair.getPublic().toString());
-        registered.setPrivateKey(keypair.getPrivate().toString());
+        registered.setApiKey(KeyGenerator.generateApiKey());
+        registered.setSecretKey(KeyGenerator.generateSecretKey());
         registered.setEnabled(1);
         Authorities auth = Authorities.newEntity();
         auth.setUserId(registered.getId());
@@ -59,9 +59,8 @@ public class UserService {
         Users registered = Users.newEntity();
         registered.setFirstName("freemium");
         registered.setLastName("freemium");
-        KeyPair keypair = com.goldennode.server.security.KeyGenerator.generateKeyPair();
-        registered.setPublicKey(keypair.getPublic().toString());
-        registered.setPrivateKey(keypair.getPrivate().toString());
+        registered.setApiKey(KeyGenerator.generateApiKey());
+        registered.setSecretKey(KeyGenerator.generateSecretKey());
         registered.setEnabled(1);
         Authorities auth = Authorities.newEntity();
         auth.setUserId(registered.getId());
@@ -77,9 +76,8 @@ public class UserService {
         Users registered = Users.newEntity();
         registered.setFirstName("temp");
         registered.setLastName("temp");
-        KeyPair keypair = com.goldennode.server.security.KeyGenerator.generateKeyPair();
-        registered.setPublicKey(keypair.getPublic().toString());
-        registered.setPrivateKey(keypair.getPrivate().toString());
+        registered.setApiKey(KeyGenerator.generateApiKey());
+        registered.setSecretKey(KeyGenerator.generateSecretKey());
         registered.setEnabled(1);
         Authorities auth = Authorities.newEntity();
         auth.setUserId(registered.getId());
