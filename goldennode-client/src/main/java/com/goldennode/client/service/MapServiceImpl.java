@@ -147,7 +147,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         if (response.getStatusCode() == 200)
             return;
         else {
-            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
         }
     }
 

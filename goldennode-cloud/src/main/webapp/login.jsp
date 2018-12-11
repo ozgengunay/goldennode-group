@@ -19,6 +19,26 @@
 	<sec:authorize access="isAnonymous()">
 		<div class="panel panel-default">
 			<div class="panel-body">
+				<div class="row social-button-row">
+					<div class="col-lg-4">
+						<a
+							href="${pageContext.request.contextPath}/auth/facebook?scope=email"><button
+								class="btn btn-facebook">
+								<i class="icon-facebook"></i> |
+								<spring:message code="label.facebook.sign.in.button" />
+							</button></a>
+						<div style="text-align: left; color: red">
+							<c:if test="${not empty error}">
+								<spring:message code="NotExist.user.email" />
+							</c:if>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
 				<h2>
 					<spring:message code="label.login.form.title" />
 				</h2>

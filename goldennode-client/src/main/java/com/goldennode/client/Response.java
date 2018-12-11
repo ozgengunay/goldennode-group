@@ -2,8 +2,6 @@ package com.goldennode.client;
 
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.List;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

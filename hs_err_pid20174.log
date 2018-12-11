@@ -1,0 +1,1062 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 106954752 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2640), pid=20174, tid=0x00007f99a75f5700
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_161-b12) (build 1.8.0_161-b12)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.161-b12 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f99cc078800):  VMThread [stack: 0x00007f99a74f5000,0x00007f99a75f6000] [id=20198]
+
+Stack: [0x00007f99a74f5000,0x00007f99a75f6000],  sp=0x00007f99a75f4220,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xacf94a]  VMError::report_and_die()+0x2ba
+V  [libjvm.so+0x50050b]  report_vm_out_of_memory(char const*, int, unsigned long, VMErrorType, char const*)+0x8b
+V  [libjvm.so+0x92b133]  os::Linux::commit_memory_impl(char*, unsigned long, bool)+0x103
+V  [libjvm.so+0x92b5c9]  os::pd_commit_memory(char*, unsigned long, unsigned long, bool)+0x29
+V  [libjvm.so+0x924c0a]  os::commit_memory(char*, unsigned long, unsigned long, bool)+0x2a
+V  [libjvm.so+0x99ab53]  PSVirtualSpace::expand_by(unsigned long)+0x53
+V  [libjvm.so+0x99bf58]  PSYoungGen::resize_generation(unsigned long, unsigned long)+0xf8
+V  [libjvm.so+0x99b0b2]  PSYoungGen::resize(unsigned long, unsigned long)+0x22
+V  [libjvm.so+0x99838b]  PSScavenge::invoke_no_policy()+0xf3b
+V  [libjvm.so+0x998b11]  PSScavenge::invoke()+0x41
+V  [libjvm.so+0x94f5a0]  ParallelScavengeHeap::failed_mem_allocate(unsigned long)+0x70
+V  [libjvm.so+0xad13c7]  VM_ParallelGCFailedAllocation::doit()+0x97
+V  [libjvm.so+0xad8ed5]  VM_Operation::evaluate()+0x55
+V  [libjvm.so+0xad729a]  VMThread::evaluate_operation(VM_Operation*)+0xba
+V  [libjvm.so+0xad761e]  VMThread::loop()+0x1ce
+V  [libjvm.so+0xad7a90]  VMThread::run()+0x70
+V  [libjvm.so+0x92da28]  java_start(Thread*)+0x108
+
+VM_Operation (0x00007f99d4134fe0): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x00007f99cc00a800
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f99cd504000 JavaThread "process reaper" daemon [_thread_blocked, id=20220, stack(0x00007f99a46b5000,0x00007f99a46ee000)]
+  0x00007f99cc0db800 JavaThread "Service Thread" daemon [_thread_blocked, id=20205, stack(0x00007f99a642f000,0x00007f99a6530000)]
+  0x00007f99cc0be000 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=20204, stack(0x00007f99a6530000,0x00007f99a6631000)]
+  0x00007f99cc0bc800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=20203, stack(0x00007f99a6631000,0x00007f99a6732000)]
+  0x00007f99cc0b9800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=20202, stack(0x00007f99a6732000,0x00007f99a6833000)]
+  0x00007f99cc0b5800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=20201, stack(0x00007f99a6833000,0x00007f99a6934000)]
+  0x00007f99cc084800 JavaThread "Finalizer" daemon [_thread_blocked, id=20200, stack(0x00007f99a72f3000,0x00007f99a73f4000)]
+  0x00007f99cc080000 JavaThread "Reference Handler" daemon [_thread_blocked, id=20199, stack(0x00007f99a73f4000,0x00007f99a74f5000)]
+  0x00007f99cc00a800 JavaThread "main" [_thread_blocked, id=20193, stack(0x00007f99d4037000,0x00007f99d4138000)]
+
+Other Threads:
+=>0x00007f99cc078800 VMThread [stack: 0x00007f99a74f5000,0x00007f99a75f6000] [id=20198]
+  0x00007f99cc0e0800 WatcherThread [stack: 0x00007f99a632e000,0x00007f99a642f000] [id=20206]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f99cc006d50] Threads_lock - owner thread: 0x00007f99cc078800
+[0x00007f99cc007250] Heap_lock - owner thread: 0x00007f99cc00a800
+
+Heap:
+ PSYoungGen      total 369664K, used 3700K [0x00000000d6900000, 0x00000000eed80000, 0x0000000100000000)
+  eden space 341504K, 0% used [0x00000000d6900000,0x00000000d6900000,0x00000000eb680000)
+  from space 28160K, 13% used [0x00000000eb680000,0x00000000eba1d1c0,0x00000000ed200000)
+  to   space 26112K, 0% used [0x00000000ed400000,0x00000000ed400000,0x00000000eed80000)
+ ParOldGen       total 131072K, used 49764K [0x0000000083a00000, 0x000000008ba00000, 0x00000000d6900000)
+  object space 131072K, 37% used [0x0000000083a00000,0x0000000086a99080,0x000000008ba00000)
+ Metaspace       used 37308K, capacity 38572K, committed 38952K, reserved 1083392K
+  class space    used 4208K, capacity 4546K, committed 4648K, reserved 1048576K
+
+Card table byte_map: [0x00007f99d09e5000,0x00007f99d0dc9000] byte_map_base: 0x00007f99d05c8000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f99d3500920
+ Begin Bits: [0x00007f99ac1d0000, 0x00007f99ae0e8000)
+ End Bits:   [0x00007f99ae0e8000, 0x00007f99b0000000)
+
+Polling page: 0x00007f99d4153000
+
+CodeCache: size=245760Kb used=23546Kb max_used=23546Kb free=222213Kb
+ bounds [0x00007f99bd000000, 0x00007f99be720000, 0x00007f99cc000000]
+ total_blobs=7734 nmethods=7299 adapters=347
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 22.746 Thread 0x00007f99cc0be000 nmethod 8577 0x00007f99be713190 code [0x00007f99be713340, 0x00007f99be713658]
+Event: 22.746 Thread 0x00007f99cc0be000 8578       2       javax.tools.StandardLocation::isOutputLocation (40 bytes)
+Event: 22.746 Thread 0x00007f99cc0be000 nmethod 8578 0x00007f99be713890 code [0x00007f99be713a00, 0x00007f99be713bb0]
+Event: 22.746 Thread 0x00007f99cc0be000 8574       2       com.sun.tools.javac.jvm.Gen$GenFinalizer::<init> (10 bytes)
+Event: 22.746 Thread 0x00007f99cc0be000 nmethod 8574 0x00007f99be713c90 code [0x00007f99be713de0, 0x00007f99be713f50]
+Event: 22.747 Thread 0x00007f99cc0be000 8580       2       com.sun.tools.javac.comp.Check::checkClassBounds (14 bytes)
+Event: 22.747 Thread 0x00007f99cc0be000 nmethod 8580 0x00007f99be713fd0 code [0x00007f99be714140, 0x00007f99be714328]
+Event: 22.749 Thread 0x00007f99cc0be000 8581       3       com.sun.tools.javac.comp.Resolve$MostSpecificCheck::argumentsAcceptable (119 bytes)
+Event: 22.749 Thread 0x00007f99cc0be000 nmethod 8581 0x00007f99be714410 code [0x00007f99be714600, 0x00007f99be7150c8]
+Event: 22.750 Thread 0x00007f99cc0be000 8582       2       com.sun.tools.javac.comp.Flow$FlowAnalyzer::visitTry (1116 bytes)
+
+GC Heap History (10 events):
+Event: 8.826 GC heap after
+Heap after GC invocations=8 (full 1):
+ PSYoungGen      total 272384K, used 16375K [0x00000000d6900000, 0x00000000e9400000, 0x0000000100000000)
+  eden space 256000K, 0% used [0x00000000d6900000,0x00000000d6900000,0x00000000e6300000)
+  from space 16384K, 99% used [0x00000000e6300000,0x00000000e72fdd50,0x00000000e7300000)
+  to   space 18944K, 0% used [0x00000000e8180000,0x00000000e8180000,0x00000000e9400000)
+ ParOldGen       total 73216K, used 17015K [0x0000000083a00000, 0x0000000088180000, 0x00000000d6900000)
+  object space 73216K, 23% used [0x0000000083a00000,0x0000000084a9dc98,0x0000000088180000)
+ Metaspace       used 30244K, capacity 31284K, committed 31488K, reserved 1077248K
+  class space    used 3484K, capacity 3757K, committed 3840K, reserved 1048576K
+}
+Event: 9.773 GC heap before
+{Heap before GC invocations=9 (full 1):
+ PSYoungGen      total 272384K, used 272375K [0x00000000d6900000, 0x00000000e9400000, 0x0000000100000000)
+  eden space 256000K, 100% used [0x00000000d6900000,0x00000000e6300000,0x00000000e6300000)
+  from space 16384K, 99% used [0x00000000e6300000,0x00000000e72fdd50,0x00000000e7300000)
+  to   space 18944K, 0% used [0x00000000e8180000,0x00000000e8180000,0x00000000e9400000)
+ ParOldGen       total 73216K, used 17015K [0x0000000083a00000, 0x0000000088180000, 0x00000000d6900000)
+  object space 73216K, 23% used [0x0000000083a00000,0x0000000084a9dc98,0x0000000088180000)
+ Metaspace       used 30669K, capacity 31718K, committed 32000K, reserved 1077248K
+  class space    used 3493K, capacity 3791K, committed 3840K, reserved 1048576K
+Event: 9.842 GC heap after
+Heap after GC invocations=9 (full 1):
+ PSYoungGen      total 278016K, used 18928K [0x00000000d6900000, 0x00000000f2f80000, 0x0000000100000000)
+  eden space 259072K, 0% used [0x00000000d6900000,0x00000000d6900000,0x00000000e6600000)
+  from space 18944K, 99% used [0x00000000e8180000,0x00000000e93fc250,0x00000000e9400000)
+  to   space 28160K, 0% used [0x00000000e6600000,0x00000000e6600000,0x00000000e8180000)
+ ParOldGen       total 73216K, used 31772K [0x0000000083a00000, 0x0000000088180000, 0x00000000d6900000)
+  object space 73216K, 43% used [0x0000000083a00000,0x0000000085907340,0x0000000088180000)
+ Metaspace       used 30669K, capacity 31718K, committed 32000K, reserved 1077248K
+  class space    used 3493K, capacity 3791K, committed 3840K, reserved 1048576K
+}
+Event: 12.445 GC heap before
+{Heap before GC invocations=10 (full 1):
+ PSYoungGen      total 278016K, used 69550K [0x00000000d6900000, 0x00000000f2f80000, 0x0000000100000000)
+  eden space 259072K, 19% used [0x00000000d6900000,0x00000000d9a6f690,0x00000000e6600000)
+  from space 18944K, 99% used [0x00000000e8180000,0x00000000e93fc250,0x00000000e9400000)
+  to   space 28160K, 0% used [0x00000000e6600000,0x00000000e6600000,0x00000000e8180000)
+ ParOldGen       total 73216K, used 31772K [0x0000000083a00000, 0x0000000088180000, 0x00000000d6900000)
+  object space 73216K, 43% used [0x0000000083a00000,0x0000000085907340,0x0000000088180000)
+ Metaspace       used 34108K, capacity 35320K, committed 35496K, reserved 1081344K
+  class space    used 3918K, capacity 4248K, committed 4264K, reserved 1048576K
+Event: 12.465 GC heap after
+Heap after GC invocations=10 (full 1):
+ PSYoungGen      total 287232K, used 16626K [0x00000000d6900000, 0x00000000eef00000, 0x0000000100000000)
+  eden space 259072K, 0% used [0x00000000d6900000,0x00000000d6900000,0x00000000e6600000)
+  from space 28160K, 59% used [0x00000000e6600000,0x00000000e763ca88,0x00000000e8180000)
+  to   space 27648K, 0% used [0x00000000ed400000,0x00000000ed400000,0x00000000eef00000)
+ ParOldGen       total 73216K, used 38917K [0x0000000083a00000, 0x0000000088180000, 0x00000000d6900000)
+  object space 73216K, 53% used [0x0000000083a00000,0x0000000086001798,0x0000000088180000)
+ Metaspace       used 34108K, capacity 35320K, committed 35496K, reserved 1081344K
+  class space    used 3918K, capacity 4248K, committed 4264K, reserved 1048576K
+}
+Event: 12.465 GC heap before
+{Heap before GC invocations=11 (full 2):
+ PSYoungGen      total 287232K, used 16626K [0x00000000d6900000, 0x00000000eef00000, 0x0000000100000000)
+  eden space 259072K, 0% used [0x00000000d6900000,0x00000000d6900000,0x00000000e6600000)
+  from space 28160K, 59% used [0x00000000e6600000,0x00000000e763ca88,0x00000000e8180000)
+  to   space 27648K, 0% used [0x00000000ed400000,0x00000000ed400000,0x00000000eef00000)
+ ParOldGen       total 73216K, used 38917K [0x0000000083a00000, 0x0000000088180000, 0x00000000d6900000)
+  object space 73216K, 53% used [0x0000000083a00000,0x0000000086001798,0x0000000088180000)
+ Metaspace       used 34108K, capacity 35320K, committed 35496K, reserved 1081344K
+  class space    used 3918K, capacity 4248K, committed 4264K, reserved 1048576K
+Event: 12.569 GC heap after
+Heap after GC invocations=11 (full 2):
+ PSYoungGen      total 287232K, used 0K [0x00000000d6900000, 0x00000000eef00000, 0x0000000100000000)
+  eden space 259072K, 0% used [0x00000000d6900000,0x00000000d6900000,0x00000000e6600000)
+  from space 28160K, 0% used [0x00000000e6600000,0x00000000e6600000,0x00000000e8180000)
+  to   space 27648K, 0% used [0x00000000ed400000,0x00000000ed400000,0x00000000eef00000)
+ ParOldGen       total 131072K, used 47392K [0x0000000083a00000, 0x000000008ba00000, 0x00000000d6900000)
+  object space 131072K, 36% used [0x0000000083a00000,0x0000000086848260,0x000000008ba00000)
+ Metaspace       used 34060K, capacity 35260K, committed 35496K, reserved 1081344K
+  class space    used 3914K, capacity 4240K, committed 4264K, reserved 1048576K
+}
+Event: 21.919 GC heap before
+{Heap before GC invocations=12 (full 2):
+ PSYoungGen      total 287232K, used 259072K [0x00000000d6900000, 0x00000000eef00000, 0x0000000100000000)
+  eden space 259072K, 100% used [0x00000000d6900000,0x00000000e6600000,0x00000000e6600000)
+  from space 28160K, 0% used [0x00000000e6600000,0x00000000e6600000,0x00000000e8180000)
+  to   space 27648K, 0% used [0x00000000ed400000,0x00000000ed400000,0x00000000eef00000)
+ ParOldGen       total 131072K, used 47392K [0x0000000083a00000, 0x000000008ba00000, 0x00000000d6900000)
+  object space 131072K, 36% used [0x0000000083a00000,0x0000000086848260,0x000000008ba00000)
+ Metaspace       used 36817K, capacity 38106K, committed 38440K, reserved 1083392K
+  class space    used 4193K, capacity 4544K, committed 4648K, reserved 1048576K
+Event: 21.928 GC heap after
+Heap after GC invocations=12 (full 2):
+ PSYoungGen      total 367616K, used 5047K [0x00000000d6900000, 0x00000000eed80000, 0x0000000100000000)
+  eden space 341504K, 0% used [0x00000000d6900000,0x00000000d6900000,0x00000000eb680000)
+  from space 26112K, 19% used [0x00000000ed400000,0x00000000ed8edc10,0x00000000eed80000)
+  to   space 28160K, 0% used [0x00000000eb680000,0x00000000eb680000,0x00000000ed200000)
+ ParOldGen       total 131072K, used 47464K [0x0000000083a00000, 0x000000008ba00000, 0x00000000d6900000)
+  object space 131072K, 36% used [0x0000000083a00000,0x000000008685a270,0x000000008ba00000)
+ Metaspace       used 36817K, capacity 38106K, committed 38440K, reserved 1083392K
+  class space    used 4193K, capacity 4544K, committed 4648K, reserved 1048576K
+}
+Event: 22.755 GC heap before
+{Heap before GC invocations=13 (full 2):
+ PSYoungGen      total 367616K, used 346551K [0x00000000d6900000, 0x00000000eed80000, 0x0000000100000000)
+  eden space 341504K, 100% used [0x00000000d6900000,0x00000000eb680000,0x00000000eb680000)
+  from space 26112K, 19% used [0x00000000ed400000,0x00000000ed8edc10,0x00000000eed80000)
+  to   space 28160K, 0% used [0x00000000eb680000,0x00000000eb680000,0x00000000ed200000)
+ ParOldGen       total 131072K, used 47464K [0x0000000083a00000, 0x000000008ba00000, 0x00000000d6900000)
+  object space 131072K, 36% used [0x0000000083a00000,0x000000008685a270,0x000000008ba00000)
+ Metaspace       used 37308K, capacity 38572K, committed 38952K, reserved 1083392K
+  class space    used 4208K, capacity 4546K, committed 4648K, reserved 1048576K
+
+Deoptimization events (10 events):
+Event: 22.061 Thread 0x00007f99cc00a800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f99bdfce438 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 253
+Event: 22.061 Thread 0x00007f99cc00a800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f99bdfce438 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 253
+Event: 22.209 Thread 0x00007f99cc00a800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f99bde1cff4 method=com.sun.tools.javac.code.Type.containsAny(Lcom/sun/tools/javac/util/List;)Z @ 20
+Event: 22.209 Thread 0x00007f99cc00a800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f99bde1cff4 method=com.sun.tools.javac.code.Type.containsAny(Lcom/sun/tools/javac/util/List;)Z @ 20
+Event: 22.209 Thread 0x00007f99cc00a800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f99bde1cff4 method=com.sun.tools.javac.code.Type.containsAny(Lcom/sun/tools/javac/util/List;)Z @ 20
+Event: 22.212 Thread 0x00007f99cc00a800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f99bde1cff4 method=com.sun.tools.javac.code.Type.containsAny(Lcom/sun/tools/javac/util/List;)Z @ 20
+Event: 22.658 Thread 0x00007f99cc00a800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f99bdc7d018 method=java.lang.Integer.equals(Ljava/lang/Object;)Z @ 1
+Event: 22.658 Thread 0x00007f99cc00a800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f99bdc7d018 method=java.lang.Integer.equals(Ljava/lang/Object;)Z @ 1
+Event: 22.684 Thread 0x00007f99cc00a800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f99bdc7d018 method=java.lang.Integer.equals(Ljava/lang/Object;)Z @ 1
+Event: 22.684 Thread 0x00007f99cc00a800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f99bdc7d018 method=java.lang.Integer.equals(Ljava/lang/Object;)Z @ 1
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 11.860 Thread 0x00007f99cc00a800 Exception <a 'sun/nio/fs/UnixException'> (0x00000000d90f41e0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 11.863 Thread 0x00007f99cc00a800 Exception <a 'sun/nio/fs/UnixException'> (0x00000000d90f8bc0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 11.868 Thread 0x00007f99cc00a800 Exception <a 'sun/nio/fs/UnixException'> (0x00000000d90fda68) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 11.872 Thread 0x00007f99cc00a800 Exception <a 'sun/nio/fs/UnixException'> (0x00000000d9102710) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 16.219 Thread 0x00007f99cc00a800 Implicit null exception at 0x00007f99bd6e4088 to 0x00007f99bd6e4437
+Event: 19.545 Thread 0x00007f99cc00a800 Exception <a 'java/lang/NoSuchMethodError': org.apache.maven.execution.MavenExecutionRequest.getFailureBehavior()Ljava/lang/String;> (0x00000000e37acd38) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/interpreter/li
+Event: 22.007 Thread 0x00007f99cc00a800 Exception <a 'java/io/FileNotFoundException'> (0x00000000dd8bb8a8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 22.007 Thread 0x00007f99cc00a800 Exception <a 'java/io/FileNotFoundException'> (0x00000000dd8bccc8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 22.414 Thread 0x00007f99cc00a800 Exception <a 'java/io/FileNotFoundException'> (0x00000000e83942a8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 22.414 Thread 0x00007f99cc00a800 Exception <a 'java/io/FileNotFoundException'> (0x00000000e83956c8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u161/10277/hotspot/src/share/vm/prims/jni.cpp, line 709]
+
+Events (10 events):
+Event: 22.666 Thread 0x00007f99cc00a800 DEOPT UNPACKING pc=0x00007f99bd047784 sp=0x00007f99d4131a18 mode 0
+Event: 22.684 Thread 0x00007f99cc00a800 Uncommon trap: trap_request=0xffffffde fr.pc=0x00007f99bdc7d018
+Event: 22.684 Thread 0x00007f99cc00a800 DEOPT PACKING pc=0x00007f99bdc7d018 sp=0x00007f99d4134bb0
+Event: 22.684 Thread 0x00007f99cc00a800 DEOPT UNPACKING pc=0x00007f99bd04573a sp=0x00007f99d4134b68 mode 2
+Event: 22.684 Thread 0x00007f99cc00a800 Uncommon trap: trap_request=0xffffffde fr.pc=0x00007f99bdc7d018
+Event: 22.684 Thread 0x00007f99cc00a800 DEOPT PACKING pc=0x00007f99bdc7d018 sp=0x00007f99d4134b80
+Event: 22.684 Thread 0x00007f99cc00a800 DEOPT UNPACKING pc=0x00007f99bd04573a sp=0x00007f99d4134b38 mode 2
+Event: 22.749 Thread 0x00007f99cc00a800 DEOPT PACKING pc=0x00007f99bdfe3b94 sp=0x00007f99d4132e70
+Event: 22.749 Thread 0x00007f99cc00a800 DEOPT UNPACKING pc=0x00007f99bd047784 sp=0x00007f99d4132b68 mode 0
+Event: 22.755 Executing VM operation: ParallelGCFailedAllocation
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:01 1319778                            /usr/lib/jvm/java-8-oracle/bin/java
+00600000-00601000 rw-p 00000000 08:01 1319778                            /usr/lib/jvm/java-8-oracle/bin/java
+00e5b000-00e7c000 rw-p 00000000 00:00 0                                  [heap]
+83a00000-8ba00000 rw-p 00000000 00:00 0 
+8ba00000-d6900000 ---p 00000000 00:00 0 
+d6900000-eed80000 rw-p 00000000 00:00 0 
+f5380000-100000000 ---p 00000000 00:00 0 
+100000000-10048a000 rw-p 00000000 00:00 0 
+10048a000-140000000 ---p 00000000 00:00 0 
+7f9968000000-7f9968043000 rw-p 00000000 00:00 0 
+7f9968043000-7f996c000000 ---p 00000000 00:00 0 
+7f996c000000-7f996c049000 rw-p 00000000 00:00 0 
+7f996c049000-7f9970000000 ---p 00000000 00:00 0 
+7f9970000000-7f9970043000 rw-p 00000000 00:00 0 
+7f9970043000-7f9974000000 ---p 00000000 00:00 0 
+7f9974000000-7f9974043000 rw-p 00000000 00:00 0 
+7f9974043000-7f9978000000 ---p 00000000 00:00 0 
+7f9978000000-7f9978021000 rw-p 00000000 00:00 0 
+7f9978021000-7f997c000000 ---p 00000000 00:00 0 
+7f997c36f000-7f997c4ef000 rw-p 00000000 00:00 0 
+7f997c4ef000-7f997c56f000 ---p 00000000 00:00 0 
+7f997c56f000-7f997c571000 r--s 00002000 08:01 267608                     /home/gunayo/.m2/repository/org/apache/ant/ant-launcher/1.8.1/ant-launcher-1.8.1.jar
+7f997c571000-7f997c588000 r--s 0015b000 08:01 267606                     /home/gunayo/.m2/repository/org/apache/ant/ant/1.8.1/ant-1.8.1.jar
+7f997c588000-7f997c58f000 r--s 0005d000 08:01 267604                     /home/gunayo/.m2/repository/org/apache/ant/ant-nodeps/1.8.1/ant-nodeps-1.8.1.jar
+7f997c58f000-7f997c591000 r--s 00007000 08:01 699284                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.1/plexus-interpolation-1.1.jar
+7f997c591000-7f997c593000 r--s 00006000 08:01 224603                     /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-antrun-plugin/1.6/maven-antrun-plugin-1.6.jar
+7f997c593000-7f997c596000 ---p 00000000 00:00 0 
+7f997c596000-7f997c694000 rw-p 00000000 00:00 0 
+7f997c694000-7f997c697000 ---p 00000000 00:00 0 
+7f997c697000-7f997c795000 rw-p 00000000 00:00 0 
+7f997c795000-7f997c798000 r--s 00015000 08:01 220318                     /home/gunayo/.m2/repository/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar
+7f997c798000-7f997c7a2000 r--s 0005c000 08:01 156633                     /home/gunayo/.m2/repository/javax/servlet/jstl/1.2/jstl-1.2.jar
+7f997c7a2000-7f997c7a5000 r--s 0001d000 08:01 219725                     /home/gunayo/.m2/repository/org/apache/commons/commons-pool2/2.6.0/commons-pool2-2.6.0.jar
+7f997c7a5000-7f997c7a9000 r--s 0002d000 08:01 219723                     /home/gunayo/.m2/repository/org/apache/commons/commons-dbcp2/2.5.0/commons-dbcp2-2.5.0.jar
+7f997c7a9000-7f997c7b6000 r--s 00083000 08:01 156436                     /home/gunayo/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar
+7f997c7b6000-7f997c7ba000 r--s 00020000 08:01 156432                     /home/gunayo/.m2/repository/commons-digester/commons-digester/1.8.1/commons-digester-1.8.1.jar
+7f997c7ba000-7f997c7bf000 r--s 00035000 08:01 156430                     /home/gunayo/.m2/repository/commons-beanutils/commons-beanutils/1.9.2/commons-beanutils-1.9.2.jar
+7f997c7bf000-7f997c7c3000 r--s 0002a000 08:01 175598                     /home/gunayo/.m2/repository/commons-validator/commons-validator/1.6/commons-validator-1.6.jar
+7f997c7c3000-7f997c7c4000 r--s 00000000 08:01 220316                     /home/gunayo/.m2/repository/org/hibernate/hibernate-entitymanager/5.3.7.Final/hibernate-entitymanager-5.3.7.Final.jar
+7f997c7c4000-7f997c7c7000 r--s 00010000 08:01 220314                     /home/gunayo/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.0.4.Final/hibernate-commons-annotations-5.0.4.Final.jar
+7f997c7c7000-7f997c7cc000 r--s 0004b000 08:01 6476                       /home/gunayo/.m2/repository/org/dom4j/dom4j/2.1.1/dom4j-2.1.1.jar
+7f997c7cc000-7f997c7ce000 r--s 0000c000 08:01 220312                     /home/gunayo/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar
+7f997c7ce000-7f997c7d1000 r--s 0002b000 08:01 220310                     /home/gunayo/.m2/repository/org/jboss/jandex/2.0.5.Final/jandex-2.0.5.Final.jar
+7f997c7d1000-7f997c7d3000 r--s 00005000 08:01 220308                     /home/gunayo/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.1.1.Final/jboss-transaction-api_1.2_spec-1.1.1.Final.jar
+7f997c7d3000-7f997c7d8000 r--s 00068000 08:01 282482                     /home/gunayo/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar
+7f997c7d8000-7f997c818000 r--s 0029d000 08:01 220306                     /home/gunayo/.m2/repository/net/bytebuddy/byte-buddy/1.8.17/byte-buddy-1.8.17.jar
+7f997c818000-7f997c823000 r--s 000b2000 08:01 220304                     /home/gunayo/.m2/repository/org/javassist/javassist/3.23.1-GA/javassist-3.23.1-GA.jar
+7f997c823000-7f997c829000 r--s 00023000 08:01 220302                     /home/gunayo/.m2/repository/javax/persistence/javax.persistence-api/2.2/javax.persistence-api-2.2.jar
+7f997c829000-7f997c8ac000 r--s 00624000 08:01 220300                     /home/gunayo/.m2/repository/org/hibernate/hibernate-core/5.3.7.Final/hibernate-core-5.3.7.Final.jar
+7f997c8ac000-7f997c8ae000 r--s 0000e000 08:01 831651                     /home/gunayo/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar
+7f997c8ae000-7f997c8b0000 r--s 0000f000 08:01 436972                     /home/gunayo/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar
+7f997c8b0000-7f997c8cd000 r--s 000fe000 08:01 220298                     /home/gunayo/.m2/repository/org/hibernate/validator/hibernate-validator/6.0.13.Final/hibernate-validator-6.0.13.Final.jar
+7f997c8cd000-7f997c8d1000 r--s 00035000 08:01 156115                     /home/gunayo/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar
+7f997c8d1000-7f997c8df000 r--s 000b1000 08:01 156121                     /home/gunayo/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar
+7f997c8df000-7f997c8e6000 r--s 0003a000 08:01 155058                     /home/gunayo/.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar
+7f997c8e6000-7f997c8f3000 r--s 00068000 08:01 175578                     /home/gunayo/.m2/repository/org/springframework/security/oauth/spring-security-oauth2/2.1.0.RELEASE/spring-security-oauth2-2.1.0.RELEASE.jar
+7f997c8f3000-7f997c8f7000 r--s 00019000 08:01 175318                     /home/gunayo/.m2/repository/org/aspectj/aspectjrt/1.8.10/aspectjrt-1.8.10.jar
+7f997c8f7000-7f997c909000 r--s 000a9000 08:01 318043                     /home/gunayo/.m2/repository/org/springframework/data/spring-data-commons/1.13.3.RELEASE/spring-data-commons-1.13.3.RELEASE.jar
+7f997c909000-7f997c910000 r--s 00040000 08:01 318041                     /home/gunayo/.m2/repository/org/springframework/data/spring-data-jpa/1.11.3.RELEASE/spring-data-jpa-1.11.3.RELEASE.jar
+7f997c910000-7f997c91a000 r--s 0004b000 08:01 319383                     /home/gunayo/.m2/repository/org/springframework/security/spring-security-web/3.2.10.RELEASE/spring-security-web-3.2.10.RELEASE.jar
+7f997c91a000-7f997c91d000 r--s 00012000 08:01 175562                     /home/gunayo/.m2/repository/org/springframework/security/spring-security-acl/3.2.10.RELEASE/spring-security-acl-3.2.10.RELEASE.jar
+7f997c91d000-7f997c91e000 r--s 00005000 08:01 175560                     /home/gunayo/.m2/repository/org/springframework/security/spring-security-taglibs/3.2.10.RELEASE/spring-security-taglibs-3.2.10.RELEASE.jar
+7f997c91e000-7f997c925000 r--s 0005c000 08:01 319381                     /home/gunayo/.m2/repository/org/springframework/security/spring-security-config/3.2.10.RELEASE/spring-security-config-3.2.10.RELEASE.jar
+7f997c925000-7f997c927000 r--s 00000000 08:01 156088                     /home/gunayo/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+7f997c927000-7f997c933000 r--s 0004f000 08:01 318036                     /home/gunayo/.m2/repository/org/springframework/security/spring-security-core/3.2.10.RELEASE/spring-security-core-3.2.10.RELEASE.jar
+7f997c933000-7f997c93c000 r--s 00067000 08:01 319379                     /home/gunayo/.m2/repository/org/springframework/spring-websocket/4.3.8.RELEASE/spring-websocket-4.3.8.RELEASE.jar
+7f997c93c000-7f997c94d000 r--s 000cf000 08:01 175558                     /home/gunayo/.m2/repository/org/springframework/spring-webmvc/4.3.8.RELEASE/spring-webmvc-4.3.8.RELEASE.jar
+7f997c94d000-7f997c95e000 r--s 000b7000 08:01 175556                     /home/gunayo/.m2/repository/org/springframework/spring-web/4.3.8.RELEASE/spring-web-4.3.8.RELEASE.jar
+7f997c95e000-7f997c966000 r--s 0003a000 08:01 175316                     /home/gunayo/.m2/repository/org/springframework/spring-tx/4.3.8.RELEASE/spring-tx-4.3.8.RELEASE.jar
+7f997c966000-7f997c970000 r--s 0006b000 08:01 175312                     /home/gunayo/.m2/repository/org/springframework/spring-orm/4.3.8.RELEASE/spring-orm-4.3.8.RELEASE.jar
+7f997c970000-7f997c97a000 r--s 0005f000 08:01 175314                     /home/gunayo/.m2/repository/org/springframework/spring-jdbc/4.3.8.RELEASE/spring-jdbc-4.3.8.RELEASE.jar
+7f997c97a000-7f997c97f000 r--s 0003c000 08:01 175554                     /home/gunayo/.m2/repository/org/springframework/spring-expression/4.3.8.RELEASE/spring-expression-4.3.8.RELEASE.jar
+7f997c97f000-7f997c999000 r--s 000fd000 08:01 175304                     /home/gunayo/.m2/repository/org/springframework/spring-context/4.3.8.RELEASE/spring-context-4.3.8.RELEASE.jar
+7f997c999000-7f997c99e000 r--s 00029000 08:01 319377                     /home/gunayo/.m2/repository/org/springframework/spring-context-support/4.3.8.RELEASE/spring-context-support-4.3.8.RELEASE.jar
+7f997c99e000-7f997c9a0000 r--s 0000e000 08:01 699281                     /home/gunayo/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar
+7f997c9a0000-7f997c9b6000 r--s 000fc000 08:01 175306                     /home/gunayo/.m2/repository/org/springframework/spring-core/4.3.8.RELEASE/spring-core-4.3.8.RELEASE.jar
+7f997c9b6000-7f997c9c4000 r--s 000ad000 08:01 175302                     /home/gunayo/.m2/repository/org/springframework/spring-beans/4.3.8.RELEASE/spring-beans-4.3.8.RELEASE.jar
+7f997c9c4000-7f997c9cd000 r--s 00054000 08:01 175300                     /home/gunayo/.m2/repository/org/springframework/spring-aop/4.3.8.RELEASE/spring-aop-4.3.8.RELEASE.jar
+7f997c9cd000-7f997c9da000 r--s 00075000 08:01 282324                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-swf-libraries/1.11.22/aws-java-sdk-swf-libraries-1.11.22.jar
+7f997c9da000-7f997c9e2000 r--s 01623000 08:01 306484                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-models/1.11.452/aws-java-sdk-models-1.11.452.jar
+7f997c9e2000-7f997c9f2000 r--s 00088000 08:01 156738                     /home/gunayo/.m2/repository/joda-time/joda-time/2.8.1/joda-time-2.8.1.jar
+7f997c9f2000-7f997c9f3000 r--s 0000b000 08:01 840555                     /home/gunayo/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.jar
+7f997c9f3000-7f997c9fd000 r--s 00081000 08:01 282307                     /home/gunayo/.m2/repository/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.jar
+7f997c9fd000-7f997ca04000 r--s 00049000 08:01 219721                     /home/gunayo/.m2/repository/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9.jar
+7f997ca04000-7f997ca12000 r--s 000ae000 08:01 219719                     /home/gunayo/.m2/repository/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5.jar
+7f997ca12000-7f997ca28000 r--s 000cd000 08:01 1056011                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-core/1.11.452/aws-java-sdk-core-1.11.452.jar
+7f997ca28000-7f997ca34000 r--s 00086000 08:01 306480                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-workdocs/1.11.452/aws-java-sdk-workdocs-1.11.452.jar
+7f997ca34000-7f997ca41000 r--s 0007a000 08:01 306476                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-organizations/1.11.452/aws-java-sdk-organizations-1.11.452.jar
+7f997ca41000-7f997ca4b000 r--s 00075000 08:01 306472                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-mechanicalturkrequester/1.11.452/aws-java-sdk-mechanicalturkrequester-1.11.452.jar
+7f997ca4b000-7f997ca4d000 r--s 0000e000 08:01 306468                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-lex/1.11.452/aws-java-sdk-lex-1.11.452.jar
+7f997ca4d000-7f997ca54000 r--s 0004c000 08:01 306464                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-batch/1.11.452/aws-java-sdk-batch-1.11.452.jar
+7f997ca54000-7f997ca5a000 r--s 00039000 08:01 306460                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-shield/1.11.452/aws-java-sdk-shield-1.11.452.jar
+7f997ca5a000-7f997ca67000 r--s 00090000 08:01 306456                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-appstream/1.11.452/aws-java-sdk-appstream-1.11.452.jar
+7f997ca67000-7f997ca6e000 r--s 0004f000 08:01 306452                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-codebuild/1.11.452/aws-java-sdk-codebuild-1.11.452.jar
+7f997ca6e000-7f997ca70000 r--s 0000d000 08:01 306448                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-costandusagereport/1.11.452/aws-java-sdk-costandusagereport-1.11.452.jar
+7f997ca70000-7f997ca74000 r--s 00022000 08:01 306444                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-health/1.11.452/aws-java-sdk-health-1.11.452.jar
+7f997ca74000-7f997ca81000 r--s 0006a000 08:01 306440                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-stepfunctions/1.11.452/aws-java-sdk-stepfunctions-1.11.452.jar
+7f997ca81000-7f997ca99000 r--s 0011b000 08:01 306436                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-lightsail/1.11.452/aws-java-sdk-lightsail-1.11.452.jar
+7f997ca99000-7f997ca9d000 r--s 00024000 08:01 306432                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-polly/1.11.452/aws-java-sdk-polly-1.11.452.jar
+7f997ca9d000-7f997caaa000 r--s 00092000 08:01 306428                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-rekognition/1.11.452/aws-java-sdk-rekognition-1.11.452.jar
+7f997caaa000-7f997cab1000 r--s 00042000 08:01 306424                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-snowball/1.11.452/aws-java-sdk-snowball-1.11.452.jar
+7f997cab1000-7f997cab6000 r--s 0002f000 08:01 306420                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-applicationautoscaling/1.11.452/aws-java-sdk-applicationautoscaling-1.11.452.jar
+7f997cab6000-7f997cabe000 r--s 0004a000 08:01 306416                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-discovery/1.11.452/aws-java-sdk-discovery-1.11.452.jar
+7f997cabe000-7f997cad9000 r--s 0012d000 08:01 306412                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cognitoidp/1.11.452/aws-java-sdk-cognitoidp-1.11.452.jar
+7f997cad9000-7f997cadc000 r--s 0000d000 08:01 306408                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-marketplacemeteringservice/1.11.452/aws-java-sdk-marketplacemeteringservice-1.11.452.jar
+7f997cadc000-7f997caed000 r--s 000ad000 08:01 306404                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-dms/1.11.452/aws-java-sdk-dms-1.11.452.jar
+7f997caed000-7f997caff000 r--s 000da000 08:01 290771                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-gamelift/1.11.452/aws-java-sdk-gamelift-1.11.452.jar
+7f997caff000-7f997cb04000 r--s 00032000 08:01 290767                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-acm/1.11.452/aws-java-sdk-acm-1.11.452.jar
+7f997cb04000-7f997cb20000 r--s 00160000 08:01 290763                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-api-gateway/1.11.452/aws-java-sdk-api-gateway-1.11.452.jar
+7f997cb20000-7f997cb48000 r--s 001e3000 08:01 290759                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-iot/1.11.452/aws-java-sdk-iot-1.11.452.jar
+7f997cb48000-7f997cb54000 r--s 0008a000 08:01 290755                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-inspector/1.11.452/aws-java-sdk-inspector-1.11.452.jar
+7f997cb54000-7f997cb56000 r--s 00009000 08:01 290751                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-marketplacecommerceanalytics/1.11.452/aws-java-sdk-marketplacecommerceanalytics-1.11.452.jar
+7f997cb56000-7f997cb78000 r--s 0017d000 08:01 290747                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-waf/1.11.452/aws-java-sdk-waf-1.11.452.jar
+7f997cb78000-7f997cb82000 r--s 0006a000 08:01 290743                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-elasticsearch/1.11.452/aws-java-sdk-elasticsearch-1.11.452.jar
+7f997cb82000-7f997cb93000 r--s 000cf000 08:01 290739                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-devicefarm/1.11.452/aws-java-sdk-devicefarm-1.11.452.jar
+7f997cb93000-7f997cba2000 r--s 0008b000 08:01 290735                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-codecommit/1.11.452/aws-java-sdk-codecommit-1.11.452.jar
+7f997cba2000-7f997cba7000 r--s 00029000 08:01 290731                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-efs/1.11.452/aws-java-sdk-efs-1.11.452.jar
+7f997cba7000-7f997cbb5000 r--s 00098000 08:01 290727                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-directory/1.11.452/aws-java-sdk-directory-1.11.452.jar
+7f997cbb5000-7f997cbbf000 r--s 00068000 08:01 290723                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-machinelearning/1.11.452/aws-java-sdk-machinelearning-1.11.452.jar
+7f997cbbf000-7f997cbc9000 r--s 00067000 08:01 290719                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-workspaces/1.11.452/aws-java-sdk-workspaces-1.11.452.jar
+7f997cbc9000-7f997cbf3000 r--s 001d1000 08:01 290715                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-ssm/1.11.452/aws-java-sdk-ssm-1.11.452.jar
+7f997cbf3000-7f997cbf8000 r--s 00032000 08:01 290711                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloudhsm/1.11.452/aws-java-sdk-cloudhsm-1.11.452.jar
+7f997cbf8000-7f997cbff000 r--s 0004a000 08:01 290707                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-ecr/1.11.452/aws-java-sdk-ecr-1.11.452.jar
+7f997cbff000-7f997cc0d000 r--s 000af000 08:01 290703                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-ecs/1.11.452/aws-java-sdk-ecs-1.11.452.jar
+7f997cc0d000-7f997cc17000 r--s 0006a000 08:01 290699                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-lambda/1.11.452/aws-java-sdk-lambda-1.11.452.jar
+7f997cc17000-7f997cc26000 r--s 000a0000 08:01 290695                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-config/1.11.452/aws-java-sdk-config-1.11.452.jar
+7f997cc26000-7f997cc2f000 r--s 0005b000 08:01 1202213                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-kms/1.11.452/aws-java-sdk-kms-1.11.452.jar
+7f997cc2f000-7f997cc3c000 r--s 0008a000 08:01 290691                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-codepipeline/1.11.452/aws-java-sdk-codepipeline-1.11.452.jar
+7f997cc3c000-7f997cc4d000 r--s 000a6000 08:01 290687                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-codedeploy/1.11.452/aws-java-sdk-codedeploy-1.11.452.jar
+7f997cc4d000-7f997cc4f000 r--s 0000a000 08:01 290683                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloudwatchmetrics/1.11.452/aws-java-sdk-cloudwatchmetrics-1.11.452.jar
+7f997cc4f000-7f997cc59000 r--s 0005f000 08:01 290681                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloudsearch/1.11.452/aws-java-sdk-cloudsearch-1.11.452.jar
+7f997cc59000-7f997cc67000 r--s 0008f000 08:01 290679                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-autoscaling/1.11.452/aws-java-sdk-autoscaling-1.11.452.jar
+7f997cc67000-7f997cc7a000 r--s 000ac000 08:01 290677                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-ses/1.11.452/aws-java-sdk-ses-1.11.452.jar
+7f997cc7a000-7f997cc8e000 r--s 000f6000 08:01 290675                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-opsworks/1.11.452/aws-java-sdk-opsworks-1.11.452.jar
+7f997cc8e000-7f997cca8000 r--s 00119000 08:01 290673                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-kinesis/1.11.452/aws-java-sdk-kinesis-1.11.452.jar
+7f997cca8000-7f997ccc1000 r--s 0010f000 08:01 290671                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-clouddirectory/1.11.452/aws-java-sdk-clouddirectory-1.11.452.jar
+7f997ccc1000-7f997ccd5000 r--s 000bc000 08:01 290669                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloudfront/1.11.452/aws-java-sdk-cloudfront-1.11.452.jar
+7f997ccd5000-7f997cce2000 r--s 00092000 08:01 290667                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloudformation/1.11.452/aws-java-sdk-cloudformation-1.11.452.jar
+7f997cce2000-7f997ccef000 r--s 00096000 08:01 290665                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-directconnect/1.11.452/aws-java-sdk-directconnect-1.11.452.jar
+7f997ccef000-7f997ccf5000 r--s 00034000 08:01 219717                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cognitosync/1.11.452/aws-java-sdk-cognitosync-1.11.452.jar
+7f997ccf5000-7f997ccfb000 r--s 0003a000 08:01 219715                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cognitoidentity/1.11.452/aws-java-sdk-cognitoidentity-1.11.452.jar
+7f997ccfb000-7f997cd01000 r--s 0003a000 08:01 219713                     /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-events/1.11.452/aws-java-sdk-events-1.11.452.jar
+7f997cd01000-7f997cd0b000 r--s 0005e000 08:01 1202211                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-logs/1.11.452/aws-java-sdk-logs-1.11.452.jar
+7f997cd0b000-7f997cd11000 r--s 00038000 08:01 1202209                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloudwatch/1.11.452/aws-java-sdk-cloudwatch-1.11.452.jar
+7f997cd11000-7f997cd17000 r--s 00033000 08:01 1202207                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloudtrail/1.11.452/aws-java-sdk-cloudtrail-1.11.452.jar
+7f997cd17000-7f997cd1c000 r--s 00030000 08:01 1202205                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-budgets/1.11.452/aws-java-sdk-budgets-1.11.452.jar
+7f997cd1c000-7f997cd25000 r--s 0004a000 08:01 1202203                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-sns/1.11.452/aws-java-sdk-sns-1.11.452.jar
+7f997cd25000-7f997cd46000 r--s 00157000 08:01 1202201                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-dynamodb/1.11.452/aws-java-sdk-dynamodb-1.11.452.jar
+7f997cd46000-7f997cd8b000 r--s 00396000 08:01 1202199                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-ec2/1.11.452/aws-java-sdk-ec2-1.11.452.jar
+7f997cd8b000-7f997cd93000 r--s 00057000 08:01 1202197                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-elastictranscoder/1.11.452/aws-java-sdk-elastictranscoder-1.11.452.jar
+7f997cd93000-7f997cda0000 r--s 0007f000 08:01 1202195                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-elasticache/1.11.452/aws-java-sdk-elasticache-1.11.452.jar
+7f997cda0000-7f997cdb0000 r--s 000b5000 08:01 1202193                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-emr/1.11.452/aws-java-sdk-emr-1.11.452.jar
+7f997cdb0000-7f997cdbd000 r--s 00070000 08:01 1202191                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-elasticloadbalancingv2/1.11.452/aws-java-sdk-elasticloadbalancingv2-1.11.452.jar
+7f997cdbd000-7f997cdc7000 r--s 00057000 08:01 1202189                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-elasticloadbalancing/1.11.452/aws-java-sdk-elasticloadbalancing-1.11.452.jar
+7f997cdc7000-7f997cdce000 r--s 0003f000 08:01 1202187                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-datapipeline/1.11.452/aws-java-sdk-datapipeline-1.11.452.jar
+7f997cdce000-7f997cdeb000 r--s 0011a000 08:01 1202185                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-iam/1.11.452/aws-java-sdk-iam-1.11.452.jar
+7f997cdeb000-7f997cdf6000 r--s 00072000 08:01 1202183                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-glacier/1.11.452/aws-java-sdk-glacier-1.11.452.jar
+7f997cdf6000-7f997ce04000 r--s 00093000 08:01 1202181                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-elasticbeanstalk/1.11.452/aws-java-sdk-elasticbeanstalk-1.11.452.jar
+7f997ce04000-7f997ce1b000 r--s 000e1000 08:01 1202179                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-redshift/1.11.452/aws-java-sdk-redshift-1.11.452.jar
+7f997ce1b000-7f997ce33000 r--s 00123000 08:01 1202177                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-rds/1.11.452/aws-java-sdk-rds-1.11.452.jar
+7f997ce33000-7f997ce3a000 r--s 00045000 08:01 1202175                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-sqs/1.11.452/aws-java-sdk-sqs-1.11.452.jar
+7f997ce3a000-7f997ce3e000 r--s 0001a000 08:01 1202173                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-sts/1.11.452/aws-java-sdk-sts-1.11.452.jar
+7f997ce3e000-7f997ce42000 r--s 00016000 08:01 1202171                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-importexport/1.11.452/aws-java-sdk-importexport-1.11.452.jar
+7f997ce42000-7f997ce56000 r--s 000d1000 08:01 1202169                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-s3/1.11.452/aws-java-sdk-s3-1.11.452.jar
+7f997ce56000-7f997ce6c000 r--s 000e3000 08:01 1202164                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-route53/1.11.452/aws-java-sdk-route53-1.11.452.jar
+7f997ce6c000-7f997ce7e000 r--s 000c0000 08:01 1202022                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-storagegateway/1.11.452/aws-java-sdk-storagegateway-1.11.452.jar
+7f997ce7e000-7f997ce8f000 r--s 000bf000 08:01 1056007                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-simpleworkflow/1.11.452/aws-java-sdk-simpleworkflow-1.11.452.jar
+7f997ce8f000-7f997ce94000 r--s 00026000 08:01 1202019                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-servermigration/1.11.452/aws-java-sdk-servermigration-1.11.452.jar
+7f997ce94000-7f997ceaa000 r--s 000fb000 08:01 1202017                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-servicecatalog/1.11.452/aws-java-sdk-servicecatalog-1.11.452.jar
+7f997ceaa000-7f997ceae000 r--s 00021000 08:01 1202015                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-simpledb/1.11.452/aws-java-sdk-simpledb-1.11.452.jar
+7f997ceae000-7f997ceb4000 r--s 00038000 08:01 1202008                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-support/1.11.452/aws-java-sdk-support-1.11.452.jar
+7f997ceb4000-7f997ceba000 r--s 00032000 08:01 1202005                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-opsworkscm/1.11.452/aws-java-sdk-opsworkscm-1.11.452.jar
+7f997ceba000-7f997cec1000 r--s 00046000 08:01 1201941                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-xray/1.11.452/aws-java-sdk-xray-1.11.452.jar
+7f997cec1000-7f997cedb000 r--s 00141000 08:01 1201939                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-pinpoint/1.11.452/aws-java-sdk-pinpoint-1.11.452.jar
+7f997cedb000-7f997cedf000 r--s 00013000 08:01 1201937                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-resourcegroupstaggingapi/1.11.452/aws-java-sdk-resourcegroupstaggingapi-1.11.452.jar
+7f997cedf000-7f997ceea000 r--s 0007a000 08:01 1201935                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-lexmodelbuilding/1.11.452/aws-java-sdk-lexmodelbuilding-1.11.452.jar
+7f997ceea000-7f997cef1000 r--s 0003a000 08:01 1201933                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-codestar/1.11.452/aws-java-sdk-codestar-1.11.452.jar
+7f997cef1000-7f997cef3000 r--s 00008000 08:01 1056003                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-marketplaceentitlement/1.11.452/aws-java-sdk-marketplaceentitlement-1.11.452.jar
+7f997cef3000-7f997cef8000 r--s 0002c000 08:01 1055998                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-athena/1.11.452/aws-java-sdk-athena-1.11.452.jar
+7f997cef8000-7f997cf0c000 r--s 000db000 08:01 1055996                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-greengrass/1.11.452/aws-java-sdk-greengrass-1.11.452.jar
+7f997cf0c000-7f997cf13000 r--s 0004a000 08:01 1055994                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-dax/1.11.452/aws-java-sdk-dax-1.11.452.jar
+7f997cf13000-7f997cf19000 r--s 0002e000 08:01 1055991                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-migrationhub/1.11.452/aws-java-sdk-migrationhub-1.11.452.jar
+7f997cf19000-7f997cf31000 r--s 00127000 08:01 1055988                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-glue/1.11.452/aws-java-sdk-glue-1.11.452.jar
+7f997cf31000-7f997cf35000 r--s 00029000 08:01 1055979                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloudhsmv2/1.11.452/aws-java-sdk-cloudhsmv2-1.11.452.jar
+7f997cf35000-7f997cf39000 r--s 0001c000 08:01 1055976                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-mobile/1.11.452/aws-java-sdk-mobile-1.11.452.jar
+7f997cf39000-7f997cf3c000 r--s 0000d000 08:01 1055970                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-pricing/1.11.452/aws-java-sdk-pricing-1.11.452.jar
+7f997cf3c000-7f997cf42000 r--s 0003e000 08:01 1055963                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-costexplorer/1.11.452/aws-java-sdk-costexplorer-1.11.452.jar
+7f997cf42000-7f997cf48000 r--s 00039000 08:01 1055954                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-mediapackage/1.11.452/aws-java-sdk-mediapackage-1.11.452.jar
+7f997cf48000-7f997cf5f000 r--s 00117000 08:01 1055952                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-medialive/1.11.452/aws-java-sdk-medialive-1.11.452.jar
+7f997cf5f000-7f997cf61000 r--s 00010000 08:01 1055950                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-mediastoredata/1.11.452/aws-java-sdk-mediastoredata-1.11.452.jar
+7f997cf61000-7f997cf65000 r--s 0001a000 08:01 1055947                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-mediastore/1.11.452/aws-java-sdk-mediastore-1.11.452.jar
+7f997cf65000-7f997cf7a000 r--s 00103000 08:01 1055936                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-mediaconvert/1.11.452/aws-java-sdk-mediaconvert-1.11.452.jar
+7f997cf7a000-7f997cf7f000 r--s 0003e000 08:01 1055917                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-mq/1.11.452/aws-java-sdk-mq-1.11.452.jar
+7f997cf7f000-7f997cf8c000 r--s 00089000 08:01 1055912                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-guardduty/1.11.452/aws-java-sdk-guardduty-1.11.452.jar
+7f997cf8c000-7f997cf94000 r--s 0004e000 08:01 1055910                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-appsync/1.11.452/aws-java-sdk-appsync-1.11.452.jar
+7f997cf94000-7f997cf9e000 r--s 00065000 08:01 290663                     /home/gunayo/.m2/repository/io/netty/netty-transport/4.1.17.Final/netty-transport-4.1.17.Final.jar
+7f997cf9e000-7f997cfab000 r--s 0007e000 08:01 290661                     /home/gunayo/.m2/repository/io/netty/netty-common/4.1.17.Final/netty-common-4.1.17.Final.jar
+7f997cfab000-7f997cfaf000 r--s 0003f000 08:01 219709                     /home/gunayo/.m2/repository/io/netty/netty-buffer/4.1.17.Final/netty-buffer-4.1.17.Final.jar
+7f997cfaf000-7f997cfb7000 r--s 00054000 08:01 290659                     /home/gunayo/.m2/repository/io/netty/netty-handler/4.1.17.Final/netty-handler-4.1.17.Final.jar
+7f997cfb7000-7f997cfbd000 r--s 00047000 08:01 290657                     /home/gunayo/.m2/repository/io/netty/netty-codec/4.1.17.Final/netty-codec-4.1.17.Final.jar
+7f997cfbd000-7f997cfc7000 r--s 0007e000 08:01 290655                     /home/gunayo/.m2/repository/io/netty/netty-codec-http/4.1.17.Final/netty-codec-http-4.1.17.Final.jar
+7f997cfc7000-7f997cfce000 r--s 0003c000 08:01 1055908                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-kinesisvideo/1.11.452/aws-java-sdk-kinesisvideo-1.11.452.jar
+7f997cfce000-7f997cfde000 r--s 000b5000 08:01 1055891                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-sagemaker/1.11.452/aws-java-sdk-sagemaker-1.11.452.jar
+7f997cfde000-7f997cfec000 r--s 00095000 08:01 1055882                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-comprehend/1.11.452/aws-java-sdk-comprehend-1.11.452.jar
+7f997cfec000-7f997cfff000 r--s 000c0000 08:01 1055867                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-alexaforbusiness/1.11.452/aws-java-sdk-alexaforbusiness-1.11.452.jar
+7f997cfff000-7f9980000000 rw-p 00000000 00:00 0 
+7f9980000000-7f9980021000 rw-p 00000000 00:00 0 
+7f9980021000-7f9984000000 ---p 00000000 00:00 0 
+7f9984000000-7f9984021000 rw-p 00000000 00:00 0 
+7f9984021000-7f9988000000 ---p 00000000 00:00 0 
+7f9988000000-7f99896e3000 rw-p 00000000 00:00 0 
+7f99896e3000-7f998c000000 ---p 00000000 00:00 0 
+7f998c000000-7f998d652000 rw-p 00000000 00:00 0 
+7f998d652000-7f9990000000 ---p 00000000 00:00 0 
+7f9990000000-7f9990021000 rw-p 00000000 00:00 0 
+7f9990021000-7f9994000000 ---p 00000000 00:00 0 
+7f9994000000-7f99958f4000 rw-p 00000000 00:00 0 
+7f99958f4000-7f9998000000 ---p 00000000 00:00 0 
+7f9998000000-7f9998021000 rw-p 00000000 00:00 0 
+7f9998021000-7f999c000000 ---p 00000000 00:00 0 
+7f999c000000-7f999c021000 rw-p 00000000 00:00 0 
+7f999c021000-7f99a0000000 ---p 00000000 00:00 0 
+7f99a0000000-7f99a0290000 rw-p 00000000 00:00 0 
+7f99a0290000-7f99a4000000 ---p 00000000 00:00 0 
+7f99a4000000-7f99a4001000 r--s 00007000 08:01 219711                     /home/gunayo/.m2/repository/io/netty/netty-resolver/4.1.17.Final/netty-resolver-4.1.17.Final.jar
+7f99a4001000-7f99a4003000 r--s 00005000 08:01 1055906                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-sagemakerruntime/1.11.452/aws-java-sdk-sagemakerruntime-1.11.452.jar
+7f99a4003000-7f99a4006000 r--s 00011000 08:01 1055893                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-iotjobsdataplane/1.11.452/aws-java-sdk-iotjobsdataplane-1.11.452.jar
+7f99a4006000-7f99a4008000 r--s 00005000 08:01 1055887                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-translate/1.11.452/aws-java-sdk-translate-1.11.452.jar
+7f99a4008000-7f99a400d000 r--s 00028000 08:01 1055873                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-resourcegroups/1.11.452/aws-java-sdk-resourcegroups-1.11.452.jar
+7f99a400d000-7f99a4012000 r--s 00030000 08:01 1055865                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-serverlessapplicationrepository/1.11.452/aws-java-sdk-serverlessapplicationrepository-1.11.452.jar
+7f99a4012000-7f99a4016000 r--s 0001c000 08:01 1055863                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-cloud9/1.11.452/aws-java-sdk-cloud9-1.11.452.jar
+7f99a4016000-7f99a401e000 r--s 00046000 08:01 1055860                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-servicediscovery/1.11.452/aws-java-sdk-servicediscovery-1.11.452.jar
+7f99a401e000-7f99a4027000 r--s 00051000 08:01 1055857                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-workmail/1.11.452/aws-java-sdk-workmail-1.11.452.jar
+7f99a4027000-7f99a402b000 r--s 0001e000 08:01 1055854                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-autoscalingplans/1.11.452/aws-java-sdk-autoscalingplans-1.11.452.jar
+7f99a402b000-7f99a402f000 r--s 00020000 08:01 1055852                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-transcribe/1.11.452/aws-java-sdk-transcribe-1.11.452.jar
+7f99a402f000-7f99a4037000 r--s 0004b000 08:01 1055849                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-connect/1.11.452/aws-java-sdk-connect-1.11.452.jar
+7f99a4037000-7f99a403c000 r--s 00029000 08:01 1055836                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-fms/1.11.452/aws-java-sdk-fms-1.11.452.jar
+7f99a403c000-7f99a4042000 r--s 00033000 08:01 1055830                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-secretsmanager/1.11.452/aws-java-sdk-secretsmanager-1.11.452.jar
+7f99a4042000-7f99a4048000 r--s 00033000 08:01 1055826                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-acmpca/1.11.452/aws-java-sdk-acmpca-1.11.452.jar
+7f99a4048000-7f99a4054000 r--s 00082000 08:01 1055822                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-iotanalytics/1.11.452/aws-java-sdk-iotanalytics-1.11.452.jar
+7f99a4054000-7f99a4058000 r--s 0001e000 08:01 1055814                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-iot1clickdevices/1.11.452/aws-java-sdk-iot1clickdevices-1.11.452.jar
+7f99a4058000-7f99a405d000 r--s 00025000 08:01 1055805                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-iot1clickprojects/1.11.452/aws-java-sdk-iot1clickprojects-1.11.452.jar
+7f99a405d000-7f99a4060000 r--s 00011000 08:01 1055803                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-pi/1.11.452/aws-java-sdk-pi-1.11.452.jar
+7f99a4060000-7f99a406f000 r--s 0009f000 08:01 1055801                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-neptune/1.11.452/aws-java-sdk-neptune-1.11.452.jar
+7f99a406f000-7f99a4072000 r--s 00010000 08:01 1055781                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-mediatailor/1.11.452/aws-java-sdk-mediatailor-1.11.452.jar
+7f99a4072000-7f99a4075000 r--s 00014000 08:01 1055775                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-eks/1.11.452/aws-java-sdk-eks-1.11.452.jar
+7f99a4075000-7f99a4079000 r--s 0001a000 08:01 1055773                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-macie/1.11.452/aws-java-sdk-macie-1.11.452.jar
+7f99a4079000-7f99a407c000 r--s 00017000 08:01 1055771                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-dlm/1.11.452/aws-java-sdk-dlm-1.11.452.jar
+7f99a407c000-7f99a4081000 r--s 0002d000 08:01 1055769                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-signer/1.11.452/aws-java-sdk-signer-1.11.452.jar
+7f99a4081000-7f99a4087000 r--s 0002e000 08:01 1055760                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-chime/1.11.452/aws-java-sdk-chime-1.11.452.jar
+7f99a4087000-7f99a4091000 r--s 0005d000 08:01 1055758                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-pinpointemail/1.11.452/aws-java-sdk-pinpointemail-1.11.452.jar
+7f99a4091000-7f99a4095000 r--s 0001b000 08:01 1055754                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-pinpointsmsvoice/1.11.452/aws-java-sdk-pinpointsmsvoice-1.11.452.jar
+7f99a4095000-7f99a4097000 r--s 00009000 08:01 1055752                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-s3control/1.11.452/aws-java-sdk-s3control-1.11.452.jar
+7f99a4097000-7f99a409d000 r--s 00035000 08:01 1055747                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-ram/1.11.452/aws-java-sdk-ram-1.11.452.jar
+7f99a409d000-7f99a409f000 r--s 00005000 08:01 1055744                    /home/gunayo/.m2/repository/com/amazonaws/jmespath-java/1.11.452/jmespath-java-1.11.452.jar
+7f99a409f000-7f99a40a6000 r--s 00044000 08:01 1055742                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk-route53resolver/1.11.452/aws-java-sdk-route53resolver-1.11.452.jar
+7f99a40a6000-7f99a40a7000 r--s 00000000 08:01 1055735                    /home/gunayo/.m2/repository/com/amazonaws/aws-java-sdk/1.11.452/aws-java-sdk-1.11.452.jar
+7f99a40a7000-7f99a40a9000 r--s 0000a000 08:01 689368                     /home/gunayo/.m2/repository/com/hazelcast/hazelcast-aws/2.3/hazelcast-aws-2.3.jar
+7f99a40a9000-7f99a40ac000 r--s 0003a000 08:01 688545                     /home/gunayo/.m2/repository/com/hazelcast/hazelcast-spring/3.11/hazelcast-spring-3.11.jar
+7f99a40ac000-7f99a417b000 r--s 008b9000 08:01 687483                     /home/gunayo/.m2/repository/com/hazelcast/hazelcast/3.11/hazelcast-3.11.jar
+7f99a417b000-7f99a417c000 r--s 00003000 08:01 196754                     /home/gunayo/projects/goldennode-group/goldennode-client/target/goldennode-client-0.0.1-SNAPSHOT.jar
+7f99a417c000-7f99a4182000 r--s 0002a000 08:01 220288                     /home/gunayo/.m2/repository/org/eclipse/persistence/javax.persistence/2.2.0/javax.persistence-2.2.0.jar
+7f99a4182000-7f99a4184000 r--s 0000e000 08:01 187709                     /home/gunayo/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar
+7f99a4184000-7f99a418d000 r--s 0008c000 08:01 1055732                    /home/gunayo/.m2/repository/com/sun/mail/javax.mail/1.5.6/javax.mail-1.5.6.jar
+7f99a418d000-7f99a418f000 r--s 0000c000 08:01 219707                     /home/gunayo/.m2/repository/org/apache/commons/commons-email/1.5/commons-email-1.5.jar
+7f99a418f000-7f99a4191000 r--s 0000c000 08:01 252250                     /home/gunayo/projects/goldennode-group/goldennode-commons/target/goldennode-commons.jar
+7f99a4191000-7f99a4391000 rw-p 00000000 00:00 0 
+7f99a4391000-7f99a4591000 rw-p 00000000 00:00 0 
+7f99a4591000-7f99a4592000 r--s 00002000 08:01 689642                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-mapping/3.0.0/maven-mapping-3.0.0.jar
+7f99a4592000-7f99a4594000 r--s 00001000 08:01 699678                     /home/gunayo/.m2/repository/org/sonatype/plexus/plexus-build-api/0.0.7/plexus-build-api-0.0.7.jar
+7f99a4594000-7f99a4596000 r--s 0000b000 08:01 699676                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-filtering/3.1.1/maven-filtering-3.1.1.jar
+7f99a4596000-7f99a459a000 r--s 0003c000 08:01 700458                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-utils/3.1.0/plexus-utils-3.1.0.jar
+7f99a459a000-7f99a459c000 r--s 00005000 08:01 283305                     /home/gunayo/.m2/repository/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar
+7f99a459c000-7f99a459d000 r--s 00001000 08:01 283723                     /home/gunayo/.m2/repository/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar
+7f99a459d000-7f99a45ab000 r--s 00082000 08:01 1055021                    /home/gunayo/.m2/repository/com/thoughtworks/xstream/xstream/1.4.10/xstream-1.4.10.jar
+7f99a45ab000-7f99a45ae000 r--s 00012000 08:01 689568                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.25/plexus-interpolation-1.25.jar
+7f99a45ae000-7f99a45b2000 r--s 00017000 08:01 268036                     /home/gunayo/.m2/repository/org/tukaani/xz/1.8/xz-1.8.jar
+7f99a45b2000-7f99a45b4000 r--s 0000d000 08:01 295196                     /home/gunayo/.m2/repository/org/iq80/snappy/snappy/0.4/snappy-0.4.jar
+7f99a45b4000-7f99a45b7000 ---p 00000000 00:00 0 
+7f99a45b7000-7f99a46b5000 rw-p 00000000 00:00 0 
+7f99a46b5000-7f99a46b8000 ---p 00000000 00:00 0 
+7f99a46b8000-7f99a48ee000 rw-p 00000000 00:00 0 
+7f99a48ee000-7f99a4aee000 rw-p 00000000 00:00 0 
+7f99a4aee000-7f99a4cee000 rw-p 00000000 00:00 0 
+7f99a4cee000-7f99a4eee000 rw-p 00000000 00:00 0 
+7f99a4eee000-7f99a4ef2000 r--s 00037000 08:01 699136                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.15/plexus-utils-3.0.15.jar
+7f99a4ef2000-7f99a4ef4000 r--s 00006000 08:01 692038                     /home/gunayo/.m2/repository/com/google/code/findbugs/jsr305/2.0.1/jsr305-2.0.1.jar
+7f99a4ef4000-7f99a4ef7000 r--s 00023000 08:01 699134                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-shared-utils/0.4/maven-shared-utils-0.4.jar
+7f99a4ef7000-7f99a4efd000 r--s 00033000 08:01 154347                     /home/gunayo/.m2/repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar
+7f99a4efd000-7f99a4f00000 r--s 0001b000 08:01 547204                     /home/gunayo/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar
+7f99a4f00000-7f99a4f02000 r--s 00007000 08:01 154279                     /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-install-plugin/2.5.2/maven-install-plugin-2.5.2.jar
+7f99a4f02000-7f99a4f04000 r--s 0000c000 08:01 714668                     /home/gunayo/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar
+7f99a4f04000-7f99a4f0f000 r--s 0007e000 08:01 195162                     /home/gunayo/.m2/repository/org/apache/commons/commons-compress/1.16.1/commons-compress-1.16.1.jar
+7f99a4f0f000-7f99a4f13000 r--s 0000f000 08:01 689702                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-io/3.0.1/plexus-io-3.0.1.jar
+7f99a4f13000-7f99a4f18000 r--s 0002a000 08:01 689694                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-archiver/3.6.0/plexus-archiver-3.6.0.jar
+7f99a4f18000-7f99a4f1c000 r--s 0002f000 08:01 410372                     /home/gunayo/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar
+7f99a4f1c000-7f99a4f20000 r--s 00025000 08:01 700464                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-shared-utils/3.2.0/maven-shared-utils-3.2.0.jar
+7f99a4f20000-7f99a4f21000 r--s 00005000 08:01 562769                     /home/gunayo/.m2/repository/org/apache/maven/maven-archiver/3.2.0/maven-archiver-3.2.0.jar
+7f99a4f21000-7f99a4f23000 r--s 00000000 08:01 1334806                    /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.7.1/plexus-component-annotations-1.7.1.jar
+7f99a4f23000-7f99a4f27000 r--s 00017000 08:01 692516                     /home/gunayo/.m2/repository/org/sonatype/aether/aether-util/1.7/aether-util-1.7.jar
+7f99a4f27000-7f99a4f32000 r--s 00069000 08:01 692499                     /home/gunayo/.m2/repository/org/sonatype/sisu/sisu-guice/2.1.7/sisu-guice-2.1.7-noaop.jar
+7f99a4f32000-7f99a4f37000 r--s 00021000 08:01 692497                     /home/gunayo/.m2/repository/org/sonatype/sisu/sisu-inject-bean/1.4.2/sisu-inject-bean-1.4.2.jar
+7f99a4f37000-7f99a4f3a000 r--s 00014000 08:01 318012                     /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-war-plugin/3.2.2/maven-war-plugin-3.2.2.jar
+7f99a4f3a000-7f99a4f3e000 r--s 0002f000 08:01 692394                     /home/gunayo/.m2/repository/commons-lang/commons-lang/2.1/commons-lang-2.1.jar
+7f99a4f3e000-7f99a4f41000 r--s 0000c000 08:01 692392                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-io/2.0.2/plexus-io-2.0.2.jar
+7f99a4f41000-7f99a4f46000 r--s 00029000 08:01 692390                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-archiver/2.1/plexus-archiver-2.1.jar
+7f99a4f46000-7f99a4f48000 r--s 0000d000 08:01 692388                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.15/plexus-interpolation-1.15.jar
+7f99a4f48000-7f99a4f4a000 r--s 00004000 08:01 547233                     /home/gunayo/.m2/repository/org/apache/maven/maven-archiver/2.5/maven-archiver-2.5.jar
+7f99a4f4a000-7f99a4f4c000 r--s 00007000 08:01 1339277                    /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-jar-plugin/2.4/maven-jar-plugin-2.4.jar
+7f99a4f4c000-7f99a4f4f000 ---p 00000000 00:00 0 
+7f99a4f4f000-7f99a504d000 rw-p 00000000 00:00 0 
+7f99a504d000-7f99a504e000 r--s 00002000 08:01 699165                     /home/gunayo/.m2/repository/org/apache/maven/reporting/maven-reporting-api/3.0/maven-reporting-api-3.0.jar
+7f99a504e000-7f99a5056000 r--s 00045000 08:01 547188                     /home/gunayo/.m2/repository/junit/junit/4.12/junit-4.12.jar
+7f99a5056000-7f99a505a000 r--s 00034000 08:01 699153                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.15/plexus-utils-1.5.15.jar
+7f99a505a000-7f99a505f000 r--s 0003d000 08:01 191822                     /home/gunayo/.m2/repository/org/apache/maven/surefire/surefire-booter/2.20.1/surefire-booter-2.20.1.jar
+7f99a505f000-7f99a5061000 r--s 00002000 08:01 92070                      /home/gunayo/.m2/repository/org/apache/maven/surefire/surefire-logger-api/2.20.1/surefire-logger-api-2.20.1.jar
+7f99a5061000-7f99a5066000 r--s 00028000 08:01 191820                     /home/gunayo/.m2/repository/org/apache/maven/surefire/surefire-api/2.20.1/surefire-api-2.20.1.jar
+7f99a5066000-7f99a5068000 r--s 00002000 08:01 154418                     /home/gunayo/.m2/repository/org/apache/maven/plugin-tools/maven-plugin-annotations/3.3/maven-plugin-annotations-3.3.jar
+7f99a5068000-7f99a5071000 r--s 00074000 08:01 191818                     /home/gunayo/.m2/repository/org/apache/maven/surefire/maven-surefire-common/2.20.1/maven-surefire-common-2.20.1.jar
+7f99a5071000-7f99a5072000 r--s 00009000 08:01 1339271                    /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin/2.20.1/maven-surefire-plugin-2.20.1.jar
+7f99a5072000-7f99a50eb000 r--s 010f9000 08:01 1331432                    /usr/lib/jvm/java-8-oracle/lib/tools.jar
+7f99a50eb000-7f99a52eb000 rw-p 00000000 00:00 0 
+7f99a52eb000-7f99a52ee000 r--s 0001b000 08:01 547140                     /home/gunayo/.m2/repository/junit/junit/3.8.2/junit-3.8.2.jar
+7f99a52ee000-7f99a52fc000 r--s 0008f000 08:01 692058                     /home/gunayo/.m2/repository/com/google/collections/google-collections/1.0/google-collections-1.0.jar
+7f99a52fc000-7f99a52fd000 r--s 0000a000 08:01 692056                     /home/gunayo/.m2/repository/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar
+7f99a52fd000-7f99a5304000 r--s 00051000 08:01 692054                     /home/gunayo/.m2/repository/log4j/log4j/1.2.12/log4j-1.2.12.jar
+7f99a5304000-7f99a5308000 r--s 0001d000 08:01 692052                     /home/gunayo/.m2/repository/org/apache/xbean/xbean-reflect/3.4/xbean-reflect-3.4.jar
+7f99a5308000-7f99a5309000 r--s 00004000 08:01 833507                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-compiler-javac/2.4/plexus-compiler-javac-2.4.jar
+7f99a5309000-7f99a530b000 r--s 00000000 08:01 832911                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-compiler-manager/2.4/plexus-compiler-manager-2.4.jar
+7f99a530b000-7f99a530d000 r--s 00005000 08:01 558333                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-compiler-api/2.4/plexus-compiler-api-2.4.jar
+7f99a530d000-7f99a530f000 r--s 00002000 08:01 692040                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-shared-incremental/1.1/maven-shared-incremental-1.1.jar
+7f99a530f000-7f99a5312000 r--s 00023000 08:01 692036                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-shared-utils/0.1/maven-shared-utils-0.1.jar
+7f99a5312000-7f99a5316000 r--s 00030000 08:01 692018                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.1/plexus-utils-1.5.1.jar
+7f99a5316000-7f99a5318000 r--s 0000a000 08:01 284842                     /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-compiler-plugin/3.2/maven-compiler-plugin-3.2.jar
+7f99a5318000-7f99a531a000 r--s 0000d000 08:01 692203                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.13/plexus-interpolation-1.13.jar
+7f99a531a000-7f99a531b000 r--s 00001000 08:01 692201                     /home/gunayo/.m2/repository/org/sonatype/plexus/plexus-build-api/0.0.4/plexus-build-api-0.0.4.jar
+7f99a531b000-7f99a531d000 r--s 00009000 08:01 692199                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-filtering/1.1/maven-filtering-1.1.jar
+7f99a531d000-7f99a5321000 r--s 00033000 08:01 692197                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.5/plexus-utils-2.0.5.jar
+7f99a5321000-7f99a5322000 r--s 00001000 08:01 692175                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.jar
+7f99a5322000-7f99a5323000 r--s 00002000 08:01 692173                     /home/gunayo/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.jar
+7f99a5323000-7f99a5325000 r--s 00006000 08:01 1339259                    /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar
+7f99a5325000-7f99a5327000 r--s 00009000 08:01 692107                     /home/gunayo/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+7f99a5327000-7f99a532d000 r--s 00036000 08:01 558327                     /home/gunayo/.m2/repository/junit/junit/4.11/junit-4.11.jar
+7f99a532d000-7f99a5330000 r--s 0000c000 08:01 689840                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-io/2.0.4/plexus-io-2.0.4.jar
+7f99a5330000-7f99a5335000 r--s 00029000 08:01 689818                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-archiver/2.2/plexus-archiver-2.2.jar
+7f99a5335000-7f99a5337000 r--s 00007000 08:01 1319939                    /home/gunayo/.m2/repository/org/apache/maven/plugin-testing/maven-plugin-testing-harness/1.3/maven-plugin-testing-harness-1.3.jar
+7f99a5337000-7f99a5338000 r--s 00002000 08:01 154335                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-i18n/1.0-beta-6/plexus-i18n-1.0-beta-6.jar
+7f99a5338000-7f99a533c000 r--s 0001d000 08:01 154333                     /home/gunayo/.m2/repository/org/eclipse/aether/aether-util/0.9.0.M2/aether-util-0.9.0.M2.jar
+7f99a533c000-7f99a533e000 r--s 00000000 08:01 1339381                    /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar
+7f99a533e000-7f99a5341000 r--s 0000d000 08:01 713698                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-dependency-tree/2.2/maven-dependency-tree-2.2.jar
+7f99a5341000-7f99a5346000 r--s 00040000 08:01 154331                     /home/gunayo/.m2/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar
+7f99a5346000-7f99a5348000 r--s 00006000 08:01 699095                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-common-artifact-filters/1.4/maven-common-artifact-filters-1.4.jar
+7f99a5348000-7f99a534b000 r--s 00016000 08:01 191804                     /home/gunayo/.m2/repository/org/apache/maven/enforcer/enforcer-rules/1.4.1/enforcer-rules-1.4.1.jar
+7f99a534b000-7f99a534c000 r--s 00002000 08:01 191802                     /home/gunayo/.m2/repository/org/apache/maven/enforcer/enforcer-api/1.4.1/enforcer-api-1.4.1.jar
+7f99a534c000-7f99a5350000 r--s 00038000 08:01 699100                     /home/gunayo/.m2/repository/commons-lang/commons-lang/2.3/commons-lang-2.3.jar
+7f99a5350000-7f99a5354000 r--s 00038000 08:01 657938                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.22/plexus-utils-3.0.22.jar
+7f99a5354000-7f99a5356000 r--s 00002000 08:01 697292                     /home/gunayo/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar
+7f99a5356000-7f99a5357000 r--s 00006000 08:01 697290                     /home/gunayo/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar
+7f99a5357000-7f99a5359000 r--s 00009000 08:01 699550                     /home/gunayo/.m2/repository/commons-cli/commons-cli/1.2/commons-cli-1.2.jar
+7f99a5359000-7f99a535a000 r--s 00002000 08:01 699546                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-logging-api/1.1/doxia-logging-api-1.1.jar
+7f99a535a000-7f99a535c000 r--s 00002000 08:01 699544                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.1/doxia-sink-api-1.1.jar
+7f99a535c000-7f99a535d000 r--s 00002000 08:01 699542                     /home/gunayo/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.2.1/maven-reporting-api-2.2.1.jar
+7f99a535d000-7f99a535f000 r--s 00003000 08:01 699163                     /home/gunayo/.m2/repository/org/slf4j/jcl-over-slf4j/1.5.6/jcl-over-slf4j-1.5.6.jar
+7f99a535f000-7f99a5361000 r--s 00001000 08:01 699159                     /home/gunayo/.m2/repository/org/slf4j/slf4j-jdk14/1.5.6/slf4j-jdk14-1.5.6.jar
+7f99a5361000-7f99a5363000 r--s 0000b000 08:01 699122                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11.jar
+7f99a5363000-7f99a536b000 r--s 00049000 08:01 699131                     /home/gunayo/.m2/repository/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar
+7f99a536b000-7f99a536c000 r--s 00006000 08:01 175231                     /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-enforcer-plugin/1.4.1/maven-enforcer-plugin-1.4.1.jar
+7f99a536c000-7f99a556c000 rw-p 00000000 00:00 0 
+7f99a556c000-7f99a556e000 r--s 00006000 08:01 699835                     /home/gunayo/.m2/repository/org/apache/maven/shared/maven-invoker/2.0.11/maven-invoker-2.0.11.jar
+7f99a556e000-7f99a5572000 r--s 00033000 08:01 687402                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.2/plexus-utils-2.0.2.jar
+7f99a5572000-7f99a5576000 r--s 0003c000 08:01 840606                     /home/gunayo/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar
+7f99a5576000-7f99a5578000 r--s 00004000 08:01 829730                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-module-xhtml/1.0/doxia-module-xhtml-1.0.jar
+7f99a5578000-7f99a5579000 r--s 00006000 08:01 690326                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-module-xdoc/1.0/doxia-module-xdoc-1.0.jar
+7f99a5579000-7f99a557a000 r--s 00004000 08:01 829726                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-module-fml/1.0/doxia-module-fml-1.0.jar
+7f99a557a000-7f99a557c000 r--s 0000a000 08:01 690320                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-module-apt/1.0/doxia-module-apt-1.0.jar
+7f99a557c000-7f99a5589000 r--s 0007f000 08:01 277460                     /home/gunayo/.m2/repository/commons-collections/commons-collections/3.2/commons-collections-3.2.jar
+7f99a5589000-7f99a558a000 r--s 0000b000 08:01 829722                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-decoration-model/1.0/doxia-decoration-model-1.0.jar
+7f99a558a000-7f99a5592000 r--s 00058000 08:01 284397                     /home/gunayo/.m2/repository/org/apache/velocity/velocity/1.5/velocity-1.5.jar
+7f99a5592000-7f99a5593000 r--s 00001000 08:01 295192                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-velocity/1.1.7/plexus-velocity-1.1.7.jar
+7f99a5593000-7f99a5594000 r--s 00002000 08:01 284373                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-i18n/1.0-beta-7/plexus-i18n-1.0-beta-7.jar
+7f99a5594000-7f99a5596000 r--s 0000a000 08:01 829714                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-site-renderer/1.0/doxia-site-renderer-1.0.jar
+7f99a5596000-7f99a5599000 r--s 0000b000 08:01 829718                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-core/1.0/doxia-core-1.0.jar
+7f99a5599000-7f99a559b000 r--s 00008000 08:01 836143                     /home/gunayo/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar
+7f99a559b000-7f99a559f000 r--s 00026000 08:01 284371                     /home/gunayo/.m2/repository/commons-digester/commons-digester/1.6/commons-digester-1.6.jar
+7f99a559f000-7f99a55a4000 r--s 0002a000 08:01 284369                     /home/gunayo/.m2/repository/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar
+7f99a55a4000-7f99a55a7000 r--s 00014000 08:01 158423                     /home/gunayo/.m2/repository/commons-validator/commons-validator/1.2.0/commons-validator-1.2.0.jar
+7f99a55a7000-7f99a55a8000 r--s 00004000 08:01 687400                     /home/gunayo/.m2/repository/org/apache/maven/reporting/maven-reporting-impl/2.0.4.2/maven-reporting-impl-2.0.4.2.jar
+7f99a55a8000-7f99a55a9000 r--s 00002000 08:01 687388                     /home/gunayo/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-9/doxia-sink-api-1.0-alpha-9.jar
+7f99a55a9000-7f99a55aa000 r--s 00002000 08:01 687386                     /home/gunayo/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.8/maven-reporting-api-2.0.8.jar
+7f99a55aa000-7f99a55ac000 r--s 00002000 08:01 1339430                    /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-interactivity-api/1.0-alpha-4/plexus-interactivity-api-1.0-alpha-4.jar
+7f99a55ac000-7f99a55ae000 r--s 00006000 08:01 692181                     /home/gunayo/.m2/repository/commons-cli/commons-cli/1.0/commons-cli-1.0.jar
+7f99a55ae000-7f99a55b0000 r--s 0000c000 08:01 65545                      /home/gunayo/.m2/repository/urbanophile/java-getopt/1.0.9/java-getopt-1.0.9.jar
+7f99a55b0000-7f99a55b2000 r--s 00023000 08:01 411305                     /home/gunayo/.m2/repository/org/jdom/jdom/1.1.3/jdom-1.1.3.jar
+7f99a55b2000-7f99a55b8000 r--s 00032000 08:01 65543                      /home/gunayo/.m2/repository/jaxen/jaxen/1.1.4/jaxen-1.1.4.jar
+7f99a55b8000-7f99a55c1000 r--s 0002d000 08:01 155719                     /home/gunayo/.m2/repository/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar
+7f99a55c1000-7f99a55da000 r--s 00135000 08:01 410321                     /home/gunayo/.m2/repository/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar
+7f99a55da000-7f99a55e1000 r--s 0005e000 08:01 284457                     /home/gunayo/.m2/repository/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar
+7f99a55e1000-7f99a55eb000 r--s 0005d000 08:01 306529                     /home/gunayo/.m2/repository/ch/qos/logback/logback-core/1.0.13/logback-core-1.0.13.jar
+7f99a55eb000-7f99a55f1000 r--s 0003b000 08:01 306527                     /home/gunayo/.m2/repository/ch/qos/logback/logback-classic/1.0.13/logback-classic-1.0.13.jar
+7f99a55f1000-7f99a566a000 r--s 010f9000 08:01 1331432                    /usr/lib/jvm/java-8-oracle/lib/tools.jar
+7f99a566a000-7f99a566d000 r--s 00025000 08:01 436830                     /home/gunayo/.m2/repository/org/mortbay/jetty/jetty-util/6.1.14/jetty-util-6.1.14.jar
+7f99a566d000-7f99a5674000 r--s 00078000 08:01 436826                     /home/gunayo/.m2/repository/org/mortbay/jetty/jetty/6.1.14/jetty-6.1.14.jar
+7f99a5674000-7f99a5677000 r--s 0001e000 08:01 436822                     /home/gunayo/.m2/repository/org/mortbay/jetty/servlet-api-2.5/6.1.14/servlet-api-2.5-6.1.14.jar
+7f99a5677000-7f99a567a000 r--s 00018000 08:01 306525                     /home/gunayo/.m2/repository/org/apache/ant/ant-junit/1.8.3/ant-junit-1.8.3.jar
+7f99a567a000-7f99a567b000 r--s 00004000 08:01 306523                     /home/gunayo/.m2/repository/org/apache/ant/ant-launcher/1.8.3/ant-launcher-1.8.3.jar
+7f99a567b000-7f99a5699000 r--s 001bc000 08:01 306521                     /home/gunayo/.m2/repository/org/apache/ant/ant/1.8.3/ant-1.8.3.jar
+7f99a5699000-7f99a569b000 r--s 0000e000 08:01 284399                     /home/gunayo/.m2/repository/oro/oro/2.0.8/oro-2.0.8.jar
+7f99a569b000-7f99a569c000 r--s 00004000 08:01 219749                     /home/gunayo/.m2/repository/org/ow2/asm/asm-analysis/5.0.1/asm-analysis-5.0.1.jar
+7f99a569c000-7f99a569d000 r--s 0000a000 08:01 219747                     /home/gunayo/.m2/repository/org/ow2/asm/asm-util/5.0.1/asm-util-5.0.1.jar
+7f99a569d000-7f99a569f000 r--s 00009000 08:01 436818                     /home/gunayo/.m2/repository/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1.jar
+7f99a569f000-7f99a56a1000 r--s 00006000 08:01 436803                     /home/gunayo/.m2/repository/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1.jar
+7f99a56a1000-7f99a56a2000 r--s 0000c000 08:01 436808                     /home/gunayo/.m2/repository/org/ow2/asm/asm/5.0.1/asm-5.0.1.jar
+7f99a56a2000-7f99a56a9000 r--s 00083000 08:01 219745                     /home/gunayo/.m2/repository/net/sourceforge/cobertura/cobertura/2.1.1/cobertura-2.1.1.jar
+7f99a56a9000-7f99a56ad000 r--s 00034000 08:01 692396                     /home/gunayo/.m2/repository/org/codehaus/plexus/plexus-utils/3.0/plexus-utils-3.0.jar
+7f99a56ad000-7f99a56af000 r--s 00005000 08:01 1339253                    /home/gunayo/.m2/repository/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.jar
+7f99a56af000-7f99a56b1000 r--s 0000d000 08:01 219551                     /home/gunayo/.m2/repository/org/codehaus/mojo/cobertura-maven-plugin/2.7/cobertura-maven-plugin-2.7.jar
+7f99a56b1000-7f99a58b1000 rw-p 00000000 00:00 0 
+7f99a58b1000-7f99a58c2000 r-xp 00000000 08:01 1332952                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f99a58c2000-7f99a5ac1000 ---p 00011000 08:01 1332952                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f99a5ac1000-7f99a5ac2000 rw-p 00010000 08:01 1332952                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnio.so
+7f99a5ac2000-7f99a5ad8000 r-xp 00000000 08:01 1332949                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f99a5ad8000-7f99a5cd8000 ---p 00016000 08:01 1332949                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f99a5cd8000-7f99a5cd9000 rw-p 00016000 08:01 1332949                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnet.so
+7f99a5cd9000-7f99a5cde000 r--s 0009d000 08:01 1332894                    /usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar
+7f99a5cde000-7f99a5ede000 rw-p 00000000 00:00 0 
+7f99a5ede000-7f99a60de000 rw-p 00000000 00:00 0 
+7f99a60de000-7f99a62de000 rw-p 00000000 00:00 0 
+7f99a62de000-7f99a62eb000 r--s 0008d000 08:01 153593                     /usr/share/java/maven3-core-3.3.9.jar
+7f99a62eb000-7f99a62ec000 r--s 00006000 08:01 153513                     /usr/share/java/plexus-sec-dispatcher.jar
+7f99a62ec000-7f99a62f1000 r--s 0001d000 08:01 153448                     /usr/share/java/eclipse-aether-api.jar
+7f99a62f1000-7f99a62f3000 r--s 00007000 08:01 153368                     /usr/share/java/slf4j-api.jar
+7f99a62f3000-7f99a62f4000 r--s 00006000 08:01 153594                     /usr/share/java/maven3-repository-metadata-3.3.9.jar
+7f99a62f4000-7f99a6302000 r--s 00095000 08:01 153465                     /usr/share/java/guice.jar
+7f99a6302000-7f99a632e000 r--s 00208000 08:01 153388                     /usr/share/java/guava.jar
+7f99a632e000-7f99a632f000 ---p 00000000 00:00 0 
+7f99a632f000-7f99a642f000 rw-p 00000000 00:00 0 
+7f99a642f000-7f99a6432000 ---p 00000000 00:00 0 
+7f99a6432000-7f99a6530000 rw-p 00000000 00:00 0 
+7f99a6530000-7f99a6533000 ---p 00000000 00:00 0 
+7f99a6533000-7f99a6631000 rw-p 00000000 00:00 0 
+7f99a6631000-7f99a6634000 ---p 00000000 00:00 0 
+7f99a6634000-7f99a6732000 rw-p 00000000 00:00 0 
+7f99a6732000-7f99a6735000 ---p 00000000 00:00 0 
+7f99a6735000-7f99a6833000 rw-p 00000000 00:00 0 
+7f99a6833000-7f99a6836000 ---p 00000000 00:00 0 
+7f99a6836000-7f99a6934000 rw-p 00000000 00:00 0 
+7f99a6934000-7f99a72f3000 r--p 00000000 08:01 1319878                    /usr/lib/locale/locale-archive
+7f99a72f3000-7f99a72f6000 ---p 00000000 00:00 0 
+7f99a72f6000-7f99a73f4000 rw-p 00000000 00:00 0 
+7f99a73f4000-7f99a73f7000 ---p 00000000 00:00 0 
+7f99a73f7000-7f99a74f5000 rw-p 00000000 00:00 0 
+7f99a74f5000-7f99a74f6000 ---p 00000000 00:00 0 
+7f99a74f6000-7f99a8000000 rw-p 00000000 00:00 0 
+7f99a8000000-7f99a8021000 rw-p 00000000 00:00 0 
+7f99a8021000-7f99ac000000 ---p 00000000 00:00 0 
+7f99ac000000-7f99ac001000 r--s 00000000 08:01 153270                     /usr/share/java/geronimo-interceptor-3.0-spec-1.0.1.jar
+7f99ac001000-7f99ac003000 r--s 00012000 08:01 168642                     /usr/share/java/el-api-3.0.jar
+7f99ac003000-7f99ac006000 r--s 00008000 08:01 153276                     /usr/share/java/cdi-api-1.0.jar
+7f99ac006000-7f99ac008000 r--s 00001000 08:01 153600                     /usr/share/java/maven3-builder-support-3.3.9.jar
+7f99ac008000-7f99ac039000 r--s 00207000 08:01 153577                     /usr/share/java/wagon-http-shaded-2.x.jar
+7f99ac039000-7f99ac0cf000 r--s 0110a000 08:01 1333002                    /usr/lib/jvm/java-8-oracle/jre/lib/ext/jfxrt.jar
+7f99ac0cf000-7f99b0000000 rw-p 00000000 00:00 0 
+7f99b0000000-7f99b0021000 rw-p 00000000 00:00 0 
+7f99b0021000-7f99b4000000 ---p 00000000 00:00 0 
+7f99b4000000-7f99b4021000 rw-p 00000000 00:00 0 
+7f99b4021000-7f99b8000000 ---p 00000000 00:00 0 
+7f99b8000000-7f99b8021000 rw-p 00000000 00:00 0 
+7f99b8021000-7f99bc000000 ---p 00000000 00:00 0 
+7f99bc000000-7f99bc001000 r--s 00000000 08:01 153265                     /usr/share/java/atinject-jsr330-api-1.0.jar
+7f99bc001000-7f99bc005000 r--s 00027000 08:01 153296                     /usr/share/java/commons-io-2.4.jar
+7f99bc005000-7f99bc007000 r--s 00000000 08:01 153561                     /usr/share/java/plexus-component-annotations-1.5.jar
+7f99bc007000-7f99bc00b000 r--s 00027000 08:01 153441                     /usr/share/java/eclipse-aether-impl.jar
+7f99bc00b000-7f99bc00d000 r--s 0000a000 08:01 153591                     /usr/share/java/maven3-plugin-api-3.3.9.jar
+7f99bc00d000-7f99bc012000 r--s 00040000 08:01 153298                     /usr/share/java/commons-lang-2.6.jar
+7f99bc012000-7f99bc019000 r--s 0005d000 08:01 153300                     /usr/share/java/commons-lang3.jar
+7f99bc019000-7f99bd000000 rw-p 00000000 00:00 0 
+7f99bd000000-7f99be720000 rwxp 00000000 00:00 0 
+7f99be720000-7f99cc000000 ---p 00000000 00:00 0 
+7f99cc000000-7f99cdf9f000 rw-p 00000000 00:00 0 
+7f99cdf9f000-7f99d0000000 ---p 00000000 00:00 0 
+7f99d0000000-7f99d0002000 r--s 0000a000 08:01 153284                     /usr/share/java/commons-cli-1.3.1.jar
+7f99d0002000-7f99d0005000 r--s 00007000 08:01 153599                     /usr/share/java/maven3-settings-builder-3.3.9.jar
+7f99d0005000-7f99d0006000 r--s 0000a000 08:01 153590                     /usr/share/java/maven3-settings-3.3.9.jar
+7f99d0006000-7f99d0007000 r--s 00004000 08:01 153264                     /usr/share/java/atinject-jsr330-tck-1.0.jar
+7f99d0007000-7f99d0009000 r--s 0000e000 08:01 153347                     /usr/share/java/plexus-interpolation.jar
+7f99d0009000-7f99d000b000 r--s 0000d000 08:01 153598                     /usr/share/java/maven3-aether-provider-3.3.9.jar
+7f99d000b000-7f99d000c000 r--s 00002000 08:01 153365                     /usr/share/java/slf4j-simple.jar
+7f99d000c000-7f99d000f000 r--s 0000a000 08:01 153601                     /usr/share/java/maven3-artifact-3.3.9.jar
+7f99d000f000-7f99d0017000 r--s 00054000 08:01 153569                     /usr/share/java/sisu-inject.jar
+7f99d0017000-7f99d001b000 r--s 00038000 08:01 153557                     /usr/share/java/plexus-utils2.jar
+7f99d001b000-7f99d001d000 r--s 0000a000 08:01 153574                     /usr/share/java/wagon-provider-api-2.x.jar
+7f99d001d000-7f99d0023000 r--s 00048000 08:01 153384                     /usr/share/java/jsoup.jar
+7f99d0023000-7f99d0027000 r--s 00020000 08:01 153449                     /usr/share/java/eclipse-aether-util.jar
+7f99d0027000-7f99d00fa000 rw-p 00000000 00:00 0 
+7f99d00fa000-7f99d02d3000 r--s 03d64000 08:01 1332861                    /usr/lib/jvm/java-8-oracle/jre/lib/rt.jar
+7f99d02d3000-7f99d0349000 rw-p 00000000 00:00 0 
+7f99d0349000-7f99d034a000 ---p 00000000 00:00 0 
+7f99d034a000-7f99d044a000 rw-p 00000000 00:00 0 
+7f99d044a000-7f99d044b000 ---p 00000000 00:00 0 
+7f99d044b000-7f99d054b000 rw-p 00000000 00:00 0 
+7f99d054b000-7f99d054c000 ---p 00000000 00:00 0 
+7f99d054c000-7f99d064c000 rw-p 00000000 00:00 0 
+7f99d064c000-7f99d064d000 ---p 00000000 00:00 0 
+7f99d064d000-7f99d078d000 rw-p 00000000 00:00 0 
+7f99d078d000-7f99d09e5000 ---p 00000000 00:00 0 
+7f99d09e5000-7f99d0a25000 rw-p 00000000 00:00 0 
+7f99d0a25000-7f99d0c7c000 ---p 00000000 00:00 0 
+7f99d0c7c000-7f99d0d3f000 rw-p 00000000 00:00 0 
+7f99d0d3f000-7f99d0dc8000 ---p 00000000 00:00 0 
+7f99d0dc8000-7f99d0e26000 rw-p 00000000 00:00 0 
+7f99d0e26000-7f99d1189000 ---p 00000000 00:00 0 
+7f99d1189000-7f99d11a4000 r-xp 00000000 08:01 1332945                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f99d11a4000-7f99d13a4000 ---p 0001b000 08:01 1332945                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f99d13a4000-7f99d13a5000 rw-p 0001b000 08:01 1332945                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libzip.so
+7f99d13a5000-7f99d13b0000 r-xp 00000000 08:01 267827                     /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f99d13b0000-7f99d15af000 ---p 0000b000 08:01 267827                     /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f99d15af000-7f99d15b0000 r--p 0000a000 08:01 267827                     /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f99d15b0000-7f99d15b1000 rw-p 0000b000 08:01 267827                     /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f99d15b1000-7f99d15b7000 rw-p 00000000 00:00 0 
+7f99d15b7000-7f99d15c2000 r-xp 00000000 08:01 267837                     /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f99d15c2000-7f99d17c1000 ---p 0000b000 08:01 267837                     /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f99d17c1000-7f99d17c2000 r--p 0000a000 08:01 267837                     /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f99d17c2000-7f99d17c3000 rw-p 0000b000 08:01 267837                     /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f99d17c3000-7f99d17d9000 r-xp 00000000 08:01 267821                     /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f99d17d9000-7f99d19d8000 ---p 00016000 08:01 267821                     /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f99d19d8000-7f99d19d9000 r--p 00015000 08:01 267821                     /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f99d19d9000-7f99d19da000 rw-p 00016000 08:01 267821                     /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f99d19da000-7f99d19dc000 rw-p 00000000 00:00 0 
+7f99d19dc000-7f99d19e4000 r-xp 00000000 08:01 267823                     /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f99d19e4000-7f99d1be3000 ---p 00008000 08:01 267823                     /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f99d1be3000-7f99d1be4000 r--p 00007000 08:01 267823                     /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f99d1be4000-7f99d1be5000 rw-p 00008000 08:01 267823                     /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f99d1be5000-7f99d1c10000 r-xp 00000000 08:01 1332939                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f99d1c10000-7f99d1e0f000 ---p 0002b000 08:01 1332939                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f99d1e0f000-7f99d1e11000 rw-p 0002a000 08:01 1332939                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libjava.so
+7f99d1e11000-7f99d1e1e000 r-xp 00000000 08:01 1332944                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f99d1e1e000-7f99d201e000 ---p 0000d000 08:01 1332944                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f99d201e000-7f99d2020000 rw-p 0000d000 08:01 1332944                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libverify.so
+7f99d2020000-7f99d2027000 r-xp 00000000 08:01 267882                     /lib/x86_64-linux-gnu/librt-2.23.so
+7f99d2027000-7f99d2226000 ---p 00007000 08:01 267882                     /lib/x86_64-linux-gnu/librt-2.23.so
+7f99d2226000-7f99d2227000 r--p 00006000 08:01 267882                     /lib/x86_64-linux-gnu/librt-2.23.so
+7f99d2227000-7f99d2228000 rw-p 00007000 08:01 267882                     /lib/x86_64-linux-gnu/librt-2.23.so
+7f99d2228000-7f99d2330000 r-xp 00000000 08:01 267798                     /lib/x86_64-linux-gnu/libm-2.23.so
+7f99d2330000-7f99d252f000 ---p 00108000 08:01 267798                     /lib/x86_64-linux-gnu/libm-2.23.so
+7f99d252f000-7f99d2530000 r--p 00107000 08:01 267798                     /lib/x86_64-linux-gnu/libm-2.23.so
+7f99d2530000-7f99d2531000 rw-p 00108000 08:01 267798                     /lib/x86_64-linux-gnu/libm-2.23.so
+7f99d2531000-7f99d320a000 r-xp 00000000 08:01 1332965                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f99d320a000-7f99d3409000 ---p 00cd9000 08:01 1332965                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f99d3409000-7f99d34e2000 rw-p 00cd8000 08:01 1332965                    /usr/lib/jvm/java-8-oracle/jre/lib/amd64/server/libjvm.so
+7f99d34e2000-7f99d352e000 rw-p 00000000 00:00 0 
+7f99d352e000-7f99d36ee000 r-xp 00000000 08:01 267728                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f99d36ee000-7f99d38ee000 ---p 001c0000 08:01 267728                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f99d38ee000-7f99d38f2000 r--p 001c0000 08:01 267728                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f99d38f2000-7f99d38f4000 rw-p 001c4000 08:01 267728                     /lib/x86_64-linux-gnu/libc-2.23.so
+7f99d38f4000-7f99d38f8000 rw-p 00000000 00:00 0 
+7f99d38f8000-7f99d38fb000 r-xp 00000000 08:01 267752                     /lib/x86_64-linux-gnu/libdl-2.23.so
+7f99d38fb000-7f99d3afa000 ---p 00003000 08:01 267752                     /lib/x86_64-linux-gnu/libdl-2.23.so
+7f99d3afa000-7f99d3afb000 r--p 00002000 08:01 267752                     /lib/x86_64-linux-gnu/libdl-2.23.so
+7f99d3afb000-7f99d3afc000 rw-p 00003000 08:01 267752                     /lib/x86_64-linux-gnu/libdl-2.23.so
+7f99d3afc000-7f99d3b12000 r-xp 00000000 08:01 1332686                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7f99d3b12000-7f99d3d11000 ---p 00016000 08:01 1332686                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7f99d3d11000-7f99d3d12000 rw-p 00015000 08:01 1332686                    /usr/lib/jvm/java-8-oracle/lib/amd64/jli/libjli.so
+7f99d3d12000-7f99d3d2a000 r-xp 00000000 08:01 267874                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f99d3d2a000-7f99d3f29000 ---p 00018000 08:01 267874                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f99d3f29000-7f99d3f2a000 r--p 00017000 08:01 267874                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f99d3f2a000-7f99d3f2b000 rw-p 00018000 08:01 267874                     /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f99d3f2b000-7f99d3f2f000 rw-p 00000000 00:00 0 
+7f99d3f2f000-7f99d3f55000 r-xp 00000000 08:01 267700                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f99d3f55000-7f99d3f56000 r--s 00001000 08:01 153580                     /usr/share/java/wagon-http-shared-2.x.jar
+7f99d3f56000-7f99d3f58000 r--s 00005000 08:01 153447                     /usr/share/java/eclipse-aether-transport-wagon.jar
+7f99d3f58000-7f99d3f59000 r--s 00001000 08:01 153573                     /usr/share/java/wagon-file-2.x.jar
+7f99d3f59000-7f99d3f5e000 r--s 00025000 08:01 153595                     /usr/share/java/maven3-model-builder-3.3.9.jar
+7f99d3f5e000-7f99d3f65000 r--s 0002c000 08:01 153571                     /usr/share/java/sisu-plexus.jar
+7f99d3f65000-7f99d3f66000 r--s 00008000 08:01 153444                     /usr/share/java/eclipse-aether-connector-basic.jar
+7f99d3f66000-7f99d3f68000 r--s 00013000 08:01 153596                     /usr/share/java/maven3-embedder-3.3.9.jar
+7f99d3f68000-7f99d3f6a000 r--s 00002000 08:01 153511                     /usr/share/java/plexus-cipher.jar
+7f99d3f6a000-7f99d3f6c000 r--s 00006000 08:01 153446                     /usr/share/java/eclipse-aether-spi.jar
+7f99d3f6c000-7f99d4037000 rw-p 00000000 00:00 0 
+7f99d4037000-7f99d403a000 ---p 00000000 00:00 0 
+7f99d403a000-7f99d413d000 rw-p 00000000 00:00 0 
+7f99d413d000-7f99d413f000 r--s 00001000 08:01 153460                     /usr/share/java/aopalliance-1.0.jar
+7f99d413f000-7f99d4141000 r--s 00027000 08:01 153597                     /usr/share/java/maven3-model-3.3.9.jar
+7f99d4141000-7f99d4148000 r--s 00041000 08:01 153592                     /usr/share/java/maven3-compat-3.3.9.jar
+7f99d4148000-7f99d414a000 r--s 0000a000 08:01 153555                     /usr/share/java/plexus-classworlds2-2.5.2.jar
+7f99d414a000-7f99d4152000 rw-s 00000000 08:01 401958                     /tmp/hsperfdata_gunayo/20174
+7f99d4152000-7f99d4153000 rw-p 00000000 00:00 0 
+7f99d4153000-7f99d4154000 ---p 00000000 00:00 0 
+7f99d4154000-7f99d4155000 r--p 00025000 08:01 267700                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f99d4155000-7f99d4156000 rw-p 00026000 08:01 267700                     /lib/x86_64-linux-gnu/ld-2.23.so
+7f99d4156000-7f99d4157000 rw-p 00000000 00:00 0 
+7ffc92b43000-7ffc92b65000 rw-p 00000000 00:00 0                          [stack]
+7ffc92bc9000-7ffc92bcc000 r--p 00000000 00:00 0                          [vvar]
+7ffc92bcc000-7ffc92bce000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Dclassworlds.conf=/usr/share/maven/bin/m2.conf -Dmaven.home=/usr/share/maven -Dmaven.multiModuleProjectDirectory=/home/gunayo/projects/goldennode-group 
+java_command: org.codehaus.plexus.classworlds.launcher.Launcher clean install -DskipTests
+java_class_path (initial): /usr/share/maven/boot/plexus-classworlds-2.x.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
+PATH=/home/gunayo/bin:/home/gunayo/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xad01e0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xad01e0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x927fb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x927fb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x927fb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x927fb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x9297f0], sa_mask[0]=00000000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x92abf0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x92abf0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x92abf0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x92abf0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.4 LTS"
+
+uname:Linux 4.15.0-42-generic #45~16.04.1-Ubuntu SMP Mon Nov 19 13:02:27 UTC 2018 x86_64
+libc:glibc 2.23 NPTL 2.23 
+rlimit: STACK 8192k, CORE 0k, NPROC 31581, NOFILE 1048576, AS infinity
+load average:1.96 0.77 0.62
+
+/proc/meminfo:
+MemTotal:        8144440 kB
+MemFree:          121912 kB
+MemAvailable:      20312 kB
+Buffers:            2500 kB
+Cached:            53244 kB
+SwapCached:        46280 kB
+Active:          4461088 kB
+Inactive:         756940 kB
+Active(anon):    4449192 kB
+Inactive(anon):   741200 kB
+Active(file):      11896 kB
+Inactive(file):    15740 kB
+Unevictable:        1008 kB
+Mlocked:            1008 kB
+SwapTotal:       2094076 kB
+SwapFree:              0 kB
+Dirty:               716 kB
+Writeback:             0 kB
+AnonPages:       5119152 kB
+Mapped:            47432 kB
+Shmem:             28068 kB
+Slab:             121560 kB
+SReclaimable:      42804 kB
+SUnreclaim:        78756 kB
+KernelStack:       17472 kB
+PageTables:        61188 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6166296 kB
+Committed_AS:   12020940 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      563008 kB
+DirectMap2M:     7825408 kB
+DirectMap1G:     2097152 kB
+
+
+CPU:total 4 (initial active 4) (1 cores per cpu, 1 threads per core) family 6 model 70 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, lzcnt, tsc, tscinvbit, bmi1, bmi2
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 70
+model name	: Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
+stepping	: 1
+microcode	: 0x13
+cpu MHz		: 2494.308
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 1
+core id		: 0
+cpu cores	: 1
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon nopl xtopology tsc_reliable nonstop_tsc cpuid pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault invpcid_single pti tpr_shadow vnmi ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 invpcid xsaveopt arat
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf
+bogomips	: 4988.61
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 42 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 70
+model name	: Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
+stepping	: 1
+microcode	: 0x13
+cpu MHz		: 2494.308
+cache size	: 6144 KB
+physical id	: 2
+siblings	: 1
+core id		: 0
+cpu cores	: 1
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon nopl xtopology tsc_reliable nonstop_tsc cpuid pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault invpcid_single pti tpr_shadow vnmi ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 invpcid xsaveopt arat
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf
+bogomips	: 4988.61
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 42 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 70
+model name	: Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
+stepping	: 1
+microcode	: 0x13
+cpu MHz		: 2494.308
+cache size	: 6144 KB
+physical id	: 4
+siblings	: 1
+core id		: 0
+cpu cores	: 1
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon nopl xtopology tsc_reliable nonstop_tsc cpuid pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault invpcid_single pti tpr_shadow vnmi ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 invpcid xsaveopt arat
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf
+bogomips	: 4988.61
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 42 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 70
+model name	: Intel(R) Core(TM) i7-4870HQ CPU @ 2.50GHz
+stepping	: 1
+microcode	: 0x13
+cpu MHz		: 2494.308
+cache size	: 6144 KB
+physical id	: 6
+siblings	: 1
+core id		: 0
+cpu cores	: 1
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon nopl xtopology tsc_reliable nonstop_tsc cpuid pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault invpcid_single pti tpr_shadow vnmi ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 invpcid xsaveopt arat
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf
+bogomips	: 4988.61
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 42 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 8144440k(121912k free), swap 2094076k(0k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.161-b12) for linux-amd64 JRE (1.8.0_161-b12), built on Dec 19 2017 16:12:43 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Tue Dec 11 17:44:26 2018
+elapsed time: 22 seconds (0d 0h 0m 22s)
+

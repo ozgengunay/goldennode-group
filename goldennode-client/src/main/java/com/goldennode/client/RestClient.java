@@ -12,15 +12,10 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.UUID;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,17 +26,17 @@ public class RestClient {
     private static String host;
     private static String SERVER_URL = "https://goldennode.com";
     static {
-        apiKey = System.getenv("GN_PK");
-        secretKey = System.getenv("GN_SK");
-        host = System.getenv("GN_HOST");
+        apiKey = System.getProperty("com.goldennode.client.apiKey");
+        secretKey = System.getProperty("com.goldennode.client.secretKey");
+        host = System.getProperty("com.goldennode.client.host");
         if (apiKey == null) {
-            apiKey = System.getProperty("com.goldennode.client.apiKey");
+            apiKey = System.getenv("GN_APIKEY");
         }
         if (secretKey == null) {
-            secretKey = System.getProperty("com.goldennode.client.secretKey");
+            secretKey = System.getenv("GN_SECRETKEY");
         }
         if (host == null) {
-            host = System.getProperty("com.goldennode.client.host");
+            host =System.getenv("GN_HOST") ;
         }
         if (apiKey == null) {
             throw new RuntimeException("can't load apiKey");
@@ -59,8 +54,6 @@ public class RestClient {
     }
 
     public static Response call(String uri, String method, String body) throws GoldenNodeException {
-        System.setProperty("javax.net.ssl.trustStore", "/home/gunayo/.keystore");
-        System.setProperty("javax.net.ssl.trustStorePassword", "12345678");
         try {
             URL url = new URL(host + uri);
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();

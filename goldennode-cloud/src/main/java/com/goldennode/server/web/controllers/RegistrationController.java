@@ -43,7 +43,7 @@ import com.goldennode.server.security.web.validation.DuplicateEmailException;
 public class RegistrationController {
     @RequestMapping(value = { "/temp" }, method = { RequestMethod.POST })
     @ResponseBody
-    public ResponseEntity<Users> registerTemp(@PathVariable("mapId") String mapId, @RequestBody String data) throws IOException {
+    public ResponseEntity<Users> registerTemp(@RequestBody String data) throws IOException {
         Users registered = service.registerTempUser();
         return new ResponseEntity<Users>(registered, HttpStatus.OK);
     }
