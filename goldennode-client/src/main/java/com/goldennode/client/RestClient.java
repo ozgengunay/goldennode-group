@@ -24,7 +24,7 @@ public class RestClient {
     private static String apiKey;
     private static String secretKey;
     private static String host;
-    private static String SERVER_URL = "https://goldennode.com";
+    private static String SERVER_URL = "https://api.goldennode.io";
     static {
         apiKey = System.getProperty("com.goldennode.client.apiKey");
         secretKey = System.getProperty("com.goldennode.client.secretKey");
