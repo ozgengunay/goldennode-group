@@ -17,7 +17,7 @@
     <sec:authorize access="isAnonymous()">
         <div class="panel panel-default">
             <div class="panel-body">
-                <form:form action="${pageContext.request.contextPath}/register" commandName="user" method="POST" enctype="utf8" role="form">
+                <form:form action="${pageContext.request.contextPath}/register" modelAttribute="user" method="POST" enctype="utf8" role="form">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     
                     <div class="row">

@@ -8,7 +8,7 @@
 	<import resource="applicationContext-web.xml" />
 	<import resource="applicationContext-persistence.xml" />
 	<import resource="applicationContext-security-nosec.xml" />
-	<!-- <import resource="applicationContext-security-hmac.xml" /> -->
+	<import resource="applicationContext-security-hmac.xml" />
 	<import resource="applicationContext-security-web.xml" />
 	<import resource="applicationContext-distribution.xml" />
 	<bean id="messageSource"

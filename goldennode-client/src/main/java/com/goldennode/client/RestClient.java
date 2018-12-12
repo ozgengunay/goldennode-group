@@ -36,13 +36,13 @@ public class RestClient {
             secretKey = System.getenv("GN_SECRETKEY");
         }
         if (host == null) {
-            host =System.getenv("GN_HOST") ;
+            host = System.getenv("GN_HOST");
         }
         if (apiKey == null) {
-            throw new RuntimeException("can't load apiKey");
+            // throw new RuntimeException("can't load apiKey");
         }
         if (secretKey == null) {
-            throw new RuntimeException("can't load secretKey");
+            // throw new RuntimeException("can't load secretKey");
         }
         if (host == null) {
             host = SERVER_URL;
@@ -53,7 +53,11 @@ public class RestClient {
         return call(uri, method, null);
     }
 
-    public static Response call(String uri, String method, String body) throws GoldenNodeException {
+    public static Response call(String uri, String method, boolean isSecure) throws GoldenNodeException {
+        return call(uri, method, null, isSecure);
+    }
+
+    public static Response call(String uri, String method, String body, boolean isSecure) throws GoldenNodeException {
         try {
             URL url = new URL(host + uri);
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
@@ -62,7 +66,8 @@ public class RestClient {
             con.setRequestProperty("Accept-Charset", "UTF-8");
             SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             (con).setSSLSocketFactory(socketFactory);
-            signRequest(con, body);
+            if (isSecure)
+                signRequest(con, body);
             if (body != null) {
                 con.setRequestProperty("Content-Type", "application/json");
                 con.setDoOutput(true);
@@ -84,6 +89,10 @@ public class RestClient {
         } catch (IOException e) {
             throw new GoldenNodeException(e);
         }
+    }
+
+    public static Response call(String uri, String method, String body) throws GoldenNodeException {
+        return call(uri, method, body, true);
     }
 
     public static void main(String arg[]) {

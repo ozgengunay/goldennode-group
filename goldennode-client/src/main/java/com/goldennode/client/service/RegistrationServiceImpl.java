@@ -4,13 +4,10 @@ import com.goldennode.client.GoldenNodeException;
 import com.goldennode.client.Response;
 import com.goldennode.client.RestClient;
 
-public class RegistrationServiceImpl implements RegistrationService{
-
+public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public Credentials registerTempAccount() throws GoldenNodeException {
-        
-        Response response = RestClient.call("/register/temp", "POST", "x");
-        
+        Response response = RestClient.call("/register/temp", "POST", "x", false);
         System.out.println(response.getBody());
         return null;
     }
