@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
      	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	<sec:http entry-point-ref="forbiddenEntryPoint"
+	<sec:http entry-point-ref="hmacEntryPoint"
 		create-session="never" pattern="/goldennode/**">
 		<sec:anonymous enabled="false" />
 		<sec:session-management
@@ -15,6 +15,7 @@
 			position="FORM_LOGIN_FILTER" />
 		<sec:intercept-url pattern="/**" access="hasAnyRole('ROLE_TEMP_USER','ROLE_PREMIUM_USER','ROLE_FREEMIUM_USER')" />
 		<sec:csrf disabled="true" />
+		<sec:access-denied-handler ref="hmacAccessDeniedHandler"/>
 	</sec:http>
 	<bean id="hmacAuthenticationFilter"
 		class="com.goldennode.server.security.hmac.HMACAuthenticationFilter">
@@ -37,6 +38,8 @@
 	<bean id="hmacAuthenticationProvider"
 		class="com.goldennode.server.security.hmac.HMACAuthenticationProvider">
 	</bean>
-	<bean id="forbiddenEntryPoint"
-		class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+	<bean id="hmacAccessDeniedHandler"
+		class="com.goldennode.server.security.GoldenNodeAccessDeniedHandler" />
+	<bean id="hmacEntryPoint"
+		class="com.goldennode.server.security.GoldenNodeEntryPoint" />
 </beans>

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-@ControllerAdvice(basePackages="com.goldennode.server.controllers.rest.controllers")
+@ControllerAdvice(basePackages="com.goldennode.server.controllers")
 public class CustomRestExceptionHandler {
 
 	@ExceptionHandler({ GoldenNodeRestException.class })

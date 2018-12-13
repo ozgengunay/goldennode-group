@@ -16,7 +16,7 @@
 		<!-- Enables Spring Security CSRF protection -->
 		<sec:csrf disabled="true" />
 		<!-- Configures the form login -->
-		<sec:form-login login-page="/login"
+		<sec:form-login login-page="/login" default-target-url="/"
 			login-processing-url="/login/authenticate"
 			authentication-failure-url="/login?error=bad_credentials"
 			username-parameter="username" password-parameter="password" />
