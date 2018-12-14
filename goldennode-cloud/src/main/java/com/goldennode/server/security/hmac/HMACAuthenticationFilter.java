@@ -3,14 +3,11 @@ package com.goldennode.server.security.hmac;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -41,13 +38,13 @@ public class HMACAuthenticationFilter extends AbstractAuthenticationProcessingFi
 		if (values.length < 2)
 			throw new InsufficientAuthenticationException("Invalid Authorization Header");
 		apiKey = values[0].split("=")[1];
-		AbstractAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(apiKey, new HMACCredentials(
+		AbstractAuthenticationToken authRequest = new HMACAuthenticationToken(apiKey, new HMACCredentials(
 				authorizationHeader + request.getRequestURI() + requestWrapper.getPayload()+ request.getMethod(), signatureHeader));
 
 		// Allow subclasses to set the "details" property
 		setDetails(request, authRequest);
 		request.setAttribute("requestWrapper", requestWrapper);
-		return authRequest;
+		return this.getAuthenticationManager().authenticate(authRequest);
 	}
 
 	@Override
@@ -83,4 +80,5 @@ public class HMACAuthenticationFilter extends AbstractAuthenticationProcessingFi
 	protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
 		return true;
 	}
+	
 }

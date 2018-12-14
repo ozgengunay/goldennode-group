@@ -6,21 +6,22 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
      	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	<sec:http entry-point-ref="hmacEntryPoint"
-		create-session="never" pattern="/goldennode/**">
+	<sec:http entry-point-ref="hmacEntryPoint" create-session="never"
+		pattern="/goldennode/**">
 		<sec:anonymous enabled="false" />
 		<sec:session-management
 			session-fixation-protection="none" />
 		<sec:custom-filter ref="hmacAuthenticationFilter"
 			position="FORM_LOGIN_FILTER" />
-		<sec:intercept-url pattern="/**" access="hasAnyRole('ROLE_TEMP_USER','ROLE_PREMIUM_USER','ROLE_FREEMIUM_USER')" />
+		<sec:intercept-url pattern="/**"
+			access="hasAnyRole('ROLE_TEMP_USER','ROLE_PREMIUM_USER','ROLE_FREEMIUM_USER')" />
 		<sec:csrf disabled="true" />
-		<sec:access-denied-handler ref="hmacAccessDeniedHandler"/>
 	</sec:http>
 	<bean id="hmacAuthenticationFilter"
 		class="com.goldennode.server.security.hmac.HMACAuthenticationFilter">
 		<constructor-arg name="defaultFilterProcessesUrl"
 			value="/" />
+		<property name="authenticationFailureHandler" ref="hmacAuthFailureHandler" />
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="authenticationSuccessHandler">
 			<!-- Upon successful authentication, Spring will attempt to try and move 
@@ -38,8 +39,7 @@
 	<bean id="hmacAuthenticationProvider"
 		class="com.goldennode.server.security.hmac.HMACAuthenticationProvider">
 	</bean>
-	<bean id="hmacAccessDeniedHandler"
-		class="com.goldennode.server.security.GoldenNodeAccessDeniedHandler" />
-	<bean id="hmacEntryPoint"
-		class="com.goldennode.server.security.GoldenNodeEntryPoint" />
+	<bean id="hmacEntryPoint" class="com.goldennode.server.security.GoldenNodeEntryPoint" />
+	<bean id="hmacAuthFailureHandler"
+		class="com.goldennode.server.security.GoldenNodeAuthFailureHandler" />
 </beans>

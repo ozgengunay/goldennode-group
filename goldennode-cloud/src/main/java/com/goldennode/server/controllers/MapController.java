@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.goldennode.server.common.ErrorCode;
+import com.goldennode.server.common.GoldenNodeRestException;
 import com.goldennode.server.common.ResponseEntity;
 import com.goldennode.server.common.StatusCode;
 import com.goldennode.server.security.GoldenNodeUser;
@@ -57,7 +59,7 @@ public class MapController {
         return new ResponseEntity(mapService.put(userDetails.getUsername(), mapId, replaceFrwdSlsh(key), data), StatusCode.SUCCESS);
     }
 
-    @RequestMapping( value = { "/remove/key/{key}" }, method = { RequestMethod.DELETE })
+    @RequestMapping(value = { "/remove/key/{key}" }, method = { RequestMethod.DELETE })
     public ResponseEntity remove(@PathVariable("mapId") String mapId, @PathVariable("key") String key) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(mapService.remove(userDetails.getUsername(), mapId, replaceFrwdSlsh(key)), StatusCode.SUCCESS);

@@ -32,7 +32,7 @@
 	</sec:http>
 	<!-- Configures the authentication manager bean which processes authentication 
 		requests. -->
-	<sec:authentication-manager alias="authenticationManager">
+	<sec:authentication-manager id="authenticationManager">
 		<sec:authentication-provider ref="hmacAuthenticationProvider" />
 		<sec:authentication-provider
 			user-service-ref="accountUserDetailsService">
