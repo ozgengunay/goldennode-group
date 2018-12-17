@@ -44,10 +44,11 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
     public static void main(String arg[]) {
         System.out.println(escape("~!@#$%^&*()_+{}:|<>?>[];',./\""));
     }
+
     private static String escape(String str) {
         try {
             return URLEncoder.encode(str.replace("/", "&sol;").replace("\"", "&quot;").replace("\\", "&bsol;"), "UTF-8");
-        } catch (UnsupportedEncodingException e) {  
+        } catch (UnsupportedEncodingException e) {
             return null;
         }
     }
@@ -94,17 +95,22 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
     }
 
     public Object extractObject(String value) throws IOException, ClassNotFoundException {
+        if (value == null)
+            return null;
         JsonNode node = om.readTree(value);
         String className = node.get("c").asText();
         JsonNode objectNode = node.get("o");
+        if (className.equals("NULL")) {
+            return null;
+        }
         Class<?> c = Class.forName(className);
         return om.treeToValue(objectNode, c);
     }
 
     public String encapObject(Object value) throws JsonProcessingException {
         JsonNode newNode = om.createObjectNode();
-        ((ObjectNode) newNode).put("c", value.getClass().getName());
-        ((ObjectNode) newNode).set("o", om.valueToTree(value));
+        ((ObjectNode) newNode).put("c", value == null ? "NULL" : value.getClass().getName());
+        ((ObjectNode) newNode).set("o", om.valueToTree(value == null ? "NULL" : value));
         return om.writeValueAsString(newNode);
     }
 
@@ -112,11 +118,13 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", escape(encapObject(key))), "POST", encapObject(value));
             if (response.getStatusCode() == 200)
-                return (V) response.getEntityValue();
+                return (V) extractObject(response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
-        } catch (JsonProcessingException e) {
+        } catch (ClassNotFoundException e) {
+            throw new GoldenNodeException(e);
+        } catch (IOException e) {
             throw new GoldenNodeException(e);
         }
     }

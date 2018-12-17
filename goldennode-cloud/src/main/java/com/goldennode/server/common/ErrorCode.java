@@ -1,7 +1,7 @@
 package com.goldennode.server.common;
 
 public enum ErrorCode{
-	GENERAL_ERROR("general error");
+	GENERAL_ERROR("general error"), EXPECTED_JSON_ARRAY("Expected json array"), JSON_PROCESSING_ERROR("Can't process json data");
 
 	private final String name;
 

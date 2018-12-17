@@ -1,6 +1,9 @@
 package com.goldennode.server.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.goldennode.server.common.ErrorCode;
 import com.goldennode.server.common.GoldenNodeRestException;
 import com.goldennode.server.common.ResponseEntity;
@@ -66,8 +71,24 @@ public class MapController {
     }
 
     @RequestMapping(value = { "/putAll" }, method = { RequestMethod.POST })
-    public ResponseEntity putAll(@PathVariable("mapId") String mapId, @RequestBody String data) throws IOException {
-        return new ResponseEntity(null, StatusCode.SUCCESS);
+    public ResponseEntity putAll(@PathVariable("mapId") String mapId, @RequestBody String data) throws GoldenNodeRestException {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            ObjectMapper om = new ObjectMapper();
+            JsonNode node = om.readTree(data);
+            if (!node.isArray())
+                throw new GoldenNodeRestException(ErrorCode.EXPECTED_JSON_ARRAY);
+            node.iterator();
+            Map map = new HashMap<>();
+            Iterator<JsonNode> iter = node.iterator();
+            while (iter.hasNext()) {
+                JsonNode nd = iter.next();
+                map.put(nd.fieldNames().next(), nd.fields().next().getValue().asText());
+            }
+            return new ResponseEntity(mapService.remove(userDetails.getUsername(), mapId, replaceFrwdSlsh(key)), StatusCode.SUCCESS);
+        } catch (IOException e) {
+            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+        }
     }
 
     @RequestMapping(value = { "/clear" }, method = { RequestMethod.DELETE })
