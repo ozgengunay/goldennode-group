@@ -85,7 +85,8 @@ public class MapController {
                 JsonNode nd = iter.next();
                 map.put(nd.fieldNames().next(), nd.fields().next().getValue().asText());
             }
-            return new ResponseEntity(mapService.remove(userDetails.getUsername(), mapId, replaceFrwdSlsh(key)), StatusCode.SUCCESS);
+            mapService.putAll(userDetails.getUsername(), mapId, map);
+            return new ResponseEntity(StatusCode.SUCCESS);
         } catch (IOException e) {
             throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
         }

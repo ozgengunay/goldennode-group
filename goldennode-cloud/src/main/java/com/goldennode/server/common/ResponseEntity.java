@@ -15,6 +15,10 @@ public class ResponseEntity {
         this.code = code.toString();
     }
 
+    public ResponseEntity(StatusCode code) {
+        this.code = code.toString();
+    }
+
     public String getCode() {
         return code;
     }
