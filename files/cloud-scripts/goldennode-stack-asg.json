@@ -157,17 +157,7 @@
     "loadBalancer": {
       "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
       "Properties": {
-        "Name": {
-          "Fn::Join": [
-            "-",
-            [
-              {
-                "Ref": "AWS::StackName"
-              },
-              "WebServerLoadBalancer"
-            ]
-          ]
-        },
+        "Name": "LoadBalancer",
         "Scheme": "internet-facing",
         "SecurityGroups": [
           {
@@ -215,13 +205,10 @@
         "DefaultActions": [
           {
             "Type": "redirect",
-            "TargetGroupArn": {
-              "Ref": "targetGroup"
-            },
             "RedirectConfig": {
               "Protocol": "HTTPS",
               "Host": "#{host}",
-              "Port": "#{port}",
+              "Port": "443",
               "Path": "/#{path}",
               "Query": "#{query}",
               "StatusCode": "HTTP_301"

@@ -24,6 +24,10 @@ public class MapService {
         this.hzInstance = hzInstance;
     }
 
+    private Map init(String userId, String mapId) {
+        return hzInstance.getMap(userId + "_" + mapId);
+    }
+
     public int size(String userId, String mapId) {
         return init(userId, mapId).size();
     }
@@ -45,11 +49,8 @@ public class MapService {
     }
 
     public String put(String userId, String mapId, String key, String value) {
-        {
-            LOGGER.debug("SAVING key: " + key + ", value: " + value);
-            String val = (String) init(userId, mapId).put(key, value);
-            return val;
-        }
+        String val = (String) init(userId, mapId).put(key, value);
+        return val;
     }
 
     public String remove(String userId, String mapId, String key) {
@@ -74,9 +75,5 @@ public class MapService {
 
     public Set<Entry<String, String>> entrySet(String userId, String mapId) {
         return init(userId, mapId).entrySet();
-    }
-
-    private Map init(String userId, String mapId) {
-        return hzInstance.getMap(userId + "_" + mapId);
     }
 }
