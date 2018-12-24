@@ -21,31 +21,31 @@ public class LockService {
         this.hzInstance = hzInstance;
     }
 
-    private Lock init(String userId, String objectId) {
-        return hzInstance.getLock(userId + "_" + objectId);
+    private Lock init(String userId, String lockId) {
+        return hzInstance.getLock(userId + "_" + lockId);
     }
 
-    public void lock(String userId, String objectId) {
-        init(userId, objectId).lock();
+    public void lock(String userId, String lockId) {
+        init(userId, lockId).lock();
     }
 
-    public void lockInterruptibly(String userId, String objectId) throws InterruptedException {
-        init(userId, objectId).lockInterruptibly();
+    public void lockInterruptibly(String userId, String lockId) throws InterruptedException {
+        init(userId, lockId).lockInterruptibly();
     }
 
-    public boolean tryLock(String userId, String objectId) {
-        return init(userId, objectId).tryLock();
+    public boolean tryLock(String userId, String lockId) {
+        return init(userId, lockId).tryLock();
     }
 
-    public boolean tryLock(String userId, String objectId, long time, TimeUnit unit) throws InterruptedException {
-        return init(userId, objectId).tryLock(time, unit);
+    public boolean tryLock(String userId, String lockId, long time, TimeUnit unit) throws InterruptedException {
+        return init(userId, lockId).tryLock(time, unit);
     }
 
-    public void unlock(String userId, String objectId) {
-        init(userId, objectId).unlock();
+    public void unlock(String userId, String lockId) {
+        init(userId, lockId).unlock();
     }
 
-    public Condition newCondition(String userId, String objectId) {
-        return init(userId, objectId).newCondition();
+    public Condition newCondition(String userId, String lockId) {
+        return init(userId, lockId).newCondition();
     }
 }

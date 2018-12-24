@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.goldennode.commons.util.URLUtils;
 import com.goldennode.server.common.ErrorCode;
 import com.goldennode.server.common.GoldenNodeRestException;
 import com.goldennode.server.common.ResponseEntity;
@@ -43,31 +44,31 @@ public class MapController {
     @RequestMapping(value = { "/containsKey/key/{key}" }, method = { RequestMethod.GET })
     public ResponseEntity containsKey(@PathVariable("mapId") String mapId, @PathVariable("key") String key) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(mapService.containsKey(userDetails.getUsername(), mapId, replaceFrwdSlsh(key)), StatusCode.SUCCESS);
+        return new ResponseEntity(mapService.containsKey(userDetails.getUsername(), mapId, URLUtils.unescapeSpecialChars(key)), StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/containsValue/value/{value}" }, method = { RequestMethod.GET })
     public ResponseEntity containsValue(@PathVariable("mapId") String mapId, @PathVariable("value") String value) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(mapService.containsValue(userDetails.getUsername(), mapId, replaceFrwdSlsh(value)), StatusCode.SUCCESS);
+        return new ResponseEntity(mapService.containsValue(userDetails.getUsername(), mapId, URLUtils.unescapeSpecialChars(value)), StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/get/key/{key}" }, method = { RequestMethod.GET })
     public ResponseEntity get(@PathVariable("mapId") String mapId, @PathVariable("key") String key) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(mapService.get(userDetails.getUsername(), mapId, replaceFrwdSlsh(key)), StatusCode.SUCCESS);
+        return new ResponseEntity(mapService.get(userDetails.getUsername(), mapId, URLUtils.unescapeSpecialChars(key)), StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/put/key/{key}" }, method = { RequestMethod.POST })
     public ResponseEntity put(@PathVariable("mapId") String mapId, @PathVariable("key") String key, @RequestBody String data) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(mapService.put(userDetails.getUsername(), mapId, replaceFrwdSlsh(key), data), StatusCode.SUCCESS);
+        return new ResponseEntity(mapService.put(userDetails.getUsername(), mapId, URLUtils.unescapeSpecialChars(key), data), StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/remove/key/{key}" }, method = { RequestMethod.DELETE })
     public ResponseEntity remove(@PathVariable("mapId") String mapId, @PathVariable("key") String key) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(mapService.remove(userDetails.getUsername(), mapId, replaceFrwdSlsh(key)), StatusCode.SUCCESS);
+        return new ResponseEntity(mapService.remove(userDetails.getUsername(), mapId, URLUtils.unescapeSpecialChars(key)), StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/putAll" }, method = { RequestMethod.POST })
@@ -115,9 +116,5 @@ public class MapController {
     public ResponseEntity entrySet(@PathVariable("mapId") String mapId) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(mapService.entrySet(userDetails.getUsername(), mapId), StatusCode.SUCCESS);
-    }
-
-    private String replaceFrwdSlsh(String str) {
-        return str.replace("&sol;", "/").replace("&quot;", "\"").replace("&bsol;", "\\");
     }
 }

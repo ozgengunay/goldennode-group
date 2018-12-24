@@ -21,79 +21,79 @@ public class QueueService {
         this.hzInstance = hzInstance;
     }
 
-    private Queue init(String userId, String mapId) {
-        return hzInstance.getQueue(userId + "_" + mapId);
+    private Queue init(String userId, String queueId) {
+        return hzInstance.getQueue(userId + "_" + queueId);
     }
 
-    public int size(String userId, String objectId) {
-        return init(userId, objectId).size();
+    public int size(String userId, String queueId) {
+        return init(userId, queueId).size();
     }
 
-    public boolean isEmpty(String userId, String objectId) {
-        return init(userId, objectId).isEmpty();
+    public boolean isEmpty(String userId, String queueId) {
+        return init(userId, queueId).isEmpty();
     }
 
-    public boolean contains(String userId, String objectId, Object o) {
-        return init(userId, objectId).contains(o);
+    public boolean contains(String userId, String queueId, Object o) {
+        return init(userId, queueId).contains(o);
     }
 
-    public Iterator iterator(String userId, String objectId) {
-        return init(userId, objectId).iterator();
+    public Iterator iterator(String userId, String queueId) {
+        return init(userId, queueId).iterator();
     }
 
-    public Object[] toArray(String userId, String objectId) {
-        return init(userId, objectId).toArray();
+    public Object[] toArray(String userId, String queueId) {
+        return init(userId, queueId).toArray();
     }
 
-    public Object[] toArray(String userId, String objectId, Object[] a) {
-        return init(userId, objectId).toArray(a);
+    public Object[] toArray(String userId, String queueId, Object[] a) {
+        return init(userId, queueId).toArray(a);
     }
 
-    public boolean remove(String userId, String objectId, Object o) {
-        return init(userId, objectId).remove(o);
+    public boolean remove(String userId, String queueId, Object o) {
+        return init(userId, queueId).remove(o);
     }
 
-    public boolean containsAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).containsAll(c);
+    public boolean containsAll(String userId, String queueId, Collection c) {
+        return init(userId, queueId).containsAll(c);
     }
 
-    public boolean addAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).addAll(c);
+    public boolean addAll(String userId, String queueId, Collection c) {
+        return init(userId, queueId).addAll(c);
     }
 
-    public boolean removeAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).removeAll(c);
+    public boolean removeAll(String userId, String queueId, Collection c) {
+        return init(userId, queueId).removeAll(c);
     }
 
-    public boolean retainAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).retainAll(c);
+    public boolean retainAll(String userId, String queueId, Collection c) {
+        return init(userId, queueId).retainAll(c);
     }
 
-    public void clear(String userId, String objectId) {
-        init(userId, objectId).clear();
+    public void clear(String userId, String queueId) {
+        init(userId, queueId).clear();
     }
 
-    public boolean add(String userId, String objectId, Object e) {
-        return init(userId, objectId).add(e);
+    public boolean add(String userId, String queueId, Object e) {
+        return init(userId, queueId).add(e);
     }
 
-    public boolean offer(String userId, String objectId, Object e) {
-        return init(userId, objectId).offer(e);
+    public boolean offer(String userId, String queueId, Object e) {
+        return init(userId, queueId).offer(e);
     }
 
-    public Object remove(String userId, String objectId) {
-        return init(userId, objectId).remove();
+    public Object remove(String userId, String queueId) {
+        return init(userId, queueId).remove();
     }
 
-    public Object poll(String userId, String objectId) {
-        return init(userId, objectId).poll();
+    public Object poll(String userId, String queueId) {
+        return init(userId, queueId).poll();
     }
 
-    public Object element(String userId, String objectId) {
-        return init(userId, objectId).element();
+    public Object element(String userId, String queueId) {
+        return init(userId, queueId).element();
     }
 
-    public Object peek(String userId, String objectId) {
-        return init(userId, objectId).peek();
+    public Object peek(String userId, String queueId) {
+        return init(userId, queueId).peek();
     }
 }

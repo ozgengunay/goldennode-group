@@ -21,60 +21,60 @@ public class SetService {
         this.hzInstance = hzInstance;
     }
 
-    private Set init(String userId, String objectId) {
-        return hzInstance.getSet(userId + "_" + objectId);
+    private Set init(String userId, String setId) {
+        return hzInstance.getSet(userId + "_" + setId);
     }
 
-    public int size(String userId, String objectId) {
-        return init(userId, objectId).size();
+    public int size(String userId, String setId) {
+        return init(userId, setId).size();
     }
 
-    public boolean isEmpty(String userId, String objectId) {
-        return init(userId, objectId).isEmpty();
+    public boolean isEmpty(String userId, String setId) {
+        return init(userId, setId).isEmpty();
     }
 
-    public boolean contains(String userId, String objectId, Object o) {
-        return init(userId, objectId).contains(o);
+    public boolean contains(String userId, String setId, Object o) {
+        return init(userId, setId).contains(o);
     }
 
-    public Iterator iterator(String userId, String objectId) {
-        return init(userId, objectId).iterator();
+    public Iterator iterator(String userId, String setId) {
+        return init(userId, setId).iterator();
     }
 
-    public Object[] toArray(String userId, String objectId) {
-        return init(userId, objectId).toArray();
+    public Object[] toArray(String userId, String setId) {
+        return init(userId, setId).toArray();
     }
 
-    public Object[] toArray(String userId, String objectId, Object[] a) {
-        return init(userId, objectId).toArray();
+    public Object[] toArray(String userId, String setId, Object[] a) {
+        return init(userId, setId).toArray();
     }
 
-    public boolean remove(String userId, String objectId, Object o) {
-        return init(userId, objectId).remove(o);
+    public boolean remove(String userId, String setId, Object o) {
+        return init(userId, setId).remove(o);
     }
 
-    public boolean containsAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).containsAll(c);
+    public boolean containsAll(String userId, String setId, Collection c) {
+        return init(userId, setId).containsAll(c);
     }
 
-    public boolean addAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).addAll(c);
+    public boolean addAll(String userId, String setId, Collection c) {
+        return init(userId, setId).addAll(c);
     }
 
-    public boolean removeAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).removeAll(c);
+    public boolean removeAll(String userId, String setId, Collection c) {
+        return init(userId, setId).removeAll(c);
     }
 
-    public boolean retainAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).retainAll(c);
+    public boolean retainAll(String userId, String setId, Collection c) {
+        return init(userId, setId).retainAll(c);
     }
 
-    public void clear(String userId, String objectId) {
-        init(userId, objectId).clear();
+    public void clear(String userId, String setId) {
+        init(userId, setId).clear();
     }
 
-    public boolean add(String userId, String objectId, Object e) {
-        return init(userId, objectId).add(e);
+    public boolean add(String userId, String setId, Object e) {
+        return init(userId, setId).add(e);
     }
 
    
