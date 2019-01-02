@@ -6,17 +6,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
 @Service
 public class MapService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MapService.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(MapService.class);
     @Autowired
     private HazelcastInstance hzInstance;
 
@@ -24,7 +21,7 @@ public class MapService {
         this.hzInstance = hzInstance;
     }
 
-    private Map init(String userId, String mapId) {
+    private Map<String,String> init(String userId, String mapId) {
         return hzInstance.getMap(userId + "_" + mapId);
     }
 
