@@ -1,10 +1,5 @@
 package com.goldennode.server.controllers;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,92 +8,92 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.goldennode.server.common.ErrorCode;
-import com.goldennode.server.common.GoldenNodeRestException;
+import com.goldennode.commons.util.URLUtils;
 import com.goldennode.server.common.ResponseEntity;
 import com.goldennode.server.common.StatusCode;
 import com.goldennode.server.security.GoldenNodeUser;
-import com.goldennode.server.services.MapService;
+import com.goldennode.server.services.QueueService;
 
 @RestController
-@RequestMapping(value = { "/goldennode/map/id/{mapId}" })
+@RequestMapping(value = { "/goldennode/queue/id/{queueId}" })
 @CrossOrigin(origins = "*")
 public class QueueController {
     @Autowired
-    private MapService mapService;
+    private QueueService queueService;
 
-    public int size(String userId, String objectId) {
-        return init(userId, objectId).size();
+    @RequestMapping(value = { "/size" }, method = { RequestMethod.GET })
+    public ResponseEntity size(@PathVariable("queueId") String queueId) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.size(userDetails.getUsername(), queueId), StatusCode.SUCCESS);
     }
 
-    public boolean isEmpty(String userId, String objectId) {
-        return init(userId, objectId).isEmpty();
+    @RequestMapping(value = { "/isEmpty" }, method = { RequestMethod.GET })
+    public ResponseEntity isEmpty(@PathVariable("queueId") String queueId) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.isEmpty(userDetails.getUsername(), queueId), StatusCode.SUCCESS);
     }
 
-    public boolean contains(String userId, String objectId, Object o) {
-        return init(userId, objectId).contains(o);
+    @RequestMapping(value = { "/contains/element/{element}" }, method = { RequestMethod.GET })
+    public ResponseEntity contains(@PathVariable("queueId") String queueId, @PathVariable("element") String element) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.contains(userDetails.getUsername(), queueId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
 
-    public Iterator iterator(String userId, String objectId) {
-        return init(userId, objectId).iterator();
+    @RequestMapping(value = { "/toArray" }, method = { RequestMethod.GET })
+    public ResponseEntity toArray(@PathVariable("queueId") String queueId) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.toArray(userDetails.getUsername(), queueId), StatusCode.SUCCESS);
     }
 
-    public Object[] toArray(String userId, String objectId) {
-        return init(userId, objectId).toArray();
+    @RequestMapping(value = { "/remove/element/{element}" }, method = { RequestMethod.DELETE })
+    public ResponseEntity remove(@PathVariable("queueId") String queueId, @PathVariable("element") String element) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.remove(userDetails.getUsername(), queueId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
+    }
+    /*
+     * public boolean containsAll(String userId, String queueId, Collection c) { return init(userId, queueId).containsAll(c); }
+     * 
+     * public boolean addAll(String userId, String queueId, Collection c) { return init(userId, queueId).addAll(c); }
+     * 
+     * public boolean removeAll(String userId, String queueId, Collection c) { return init(userId, queueId).removeAll(c); }
+     * 
+     * public boolean retainAll(String userId, String queueId, Collection c) { return init(userId, queueId).retainAll(c); }
+     */
+
+    @RequestMapping(value = { "/clear" }, method = { RequestMethod.DELETE })
+    public ResponseEntity clear(@PathVariable("queueId") String queueId) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        queueService.clear(userDetails.getUsername(), queueId);
+        return new ResponseEntity(null, StatusCode.SUCCESS);
     }
 
-    public Object[] toArray(String userId, String objectId, Object[] a) {
-        return init(userId, objectId).toArray(a);
+    @RequestMapping(value = { "/add" }, method = { RequestMethod.POST })
+    public ResponseEntity add(@PathVariable("queueId") String queueId, @RequestBody String data) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.add(userDetails.getUsername(), queueId, data), StatusCode.SUCCESS);
     }
 
-    public boolean remove(String userId, String objectId, Object o) {
-        return init(userId, objectId).remove(o);
+    @RequestMapping(value = { "/offer" }, method = { RequestMethod.POST })
+    public ResponseEntity offer(@PathVariable("queueId") String queueId, @RequestBody String data) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.offer(userDetails.getUsername(), queueId, data), StatusCode.SUCCESS);
     }
 
-    public boolean containsAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).containsAll(c);
+    @RequestMapping(value = { "/poll" }, method = { RequestMethod.GET })
+    public ResponseEntity poll(@PathVariable("queueId") String queueId) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.poll(userDetails.getUsername(), queueId), StatusCode.SUCCESS);
     }
 
-    public boolean addAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).addAll(c);
+    @RequestMapping(value = { "/element" }, method = { RequestMethod.GET })
+    public ResponseEntity element(@PathVariable("queueId") String queueId) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.element(userDetails.getUsername(), queueId), StatusCode.SUCCESS);
     }
 
-    public boolean removeAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).removeAll(c);
+    @RequestMapping(value = { "/peek" }, method = { RequestMethod.GET })
+    public ResponseEntity peek(@PathVariable("queueId") String queueId) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(queueService.peek(userDetails.getUsername(), queueId), StatusCode.SUCCESS);
     }
-
-    public boolean retainAll(String userId, String objectId, Collection c) {
-        return init(userId, objectId).retainAll(c);
-    }
-
-    public void clear(String userId, String objectId) {
-        init(userId, objectId).clear();
-    }
-
-    public boolean add(String userId, String objectId, Object e) {
-        return init(userId, objectId).add(e);
-    }
-
-    public boolean offer(String userId, String objectId, Object e) {
-        return init(userId, objectId).offer(e);
-    }
-
-    public Object remove(String userId, String objectId) {
-        return init(userId, objectId).remove();
-    }
-
-    public Object poll(String userId, String objectId) {
-        return init(userId, objectId).poll();
-    }
-
-    public Object element(String userId, String objectId) {
-        return init(userId, objectId).element();
-    }
-
-    public Object peek(String userId, String objectId) {
-        return init(userId, objectId).peek();
-    }
-
 }

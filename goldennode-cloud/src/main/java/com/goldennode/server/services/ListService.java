@@ -100,14 +100,6 @@ public class ListService {
         return init(userId, listId).lastIndexOf(element);
     }
 
-    public ListIterator<String> listIterator(String userId, String listId) {
-        return init(userId, listId).listIterator();
-    }
-
-    public ListIterator<String> listIterator(String userId, String listId, int index) {
-        return init(userId, listId).listIterator(index);
-    }
-
     public List<String> subList(String userId, String listId, int fromIndex, int toIndex) {
         return init(userId, listId).subList(fromIndex, toIndex);
     }

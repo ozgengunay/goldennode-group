@@ -1,15 +1,13 @@
 package com.goldennode.server.controllers;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.goldennode.commons.util.URLUtils;
 import com.goldennode.server.common.ResponseEntity;
 import com.goldennode.server.common.StatusCode;
@@ -38,13 +36,7 @@ public class ListController {
     @RequestMapping(value = { "/contains/element/{element}" }, method = { RequestMethod.GET })
     public ResponseEntity contains(@PathVariable("listId") String listId, @PathVariable("element") String element) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(listService.contains(userDetails.getUsername(), listId, element), StatusCode.SUCCESS);
-    }
-
-    @RequestMapping(value = { "/iterator" }, method = { RequestMethod.GET })
-    public ResponseEntity iterator(@PathVariable("listId") String listId) {
-        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(listService.iterator(userDetails.getUsername(), listId), StatusCode.SUCCESS);
+        return new ResponseEntity(listService.contains(userDetails.getUsername(), listId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/toArray" }, method = { RequestMethod.GET })
@@ -53,10 +45,10 @@ public class ListController {
         return new ResponseEntity(listService.toArray(userDetails.getUsername(), listId), StatusCode.SUCCESS);
     }
 
-    @RequestMapping(value = { "/add/element/{element}" }, method = { RequestMethod.POST })
-    public ResponseEntity add(@PathVariable("listId") String listId, @PathVariable("element") String element) {
+    @RequestMapping(value = { "/add" }, method = { RequestMethod.POST })
+    public ResponseEntity add(@PathVariable("listId") String listId, @RequestBody String data) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(listService.add(userDetails.getUsername(), listId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
+        return new ResponseEntity(listService.add(userDetails.getUsername(), listId, data), StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/remove/element/{element}" }, method = { RequestMethod.DELETE })
@@ -65,33 +57,33 @@ public class ListController {
         return new ResponseEntity(listService.remove(userDetails.getUsername(), listId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
 
-    public ResponseEntity containsAll(@PathVariable("listId") String listId, @PathVariable("objects") Collection objects) {
+    /*public ResponseEntity containsAll(@PathVariable("listId") String listId, @PathVariable("objects") Collection objects) {
         return null;
-        //return init(userId, listId).containsAll(collection);
+        // return init(userId, listId).containsAll(collection);
     }
 
     @RequestMapping(value = { "/putAll" }, method = { RequestMethod.POST })
     public ResponseEntity addAll(@PathVariable("listId") String listId, Collection collection) {
         return null;
-        //return init(userId, listId).addAll(collection);
+        // return init(userId, listId).addAll(collection);
     }
 
     @RequestMapping(value = { "/putAll" }, method = { RequestMethod.POST })
     public ResponseEntity addAll(@PathVariable("listId") String listId, @PathVariable("index") int index, Collection collection) {
         return null;
-        //return init(userId, listId).addAll(collection);
+        // return init(userId, listId).addAll(collection);
     }
 
     @RequestMapping(value = { "/removeAll" }, method = { RequestMethod.DELETE })
     public ResponseEntity removeAll(@PathVariable("listId") String listId, Collection collection) {
         return null;
-        //return init(userId, listId).removeAll(collection);
+        // return init(userId, listId).removeAll(collection);
     }
 
     public ResponseEntity retainAll(@PathVariable("listId") String listId, Collection collection) {
         return null;
-        //return init(userId, listId).retainAll(collection);
-    }
+        // return init(userId, listId).retainAll(collection);
+    }*/
 
     @RequestMapping(value = { "/clear" }, method = { RequestMethod.DELETE })
     public ResponseEntity clear(@PathVariable("listId") String listId) {
@@ -106,36 +98,40 @@ public class ListController {
         return new ResponseEntity(listService.get(userDetails.getUsername(), listId, index), StatusCode.SUCCESS);
     }
 
-    public ResponseEntity set(@PathVariable("listId") String listId, @PathVariable("index") int index, @PathVariable("element") Object element) {
-        return init(userId, listId).set(index, element);
+    @RequestMapping(value = { "/set/index/{index}" }, method = { RequestMethod.PUT })
+    public ResponseEntity set(@PathVariable("listId") String listId, @PathVariable("index") int index,  @RequestBody String data) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(listService.set(userDetails.getUsername(), listId, index, data), StatusCode.SUCCESS);
     }
 
-    public ResponseEntity add(@PathVariable("listId") String listId, @PathVariable("index") int index, @PathVariable("element") Object element) {
-        init(userId, listId).add(index, element);
+    @RequestMapping(value = { "/add/index/{index}" }, method = { RequestMethod.POST })
+    public ResponseEntity add(@PathVariable("listId") String listId, @PathVariable("index") int index,  @RequestBody String data) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        listService.add(userDetails.getUsername(), listId, index, data);
+        return new ResponseEntity(null, StatusCode.SUCCESS);
     }
 
-    @RequestMapping(value = { "/remove/key/{key}" }, method = { RequestMethod.DELETE })
+    @RequestMapping(value = { "/remove/index/{index}" }, method = { RequestMethod.DELETE })
     public ResponseEntity remove(@PathVariable("listId") String listId, int index) {
-        return init(userId, listId).remove(index);
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(listService.remove(userDetails.getUsername(), listId, index), StatusCode.SUCCESS);
     }
 
-    public ResponseEntity indexOf(@PathVariable("listId") String listId, @PathVariable("element") Object element) {
-        return init(userId, listId).indexOf(element);
+    @RequestMapping(value = { "/indexOf/element/{element}" }, method = { RequestMethod.GET })
+    public ResponseEntity indexOf(@PathVariable("listId") String listId, @PathVariable("element") String element) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(listService.indexOf(userDetails.getUsername(), listId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
 
-    public ResponseEntity lastIndexOf(@PathVariable("listId") String listId, @PathVariable("element") Object element) {
-        return init(userId, listId).lastIndexOf(element);
+    @RequestMapping(value = { "/lastIndexOf/element/{element}" }, method = { RequestMethod.GET })
+    public ResponseEntity lastIndexOf(@PathVariable("listId") String listId, @PathVariable("element") String element) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(listService.lastIndexOf(userDetails.getUsername(), listId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
 
-    public ResponseEntity listIterator(@PathVariable("listId") String listId) {
-        return init(userId, listId).listIterator();
-    }
-
-    public ResponseEntity listIterator(@PathVariable("listId") String listId, @PathVariable("index") int index) {
-        return init(userId, listId).listIterator(index);
-    }
-
+    @RequestMapping(value = { "/subList/fromIndex/{fromIndex}/toIndex/{toIndex}" }, method = { RequestMethod.GET })
     public ResponseEntity subList(@PathVariable("listId") String listId, int fromIndex, int toIndex) {
-        return init(userId, listId).subList(fromIndex, toIndex);
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new ResponseEntity(listService.subList(userDetails.getUsername(), listId, fromIndex, toIndex), StatusCode.SUCCESS);
     }
 }
