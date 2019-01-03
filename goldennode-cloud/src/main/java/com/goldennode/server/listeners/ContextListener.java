@@ -6,13 +6,8 @@ import javax.servlet.annotation.WebListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.amazonaws.metrics.AwsSdkMetrics;
-import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
-import com.amazonaws.services.cloudwatch.AmazonCloudWatchClientBuilder;
-import com.amazonaws.services.cloudwatch.model.Dimension;
-import com.amazonaws.services.cloudwatch.model.MetricDatum;
-import com.amazonaws.services.cloudwatch.model.PutMetricDataRequest;
-import com.amazonaws.services.cloudwatch.model.PutMetricDataResult;
-import com.amazonaws.services.cloudwatch.model.StandardUnit;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.util.EC2MetadataUtils;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
@@ -30,8 +25,11 @@ public class ContextListener implements ServletContextListener {
         try {
             // WebApplicationContext ctx =WebApplicationContextUtils.getWebApplicationContext(contextEvent.getServletContext());
             // contextEvent.getServletContext().setAttribute("hazelcast", Hazelcast.newHazelcastInstance());
-            LOGGER.debug("Context initialized... / " + contextEvent.getServletContext().getRealPath("/") + " / " + contextEvent.getServletContext().getServletContextName());
+            AwsSdkMetrics.setPerHostMetricsIncluded(true);
+            AwsSdkMetrics.setRegion(Regions.getCurrentRegion() != null ? Regions.getCurrentRegion().getName() : null);
+            AwsSdkMetrics.setHostMetricName(EC2MetadataUtils.getInstanceId());
             AwsSdkMetrics.enableDefaultMetrics();
+            LOGGER.debug("Context initialized... / " + contextEvent.getServletContext().getRealPath("/") + " / " + contextEvent.getServletContext().getServletContextName());
         } catch (Exception e) {
             LOGGER.error("error initializing context", e);
         }

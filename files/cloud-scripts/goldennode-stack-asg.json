@@ -443,14 +443,13 @@
                 },
                 " -f < goldennode.sql \n",
                 "# install Cloud Watch Monitoring Scripts \n",
-				"wget https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.2.zip -O /opt/scripts/CloudWatchMonitoringScripts.zip \n",
-	            "sudo -E apt-get -qy install unzip libwww-perl libdatetime-perl \n",
-	            "unzip /opt/scripts/CloudWatchMonitoringScripts.zip -d /opt/scripts \n",
-	            "rm /opt/scripts/CloudWatchMonitoringScripts.zip \n",
-	            "sudo chown -hR root:root /opt/scripts/aws-scripts-mon \n",
-	            "echo '*/5 * * * * /opt/scripts/aws-scripts-mon/mon-put-instance-data.pl --auto-scaling --mem-util --swap-util --disk-space-util --disk-path=/' > /opt/scripts/resource_usage.cron \n",
-	            "crontab /opt/scripts/resource_usage.cron \n",
-                
+                "wget https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.2.zip -O CloudWatchMonitoringScripts.zip \n",
+                "sudo yum install -y perl-Switch perl-DateTime perl-Sys-Syslog perl-LWP-Protocol-https perl-Digest-SHA.x86_64 \n",
+                "unzip CloudWatchMonitoringScripts.zip \n",
+                "rm CloudWatchMonitoringScripts.zip \n",
+                "sudo chown -hR root:root aws-scripts-mon \n",
+                "echo '*/5 * * * * aws-scripts-mon/mon-put-instance-data.pl --auto-scaling --mem-util --swap-util --disk-space-util --disk-path=/' > resource_usage.cron \n",
+                "crontab resource_usage.cron \n",
                 "apache-tomcat-",
                 {
                   "Ref": "tomcatVersion"
@@ -559,7 +558,9 @@
         "Dimensions": [
           {
             "Name": "AutoScalingGroupName",
-            "Value": "Auto Scaling Group"
+            "Value": {
+              "Ref": "autoScalingGroup"
+            }
           }
         ]
       }
@@ -586,7 +587,9 @@
         "Dimensions": [
           {
             "Name": "AutoScalingGroupName",
-            "Value": "Auto Scaling Group"
+            "Value": {
+              "Ref": "autoScalingGroup"
+            }
           }
         ]
       }
