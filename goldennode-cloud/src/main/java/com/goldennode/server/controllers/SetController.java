@@ -1,6 +1,5 @@
 package com.goldennode.server.controllers;
 
-import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;

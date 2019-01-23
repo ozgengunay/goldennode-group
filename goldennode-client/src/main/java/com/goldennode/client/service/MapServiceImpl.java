@@ -1,8 +1,6 @@
 package com.goldennode.client.service;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,15 +12,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.goldennode.client.GoldenNodeException;
 import com.goldennode.client.Response;
 import com.goldennode.client.RestClient;
 import com.goldennode.client.Utils;
 
 public class MapServiceImpl<K, V> implements MapService<K, V> {
-    ObjectMapper om = new ObjectMapper();
+    
 
     public int size(String id) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), "GET");
@@ -44,7 +40,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public boolean containsKey(String id, Object key) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsKey/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(encapObject(key))), "GET");
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsKey/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "GET");
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean((String) response.getEntityValue());
             else {
@@ -57,7 +53,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public boolean containsValue(String id, Object value) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsValue/value/{value}".replace("{mapId}", id).replace("{value}", Utils.encode(encapObject(value))), "GET");
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/containsValue/value/{value}".replace("{mapId}", id).replace("{value}", Utils.encode(Utils.encapObject(value))), "GET");
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean((String) response.getEntityValue());
             else {
@@ -70,9 +66,9 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public V get(String id, Object key) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/get/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(encapObject(key))), "GET");
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/get/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "GET");
             if (response.getStatusCode() == 200) {
-                return (V) extractObject(response.getEntityValue());
+                return (V) Utils.extractObject(response.getEntityValue());
             } else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -83,31 +79,11 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
-    public Object extractObject(String value) throws IOException, ClassNotFoundException {
-        if (value == null)
-            return null;
-        JsonNode node = om.readTree(value);
-        String className = node.get("c").asText();
-        JsonNode objectNode = node.get("o");
-        if (className.equals("NULL")) {
-            return null;
-        }
-        Class<?> c = Class.forName(className);
-        return om.treeToValue(objectNode, c);
-    }
-
-    public String encapObject(Object value) throws JsonProcessingException {
-        JsonNode newNode = om.createObjectNode();
-        ((ObjectNode) newNode).put("c", value == null ? "NULL" : value.getClass().getName());
-        ((ObjectNode) newNode).set("o", om.valueToTree(value == null ? "NULL" : value));
-        return om.writeValueAsString(newNode);
-    }
-
     public V put(String id, K key, V value) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(encapObject(key))), "POST", encapObject(value));
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "POST", Utils.encapObject(value));
             if (response.getStatusCode() == 200)
-                return (V) extractObject(response.getEntityValue());
+                return (V) Utils.extractObject(response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -120,9 +96,9 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public V remove(String id, Object key) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/remove/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(encapObject(key))), "DELETE");
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/remove/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "DELETE");
             if (response.getStatusCode() == 200)
-                return (V) extractObject(response.getEntityValue());
+                return (V) Utils.extractObject(response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -155,7 +131,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
                 Set<K> set = new HashSet<>();
                 Iterator<JsonNode> iter = response.getEntityIterator();
                 while (iter.hasNext()) {
-                    set.add((K) extractObject(iter.next().asText()));
+                    set.add((K) Utils.extractObject(iter.next().asText()));
                 }
                 return set;
             } else {
@@ -175,7 +151,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
                 List<V> list = new ArrayList<>();
                 Iterator<JsonNode> iter = response.getEntityIterator();
                 while (iter.hasNext()) {
-                    list.add((V) extractObject(iter.next().asText()));
+                    list.add((V) Utils.extractObject(iter.next().asText()));
                 }
                 return list;
             } else {
@@ -196,8 +172,8 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
                 Iterator<JsonNode> iter = response.getEntityIterator();
                 while (iter.hasNext()) {
                     JsonNode node = iter.next();
-                    K key = (K) extractObject(node.fieldNames().next());
-                    V value = (V) extractObject(node.fields().next().getValue().asText());
+                    K key = (K) Utils.extractObject(node.fieldNames().next());
+                    V value = (V) Utils.extractObject(node.fields().next().getValue().asText());
                     map.put(key, value);
                 }
                 return map.entrySet();
