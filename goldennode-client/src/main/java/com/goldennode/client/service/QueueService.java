@@ -9,7 +9,7 @@ public interface QueueService<E> extends Service {
 
     public boolean isEmpty(String queueId) throws GoldenNodeException;
 
-    public boolean contains(String queueId, Object o) throws GoldenNodeException;
+    public boolean contains(String queueId, Object object) throws GoldenNodeException;
 
     public Iterator<E> iterator(String queueId) throws GoldenNodeException;
 
@@ -17,21 +17,21 @@ public interface QueueService<E> extends Service {
 
     public <T> T[] toArray(String queueId, T[] a) throws GoldenNodeException;
 
-    public boolean remove(String queueId, Object o) throws GoldenNodeException;
+    public boolean remove(String queueId, Object object) throws GoldenNodeException;
 
-    public boolean containsAll(String queueId, Collection<?> c) throws GoldenNodeException;
+    public boolean containsAll(String queueId, Collection<?> collection) throws GoldenNodeException;
 
-    public boolean addAll(String queueId, Collection<? extends E> c) throws GoldenNodeException;
+    public boolean addAll(String queueId, Collection<? extends E> collection) throws GoldenNodeException;
 
-    public boolean removeAll(String queueId, Collection<?> c) throws GoldenNodeException;
+    public boolean removeAll(String queueId, Collection<?> collection) throws GoldenNodeException;
 
-    public boolean retainAll(String queueId, Collection<?> c) throws GoldenNodeException;
+    public boolean retainAll(String queueId, Collection<?> collection) throws GoldenNodeException;
 
     public void clear(String queueId) throws GoldenNodeException;
 
-    public boolean add(String queueId, E e) throws GoldenNodeException;
+    public boolean add(String queueId, E element) throws GoldenNodeException;
 
-    public boolean offer(String queueId, E e) throws GoldenNodeException;
+    public boolean offer(String queueId, E element) throws GoldenNodeException;
 
     public E remove(String queueId) throws GoldenNodeException;
 
