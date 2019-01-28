@@ -1,12 +1,15 @@
 package com.goldennode.client.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.goldennode.client.GoldenNodeException;
 import com.goldennode.client.Response;
 import com.goldennode.client.RestClient;
@@ -141,26 +144,82 @@ public class SetServiceImpl<E> implements SetService<E> {
 
     @Override
     public boolean containsAll(String setId, Collection<?> c) throws GoldenNodeException {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            Iterator<?> iter = c.iterator();
+            List<String> temp = new ArrayList<>();
+            while (iter.hasNext()) {
+                Object o = iter.next();
+                temp.add(Utils.encapObject(Utils.encapObject(o)));
+            }
+            Response response = RestClient.call("/goldennode/set/id/{setId}/containsAll".replace("{setId}", setId), "PUT", new ObjectMapper().writeValueAsString(temp));
+            if (response.getStatusCode() == 200)
+                return Boolean.parseBoolean(response.getEntityValue());
+            else {
+                throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
+            }
+        } catch (IOException e) {
+            throw new GoldenNodeException(e);
+        }
     }
 
     @Override
     public boolean addAll(String setId, Collection<? extends E> c) throws GoldenNodeException {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            Iterator<? extends E> iter = c.iterator();
+            List<String> temp = new ArrayList<>();
+            while (iter.hasNext()) {
+                Object o = iter.next();
+                temp.add(Utils.encapObject(Utils.encapObject(o)));
+            }
+            Response response = RestClient.call("/goldennode/set/id/{setId}/addAll".replace("{setId}", setId), "POST", new ObjectMapper().writeValueAsString(temp));
+            if (response.getStatusCode() == 200)
+                return Boolean.parseBoolean(response.getEntityValue());
+            else {
+                throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
+            }
+        } catch (IOException e) {
+            throw new GoldenNodeException(e);
+        }
     }
 
     @Override
     public boolean retainAll(String setId, Collection<?> c) throws GoldenNodeException {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            Iterator<?> iter = c.iterator();
+            Set<String> temp = new HashSet<>();
+            while (iter.hasNext()) {
+                Object o = iter.next();
+                temp.add(Utils.encapObject(Utils.encapObject(o)));
+            }
+            Response response = RestClient.call("/goldennode/set/id/{setId}/retainAll".replace("{setId}", setId), "PUT", new ObjectMapper().writeValueAsString(temp));
+            if (response.getStatusCode() == 200)
+                return Boolean.parseBoolean(response.getEntityValue());
+            else {
+                throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
+            }
+        } catch (IOException e) {
+            throw new GoldenNodeException(e);
+        }
     }
 
     @Override
     public boolean removeAll(String setId, Collection<?> c) throws GoldenNodeException {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            Iterator<?> iter = c.iterator();
+            Set<String> temp = new HashSet<>();
+            while (iter.hasNext()) {
+                Object o = iter.next();
+                temp.add(Utils.encapObject(Utils.encapObject(o)));
+            }
+            Response response = RestClient.call("/goldennode/set/id/{setId}/removeAll".replace("{setId}", setId), "PUT", new ObjectMapper().writeValueAsString(temp));
+            if (response.getStatusCode() == 200)
+                return Boolean.parseBoolean(response.getEntityValue());
+            else {
+                throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
+            }
+        } catch (IOException e) {
+            throw new GoldenNodeException(e);
+        }
     }
 
     @Override

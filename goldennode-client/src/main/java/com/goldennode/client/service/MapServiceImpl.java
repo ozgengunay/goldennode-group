@@ -12,14 +12,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.goldennode.client.GoldenNodeException;
 import com.goldennode.client.Response;
 import com.goldennode.client.RestClient;
 import com.goldennode.client.Utils;
 
 public class MapServiceImpl<K, V> implements MapService<K, V> {
-    
-
     public int size(String id) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), "GET");
         if (response.getStatusCode() == 200)
@@ -81,7 +80,8 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
 
     public V put(String id, K key, V value) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "POST", Utils.encapObject(value));
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "POST",
+                    Utils.encapObject(value));
             if (response.getStatusCode() == 200)
                 return (V) Utils.extractObject(response.getEntityValue());
             else {
@@ -110,8 +110,20 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
     }
 
     public void putAll(String id, Map<? extends K, ? extends V> m) throws GoldenNodeException {
-        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
-            put(id, entry.getKey(), entry.getValue());
+        try {
+            Map<String, String> temp = new HashMap<>();
+            for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
+                temp.put(Utils.encapObject(entry.getKey()), Utils.encapObject(entry.getValue()));
+                m.remove(entry.getKey());
+            }
+            Response response = RestClient.call("/goldennode/map/id/{mapId}/putAll".replace("{mapId}", id), "POST", new ObjectMapper().writeValueAsString(temp));
+            if (response.getStatusCode() == 200)
+                return;
+            else {
+                throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
+            }
+        } catch (IOException e) {
+            throw new GoldenNodeException(e);
         }
     }
 

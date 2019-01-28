@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,6 +22,7 @@ import com.goldennode.server.common.ResponseEntity;
 import com.goldennode.server.common.StatusCode;
 import com.goldennode.server.security.GoldenNodeUser;
 import com.goldennode.server.services.MapService;
+import com.hazelcast.core.IMap;
 
 @RestController
 @RequestMapping(value = { "/goldennode/map/id/{mapId}" })
@@ -77,14 +79,13 @@ public class MapController {
         try {
             ObjectMapper om = new ObjectMapper();
             JsonNode node = om.readTree(data);
-            if (!node.isArray())
-                throw new GoldenNodeRestException(ErrorCode.EXPECTED_JSON_ARRAY);
-            node.iterator();
+            // if (!node.isArray())
+            // throw new GoldenNodeRestException(ErrorCode.EXPECTED_JSON_ARRAY);
             Map map = new HashMap<>();
-            Iterator<JsonNode> iter = node.iterator();
+            Iterator<Entry<String, JsonNode>> iter = node.fields();
             while (iter.hasNext()) {
-                JsonNode nd = iter.next();
-                map.put(nd.fieldNames().next(), nd.fields().next().getValue().asText());
+                Map.Entry<String, JsonNode> nd = iter.next();
+                map.put(nd.getKey(), nd.getValue().asText());
             }
             mapService.putAll(userDetails.getUsername(), mapId, map);
             return new ResponseEntity(StatusCode.SUCCESS);
@@ -97,7 +98,7 @@ public class MapController {
     public ResponseEntity clear(@PathVariable("mapId") String mapId) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         mapService.clear(userDetails.getUsername(), mapId);
-        return new ResponseEntity(null, StatusCode.SUCCESS);
+        return new ResponseEntity(StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/keySet" }, method = { RequestMethod.GET })
