@@ -1,5 +1,9 @@
 package com.goldennode.server.controllers;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.goldennode.commons.util.URLUtils;
+import com.goldennode.server.common.ErrorCode;
+import com.goldennode.server.common.GoldenNodeRestException;
 import com.goldennode.server.common.ResponseEntity;
 import com.goldennode.server.common.StatusCode;
 import com.goldennode.server.security.GoldenNodeUser;
@@ -55,22 +63,86 @@ public class SetController {
         return new ResponseEntity(setService.remove(userDetails.getUsername(), setId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
    
-
-    /*public boolean containsAll(String userId, String setId, Collection c) {
-        return init(userId, setId).containsAll(c);
+    @RequestMapping(value = { "/containsAll" }, method = { RequestMethod.POST })
+    public ResponseEntity containsAll(String userId, String setId, @RequestBody String data) throws GoldenNodeRestException {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            ObjectMapper om = new ObjectMapper();
+            JsonNode node = om.readTree(data);
+            if (!node.isArray())
+                throw new GoldenNodeRestException(ErrorCode.EXPECTED_JSON_ARRAY);
+            Collection<String> set = new HashSet<>();
+            Iterator<JsonNode> iter = node.iterator();
+            while (iter.hasNext()) {
+                JsonNode nd = iter.next();
+                set.add(nd.asText());
+            }
+            return new ResponseEntity(setService.containsAll(userDetails.getUsername(), setId, set), StatusCode.SUCCESS);
+        } catch (IOException e) {
+            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+        }
     }
 
-    public boolean addAll(String userId, String setId, Collection c) {
-        return init(userId, setId).addAll(c);
+    
+    @RequestMapping(value = { "/addAll" }, method = { RequestMethod.POST })
+    public ResponseEntity addAll(String userId, String setId, @RequestBody String data) throws GoldenNodeRestException {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            ObjectMapper om = new ObjectMapper();
+            JsonNode node = om.readTree(data);
+            if (!node.isArray())
+                throw new GoldenNodeRestException(ErrorCode.EXPECTED_JSON_ARRAY);
+            Collection<String> set = new HashSet<>();
+            Iterator<JsonNode> iter = node.iterator();
+            while (iter.hasNext()) {
+                JsonNode nd = iter.next();
+                set.add(nd.asText());
+            }
+            return new ResponseEntity(setService.addAll(userDetails.getUsername(), setId, set), StatusCode.SUCCESS);
+        } catch (IOException e) {
+            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+        }
+    }
+    
+    @RequestMapping(value = { "/removeAll" }, method = { RequestMethod.PUT })
+    public ResponseEntity removeAll(String userId, String setId, @RequestBody String data) throws GoldenNodeRestException {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            ObjectMapper om = new ObjectMapper();
+            JsonNode node = om.readTree(data);
+            if (!node.isArray())
+                throw new GoldenNodeRestException(ErrorCode.EXPECTED_JSON_ARRAY);
+            Collection<String> set = new HashSet<>();
+            Iterator<JsonNode> iter = node.iterator();
+            while (iter.hasNext()) {
+                JsonNode nd = iter.next();
+                set.add(nd.asText());
+            }
+            return new ResponseEntity(setService.removeAll(userDetails.getUsername(), setId, set), StatusCode.SUCCESS);
+        } catch (IOException e) {
+            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+        }
     }
 
-    public boolean removeAll(String userId, String setId, Collection c) {
-        return init(userId, setId).removeAll(c);
+    @RequestMapping(value = { "/retainAll" }, method = { RequestMethod.PUT })    
+    public ResponseEntity retainAll(String userId, String setId, @RequestBody String data) throws GoldenNodeRestException {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            ObjectMapper om = new ObjectMapper();
+            JsonNode node = om.readTree(data);
+            if (!node.isArray())
+                throw new GoldenNodeRestException(ErrorCode.EXPECTED_JSON_ARRAY);
+            Collection<String> set = new HashSet<>();
+            Iterator<JsonNode> iter = node.iterator();
+            while (iter.hasNext()) {
+                JsonNode nd = iter.next();
+                set.add(nd.asText());
+            }
+            return new ResponseEntity(setService.retainAll(userDetails.getUsername(), setId, set), StatusCode.SUCCESS);
+        } catch (IOException e) {
+            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+        }
     }
-
-    public boolean retainAll(String userId, String setId, Collection c) {
-        return init(userId, setId).retainAll(c);
-    }*/
 
     @RequestMapping(value = { "/clear" }, method = { RequestMethod.DELETE })
     public ResponseEntity clear(@PathVariable("setId") String setId) {

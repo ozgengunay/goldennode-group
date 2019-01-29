@@ -1,7 +1,6 @@
 package com.goldennode.server.controllers;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;

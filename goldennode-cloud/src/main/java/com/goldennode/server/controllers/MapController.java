@@ -22,7 +22,6 @@ import com.goldennode.server.common.ResponseEntity;
 import com.goldennode.server.common.StatusCode;
 import com.goldennode.server.security.GoldenNodeUser;
 import com.goldennode.server.services.MapService;
-import com.hazelcast.core.IMap;
 
 @RestController
 @RequestMapping(value = { "/goldennode/map/id/{mapId}" })
@@ -79,9 +78,7 @@ public class MapController {
         try {
             ObjectMapper om = new ObjectMapper();
             JsonNode node = om.readTree(data);
-            // if (!node.isArray())
-            // throw new GoldenNodeRestException(ErrorCode.EXPECTED_JSON_ARRAY);
-            Map map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
             Iterator<Entry<String, JsonNode>> iter = node.fields();
             while (iter.hasNext()) {
                 Map.Entry<String, JsonNode> nd = iter.next();

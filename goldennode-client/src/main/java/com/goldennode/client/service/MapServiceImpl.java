@@ -19,6 +19,7 @@ import com.goldennode.client.RestClient;
 import com.goldennode.client.Utils;
 
 public class MapServiceImpl<K, V> implements MapService<K, V> {
+    @Override
     public int size(String id) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/map/id/{mapId}/size".replace("{mapId}", id), "GET");
         if (response.getStatusCode() == 200)
@@ -28,6 +29,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @Override
     public boolean isEmpty(String id) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/map/id/{mapId}/isEmpty".replace("{mapId}", id), "GET");
         if (response.getStatusCode() == 200) {
@@ -37,6 +39,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @Override
     public boolean containsKey(String id, Object key) throws GoldenNodeException {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/containsKey/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "GET");
@@ -50,6 +53,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @Override
     public boolean containsValue(String id, Object value) throws GoldenNodeException {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/containsValue/value/{value}".replace("{mapId}", id).replace("{value}", Utils.encode(Utils.encapObject(value))), "GET");
@@ -63,6 +67,8 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
     public V get(String id, Object key) throws GoldenNodeException {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/get/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "GET");
@@ -78,6 +84,8 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
     public V put(String id, K key, V value) throws GoldenNodeException {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/put/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "POST",
@@ -94,6 +102,8 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
     public V remove(String id, Object key) throws GoldenNodeException {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/remove/key/{key}".replace("{mapId}", id).replace("{key}", Utils.encode(Utils.encapObject(key))), "DELETE");
@@ -109,12 +119,12 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @Override
     public void putAll(String id, Map<? extends K, ? extends V> m) throws GoldenNodeException {
         try {
             Map<String, String> temp = new HashMap<>();
             for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
                 temp.put(Utils.encapObject(entry.getKey()), Utils.encapObject(entry.getValue()));
-                m.remove(entry.getKey());
             }
             Response response = RestClient.call("/goldennode/map/id/{mapId}/putAll".replace("{mapId}", id), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
@@ -127,6 +137,7 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @Override
     public void clear(String id) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/map/id/{mapId}/clear".replace("{mapId}", id), "DELETE");
         if (response.getStatusCode() == 200)
@@ -136,6 +147,8 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
     public Set<K> keySet(String id) throws GoldenNodeException {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/keySet".replace("{mapId}", id), "GET");
@@ -156,6 +169,8 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
     public Collection<V> values(String id) throws GoldenNodeException {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/values".replace("{mapId}", id), "GET");
@@ -176,6 +191,8 @@ public class MapServiceImpl<K, V> implements MapService<K, V> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
     public Set<Entry<K, V>> entrySet(String id) throws GoldenNodeException {
         try {
             Response response = RestClient.call("/goldennode/map/id/{mapId}/entrySet".replace("{mapId}", id), "GET");

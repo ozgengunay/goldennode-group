@@ -21,21 +21,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class TestGoldenNodeMap {
     ObjectMapper om = new ObjectMapper();
 
-    public Object extractObject(String value) throws IOException, ClassNotFoundException {
-        JsonNode node = om.readTree(value);
-        String className = node.get("className").asText();
-        JsonNode objectNode = node.get("object");
-        Class<?> c = Class.forName(className);
-        return om.treeToValue(objectNode, c);
-    }
-
-    public String encapObject(Object value) throws JsonProcessingException {
-        JsonNode newNode = om.createObjectNode();
-        ((ObjectNode) newNode).put("className", value.getClass().getName());
-        ((ObjectNode) newNode).set("object", om.valueToTree(value));
-        return om.writeValueAsString(newNode);
-    }
-
     public void loadTest() {
         HashMap<String, String> map = new HashMap<>();
         Random random = new Random();
@@ -107,7 +92,7 @@ public class TestGoldenNodeMap {
         expectedKey.add("key1_");
         expectedKey.add("key2_");
         expectedKey.add("key3");
-        Assert.assertTrue(contentsSame(expectedKey, (Set<?>) response));
+        Assert.assertTrue(TestUtil.contentsSame(expectedKey, (Set<?>) response));
         response = m0.values();
         Assert.assertEquals(6, ((Collection<?>) response).size());
         Collection<TestBean> expectedValue = new HashSet<>();
@@ -118,7 +103,7 @@ public class TestGoldenNodeMap {
         expectedValue.add(tb2_);
         expectedValue.add(tb2);
         expectedValue.add(tb3);
-        Assert.assertTrue(contentsSame(expectedValue, (List<?>) response));
+        Assert.assertTrue(TestUtil.contentsSame(expectedValue, (List<?>) response));
         response = m0.entrySet();
         Assert.assertEquals("key1", ((Set<Entry<String, String>>) response).iterator().next().getKey());
         Assert.assertEquals(tb11, ((Set<Entry<String, String>>) response).iterator().next().getValue());
@@ -184,7 +169,7 @@ public class TestGoldenNodeMap {
         expected.add("key3");
         expected.add("key1_");
         expected.add("key2_");
-        Assert.assertTrue(contentsSame(expected, (Set<?>) response));
+        Assert.assertTrue(TestUtil.contentsSame(expected, (Set<?>) response));
         response = m1.values();
         Assert.assertEquals(5, ((Collection<?>) response).size());
         expected = new ArrayList<>();
@@ -193,7 +178,7 @@ public class TestGoldenNodeMap {
         expected.add("val3");
         expected.add("val1_");
         expected.add("val2_");
-        Assert.assertTrue(contentsSame(expected, (List<?>) response));
+        Assert.assertTrue(TestUtil.contentsSame(expected, (List<?>) response));
         response = m1.entrySet();
         Assert.assertEquals("key1", ((Set<Entry<String, String>>) response).iterator().next().getKey());
         Assert.assertEquals("val1", ((Set<Entry<String, String>>) response).iterator().next().getValue());
@@ -249,15 +234,5 @@ public class TestGoldenNodeMap {
         Assert.assertEquals(null, response);
         response = m5.get("key1");
         Assert.assertEquals(time, ((Date) response).getTime());
-    }
-
-    private boolean contentsSame(Collection<?> expected, Collection<?> actual) {
-        if (expected.size() != actual.size())
-            return false;
-        for (Object exp : expected) {
-            if (!actual.contains(exp))
-                return false;
-        }
-        return true;
     }
 }

@@ -16,7 +16,6 @@ import com.goldennode.client.RestClient;
 import com.goldennode.client.Utils;
 
 public class SetServiceImpl<E> implements SetService<E> {
-
     @Override
     public int size(String setId) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/set/id/{setId}/size".replace("{setId}", setId), "GET");
@@ -51,6 +50,7 @@ public class SetServiceImpl<E> implements SetService<E> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Iterator<E> iterator(String setId) throws GoldenNodeException {
         try {
@@ -72,6 +72,7 @@ public class SetServiceImpl<E> implements SetService<E> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Object[] toArray(String setId) throws GoldenNodeException {
         try {
@@ -93,6 +94,7 @@ public class SetServiceImpl<E> implements SetService<E> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T[] toArray(String setId, T[] a) throws GoldenNodeException {
         try {
@@ -123,7 +125,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
-        }  catch (IOException e) {
+        } catch (IOException e) {
             throw new GoldenNodeException(e);
         }
     }
@@ -151,7 +153,7 @@ public class SetServiceImpl<E> implements SetService<E> {
                 Object o = iter.next();
                 temp.add(Utils.encapObject(Utils.encapObject(o)));
             }
-            Response response = RestClient.call("/goldennode/set/id/{setId}/containsAll".replace("{setId}", setId), "PUT", new ObjectMapper().writeValueAsString(temp));
+            Response response = RestClient.call("/goldennode/set/id/{setId}/containsAll".replace("{setId}", setId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean(response.getEntityValue());
             else {
@@ -230,6 +232,5 @@ public class SetServiceImpl<E> implements SetService<E> {
         else {
             throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
         }
-        
     }
 }
