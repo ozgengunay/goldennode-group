@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,6 +29,11 @@ public class TestGoldenNodeList {
         Collection<TestBean> m0_ = new ArrayList<TestBean>();
         m0_.add(tb2);
         m0_.add(tb3);
+        Collection<TestBean> m1 = new ArrayList<TestBean>();
+        m1.add(tb1_);
+        m1.add(tb2_);
+        Collection<TestBean> m2 = new ArrayList<TestBean>();
+        m2.add(tb1_);
         // response = m0.add(null);
         // Assert.assertEquals(true, response);
         response = m0.add(tb1);
@@ -74,5 +80,52 @@ public class TestGoldenNodeList {
         Assert.assertEquals(true, response);
         response = m0.containsAll(m0_);
         Assert.assertEquals(true, response);
+        response = m0.isEmpty();
+        Assert.assertEquals(false, response);
+        
+        response = m0.addAll(m1);
+        Assert.assertEquals(true, response);
+        response = m0.size();
+        Assert.assertEquals(4, response);
+        response = m0.removeAll(m1);
+        Assert.assertEquals(true, response);
+        response = m0.size();
+        Assert.assertEquals(2, response);
+
+        m0.stream().forEach(System.out::println);
+        response = m0.addAll(0, m2);
+        Assert.assertEquals(true, response);
+        response = m0.size();
+        Assert.assertEquals(3, response);
+        m0.stream().forEach(System.out::println);
+        response = m0.get(0);
+        Assert.assertEquals(tb1_, response);
+        /* ;
+
+         boolean addAll(String listId, int index, Collection<? extends E> c) ;
+
+        
+
+         boolean retainAll(String listId, Collection<?> c) ;
+
+         void clear(String listId) ;
+
+         
+
+         E set(String listId, int index, E element) ;
+
+         void add(String listId, int index, E element) ;
+
+         E remove(String listId, int index) ;
+
+         int indexOf(String listId, Object o) ;
+
+         int lastIndexOf(String listId, Object o) ;
+
+         ListIterator<E> listIterator(String listId) ;
+
+         ListIterator<E> listIterator(String listId, int index) ;
+
+         List<E> subList(String listId, int fromIndex, int toIndex) ;*/
     }
 }

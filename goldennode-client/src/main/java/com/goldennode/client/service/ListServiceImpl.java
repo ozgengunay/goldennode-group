@@ -150,7 +150,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             List<String> temp = new ArrayList<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/containsAll".replace("{listId}", listId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
@@ -170,7 +170,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             List<String> temp = new ArrayList<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/addAll".replace("{listId}", listId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
@@ -190,7 +190,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             List<String> temp = new ArrayList<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/addAll/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "POST",
                     new ObjectMapper().writeValueAsString(temp));
@@ -211,7 +211,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             List<String> temp = new ArrayList<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/removeAll".replace("{listId}", listId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
@@ -231,7 +231,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             List<String> temp = new ArrayList<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/retainAll".replace("{listId}", listId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
