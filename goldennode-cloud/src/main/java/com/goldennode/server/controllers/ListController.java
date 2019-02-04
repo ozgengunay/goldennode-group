@@ -41,8 +41,8 @@ public class ListController {
         return new ResponseEntity(listService.isEmpty(userDetails.getUsername(), listId), StatusCode.SUCCESS);
     }
 
-    @RequestMapping(value = { "/contains/element/{element}" }, method = { RequestMethod.GET })
-    public ResponseEntity contains(@PathVariable("listId") String listId, @PathVariable("element") String element) {
+    @RequestMapping(value = { "/contains/object/{object}" }, method = { RequestMethod.GET })
+    public ResponseEntity contains(@PathVariable("listId") String listId, @PathVariable("object") String element) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(listService.contains(userDetails.getUsername(), listId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
@@ -119,7 +119,7 @@ public class ListController {
                 JsonNode nd = iter.next();
                 list.add(nd.asText());
             }
-            return new ResponseEntity(listService.addAll(userDetails.getUsername(), listId, index,list), StatusCode.SUCCESS);
+            return new ResponseEntity(listService.addAll(userDetails.getUsername(), listId, index, list), StatusCode.SUCCESS);
         } catch (IOException e) {
             throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
         }
@@ -192,25 +192,25 @@ public class ListController {
     }
 
     @RequestMapping(value = { "/remove/index/{index}" }, method = { RequestMethod.DELETE })
-    public ResponseEntity remove(@PathVariable("listId") String listId, int index) {
+    public ResponseEntity remove(@PathVariable("listId") String listId, @PathVariable("index") int index) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(listService.remove(userDetails.getUsername(), listId, index), StatusCode.SUCCESS);
     }
 
-    @RequestMapping(value = { "/indexOf/element/{element}" }, method = { RequestMethod.GET })
-    public ResponseEntity indexOf(@PathVariable("listId") String listId, @PathVariable("element") String element) {
+    @RequestMapping(value = { "/indexOf/object/{object}" }, method = { RequestMethod.GET })
+    public ResponseEntity indexOf(@PathVariable("listId") String listId, @PathVariable("object") String element) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(listService.indexOf(userDetails.getUsername(), listId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
 
-    @RequestMapping(value = { "/lastIndexOf/element/{element}" }, method = { RequestMethod.GET })
-    public ResponseEntity lastIndexOf(@PathVariable("listId") String listId, @PathVariable("element") String element) {
+    @RequestMapping(value = { "/lastIndexOf/object/{object}" }, method = { RequestMethod.GET })
+    public ResponseEntity lastIndexOf(@PathVariable("listId") String listId, @PathVariable("object") String element) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(listService.lastIndexOf(userDetails.getUsername(), listId, URLUtils.unescapeSpecialChars(element)), StatusCode.SUCCESS);
     }
 
     @RequestMapping(value = { "/subList/fromIndex/{fromIndex}/toIndex/{toIndex}" }, method = { RequestMethod.GET })
-    public ResponseEntity subList(@PathVariable("listId") String listId, int fromIndex, int toIndex) {
+    public ResponseEntity subList(@PathVariable("listId") String listId, @PathVariable("fromIndex") int fromIndex, @PathVariable("toIndex") int toIndex) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(listService.subList(userDetails.getUsername(), listId, fromIndex, toIndex), StatusCode.SUCCESS);
     }

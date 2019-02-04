@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class TestGoldenNodeList {
+public class TestGoldenNodeSet {
     ObjectMapper om = new ObjectMapper();
 
     @Test
     public void test1() {
         Object response;
-        List<TestBean> m0 = new GoldenNodeList<>("list0");
+        Set<TestBean> m0 = new GoldenNodeSet<>("list0");
         m0.clear();
         response = m0.isEmpty();
         Assert.assertEquals(true, response);
@@ -39,12 +40,9 @@ public class TestGoldenNodeList {
         Assert.assertEquals(true, response);
         response = m0.add(tb3);
         Assert.assertEquals(true, response);
-        response = m0.get(0);
-        Assert.assertEquals(tb1, response);
-        response = m0.get(1);
-        Assert.assertEquals(tb2, response);
-        response = m0.get(2);
-        Assert.assertEquals(tb3, response);
+        
+        
+        
         response = m0.size();
         Assert.assertEquals(3, response);
         response = m0.contains(tb1);
@@ -135,5 +133,6 @@ public class TestGoldenNodeList {
         m0.clear();
         response = m0.isEmpty();
         Assert.assertEquals(true, response);
+
     }
 }

@@ -37,7 +37,8 @@ public class ListServiceImpl<E> implements ListService<E> {
 
     public boolean contains(String listId, Object object) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/list/id/{listId}/contains/element/{element}".replace("{listId}", listId).replace("{element}", Utils.encode(Utils.encapObject(object))), "GET");
+            Response response = RestClient.call("/goldennode/list/id/{listId}/contains/object/{object}".replace("{listId}", listId).replace("{object}", Utils.encode(Utils.encapObject(object))),
+                    "GET");
             if (response.getStatusCode() == 200) {
                 return Boolean.parseBoolean(response.getEntityValue());
             } else {
@@ -354,7 +355,7 @@ public class ListServiceImpl<E> implements ListService<E> {
     @Override
     public ListIterator<E> listIterator(String listId) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/list/id/{listId}/listIterator".replace("{listId}", listId), "GET");
+            Response response = RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
                 Iterator<JsonNode> iter = response.getEntityIterator();
@@ -376,14 +377,14 @@ public class ListServiceImpl<E> implements ListService<E> {
     @Override
     public ListIterator<E> listIterator(String listId, int index) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/list/id/{listId}/listIterator/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "GET");
+            Response response = RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
                 Iterator<JsonNode> iter = response.getEntityIterator();
                 while (iter.hasNext()) {
                     list.add((E) Utils.extractObject(iter.next().asText()));
                 }
-                return list.listIterator();
+                return list.listIterator(index);
             } else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
