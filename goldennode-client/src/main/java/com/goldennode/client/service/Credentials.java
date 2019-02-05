@@ -1,5 +1,8 @@
 package com.goldennode.client.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Credentials {
     private String apiKey;
     private String secretKey;

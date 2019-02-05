@@ -18,6 +18,8 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.goldennode.client.service.Credentials;
+import com.goldennode.client.service.RegistrationServiceImpl;
 
 public class RestClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestClient.class);
@@ -38,14 +40,18 @@ public class RestClient {
         if (host == null) {
             host = System.getenv("GN_HOST");
         }
-        if (apiKey == null) {
-            // throw new RuntimeException("can't load apiKey");
-        }
-        if (secretKey == null) {
-            // throw new RuntimeException("can't load secretKey");
-        }
         if (host == null) {
             host = SERVER_URL;
+        }
+        if (apiKey == null || secretKey == null) {
+            try {
+                Credentials cred = new RegistrationServiceImpl().registerTempAccount();
+                apiKey = cred.getApiKey();
+                secretKey = cred.getSecretKey();
+            } catch (GoldenNodeException e) {
+                LOGGER.error("Error occured", e);
+                throw new RuntimeException("can't load apiKey");
+            }
         }
     }
 

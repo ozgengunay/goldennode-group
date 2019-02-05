@@ -2,8 +2,8 @@ package com.goldennode.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,6 +16,7 @@ public class TestGoldenNodeSet {
     public void test1() {
         Object response;
         Set<TestBean> m0 = new GoldenNodeSet<>("list0");
+        // Set<TestBean> m0 = new HashSet<>();
         m0.clear();
         response = m0.isEmpty();
         Assert.assertEquals(true, response);
@@ -31,7 +32,11 @@ public class TestGoldenNodeSet {
         m1.add(tb1_);
         m1.add(tb2_);
         Collection<TestBean> m2 = new ArrayList<TestBean>();
-        m2.add(tb1_);
+        m2.add(tb3);
+        Collection<TestBean> iteratorContents = new ArrayList<TestBean>();
+        iteratorContents.add(tb1);
+        iteratorContents.add(tb2);
+        iteratorContents.add(tb3);
         // response = m0.add(null);
         // Assert.assertEquals(true, response);
         response = m0.add(tb1);
@@ -40,9 +45,12 @@ public class TestGoldenNodeSet {
         Assert.assertEquals(true, response);
         response = m0.add(tb3);
         Assert.assertEquals(true, response);
-        
-        
-        
+        response = m0.contains(tb1);
+        Assert.assertEquals(true, response);
+        response = m0.contains(tb2);
+        Assert.assertEquals(true, response);
+        response = m0.contains(tb3);
+        Assert.assertEquals(true, response);
         response = m0.size();
         Assert.assertEquals(3, response);
         response = m0.contains(tb1);
@@ -53,24 +61,20 @@ public class TestGoldenNodeSet {
         Assert.assertEquals(true, response);
         Iterator<TestBean> iter = m0.iterator();
         while (iter.hasNext()) {
-            Assert.assertEquals(tb1, iter.next());
-            Assert.assertEquals(tb2, iter.next());
-            Assert.assertEquals(tb3, iter.next());
+            Assert.assertTrue(iteratorContents.contains(iter.next()));
         }
-        Assert.assertEquals(tb1, m0.toArray()[0]);
-        Assert.assertEquals(tb2, m0.toArray()[1]);
-        Assert.assertEquals(tb3, m0.toArray()[2]);
-        Assert.assertEquals(tb1, m0.toArray(new TestBean[0])[0]);
-        Assert.assertEquals(tb2, m0.toArray(new TestBean[0])[1]);
-        Assert.assertEquals(tb3, m0.toArray(new TestBean[0])[2]);
+        for (Object tb : m0.toArray()) {
+            Assert.assertTrue(iteratorContents.contains(tb));
+        }
+        for (TestBean tb : m0.toArray(new TestBean[0])) {
+            Assert.assertTrue(iteratorContents.contains(tb));
+        }
         response = m0.remove(tb1);
         Assert.assertEquals(true, response);
-        response = m0.get(0);
-        Assert.assertEquals(tb2, response);
-        response = m0.size();
-        Assert.assertEquals(2, response);
         response = m0.contains(tb2);
         Assert.assertEquals(true, response);
+        response = m0.size();
+        Assert.assertEquals(2, response);
         response = m0.contains(tb3);
         Assert.assertEquals(true, response);
         response = m0.containsAll(m0_);
@@ -85,54 +89,22 @@ public class TestGoldenNodeSet {
         Assert.assertEquals(true, response);
         response = m0.size();
         Assert.assertEquals(2, response);
-        m0.stream().forEach(System.out::println);
-        response = m0.addAll(0, m2);
-        Assert.assertEquals(true, response);
-        response = m0.size();
-        Assert.assertEquals(3, response);
-        m0.stream().forEach(System.out::println);
-        response = m0.get(0);
-        Assert.assertEquals(tb1_, response);
         response = m0.retainAll(m2);
         Assert.assertEquals(true, response);
         response = m0.size();
         Assert.assertEquals(1, response);
-        TestUtil.contentsSame(m0, m2);
-        m0.add(1, tb2_);
-        response = m0.get(0);
-        Assert.assertEquals(tb1_, response);
-        response = m0.get(1);
-        Assert.assertEquals(tb2_, response);
-        m0.set(1, tb1);
-        response = m0.get(0);
-        Assert.assertEquals(tb1_, response);
-        response = m0.get(1);
-        Assert.assertEquals(tb1, response);
-        response = m0.size();
-        Assert.assertEquals(2, response);
-        response = m0.remove(0);
-        Assert.assertEquals(tb1_, response);
-        response = m0.size();
-        Assert.assertEquals(1, response);
-        response = m0.get(0);
-        Assert.assertEquals(tb1, response);
-        response = m0.indexOf(tb1);
-        Assert.assertEquals(0, response);
-        response = m0.lastIndexOf(tb1);
-        Assert.assertEquals(0, response);
-        response = m0.subList(0, 1);
-        Assert.assertEquals(true, TestUtil.contentsSame(m0, (List<?>) response));
-        iter = m0.listIterator();
-        while (iter.hasNext()) {
-            Assert.assertEquals(tb1, iter.next());
-        }
-        iter = m0.listIterator(0);
-        while (iter.hasNext()) {
-            Assert.assertEquals(tb1, iter.next());
-        }
+        response = m0.contains(tb3);
+        Assert.assertEquals(true, response);
         m0.clear();
         response = m0.isEmpty();
         Assert.assertEquals(true, response);
-
+        response = m0.add(null);
+        Assert.assertEquals(true, response);
+        response = m0.size();
+        Assert.assertEquals(1, response);
+        response = m0.add(null);
+        Assert.assertEquals(false, response);
+        response = m0.size();
+        Assert.assertEquals(1, response);
     }
 }

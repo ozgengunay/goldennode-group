@@ -39,7 +39,7 @@ public class SetServiceImpl<E> implements SetService<E> {
     @Override
     public boolean contains(String setId, Object object) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/set/id/{setId}/contains/element".replace("{setId}", setId).replace("{element}", Utils.encode(Utils.encapObject(object))), "GET");
+            Response response = RestClient.call("/goldennode/set/id/{setId}/contains/object/{object}".replace("{setId}", setId).replace("{object}", Utils.encode(Utils.encapObject(object))), "GET");
             if (response.getStatusCode() == 200) {
                 return Boolean.parseBoolean(response.getEntityValue());
             } else {
@@ -54,7 +54,7 @@ public class SetServiceImpl<E> implements SetService<E> {
     @Override
     public Iterator<E> iterator(String setId) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/set/id/{setId}/iterator".replace("{setId}", setId), "GET");
+            Response response = RestClient.call("/goldennode/set/id/{setId}/toArray".replace("{setId}", setId), "GET");
             if (response.getStatusCode() == 200) {
                 Set<E> set = new HashSet<E>();
                 Iterator<JsonNode> iter = response.getEntityIterator();
@@ -119,7 +119,7 @@ public class SetServiceImpl<E> implements SetService<E> {
     @Override
     public boolean add(String setId, E element) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/set/id/{setId}/add/element/{element}".replace("{setId}", setId).replace("{element}", Utils.encode(Utils.encapObject(element))), "POST");
+            Response response = RestClient.call("/goldennode/set/id/{setId}/add".replace("{setId}", setId), "POST", Utils.encapObject(element));
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean(response.getEntityValue());
             else {
@@ -151,7 +151,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             List<String> temp = new ArrayList<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/set/id/{setId}/containsAll".replace("{setId}", setId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
@@ -171,7 +171,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             List<String> temp = new ArrayList<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/set/id/{setId}/addAll".replace("{setId}", setId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
@@ -191,7 +191,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             Set<String> temp = new HashSet<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/set/id/{setId}/retainAll".replace("{setId}", setId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
@@ -211,7 +211,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             Set<String> temp = new HashSet<>();
             while (iter.hasNext()) {
                 Object o = iter.next();
-                temp.add(Utils.encapObject(Utils.encapObject(o)));
+                temp.add(Utils.encapObject(o));
             }
             Response response = RestClient.call("/goldennode/set/id/{setId}/removeAll".replace("{setId}", setId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
