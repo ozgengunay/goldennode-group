@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import org.junit.Assert;
 import org.junit.Test;
@@ -40,6 +41,10 @@ public class TestGoldenNodeQueue {
         Assert.assertEquals(true, response);
         response = m0.size();
         Assert.assertEquals(3, response);
+        response = m0.isEmpty();
+        Assert.assertEquals(false, response);
+        response = m0.contains(tb1);
+        Assert.assertEquals(true, response);
         response = m0.poll();
         Assert.assertEquals(tb1, response);
         response = m0.poll();
@@ -47,6 +52,64 @@ public class TestGoldenNodeQueue {
         response = m0.poll();
         Assert.assertEquals(tb3, response);
         response = m0.size();
-        Assert.assertEquals(3, response);
+        Assert.assertEquals(0, response);
+        response = m0.contains(tb1);
+        Assert.assertEquals(false, response);
+        response = m0.add(tb1);
+        Assert.assertEquals(true, response);
+        response = m0.size();
+        Assert.assertEquals(1, response);
+        response = m0.remove();
+        Assert.assertEquals(0, response);
+        try {
+            response = m0.remove();
+            Assert.fail("should have thrown exception");
+        } catch (NoSuchElementException e) {
+            //Expected path
+        }
+        
+        
+        
+        
+
+        /* Iterator<E> iterator(String queueId);
+
+         Object[] toArray(String queueId);
+
+         <T> T[] toArray(String queueId, T[] a);
+
+         boolean remove(String queueId, Object object);
+
+         boolean containsAll(String queueId, Collection<?> collection);
+
+         boolean addAll(String queueId, Collection<? extends E> collection);
+
+         boolean removeAll(String queueId, Collection<?> collection);
+
+         boolean retainAll(String queueId, Collection<?> collection);
+
+         void clear(String queueId);
+
+         boolean add(String queueId, E element);
+
+         boolean offer(String queueId, E element);
+
+         E remove(String queueId);
+
+         E poll(String queueId);
+
+         E element(String queueId);
+
+         E peek(String queueId);*/
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }

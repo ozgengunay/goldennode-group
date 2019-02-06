@@ -222,8 +222,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
     @Override
     public boolean add(String queueId, E element) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/queue/id/{queueId}/add/element/{element}".replace("{queueId}", queueId).replace("{element}", Utils.encode(Utils.encapObject(element))),
-                    "POST");
+            Response response = RestClient.call("/goldennode/queue/id/{queueId}/add".replace("{queueId}", queueId), "POST", Utils.encapObject(element));
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean(response.getEntityValue());
             else {
@@ -237,8 +236,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
     @Override
     public boolean offer(String queueId, E element) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/queue/id/{queueId}/offer/element/{element}".replace("{queueId}", queueId).replace("{element}", Utils.encode(Utils.encapObject(element))),
-                    "POST");
+            Response response = RestClient.call("/goldennode/queue/id/{queueId}/offer".replace("{queueId}", queueId), "POST", Utils.encapObject(element));
             if (response.getStatusCode() == 200)
                 return Boolean.parseBoolean(response.getEntityValue());
             else {
@@ -270,7 +268,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
     @Override
     public E poll(String queueId) throws GoldenNodeException {
         try {
-            Response response = RestClient.call("/goldennode/queue/id/{queueId}/poll".replace("{queueId}", queueId), "DELETE");
+            Response response = RestClient.call("/goldennode/queue/id/{queueId}/poll".replace("{queueId}", queueId), "GET");
             if (response.getStatusCode() == 200)
                 return (E) Utils.extractObject(response.getEntityValue());
             else {
