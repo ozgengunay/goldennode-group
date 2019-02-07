@@ -18,7 +18,6 @@ import com.goldennode.commons.util.URLUtils;
 import com.goldennode.server.common.ErrorCode;
 import com.goldennode.server.common.GoldenNodeRestException;
 import com.goldennode.server.common.ResponseEntity;
-import com.goldennode.server.common.StatusCode;
 import com.goldennode.server.security.GoldenNodeUser;
 import com.goldennode.server.services.SetService;
 
@@ -32,31 +31,31 @@ public class SetController {
     @RequestMapping(value = { "/size" }, method = { RequestMethod.GET })
     public ResponseEntity size(@PathVariable("setId") String setId) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(setService.size(userDetails.getUsername(), setId), StatusCode.SUCCESS);
+        return new ResponseEntity(setService.size(userDetails.getUsername(), setId));
     }
 
     @RequestMapping(value = { "/isEmpty" }, method = { RequestMethod.GET })
     public ResponseEntity isEmpty(@PathVariable("setId") String setId) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(setService.isEmpty(userDetails.getUsername(), setId), StatusCode.SUCCESS);
+        return new ResponseEntity(setService.isEmpty(userDetails.getUsername(), setId));
     }
 
     @RequestMapping(value = { "/contains/object/{object}" }, method = { RequestMethod.GET })
     public ResponseEntity contains(@PathVariable("setId") String setId, @PathVariable("object") String object) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(setService.contains(userDetails.getUsername(), setId, URLUtils.unescapeSpecialChars(object)), StatusCode.SUCCESS);
+        return new ResponseEntity(setService.contains(userDetails.getUsername(), setId, URLUtils.unescapeSpecialChars(object)));
     }
 
     @RequestMapping(value = { "/toArray" }, method = { RequestMethod.GET })
     public ResponseEntity toArray(@PathVariable("setId") String setId) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(setService.toArray(userDetails.getUsername(), setId), StatusCode.SUCCESS);
+        return new ResponseEntity(setService.toArray(userDetails.getUsername(), setId));
     }
 
     @RequestMapping(value = { "/remove/object/{object}" }, method = { RequestMethod.DELETE })
     public ResponseEntity remove(@PathVariable("setId") String setId, @PathVariable("object") String object) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(setService.remove(userDetails.getUsername(), setId, URLUtils.unescapeSpecialChars(object)), StatusCode.SUCCESS);
+        return new ResponseEntity(setService.remove(userDetails.getUsername(), setId, URLUtils.unescapeSpecialChars(object)));
     }
 
     @RequestMapping(value = { "/containsAll" }, method = { RequestMethod.POST })
@@ -73,9 +72,9 @@ public class SetController {
                 JsonNode nd = iter.next();
                 list.add(nd.asText());
             }
-            return new ResponseEntity(setService.containsAll(userDetails.getUsername(), setId, list), StatusCode.SUCCESS);
+            return new ResponseEntity(setService.containsAll(userDetails.getUsername(), setId, list));
         } catch (IOException e) {
-            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+            throw new GoldenNodeRestException(e);
         }
     }
 
@@ -93,9 +92,9 @@ public class SetController {
                 JsonNode nd = iter.next();
                 list.add(nd.asText());
             }
-            return new ResponseEntity(setService.addAll(userDetails.getUsername(), setId, list), StatusCode.SUCCESS);
+            return new ResponseEntity(setService.addAll(userDetails.getUsername(), setId, list));
         } catch (IOException e) {
-            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+            throw new GoldenNodeRestException(e);
         }
     }
 
@@ -113,9 +112,9 @@ public class SetController {
                 JsonNode nd = iter.next();
                 list.add(nd.asText());
             }
-            return new ResponseEntity(setService.removeAll(userDetails.getUsername(), setId, list), StatusCode.SUCCESS);
+            return new ResponseEntity(setService.removeAll(userDetails.getUsername(), setId, list));
         } catch (IOException e) {
-            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+            throw new GoldenNodeRestException(e);
         }
     }
 
@@ -133,9 +132,9 @@ public class SetController {
                 JsonNode nd = iter.next();
                 list.add(nd.asText());
             }
-            return new ResponseEntity(setService.retainAll(userDetails.getUsername(), setId, list), StatusCode.SUCCESS);
+            return new ResponseEntity(setService.retainAll(userDetails.getUsername(), setId, list));
         } catch (IOException e) {
-            throw new GoldenNodeRestException(ErrorCode.JSON_PROCESSING_ERROR);
+            throw new GoldenNodeRestException(e);
         }
     }
 
@@ -143,12 +142,12 @@ public class SetController {
     public ResponseEntity clear(@PathVariable("setId") String setId) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         setService.clear(userDetails.getUsername(), setId);
-        return new ResponseEntity(null, StatusCode.SUCCESS);
+        return new ResponseEntity(null);
     }
 
     @RequestMapping(value = { "/add" }, method = { RequestMethod.POST })
     public ResponseEntity add(@PathVariable("setId") String setId, @RequestBody String data) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(setService.add(userDetails.getUsername(), setId, data), StatusCode.SUCCESS);
+        return new ResponseEntity(setService.add(userDetails.getUsername(), setId, data));
     }
 }

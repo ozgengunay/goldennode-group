@@ -7,7 +7,6 @@ import com.goldennode.client.service.QueueService;
 import com.goldennode.client.service.QueueServiceImpl;
 
 public class GoldenNodeQueue<E> implements Queue<E> {
-
     QueueService<E> service;
     private String id;
 
@@ -15,7 +14,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
         this.id = id;
         service = new QueueServiceImpl<>();
     }
-    
+
     @Override
     public int size() {
         try {

@@ -60,6 +60,8 @@ public class TestGoldenNodeQueue {
         response = m0.size();
         Assert.assertEquals(1, response);
         response = m0.remove();
+        Assert.assertEquals(tb1, response);
+        response = m0.size();
         Assert.assertEquals(0, response);
         try {
             response = m0.remove();

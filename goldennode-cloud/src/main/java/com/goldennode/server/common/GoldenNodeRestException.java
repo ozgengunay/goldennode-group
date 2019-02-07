@@ -1,20 +1,24 @@
 package com.goldennode.server.common;
 
-import com.goldennode.commons.util.GoldenNodeException;
+public class GoldenNodeRestException extends Exception {
+    private String description;
+    private String claz;
 
-public class GoldenNodeRestException extends GoldenNodeException{
+    public GoldenNodeRestException(Exception e) {
+        this.claz = e.getClass().getName();
+        this.description = e.toString();
+    }
 
-	private ErrorCode code;
+    public GoldenNodeRestException(ErrorCode description) {
+        this.claz = Exception.class.getName();
+        this.description = description.toString();
+    }
 
-	public GoldenNodeRestException(ErrorCode code) {
-		
-		super(code.toString());
-		this.code=code;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public ErrorCode getCode() {
-		return code;
-	}
-
-
+    public String getClaz() {
+        return claz;
+    }
 }

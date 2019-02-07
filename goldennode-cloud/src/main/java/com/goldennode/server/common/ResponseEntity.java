@@ -7,20 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ResponseEntity {
     @JsonProperty
     Object entity;
-    @JsonProperty
-    String code;
 
-    public ResponseEntity(Object entity, StatusCode code) {
+    public ResponseEntity(Object entity) {
         this.entity = entity;
-        this.code = code.toString();
     }
 
-    public ResponseEntity(StatusCode code) {
-        this.code = code.toString();
-    }
-
-    public String getCode() {
-        return code;
+    public ResponseEntity() {
     }
 
     public Object getEntity() {

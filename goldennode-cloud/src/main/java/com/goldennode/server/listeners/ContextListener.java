@@ -25,10 +25,10 @@ public class ContextListener implements ServletContextListener {
         try {
             // WebApplicationContext ctx =WebApplicationContextUtils.getWebApplicationContext(contextEvent.getServletContext());
             // contextEvent.getServletContext().setAttribute("hazelcast", Hazelcast.newHazelcastInstance());
-            AwsSdkMetrics.setPerHostMetricsIncluded(true);
-            AwsSdkMetrics.setRegion(Regions.getCurrentRegion() != null ? Regions.getCurrentRegion().getName() : null);
-            AwsSdkMetrics.setHostMetricName(EC2MetadataUtils.getInstanceId());
-            AwsSdkMetrics.enableDefaultMetrics();
+           // AwsSdkMetrics.setPerHostMetricsIncluded(true);
+          //  AwsSdkMetrics.setRegion(Regions.getCurrentRegion() != null ? Regions.getCurrentRegion().getName() : null);
+          //  AwsSdkMetrics.setHostMetricName(EC2MetadataUtils.getInstanceId());
+          //  AwsSdkMetrics.enableDefaultMetrics();
             LOGGER.debug("Context initialized... / " + contextEvent.getServletContext().getRealPath("/") + " / " + contextEvent.getServletContext().getServletContextName());
         } catch (Exception e) {
             LOGGER.error("error initializing context", e);
