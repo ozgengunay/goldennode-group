@@ -28,7 +28,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
     public boolean isEmpty(String queueId) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/queue/id/{queueId}/isEmpty".replace("{queueId}", queueId), "GET");
         if (response.getStatusCode() == 200) {
-            return Boolean.parseBoolean(response.getEntityValue());
+            return Boolean.parseBoolean((String)response.getEntityValue());
         } else {
             throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
         }
@@ -40,7 +40,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/contains/object/{object}".replace("{queueId}", queueId).replace("{object}", Utils.encode(Utils.encapObject(object))),
                     "GET");
             if (response.getStatusCode() == 200) {
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             } else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -56,9 +56,9 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/iterator".replace("{queueId}", queueId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list.iterator();
             } else {
@@ -78,9 +78,9 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/toArray".replace("{queueId}", queueId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list.toArray();
             } else {
@@ -100,9 +100,9 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/toArray".replace("{queueId}", queueId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list.toArray(a);
             } else {
@@ -121,7 +121,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/remove/object/{object}".replace("{queueId}", queueId).replace("{object}", Utils.encode(Utils.encapObject(object))),
                     "DELETE");
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -141,7 +141,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             }
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/containsAll".replace("{queueId}", queueId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -161,7 +161,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             }
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/addAll".replace("{queueId}", queueId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -181,7 +181,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             }
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/removeAll".replace("{queueId}", queueId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -201,7 +201,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
             }
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/retainAll".replace("{queueId}", queueId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -216,7 +216,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
         if (response.getStatusCode() == 200)
             return;
         else {
-            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
         }
     }
 
@@ -225,7 +225,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
         try {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/add".replace("{queueId}", queueId), "POST", Utils.encapObject(element));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -239,7 +239,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
         try {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/offer".replace("{queueId}", queueId), "POST", Utils.encapObject(element));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -254,7 +254,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
         try {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/remove".replace("{queueId}", queueId), "GET");
             if (response.getStatusCode() == 200)
-                return (E) Utils.extractObject(response.getEntityValue());
+                return (E) Utils.extractObject((String)response.getEntityValue());
             else if (response.getStatusCode() == 400) {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             } else {
@@ -273,7 +273,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
         try {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/poll".replace("{queueId}", queueId), "GET");
             if (response.getStatusCode() == 200)
-                return (E) Utils.extractObject(response.getEntityValue());
+                return (E) Utils.extractObject((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -290,7 +290,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
         try {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/element".replace("{queueId}", queueId), "GET");
             if (response.getStatusCode() == 200)
-                return (E) Utils.extractObject(response.getEntityValue());
+                return (E) Utils.extractObject((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -307,7 +307,7 @@ public class QueueServiceImpl<E> implements QueueService<E> {
         try {
             Response response = RestClient.call("/goldennode/queue/id/{queueId}/peek".replace("{queueId}", queueId), "GET");
             if (response.getStatusCode() == 200)
-                return (E) Utils.extractObject(response.getEntityValue());
+                return (E) Utils.extractObject((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }

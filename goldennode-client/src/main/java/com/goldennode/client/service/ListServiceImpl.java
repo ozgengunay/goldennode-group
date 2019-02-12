@@ -29,7 +29,7 @@ public class ListServiceImpl<E> implements ListService<E> {
     public boolean isEmpty(String listId) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/list/id/{listId}/isEmpty".replace("{listId}", listId), "GET");
         if (response.getStatusCode() == 200) {
-            return Boolean.parseBoolean(response.getEntityValue());
+            return Boolean.parseBoolean((String)response.getEntityValue());
         } else {
             throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
         }
@@ -40,7 +40,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/contains/object/{object}".replace("{listId}", listId).replace("{object}", Utils.encode(Utils.encapObject(object))),
                     "GET");
             if (response.getStatusCode() == 200) {
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             } else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -56,9 +56,9 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list.iterator();
             } else {
@@ -78,9 +78,9 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list.toArray();
             } else {
@@ -100,9 +100,9 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list.toArray(a);
             } else {
@@ -120,7 +120,7 @@ public class ListServiceImpl<E> implements ListService<E> {
         try {
             Response response = RestClient.call("/goldennode/list/id/{listId}/add".replace("{listId}", listId), "POST", Utils.encapObject(element));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -135,7 +135,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/remove/object/{object}".replace("{listId}", listId).replace("{object}", Utils.encode(Utils.encapObject(object))),
                     "DELETE");
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -155,7 +155,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/containsAll".replace("{listId}", listId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -175,7 +175,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/addAll".replace("{listId}", listId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -196,7 +196,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/addAll/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "POST",
                     new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -216,7 +216,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/removeAll".replace("{listId}", listId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -236,7 +236,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             }
             Response response = RestClient.call("/goldennode/list/id/{listId}/retainAll".replace("{listId}", listId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -251,7 +251,7 @@ public class ListServiceImpl<E> implements ListService<E> {
         if (response.getStatusCode() == 200)
             return;
         else {
-            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
         }
     }
 
@@ -261,7 +261,7 @@ public class ListServiceImpl<E> implements ListService<E> {
         try {
             Response response = RestClient.call("/goldennode/list/id/{listId}/get/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "GET");
             if (response.getStatusCode() == 200) {
-                return (E) Utils.extractObject(response.getEntityValue());
+                return (E) Utils.extractObject((String)(String)response.getEntityValue());
             } else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -279,7 +279,7 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/set/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "PUT",
                     Utils.encapObject(element));
             if (response.getStatusCode() == 200)
-                return (E) Utils.extractObject(response.getEntityValue());
+                return (E) Utils.extractObject((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -311,7 +311,7 @@ public class ListServiceImpl<E> implements ListService<E> {
         try {
             Response response = RestClient.call("/goldennode/list/id/{listId}/remove/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "DELETE");
             if (response.getStatusCode() == 200)
-                return (E) Utils.extractObject(response.getEntityValue());
+                return (E) Utils.extractObject((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -358,9 +358,9 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list.listIterator();
             } else {
@@ -380,9 +380,9 @@ public class ListServiceImpl<E> implements ListService<E> {
             Response response = RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list.listIterator(index);
             } else {
@@ -403,9 +403,9 @@ public class ListServiceImpl<E> implements ListService<E> {
                     .replace("{fromIndex}", Integer.toString(fromIndex)).replace("{toIndex}", Integer.toString(toIndex)), "GET");
             if (response.getStatusCode() == 200) {
                 List<E> list = new ArrayList<>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    list.add((E) Utils.extractObject(iter.next().asText()));
+                    list.add((E) Utils.extractObject(iter.next()));
                 }
                 return list;
             } else {

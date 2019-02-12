@@ -1,36 +1,65 @@
 package com.goldennode.client;
 
-import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Response {
     String body;
     int statusCode;
-    String entityValue;
-    Iterator<JsonNode> entityIterator;
+    Object entityValue;
 
-    public Response(String body, int statusCode) {
+    public Response(String body, int statusCode) throws GoldenNodeException {
         this.body = body;
         this.statusCode = statusCode;
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode json = null;
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            if (!body.isEmpty()) {
-                JsonNode json = mapper.readTree(body);
-                if (json.has("entity")) {
-                    if (json.get("entity").isArray()) {
-                        entityIterator = json.get("entity").iterator();
+            json = mapper.readTree(body);
+        } catch (Exception e1) {
+            throw new GoldenNodeException("invalid response");
+        }
+        if (json.has("entity")) {
+            if (json.get("entity").isArray()) {
+                List<Object> list = new ArrayList<>();
+                Iterator<JsonNode> iter = json.get("entity").iterator();
+                while (iter.hasNext()) {
+                    JsonNode node = iter.next();
+                    if (node.isTextual()) {
+                        list.add(node.asText());
                     } else {
-                        entityValue = json.get("entity").asText();
+                        list.add(node);
                     }
-                } else {
-                    entityValue = null;
+                }
+                entityValue = list;
+            } else {
+                entityValue = json.get("entity").asText();
+                if (Utils.canExtractObject((String) entityValue)) {
+                    entityValue = Utils.extractObject((String) entityValue);
+                    json.isValueNode()
                 }
             }
-        } catch (IOException e) {
-            // invalid json
+        } else {
+            entityValue = null;// response is null
         }
+        if (json.has("error")) {
+            try {
+                Class c = Class.forName(json.get("error").get("claz").asText());
+                Constructor con = c.getConstructor(String.class);
+                Exception e = (Exception) con.newInstance(json.get("error").get("description").asText());
+                throw new GoldenNodeException(e);
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
+                //
+            }
+        }
+    }
+
+    public Object getEntityValue() {
+        return entityValue;
     }
 
     public int getStatusCode() {
@@ -39,13 +68,5 @@ public class Response {
 
     public String getBody() {
         return body;
-    }
-
-    public String getEntityValue() {
-        return entityValue;
-    }
-
-    public Iterator<JsonNode> getEntityIterator() {
-        return entityIterator;
     }
 }

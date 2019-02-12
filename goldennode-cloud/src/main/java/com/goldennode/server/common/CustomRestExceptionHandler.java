@@ -10,13 +10,13 @@ import org.springframework.web.context.request.WebRequest;
 public class CustomRestExceptionHandler {
     @ExceptionHandler({ GoldenNodeRestException.class })
     public ResponseEntity<Object> handleAll(GoldenNodeRestException ex, WebRequest request) {
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getClaz(), ex.getDescription());
-        return new ResponseEntity<Object>(apiError, apiError.getStatus());
+        ApiError apiError = new ApiError(ex.getClaz(), ex.getDescription());
+        return new ResponseEntity<Object>(apiError, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({ Exception.class })
     public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
-        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getClass().getName(), ex.toString());
-        return new ResponseEntity<Object>(apiError, apiError.getStatus());
+        ApiError apiError = new ApiError(ex.getClass().getName(), ex.getMessage() != null ? ex.getMessage() : "");
+        return new ResponseEntity<Object>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

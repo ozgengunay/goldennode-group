@@ -234,5 +234,9 @@ public class TestGoldenNodeMap {
         Assert.assertEquals(null, response);
         response = m5.get("key1");
         Assert.assertEquals(time, ((Date) response).getTime());
+        Map<String, String> m6 = new GoldenNodeMap<>("map6");
+        m6.put("key1", "");
+        response = m6.get("key1");
+        Assert.assertEquals("", response);
     }
 }

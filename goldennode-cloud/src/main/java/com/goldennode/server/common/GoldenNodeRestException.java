@@ -5,11 +5,13 @@ public class GoldenNodeRestException extends Exception {
     private String claz;
 
     public GoldenNodeRestException(Exception e) {
+        super(e);
         this.claz = e.getClass().getName();
-        this.description = e.toString();
+        this.description = e.getMessage() != null ? e.getMessage() : "";
     }
 
     public GoldenNodeRestException(ErrorCode description) {
+        super(description.toString());
         this.claz = Exception.class.getName();
         this.description = description.toString();
     }

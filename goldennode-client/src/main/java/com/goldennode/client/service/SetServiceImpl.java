@@ -30,7 +30,7 @@ public class SetServiceImpl<E> implements SetService<E> {
     public boolean isEmpty(String setId) throws GoldenNodeException {
         Response response = RestClient.call("/goldennode/set/id/{setId}/isEmpty".replace("{setId}", setId), "GET");
         if (response.getStatusCode() == 200) {
-            return Boolean.parseBoolean(response.getEntityValue());
+            return Boolean.parseBoolean((String)response.getEntityValue());
         } else {
             throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
         }
@@ -41,7 +41,7 @@ public class SetServiceImpl<E> implements SetService<E> {
         try {
             Response response = RestClient.call("/goldennode/set/id/{setId}/contains/object/{object}".replace("{setId}", setId).replace("{object}", Utils.encode(Utils.encapObject(object))), "GET");
             if (response.getStatusCode() == 200) {
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             } else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -57,9 +57,9 @@ public class SetServiceImpl<E> implements SetService<E> {
             Response response = RestClient.call("/goldennode/set/id/{setId}/toArray".replace("{setId}", setId), "GET");
             if (response.getStatusCode() == 200) {
                 Set<E> set = new HashSet<E>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    set.add((E) Utils.extractObject(iter.next().asText()));
+                    set.add((E) Utils.extractObject(iter.next()));
                 }
                 return set.iterator();
             } else {
@@ -79,9 +79,9 @@ public class SetServiceImpl<E> implements SetService<E> {
             Response response = RestClient.call("/goldennode/set/id/{setId}/toArray".replace("{setId}", setId), "GET");
             if (response.getStatusCode() == 200) {
                 Set<E> set = new HashSet<E>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    set.add((E) Utils.extractObject(iter.next().asText()));
+                    set.add((E) Utils.extractObject(iter.next()));
                 }
                 return set.toArray();
             } else {
@@ -101,9 +101,9 @@ public class SetServiceImpl<E> implements SetService<E> {
             Response response = RestClient.call("/goldennode/set/id/{setId}/toArray".replace("{setId}", setId), "GET");
             if (response.getStatusCode() == 200) {
                 Set<E> set = new HashSet<E>();
-                Iterator<JsonNode> iter = response.getEntityIterator();
+                Iterator<String> iter = ((List<String>)response.getEntityValue()).iterator();
                 while (iter.hasNext()) {
-                    set.add((E) Utils.extractObject(iter.next().asText()));
+                    set.add((E) Utils.extractObject(iter.next()));
                 }
                 return set.toArray(a);
             } else {
@@ -121,7 +121,7 @@ public class SetServiceImpl<E> implements SetService<E> {
         try {
             Response response = RestClient.call("/goldennode/set/id/{setId}/add".replace("{setId}", setId), "POST", Utils.encapObject(element));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -135,7 +135,7 @@ public class SetServiceImpl<E> implements SetService<E> {
         try {
             Response response = RestClient.call("/goldennode/set/id/{setId}/remove/object/{object}".replace("{setId}", setId).replace("{object}", Utils.encode(Utils.encapObject(object))), "DELETE");
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -155,7 +155,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             }
             Response response = RestClient.call("/goldennode/set/id/{setId}/containsAll".replace("{setId}", setId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -175,7 +175,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             }
             Response response = RestClient.call("/goldennode/set/id/{setId}/addAll".replace("{setId}", setId), "POST", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -195,7 +195,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             }
             Response response = RestClient.call("/goldennode/set/id/{setId}/retainAll".replace("{setId}", setId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -215,7 +215,7 @@ public class SetServiceImpl<E> implements SetService<E> {
             }
             Response response = RestClient.call("/goldennode/set/id/{setId}/removeAll".replace("{setId}", setId), "PUT", new ObjectMapper().writeValueAsString(temp));
             if (response.getStatusCode() == 200)
-                return Boolean.parseBoolean(response.getEntityValue());
+                return Boolean.parseBoolean((String)response.getEntityValue());
             else {
                 throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
             }
@@ -230,7 +230,7 @@ public class SetServiceImpl<E> implements SetService<E> {
         if (response.getStatusCode() == 200)
             return;
         else {
-            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getBody());
+            throw new GoldenNodeException("Error occured" + response.getStatusCode() + " - " + response.getEntityValue());
         }
     }
 }
