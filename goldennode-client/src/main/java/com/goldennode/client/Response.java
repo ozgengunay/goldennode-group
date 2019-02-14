@@ -1,5 +1,6 @@
 package com.goldennode.client;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
 
 public class Response {
     String body;
@@ -24,37 +26,65 @@ public class Response {
             throw new GoldenNodeException("invalid response");
         }
         if (json.has("entity")) {
-            if (json.get("entity").isArray()) {
-                List<Object> list = new ArrayList<>();
-                Iterator<JsonNode> iter = json.get("entity").iterator();
-                while (iter.hasNext()) {
-                    JsonNode node = iter.next();
-                    if (node.isTextual()) {
-                        list.add(node.asText());
-                    } else {
-                        list.add(node);
-                    }
-                }
-                entityValue = list;
-            } else {
-                entityValue = json.get("entity").asText();
-                if (Utils.canExtractObject((String) entityValue)) {
-                    entityValue = Utils.extractObject((String) entityValue);
-                    json.isValueNode()
-                }
-            }
-        } else {
-            entityValue = null;// response is null
+            entityValue = getNodeValue(json.get("entity"));
         }
         if (json.has("error")) {
-            try {
-                Class c = Class.forName(json.get("error").get("claz").asText());
-                Constructor con = c.getConstructor(String.class);
-                Exception e = (Exception) con.newInstance(json.get("error").get("description").asText());
-                throw new GoldenNodeException(e);
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
-                //
-            }
+            raiseError(json.get("error"));
+        }
+    }
+
+    private void raiseError(JsonNode node) throws GoldenNodeException {
+        try {
+            Class c = Class.forName(node.get("claz").asText());
+            Constructor con = c.getConstructor(String.class);
+            Exception e = (Exception) con.newInstance(node.get("description").asText());
+            throw new GoldenNodeException(e);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
+            //
+        }
+    }
+
+    private Object getNodeValue(JsonNode node) throws GoldenNodeException {
+        JsonNodeType type = node.getNodeType();
+        switch (type) {
+            case STRING:
+                if (Utils.canExtractObject(node.asText())) {
+                    return Utils.extractObject(node.asText());
+                } else {
+                    return node.asText();
+                }
+            case ARRAY:
+                List<Object> list = new ArrayList<>();
+                Iterator<JsonNode> iter = node.iterator();
+                while (iter.hasNext()) {
+                    JsonNode nde = iter.next();
+                    list.add(getNodeValue(nde));
+                }
+                return list.toArray();
+            case BINARY:
+                try {
+                    return node.binaryValue();
+                } catch (IOException e) {
+                    throw new GoldenNodeException("invalid value");
+                }
+            case BOOLEAN:
+                return node.asBoolean();
+            case MISSING:
+            case NULL:
+                return null;
+            case NUMBER:
+                if (node.isInt()) {
+                    return node.asInt();
+                } else if (node.isLong()) {
+                    return node.asLong();
+                } else if (node.isFloat() || node.isDouble()) {
+                    return node.asDouble();
+                }
+            case OBJECT:
+            case POJO:
+                return node;
+            default:
+                throw new GoldenNodeException("invalid type");
         }
     }
 

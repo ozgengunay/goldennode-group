@@ -2,6 +2,10 @@ package com.goldennode.client;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +16,7 @@ public class Utils {
         try {
             return URLEncoder.encode(str.replace("/", "&sol;").replace("\"", "&quot;").replace("\\", "&bsol;"), "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
@@ -50,6 +54,20 @@ public class Utils {
             ((ObjectNode) newNode).put("c", value == null ? "NULL" : value.getClass().getName());
             ((ObjectNode) newNode).set("o", om.valueToTree(value == null ? "NULL" : value));
             return om.writeValueAsString(newNode);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String toJsonString(Collection<?> c) {
+        Iterator<?> iter = c.iterator();
+        List<String> temp = new ArrayList<>();
+        while (iter.hasNext()) {
+            Object o = iter.next();
+            temp.add(Utils.encapObject(o));
+        }
+        try {
+            return new ObjectMapper().writeValueAsString(temp);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
