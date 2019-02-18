@@ -4,8 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -71,5 +74,21 @@ public class Utils {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static <K, V> String toJsonString(Map<? extends K, ? extends V> m) {
+        Map<String, String> temp = new HashMap<>();
+        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
+            temp.put(Utils.encapObject(entry.getKey()), Utils.encapObject(entry.getValue()));
+        }
+        try {
+            return new ObjectMapper().writeValueAsString(temp);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static long getFreeMemory() {
+        return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
     }
 }

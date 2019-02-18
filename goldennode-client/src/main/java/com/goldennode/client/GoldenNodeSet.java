@@ -121,7 +121,7 @@ public class GoldenNodeSet<E> implements Set<E> {
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
-    }   
+    }
 
     @Override
     public void clear() {

@@ -1,6 +1,10 @@
 package com.goldennode.client;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Random;
 import org.junit.Test;
 
@@ -9,6 +13,10 @@ public class HashMapMemoryTest {
 
     @Test
     public void test1() {
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        formatter.setDecimalFormatSymbols(symbols);
         Thread th = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -16,7 +24,7 @@ public class HashMapMemoryTest {
                 int i = 0;
                 while (i++ < 10000000) {
                     String str = new Integer(Math.abs(random.nextInt())).toString();
-                    str = str.length() > 7 ? str.substring(0, 7) : str;
+                    str = str.length() > 8 ? str.substring(0, 8) : str;
                     map.put(str, str + "_str");
                     // System.out.println(str);
                 }
@@ -27,11 +35,15 @@ public class HashMapMemoryTest {
             public void run() {
                 while (true) {
                     System.gc();
-                    int memPerc = (int) (((double) (Runtime.getRuntime().maxMemory() - (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()))
-                            / Runtime.getRuntime().maxMemory()) * 100);
-                    System.out.println("Map size=" + map.size());
-                    System.out.println("mem perc=" + memPerc + "%");
-                    System.out.println("Per item:" + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / map.size());
+                    int memPerc = (int) (((double)(Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()))
+                            / Runtime.getRuntime().maxMemory() * 100);
+                    System.out.println("Runtime.getRuntime().maxMemory()   =" + formatter.format(Runtime.getRuntime().maxMemory()));
+                    System.out.println("Runtime.getRuntime().totalMemory() =" + formatter.format(Runtime.getRuntime().totalMemory()));
+                    System.out.println("Map size=" + formatter.format(map.size()));
+                    System.out.println("Mem perc=" + formatter.format(memPerc) + "%");
+                    System.out.println("Per item:" + formatter.format((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / map.size()));
+                    System.out.println("Items:" + formatter.format(map.size()));
+                    System.out.println("-------------------");
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {

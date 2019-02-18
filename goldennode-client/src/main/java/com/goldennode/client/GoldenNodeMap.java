@@ -3,12 +3,17 @@ package com.goldennode.client;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import com.goldennode.client.service.MapService;
 import com.goldennode.client.service.MapServiceImpl;
 
 public class GoldenNodeMap<K, V> implements Map<K, V> {
     MapService<K, V> service;
     private String id;
+
+    public GoldenNodeMap() {
+        this(UUID.randomUUID().toString());
+    }
 
     public GoldenNodeMap(String id) {
         this.id = id;

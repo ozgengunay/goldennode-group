@@ -22,6 +22,7 @@ import com.goldennode.client.service.Credentials;
 import com.goldennode.client.service.RegistrationServiceImpl;
 
 public class RestClient {
+    
     private static final Logger LOGGER = LoggerFactory.getLogger(RestClient.class);
     private static String apiKey;
     private static String secretKey;

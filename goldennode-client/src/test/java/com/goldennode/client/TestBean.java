@@ -60,6 +60,4 @@ public class TestBean {
             return false;
         return true;
     }
-    
-    
 }

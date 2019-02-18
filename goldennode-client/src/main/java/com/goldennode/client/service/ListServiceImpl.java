@@ -31,7 +31,7 @@ public class ListServiceImpl<E> implements ListService<E> {
     public Iterator<E> iterator(String listId) throws GoldenNodeException {
         return Arrays.asList((E[]) RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET").getEntityValue()).iterator();
     }
-    
+
     @Override
     public Object[] toArray(String listId) throws GoldenNodeException {
         return (Object[]) RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET").getEntityValue();
@@ -40,7 +40,7 @@ public class ListServiceImpl<E> implements ListService<E> {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T[] toArray(String listId, T[] a) throws GoldenNodeException {
-        return Arrays.asList((E[]) RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET").getEntityValue()).toArray(a);
+        return Arrays.asList((T[]) RestClient.call("/goldennode/list/id/{listId}/toArray".replace("{listId}", listId), "GET").getEntityValue()).toArray(a);
     }
 
     @Override
@@ -88,14 +88,14 @@ public class ListServiceImpl<E> implements ListService<E> {
     @SuppressWarnings("unchecked")
     @Override
     public E get(String listId, int index) throws GoldenNodeException {
-        return ((E) RestClient.call("/goldennode/list/id/{listId}/get/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "GET").getEntityValue());
+        return (E) RestClient.call("/goldennode/list/id/{listId}/get/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "GET").getEntityValue();
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public E set(String listId, int index, E element) throws GoldenNodeException {
-        return ((E) RestClient.call("/goldennode/list/id/{listId}/set/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "PUT", Utils.encapObject(element))
-                .getEntityValue());
+        return (E) RestClient.call("/goldennode/list/id/{listId}/set/index/{index}".replace("{listId}", listId).replace("{index}", Integer.toString(index)), "PUT", Utils.encapObject(element))
+                .getEntityValue();
     }
 
     @Override

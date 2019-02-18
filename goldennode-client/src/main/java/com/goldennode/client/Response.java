@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
@@ -35,9 +36,12 @@ public class Response {
 
     private void raiseError(JsonNode node) throws GoldenNodeException {
         try {
-            Class c = Class.forName(node.get("claz").asText());
-            Constructor con = c.getConstructor(String.class);
+            Class<?> c = Class.forName(node.get("claz").asText());
+            Constructor<?> con = c.getConstructor(String.class);
             Exception e = (Exception) con.newInstance(node.get("description").asText());
+            if (e instanceof RuntimeException) {
+                throw (RuntimeException) e;
+            }
             throw new GoldenNodeException(e);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
             //
@@ -82,7 +86,22 @@ public class Response {
                 }
             case OBJECT:
             case POJO:
-                return node;
+                return new Map.Entry<Object, Object>() {
+                    @Override
+                    public Object getKey() {
+                        return Utils.extractObject((String) node.fieldNames().next());
+                    }
+
+                    @Override
+                    public Object getValue() {
+                        return Utils.extractObject((String) node.fields().next().getValue().asText());
+                    }
+
+                    @Override
+                    public Object setValue(Object value) {
+                        return null;
+                    }
+                };
             default:
                 throw new GoldenNodeException("invalid type");
         }

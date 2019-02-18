@@ -2,8 +2,6 @@ package com.goldennode.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import org.junit.Assert;
@@ -67,51 +65,38 @@ public class TestGoldenNodeQueue {
             response = m0.remove();
             Assert.fail("should have thrown exception");
         } catch (NoSuchElementException e) {
-            //Expected path
+            // Expected path
         }
-        
-        
-        
-        
-
-        /* Iterator<E> iterator(String queueId);
-
-         Object[] toArray(String queueId);
-
-         <T> T[] toArray(String queueId, T[] a);
-
-         boolean remove(String queueId, Object object);
-
-         boolean containsAll(String queueId, Collection<?> collection);
-
-         boolean addAll(String queueId, Collection<? extends E> collection);
-
-         boolean removeAll(String queueId, Collection<?> collection);
-
-         boolean retainAll(String queueId, Collection<?> collection);
-
-         void clear(String queueId);
-
-         boolean add(String queueId, E element);
-
-         boolean offer(String queueId, E element);
-
-         E remove(String queueId);
-
-         E poll(String queueId);
-
-         E element(String queueId);
-
-         E peek(String queueId);*/
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        /*
+         * Iterator<E> iterator(String queueId);
+         * 
+         * Object[] toArray(String queueId);
+         * 
+         * <T> T[] toArray(String queueId, T[] a);
+         * 
+         * boolean remove(String queueId, Object object);
+         * 
+         * boolean containsAll(String queueId, Collection<?> collection);
+         * 
+         * boolean addAll(String queueId, Collection<? extends E> collection);
+         * 
+         * boolean removeAll(String queueId, Collection<?> collection);
+         * 
+         * boolean retainAll(String queueId, Collection<?> collection);
+         * 
+         * void clear(String queueId);
+         * 
+         * boolean add(String queueId, E element);
+         * 
+         * boolean offer(String queueId, E element);
+         * 
+         * E remove(String queueId);
+         * 
+         * E poll(String queueId);
+         * 
+         * E element(String queueId);
+         * 
+         * E peek(String queueId);
+         */
     }
 }

@@ -7,7 +7,5 @@ public class TestRegistrationService {
     @Test
     public void registerTempAccount() throws GoldenNodeException {
         new RegistrationServiceImpl().registerTempAccount();
-        
-        
     }
 }
