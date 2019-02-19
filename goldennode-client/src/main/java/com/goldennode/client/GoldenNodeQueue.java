@@ -8,17 +8,17 @@ import com.goldennode.client.service.QueueServiceImpl;
 
 public class GoldenNodeQueue<E> implements Queue<E> {
     QueueService<E> service;
-    private String id;
+    private String queueId;
 
-    public GoldenNodeQueue(String id) {
-        this.id = id;
+    public GoldenNodeQueue(String queueId) {
+        this.queueId = queueId;
         service = new QueueServiceImpl<>();
     }
 
     @Override
     public int size() {
         try {
-            return service.size(id);
+            return service.size(queueId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -27,7 +27,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean isEmpty() {
         try {
-            return service.isEmpty(id);
+            return service.isEmpty(queueId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -36,7 +36,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean contains(Object o) {
         try {
-            return service.contains(id, o);
+            return service.contains(queueId, o);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -45,7 +45,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public Iterator<E> iterator() {
         try {
-            return service.iterator(id);
+            return service.iterator(queueId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -54,7 +54,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public Object[] toArray() {
         try {
-            return service.toArray(id);
+            return service.toArray(queueId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -63,7 +63,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public <T> T[] toArray(T[] a) {
         try {
-            return service.toArray(id, a);
+            return service.toArray(queueId, a);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -72,7 +72,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean remove(Object o) {
         try {
-            return service.remove(id, o);
+            return service.remove(queueId, o);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -81,7 +81,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean containsAll(Collection<?> c) {
         try {
-            return service.containsAll(id, c);
+            return service.containsAll(queueId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -90,7 +90,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean addAll(Collection<? extends E> c) {
         try {
-            return service.addAll(id, c);
+            return service.addAll(queueId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -99,7 +99,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean removeAll(Collection<?> c) {
         try {
-            return service.removeAll(id, c);
+            return service.removeAll(queueId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -108,7 +108,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean retainAll(Collection<?> c) {
         try {
-            return service.retainAll(id, c);
+            return service.retainAll(queueId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -117,7 +117,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public void clear() {
         try {
-            service.clear(id);
+            service.clear(queueId);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -126,7 +126,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean add(E e) {
         try {
-            return service.add(id, e);
+            return service.add(queueId, e);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -135,7 +135,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public boolean offer(E e) {
         try {
-            return service.offer(id, e);
+            return service.offer(queueId, e);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -144,7 +144,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public E remove() {
         try {
-            return service.remove(id);
+            return service.remove(queueId);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -153,7 +153,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public E poll() {
         try {
-            return service.poll(id);
+            return service.poll(queueId);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -162,7 +162,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public E element() {
         try {
-            return service.element(id);
+            return service.element(queueId);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -171,7 +171,7 @@ public class GoldenNodeQueue<E> implements Queue<E> {
     @Override
     public E peek() {
         try {
-            return service.peek(id);
+            return service.peek(queueId);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }

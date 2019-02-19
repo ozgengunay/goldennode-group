@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import com.goldennode.client.GoldenNodeException;
 
-public interface LockService<E> extends Service {
+public interface LockService extends Service {
     public void lock(String lockId) throws GoldenNodeException;
 
     public void lockInterruptibly(String lockId) throws GoldenNodeException;
@@ -15,5 +15,5 @@ public interface LockService<E> extends Service {
 
     public void unlock(String lockId) throws GoldenNodeException;
 
-    public Condition newCondition(String lockId);
+    public Condition newCondition(String lockId) throws GoldenNodeException;
 }

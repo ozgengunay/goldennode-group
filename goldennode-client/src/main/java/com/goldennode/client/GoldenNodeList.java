@@ -9,17 +9,17 @@ import com.goldennode.client.service.ListServiceImpl;
 
 public class GoldenNodeList<E> implements List<E> {
     ListService<E> service;
-    private String id;
+    private String listId;
 
-    public GoldenNodeList(String id) {
-        this.id = id;
+    public GoldenNodeList(String listId) {
+        this.listId = listId;
         service = new ListServiceImpl<>();
     }
 
     @Override
     public int size() {
         try {
-            return service.size(id);
+            return service.size(listId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -28,7 +28,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean isEmpty() {
         try {
-            return service.isEmpty(id);
+            return service.isEmpty(listId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -37,7 +37,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean contains(Object o) {
         try {
-            return service.contains(id, o);
+            return service.contains(listId, o);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -46,7 +46,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public Iterator<E> iterator() {
         try {
-            return service.iterator(id);
+            return service.iterator(listId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -55,7 +55,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public Object[] toArray() {
         try {
-            return service.toArray(id);
+            return service.toArray(listId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -64,7 +64,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public <T> T[] toArray(T[] a) {
         try {
-            return service.toArray(id, a);
+            return service.toArray(listId, a);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -73,7 +73,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean add(E e) {
         try {
-            return service.add(id, e);
+            return service.add(listId, e);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -82,7 +82,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean remove(Object o) {
         try {
-            return service.remove(id, o);
+            return service.remove(listId, o);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -91,7 +91,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean containsAll(Collection<?> c) {
         try {
-            return service.containsAll(id, c);
+            return service.containsAll(listId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -100,7 +100,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean addAll(Collection<? extends E> c) {
         try {
-            return service.addAll(id, c);
+            return service.addAll(listId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -109,7 +109,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         try {
-            return service.addAll(id, index, c);
+            return service.addAll(listId, index, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -118,7 +118,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean removeAll(Collection<?> c) {
         try {
-            return service.removeAll(id, c);
+            return service.removeAll(listId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -127,7 +127,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public boolean retainAll(Collection<?> c) {
         try {
-            return service.retainAll(id, c);
+            return service.retainAll(listId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -136,7 +136,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public void clear() {
         try {
-            service.clear(id);
+            service.clear(listId);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -145,7 +145,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public E get(int index) {
         try {
-            return service.get(id, index);
+            return service.get(listId, index);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -154,7 +154,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public E set(int index, E element) {
         try {
-            return service.set(id, index, element);
+            return service.set(listId, index, element);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -163,7 +163,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public void add(int index, E element) {
         try {
-            service.add(id, index, element);
+            service.add(listId, index, element);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -172,7 +172,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public E remove(int index) {
         try {
-            return service.remove(id, index);
+            return service.remove(listId, index);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -181,7 +181,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public int indexOf(Object o) {
         try {
-            return service.indexOf(id, o);
+            return service.indexOf(listId, o);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -190,7 +190,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public int lastIndexOf(Object o) {
         try {
-            return service.lastIndexOf(id, o);
+            return service.lastIndexOf(listId, o);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -199,7 +199,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public ListIterator<E> listIterator() {
         try {
-            return service.listIterator(id);
+            return service.listIterator(listId);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -208,7 +208,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public ListIterator<E> listIterator(int index) {
         try {
-            return service.listIterator(id, index);
+            return service.listIterator(listId, index);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -217,7 +217,7 @@ public class GoldenNodeList<E> implements List<E> {
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
         try {
-            return service.subList(id, fromIndex, toIndex);
+            return service.subList(listId, fromIndex, toIndex);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }

@@ -9,20 +9,20 @@ import com.goldennode.client.service.MapServiceImpl;
 
 public class GoldenNodeMap<K, V> implements Map<K, V> {
     MapService<K, V> service;
-    private String id;
+    private String mapId;
 
     public GoldenNodeMap() {
         this(UUID.randomUUID().toString());
     }
 
-    public GoldenNodeMap(String id) {
-        this.id = id;
+    public GoldenNodeMap(String mapId) {
+        this.mapId = mapId;
         service = new MapServiceImpl<>();
     }
 
     public int size() {
         try {
-            return service.size(id);
+            return service.size(mapId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -30,7 +30,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public boolean isEmpty() {
         try {
-            return service.isEmpty(id);
+            return service.isEmpty(mapId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -38,7 +38,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public boolean containsKey(Object key) {
         try {
-            return service.containsKey(id, key);
+            return service.containsKey(mapId, key);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -46,7 +46,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public boolean containsValue(Object value) {
         try {
-            return service.containsValue(id, value);
+            return service.containsValue(mapId, value);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -54,7 +54,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public V get(Object key) {
         try {
-            return service.get(id, key);
+            return service.get(mapId, key);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -62,7 +62,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public V put(K key, V value) {
         try {
-            return service.put(id, key, value);
+            return service.put(mapId, key, value);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -70,7 +70,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public V remove(Object key) {
         try {
-            return service.remove(id, key);
+            return service.remove(mapId, key);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -78,7 +78,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public void putAll(Map<? extends K, ? extends V> m) {
         try {
-            service.putAll(id, m);
+            service.putAll(mapId, m);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -86,7 +86,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public void clear() {
         try {
-            service.clear(id);
+            service.clear(mapId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -94,7 +94,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public Set<K> keySet() {
         try {
-            return service.keySet(id);
+            return service.keySet(mapId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -102,7 +102,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public Collection<V> values() {
         try {
-            return service.values(id);
+            return service.values(mapId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -110,7 +110,7 @@ public class GoldenNodeMap<K, V> implements Map<K, V> {
 
     public Set<Entry<K, V>> entrySet() {
         try {
-            return service.entrySet(id);
+            return service.entrySet(mapId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }

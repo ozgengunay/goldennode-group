@@ -18,27 +18,27 @@ public class LockController {
     @Autowired
     private LockService lockService;
 
-    @RequestMapping(value = { "/lock" }, method = { RequestMethod.POST })
+    @RequestMapping(value = { "/lock" }, method = { RequestMethod.GET })
     public ResponseEntity lock(String userId, String lockId) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         lockService.lock(userDetails.getUsername(), lockId);
         return new ResponseEntity(null);
     }
 
-    @RequestMapping(value = { "/lockInterruptibly" }, method = { RequestMethod.POST })
+    @RequestMapping(value = { "/lockInterruptibly" }, method = { RequestMethod.GET })
     public ResponseEntity lockInterruptibly(String userId, String lockId) throws InterruptedException {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         lockService.lockInterruptibly(userDetails.getUsername(), lockId);
         return new ResponseEntity(null);
     }
 
-    @RequestMapping(value = { "/tryLock" }, method = { RequestMethod.POST })
+    @RequestMapping(value = { "/tryLock" }, method = { RequestMethod.GET })
     public ResponseEntity tryLock(String userId, String lockId) {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(lockService.tryLock(userDetails.getUsername(), lockId));
     }
 
-    @RequestMapping(value = { "/tryLock/time/{time}/timeUnit/{timeUnit}" }, method = { RequestMethod.POST })
+    @RequestMapping(value = { "/tryLock/time/{time}/timeUnit/{timeUnit}" }, method = { RequestMethod.GET })
     public ResponseEntity tryLock(String userId, String lockId, long time, TimeUnit unit) throws InterruptedException {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(lockService.tryLock(userDetails.getUsername(), lockId, time, unit));
@@ -50,7 +50,9 @@ public class LockController {
         return new ResponseEntity(null);
     }
 
-    /*public ResponseEntity newCondition(String userId, String lockId) {
-        return init(userId, lockId).newCondition();
-    }*/
+    public ResponseEntity newCondition(String userId, String lockId) {
+        GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        lockService.newCondition(userId, lockId);
+        return new ResponseEntity(null);
+    }
 }

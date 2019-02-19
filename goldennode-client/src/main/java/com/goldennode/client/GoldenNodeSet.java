@@ -8,17 +8,17 @@ import com.goldennode.client.service.SetServiceImpl;
 
 public class GoldenNodeSet<E> implements Set<E> {
     SetService<E> service;
-    private String id;
+    private String setId;
 
-    public GoldenNodeSet(String id) {
-        this.id = id;
+    public GoldenNodeSet(String setId) {
+        this.setId = setId;
         service = new SetServiceImpl<>();
     }
 
     @Override
     public int size() {
         try {
-            return service.size(id);
+            return service.size(setId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -27,7 +27,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public boolean isEmpty() {
         try {
-            return service.isEmpty(id);
+            return service.isEmpty(setId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -36,7 +36,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public boolean contains(Object o) {
         try {
-            return service.contains(id, o);
+            return service.contains(setId, o);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -45,7 +45,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public Iterator<E> iterator() {
         try {
-            return service.iterator(id);
+            return service.iterator(setId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -54,7 +54,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public Object[] toArray() {
         try {
-            return service.toArray(id);
+            return service.toArray(setId);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -63,7 +63,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public <T> T[] toArray(T[] a) {
         try {
-            return service.toArray(id, a);
+            return service.toArray(setId, a);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -72,7 +72,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public boolean add(E e) {
         try {
-            return service.add(id, e);
+            return service.add(setId, e);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -81,7 +81,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public boolean remove(Object o) {
         try {
-            return service.remove(id, o);
+            return service.remove(setId, o);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -90,7 +90,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public boolean containsAll(Collection<?> c) {
         try {
-            return service.containsAll(id, c);
+            return service.containsAll(setId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -99,7 +99,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public boolean addAll(Collection<? extends E> c) {
         try {
-            return service.addAll(id, c);
+            return service.addAll(setId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -108,7 +108,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public boolean removeAll(Collection<?> c) {
         try {
-            return service.removeAll(id, c);
+            return service.removeAll(setId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -117,7 +117,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public boolean retainAll(Collection<?> c) {
         try {
-            return service.retainAll(id, c);
+            return service.retainAll(setId, c);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
@@ -126,7 +126,7 @@ public class GoldenNodeSet<E> implements Set<E> {
     @Override
     public void clear() {
         try {
-            service.clear(id);
+            service.clear(setId);
         } catch (GoldenNodeException ex) {
             throw new GoldenNodeRuntimeException(ex);
         }
