@@ -23,7 +23,7 @@ public class GoldenNodeLock implements Lock {
     @Override
     public void lock() {
         try {
-            service.lock(lockId);
+            service.lock(lockId, new Long(Thread.currentThread().getId()).toString());
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -32,7 +32,7 @@ public class GoldenNodeLock implements Lock {
     @Override
     public void lockInterruptibly() throws InterruptedException {
         try {
-            service.lockInterruptibly(lockId);
+            service.lockInterruptibly(lockId, new Long(Thread.currentThread().getId()).toString());
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -41,7 +41,7 @@ public class GoldenNodeLock implements Lock {
     @Override
     public boolean tryLock() {
         try {
-            return service.tryLock(lockId);
+            return service.tryLock(lockId, new Long(Thread.currentThread().getId()).toString());
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -50,7 +50,7 @@ public class GoldenNodeLock implements Lock {
     @Override
     public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
         try {
-            return service.tryLock(lockId, time, unit);
+            return service.tryLock(lockId, new Long(Thread.currentThread().getId()).toString(), time, unit);
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
@@ -59,7 +59,7 @@ public class GoldenNodeLock implements Lock {
     @Override
     public void unlock() {
         try {
-            service.unlock(lockId);
+            service.unlock(lockId, new Long(Thread.currentThread().getId()).toString());
         } catch (GoldenNodeException e) {
             throw new GoldenNodeRuntimeException(e);
         }
