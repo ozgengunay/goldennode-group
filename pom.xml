@@ -72,7 +72,7 @@
 		<antrun-plugin.version>1.6</antrun-plugin.version>
 		<war-plugin.version>3.2.2</war-plugin.version>
 		<!-- HAZELCAST -->
-		<hazelcast.version>3.11</hazelcast.version>
+		<hazelcast.version>3.5</hazelcast.version>
 		<hazelcast-aws.version>2.3</hazelcast-aws.version>
 		<!-- MYSQL -->
 		<mysql-connector.version>5.1.47</mysql-connector.version>

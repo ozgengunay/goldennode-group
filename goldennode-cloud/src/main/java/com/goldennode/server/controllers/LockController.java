@@ -21,17 +21,17 @@ public class LockController {
     private LockService lockService;
 
     @RequestMapping(value = { "/threadId/{threadId}/lock" }, method = { RequestMethod.GET })
-    public ResponseEntity lock(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId) {
+    public ResponseEntity lock(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId) throws Exception {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        lockService.lock(userDetails.getUsername(), lockId);
+        lockService.lock(userDetails.getUsername(), lockId, threadId);
         return new ResponseEntity(null);
     }
 
     @RequestMapping(value = { "/threadId/{threadId}/lockInterruptibly" }, method = { RequestMethod.GET })
-    public ResponseEntity lockInterruptibly(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId) throws GoldenNodeRestException {
+    public ResponseEntity lockInterruptibly(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId) throws Exception {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {
-            lockService.lockInterruptibly(userDetails.getUsername(), lockId);
+            lockService.lockInterruptibly(userDetails.getUsername(), lockId, threadId);
         } catch (InterruptedException e) {
             throw new GoldenNodeRestException(e);
         }
@@ -39,22 +39,22 @@ public class LockController {
     }
 
     @RequestMapping(value = { "/threadId/{threadId}/tryLock" }, method = { RequestMethod.GET })
-    public ResponseEntity tryLock(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId) {
+    public ResponseEntity tryLock(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId) throws Exception {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(lockService.tryLock(userDetails.getUsername(), lockId));
+        return new ResponseEntity(lockService.tryLock(userDetails.getUsername(), lockId, threadId));
     }
 
     @RequestMapping(value = { "/threadId/{threadId}/tryLock/time/{time}/unit/{unit}" }, method = { RequestMethod.GET })
     public ResponseEntity tryLock(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId, @PathVariable("time") long time, @PathVariable("unit") TimeUnit unit)
-            throws InterruptedException {
+            throws Exception {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return new ResponseEntity(lockService.tryLock(userDetails.getUsername(), lockId, time, unit));
+        return new ResponseEntity(lockService.tryLock(userDetails.getUsername(), lockId, threadId, time, unit));
     }
 
     @RequestMapping(value = { "/threadId/{threadId}/unlock" }, method = { RequestMethod.GET })
-    public ResponseEntity unlock(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId) {
+    public ResponseEntity unlock(@PathVariable("lockId") String lockId, @PathVariable("threadId") String threadId) throws Exception {
         GoldenNodeUser userDetails = (GoldenNodeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        lockService.unlock(userDetails.getUsername(), lockId);
+        lockService.unlock(userDetails.getUsername(), lockId, threadId);
         return new ResponseEntity(null);
     }
 
