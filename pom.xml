@@ -84,7 +84,6 @@
 		<module>goldennode-cloud</module>
 		<module>goldennode-api</module>
 		<module>goldennode-client</module>
-		<module>ev-cloud</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
