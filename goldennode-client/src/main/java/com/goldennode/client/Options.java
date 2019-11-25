@@ -1,14 +1,54 @@
 package com.goldennode.client;
 
 public class Options {
-	
-	
-	int maxLocalFreeMemoryRate;
-	int maxLocalCPURate;
-	int maxLocalEntries;
-	int maxCloudEntries;
-	int localToCloudEntryRatio;
-	int maxLocalDataSizeInMB;	
-	StorageOption storagePriority;
+
+    public static final int MegaBytes = 10241024;
+
+    private Integer maxLocalEntries;
+    private StorageOption storageOption = StorageOption.MIXTURE;
+    private double freeToTotalMemoryRatio = 0.1;
+    private long minLocalFreeMemory = (long) (getMaxMemory() * freeToTotalMemoryRatio);
+
+    static long getSystemFree() {
+        long freeMemory = Runtime.getRuntime().freeMemory() / Options.MegaBytes;
+        long totalMemory = Runtime.getRuntime().totalMemory() / Options.MegaBytes;
+        long maxMemory = Runtime.getRuntime().maxMemory() / Options.MegaBytes;
+        long usedMemory = (totalMemory - freeMemory);
+        long systemFree = maxMemory - usedMemory;
+        return systemFree;
+    }
+    
+    static long getMaxMemory() {
+        return Runtime.getRuntime().maxMemory() / MegaBytes;
+    }
+
+    public double getFreeToTotalMemoryRatio() {
+        return freeToTotalMemoryRatio;
+    }
+
+    public void setFreeToTotalMemoryRatio(double freeToTotalMemoryRatio) {
+        this.freeToTotalMemoryRatio = freeToTotalMemoryRatio;
+        this.minLocalFreeMemory = (long) (getMaxMemory() * freeToTotalMemoryRatio);
+    }
+
+    public Integer getMaxLocalEntries() {
+        return maxLocalEntries;
+    }
+
+    public void setMaxLocalEntries(int maxLocalEntries) {
+        this.maxLocalEntries = maxLocalEntries;
+    }
+
+    public long getMinLocalFreeMemory() {
+        return minLocalFreeMemory;
+    }
+
+    public StorageOption getStorageOption() {
+        return storageOption;
+    }
+
+    public void setStorageOption(StorageOption storageOption) {
+        this.storageOption = storageOption;
+    }
 
 }

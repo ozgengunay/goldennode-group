@@ -14,4 +14,11 @@ public interface HybridMap<K, V> extends Map<K, V>{
 	String dump();
 
 	void reconfigure(Options options);
+
+    int cloudSize();
+
+    boolean cloudIsEmpty();
+	
+
+	
 }
