@@ -109,7 +109,7 @@ public class RestClient {
         String auth = "key=" + apiKey + ",timestamp=" + System.currentTimeMillis() / 1000L + ",nonce=" + UUID.randomUUID().toString();
         String sigBase = auth + con.getURL().getPath() + (body == null ? "" : body) + con.getRequestMethod();
         con.addRequestProperty("Signature", generateHmacSHA256Signature(sigBase, secretKey));
-        LOGGER.debug("Signature to be created from : " + sigBase);
+        LOGGER.trace("Signature to be created from : " + sigBase);
         con.addRequestProperty("Authorization", auth);
     }
 

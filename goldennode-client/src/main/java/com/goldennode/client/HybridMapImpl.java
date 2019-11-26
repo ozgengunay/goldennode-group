@@ -102,9 +102,8 @@ public class HybridMapImpl<K, V> implements HybridMap<K, V> {
                 cloudVotes++;
             }
         }
-        if (options.getMinLocalFreeMemory() > Options.getSystemFree()) {
+        if (options.getMinLocalFreeMemory() < Options.getSystemFree()) {
             localVotes++;
-
         } else {
             localVotes = Integer.MIN_VALUE;
             cloudVotes++;

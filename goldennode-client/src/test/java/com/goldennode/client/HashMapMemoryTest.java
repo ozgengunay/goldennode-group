@@ -6,12 +6,14 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class HashMapMemoryTest {
     HashMap<String, String> map = new HashMap<>();
 
     @Test
+    @Ignore
     public void test1() {
         DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
         DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();

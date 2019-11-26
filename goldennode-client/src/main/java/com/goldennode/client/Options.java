@@ -2,7 +2,7 @@ package com.goldennode.client;
 
 public class Options {
 
-    public static final int MegaBytes = 10241024;
+    public static final int MegaBytes = 1024*1024;
 
     private Integer maxLocalEntries;
     private StorageOption storageOption = StorageOption.MIXTURE;
