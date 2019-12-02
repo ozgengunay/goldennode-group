@@ -1,5 +1,11 @@
 package com.goldennode.client;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -27,7 +33,7 @@ public class HybridMapImpl<K, V> implements HybridMap<K, V> {
     public int cloudSize() {
         return cloudMap.size();
     }
-    
+
     @Override
     public boolean isEmpty() {
         return (cloudMap.size() + localMap.size()) == 0;
@@ -37,7 +43,7 @@ public class HybridMapImpl<K, V> implements HybridMap<K, V> {
     public boolean cloudIsEmpty() {
         return cloudMap.isEmpty();
     }
-    
+
     @Override
     public boolean containsKey(Object key) {
         return (localMap.containsKey(key) || cloudMap.containsKey(key));
@@ -69,7 +75,6 @@ public class HybridMapImpl<K, V> implements HybridMap<K, V> {
         } else {
             storageLocal = null;
         }
-
         if (storageLocal != null) {
             if (storageLocal) {
                 return localMap.put(key, value);
@@ -77,22 +82,17 @@ public class HybridMapImpl<K, V> implements HybridMap<K, V> {
                 return cloudMap.put(key, value);
             }
         }
-
         return decide(1).put(key, value);
-
     }
 
-    private Map<K,V> decide(int itemsToPut) {
-
+    private Map<K, V> decide(int itemsToPut) {
         int localVotes = 0;
         int cloudVotes = 0;
-
         if (options.getStorageOption() == StorageOption.ONLY_CLOUD) {
             return cloudMap;
         } else if (options.getStorageOption() == StorageOption.ONLY_LOCAL) {
             return localMap;
         }
-
         if (options.getMaxLocalEntries() != null) {
             int localSize = localMap.size();
             if ((localSize + itemsToPut) <= options.getMaxLocalEntries()) {
@@ -108,13 +108,11 @@ public class HybridMapImpl<K, V> implements HybridMap<K, V> {
             localVotes = Integer.MIN_VALUE;
             cloudVotes++;
         }
-
         if (localVotes > 0 && localVotes > cloudVotes) {
             return localMap;
         } else {
             return cloudMap;
         }
-
     }
 
     @Override
@@ -157,30 +155,47 @@ public class HybridMapImpl<K, V> implements HybridMap<K, V> {
     @Override
     public void moveAllDataTo(Storage storage) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void save(String name) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void populate(String name) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void reconfigure(Options options) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
-    public String dump() {
-        // TODO Auto-generated method stub
-        return null;
+    public String dump(String fileName) throws IOException {
+        String data = Utils.toJsonString(localMap);
+        RandomAccessFile stream = new RandomAccessFile(fileName, "rw");
+        FileChannel channel = stream.getChannel();
+        FileLock lock = null;
+        try {
+            lock = channel.tryLock();
+        } catch (final OverlappingFileLockException e) {
+            stream.close();
+            channel.close();
+        }
+        for (int i = 0; i < data.length(); i = i + 1000) {
+            stream.writeUTF(data.substring(i, i + 500));
+        }
+        lock.release();
+        stream.close();
+        channel.close();
+        return fileName;
+    }
+
+    @Override
+    public String dump() throws IOException {
+        File tmpFile = File.createTempFile("hybridMapLocalDump", ".tmp");
+        return dump(tmpFile.getAbsolutePath());
     }
 }
