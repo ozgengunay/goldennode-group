@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.goldennode</groupId>
 	<artifactId>goldennode-group</artifactId>
@@ -435,11 +437,6 @@
 					<version>${war-plugin.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>gwt-maven-plugin</artifactId>
-					<version>${gwt.version}</version>
-				</plugin>
-				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
 					<version>${pmd.version}</version>
@@ -449,7 +446,7 @@
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>${antrun-plugin.version}</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>rpm-maven-plugin</artifactId>
@@ -503,7 +500,7 @@
 				<!-- <executions> <execution> <goals> <goal>check</goal> <goal>cpd-check</goal> 
 					</goals> </execution> </executions> -->
 			</plugin>
-			
+
 		</plugins>
 	</build>
 	<distributionManagement>
@@ -519,17 +516,18 @@
 		</snapshotRepository>
 	</distributionManagement>
 	<scm>
+		<url>scm:git:https://github.com/ozgengunay/goldennode-group</url>
 		<developerConnection>scm:git:https://github.com/ozgengunay/goldennode-group</developerConnection>
 		<connection>scm:git:https://github.com/ozgengunay/goldennode-group</connection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 	<reporting>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
