@@ -510,35 +510,20 @@
 	</build>
 	<distributionManagement>
 		<repository>
-			<id>goldennodedeployment</id>
+			<id>nexus</id>
 			<name>Internal Releases</name>
-			<url>http://nexus.goldennode.com/nexus/content/repositories/releases/</url>
+			<url>http://nexus.ozsterdam.com/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
-			<id>goldennodedeployment</id>
+			<id>nexus</id>
 			<name>Internal Releases</name>
-			<url>http://nexus.goldennode.com/nexus/content/repositories/snapshots/</url>
+			<url>http://nexus.ozsterdam.com/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 	<scm>
 		<developerConnection>scm:git:https://github.com/ozgengunay/goldennode-group</developerConnection>
+		<connection>scm:git:https://github.com/ozgengunay/goldennode-group</connection>
 	</scm>
-	<issueManagement>
-		<system>Jira</system>
-		<url>http://jira.goldennode.com</url>
-	</issueManagement>
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://jenkins.goldennode.com</url>
-		<notifiers>
-			<notifier>
-				<sendOnError>true</sendOnError>
-				<sendOnFailure>true</sendOnFailure>
-				<sendOnSuccess>true</sendOnSuccess>
-				<sendOnWarning>true</sendOnWarning>
-			</notifier>
-		</notifiers>
-	</ciManagement>
 	<reporting>
 		<plugins>
 			<plugin>
