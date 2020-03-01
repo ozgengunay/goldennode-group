@@ -521,7 +521,7 @@
 	<scm>
 		<developerConnection>scm:git:https://github.com/ozgengunay/goldennode-group</developerConnection>
 		<connection>scm:git:https://github.com/ozgengunay/goldennode-group</connection>
-	  <tag>HEAD</tag>
+	  <tag>releases/1.0.2</tag>
   </scm>
 	<reporting>
 		<plugins>
