@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.goldennode</groupId>
 		<artifactId>goldennode-group</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
+		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>goldennode-client</artifactId>
 	<packaging>jar</packaging>
