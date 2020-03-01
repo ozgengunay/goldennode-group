@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.goldennode</groupId>
 	<artifactId>goldennode-group</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>goldennode-group</name>
 	<url>http://www.goldennode.com</url>
@@ -517,7 +517,7 @@
 		<url>scm:git:https://github.com/ozgengunay/goldennode-group</url>
 		<developerConnection>scm:git:https://github.com/ozgengunay/goldennode-group</developerConnection>
 		<connection>scm:git:https://github.com/ozgengunay/goldennode-group</connection>
-		<tag>releases/1.0.3</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<reporting>
 		<plugins>
