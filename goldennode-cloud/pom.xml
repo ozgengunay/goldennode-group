@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.goldennode</groupId>
 		<artifactId>goldennode-group</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>goldennode-cloud</artifactId>
 	<packaging>war</packaging>
