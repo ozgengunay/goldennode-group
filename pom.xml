@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.goldennode</groupId>
 	<artifactId>goldennode-group</artifactId>
@@ -463,6 +465,7 @@
 					<configuration>
 						<forkMode>once</forkMode>
 						<argLine>-Xms256m -Xmx6000m -Djava.net.preferIPv4Stack=true</argLine>
+						<skip>true</skip>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -527,17 +530,4 @@
 		<connection>scm:git:https://github.com/ozgengunay/goldennode-group</connection>
 		<tag>HEAD</tag>
 	</scm>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</reporting>
 </project>
