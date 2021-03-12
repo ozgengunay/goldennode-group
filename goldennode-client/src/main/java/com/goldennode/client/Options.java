@@ -5,10 +5,17 @@ public class Options {
     public static final int MegaBytes = 1024*1024;
 
     private Integer maxLocalEntries;
-    private StorageOption storageOption = StorageOption.MIXTURE;
-    private double freeToTotalMemoryRatio = 0.1;
+    private StorageOption storageOption = StorageOption.SMART;
+    private double freeToTotalMemoryRatio = 0.7;
     private long minLocalFreeMemory = (long) (getMaxMemory() * freeToTotalMemoryRatio);
 
+    public Options() {
+    	
+    }
+    public Options(StorageOption storageOption) {
+    	this.storageOption=storageOption;
+    	
+    }
     public static long getSystemFree() {
         long freeMemory = Runtime.getRuntime().freeMemory() / Options.MegaBytes;
         long totalMemory = Runtime.getRuntime().totalMemory() / Options.MegaBytes;
@@ -29,7 +36,6 @@ public class Options {
     public void setFreeToTotalMemoryRatio(double freeToTotalMemoryRatio) {
         this.freeToTotalMemoryRatio = freeToTotalMemoryRatio;
         this.minLocalFreeMemory = (long) (getMaxMemory() * freeToTotalMemoryRatio);
-        int a=0;
     }
 
     public Integer getMaxLocalEntries() {

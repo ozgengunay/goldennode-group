@@ -2,5 +2,5 @@ package com.goldennode.client;
 
 public enum Storage {
 
-	CLOUD,IN_MEMORY
+	CLOUD, IN_MEMORY
 }

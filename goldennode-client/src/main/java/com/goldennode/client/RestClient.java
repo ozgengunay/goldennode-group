@@ -27,7 +27,7 @@ public class RestClient {
     private static String apiKey;
     private static String secretKey;
     private static String host;
-    private static String SERVER_URL = "https://api.goldennode.io";
+    private static String SERVER_URL = "https://api.thegoldennode.com";
     static {
         apiKey = System.getProperty("com.goldennode.client.apiKey");
         secretKey = System.getProperty("com.goldennode.client.secretKey");
@@ -71,6 +71,8 @@ public class RestClient {
             con.setRequestMethod(method);
             con.setRequestProperty("Accept", "application/json");
             con.setRequestProperty("Accept-Charset", "UTF-8");
+            con.setReadTimeout(0);
+            con.setConnectTimeout(0);
             SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             (con).setSSLSocketFactory(socketFactory);
             if (isSecure)

@@ -15,7 +15,6 @@ public class TestGoldenNodeSet {
     public void test1() {
         Object response;
         Set<TestBean> m0 = new GoldenNodeSet<>("list0");
-        // Set<TestBean> m0 = new HashSet<>();
         m0.clear();
         response = m0.isEmpty();
         Assert.assertEquals(true, response);
@@ -33,11 +32,12 @@ public class TestGoldenNodeSet {
         Collection<TestBean> m2 = new ArrayList<TestBean>();
         m2.add(tb3);
         Collection<TestBean> iteratorContents = new ArrayList<TestBean>();
+        iteratorContents.add(null);
         iteratorContents.add(tb1);
         iteratorContents.add(tb2);
         iteratorContents.add(tb3);
-        // response = m0.add(null);
-        // Assert.assertEquals(true, response);
+        response = m0.add(null);
+        Assert.assertEquals(true, response);
         response = m0.add(tb1);
         Assert.assertEquals(true, response);
         response = m0.add(tb2);
@@ -51,7 +51,7 @@ public class TestGoldenNodeSet {
         response = m0.contains(tb3);
         Assert.assertEquals(true, response);
         response = m0.size();
-        Assert.assertEquals(3, response);
+        Assert.assertEquals(4, response);
         response = m0.contains(tb1);
         Assert.assertEquals(true, response);
         response = m0.contains(tb2);
@@ -73,7 +73,7 @@ public class TestGoldenNodeSet {
         response = m0.contains(tb2);
         Assert.assertEquals(true, response);
         response = m0.size();
-        Assert.assertEquals(2, response);
+        Assert.assertEquals(3, response);
         response = m0.contains(tb3);
         Assert.assertEquals(true, response);
         response = m0.containsAll(m0_);
@@ -83,11 +83,11 @@ public class TestGoldenNodeSet {
         response = m0.addAll(m1);
         Assert.assertEquals(true, response);
         response = m0.size();
-        Assert.assertEquals(4, response);
+        Assert.assertEquals(5, response);
         response = m0.removeAll(m1);
         Assert.assertEquals(true, response);
         response = m0.size();
-        Assert.assertEquals(2, response);
+        Assert.assertEquals(3, response);
         response = m0.retainAll(m2);
         Assert.assertEquals(true, response);
         response = m0.size();

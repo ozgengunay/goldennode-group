@@ -10,15 +10,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+
 import org.junit.Assert;
 import org.junit.Test;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestGoldenNodeMap {
-    ObjectMapper om = new ObjectMapper();
-
+ 
+    @Test
     public void loadTest() {
-        HashMap<String, String> map = new HashMap<>();
+        Map<String, String> map = new GoldenNodeMap<>();
         Random random = new Random();
         int i = 0;
         while (i++ < 1000000) {
@@ -29,7 +29,8 @@ public class TestGoldenNodeMap {
         System.out.println(map.size());
     }
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     public void test1() {
         Object response;
         Map<String, TestBean> m0 = new GoldenNodeMap<>("map0");

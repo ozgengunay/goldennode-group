@@ -6,17 +6,17 @@ import java.util.Map;
 public interface HybridMap<K, V> extends Map<K, V>{
 
 	
-	void moveAllDataTo(Storage storage);
+	//void moveAllDataTo(Storage storage);
 	
-	void save(String name);
+	//void save(String name);
 	
-	void populate(String name);
+	//void populate(String name);
 	
 	String dump() throws IOException;
 	
 	String dump(String fileName) throws IOException;
 
-	void reconfigure(Options options);
+	//void reconfigure(Options options);
 
     int cloudSize();
 
