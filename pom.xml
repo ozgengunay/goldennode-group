@@ -54,7 +54,7 @@
 		<junit.version>4.12</junit.version>
 		<mockito.version>2.28.2</mockito.version>
 		<!-- COMMONS -->
-		<commons.io.version>2.6</commons.io.version>
+		<commons.io.version>2.7</commons.io.version>
 		<commons.dbcp.version>2.5.0</commons.dbcp.version>
 		<commons.validator.version>1.6</commons.validator.version>
 		<commons.email.version>1.5</commons.email.version>
