@@ -37,7 +37,7 @@
 		<jsp.api.version>2.3.3</jsp.api.version>
 		<validation.api.version>2.0.1.Final</validation.api.version>
 		<!-- SPRING -->
-		<spring.version>5.1.1.RELEASE</spring.version>
+		<spring.version>6.0.0</spring.version>
 		<spring.data.jpa.version>2.1.2.RELEASE</spring.data.jpa.version>
 		<spring.security.version>5.1.1.RELEASE</spring.security.version>
 		<spring.security.oauth.version>2.1.0.RELEASE</spring.security.oauth.version>
